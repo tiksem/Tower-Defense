@@ -44,8 +44,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ArrowBullet.cs" />
+     <Compile Include="Assets\Bullet.cs" />
+     <Compile Include="Assets\ComprasionComparer.cs" />
      <Compile Include="Assets\MovableObject.cs" />
      <Compile Include="Assets\MoveAroundSimulator.cs" />
+     <Compile Include="Assets\Weapon.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Glass Refraction (Pro Only)\Sources\Shaders\Glass-Stained-BumpDistort.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
