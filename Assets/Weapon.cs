@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
 		
 		public GameObject bullet;
 	
-		public float cooldown = 1000.0f;
+		public float cooldown = 1.0f;
 		public float range = 1000.0f;
 	}
 	
@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
 	
 	private GameObject[] targets;
 	private GameObject[] availibleTargets;
+	private float[] lastAttackTimePerAttackType;
 	
 	private int DistanceComparator(object a, object b)
 	{		
@@ -37,6 +38,7 @@ public class Weapon : MonoBehaviour
 	void Awake()
 	{
 		targets = new GameObject[attackTypes.Length];
+		lastAttackTimePerAttackType = new float[attackTypes.Length];
 		System.Array.Sort(attackTypes, (BulletDefinition a, BulletDefinition b) => -a.range.CompareTo(b.range));
 		CheckBulletDefinitions();
 	}
@@ -93,6 +95,12 @@ public class Weapon : MonoBehaviour
 		System.Array.Sort(availibleTargets, DistanceComparator);
 	}
 	
+	private void ClearTarget(int index)
+	{
+		targets[index] = null;
+		lastAttackTimePerAttackType[index] = 0.0f;
+	}
+	
 	private void UpdateTargets()
 	{	
 		UpdateAvailibleTargets();
@@ -102,7 +110,7 @@ public class Weapon : MonoBehaviour
 		{
 			if(targetsAreSoFar)
 			{
-				targets[i] = null;
+				ClearTarget(i);
 				continue;
 			}
 			
@@ -115,8 +123,12 @@ public class Weapon : MonoBehaviour
 				if(target == null)
 				{
 					targetsAreSoFar = true;
+					ClearTarget(i);
 				}
-				targets[i] = target;
+				else
+				{
+					targets[i] = target;
+				}
 			}
 		}
 	}
@@ -140,8 +152,26 @@ public class Weapon : MonoBehaviour
 	}
 	
 	private void AttackWithAttackType(int index)
-	{
+	{	
 		BulletDefinition attackType = attackTypes[index];
+		float lastAttackTime = lastAttackTimePerAttackType[index];
+		float currentTime = Time.time;
+		
+		if(currentTime - lastAttackTime < attackType.cooldown)
+		{
+			return;
+		}
+		
+		// avoid equals with 0.0f
+		if(lastAttackTime < 0.1f)
+		{
+			lastAttackTimePerAttackType[index] = currentTime;
+		}
+		else
+		{
+			lastAttackTimePerAttackType[index] = lastAttackTime + attackType.cooldown;
+		}
+		
 		GameObject target = targets[index];
 		CreateAndThrowBullet(attackType.bullet, target);
 	}
