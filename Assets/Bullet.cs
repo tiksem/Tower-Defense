@@ -51,13 +51,22 @@ public abstract class Bullet : MonoBehaviour
 		targetHitEffects.Add(effect);
 	}
 	
+	private void DestroyEffects()
+	{
+		foreach(GameObject effect in targetHitEffects)
+		{
+			Destroy(effect);
+		}
+	}
+	
 	// Update is called once per frame
 	void Update() 
 	{
 		if(target == null)
 		{
 			if(targetDefined)
-			{
+			{				
+				DestroyEffects();
 				Destroy(gameObject);
 			}
 			
