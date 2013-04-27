@@ -5,6 +5,20 @@ using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour 
 {
+	public enum AttackType
+	{
+		NORMAL,
+		SIEGE,
+		PIERCING,
+		DEATH,
+		HOLY,
+		FIRE,
+		POISON,
+		ICE,
+		GROUND,
+		WIND
+	}
+	
 	[System.Serializable]
 	public class BulletDefinition
 	{
@@ -14,6 +28,11 @@ public class Weapon : MonoBehaviour
 	
 		public float cooldown = 1.0f;
 		public float range = 1000.0f;
+		
+		public int damage = 0;
+		public AttackType attackType = AttackType.NORMAL;
+		
+		public GameObject[] additionalEffects;
 	}
 	
 	public bool attackingEnabled = false;
@@ -139,8 +158,25 @@ public class Weapon : MonoBehaviour
 		Attack();
 	}
 	
-	private void CreateAndThrowBullet(GameObject bulletPrefab, GameObject target)
+	private GameObject CreateDamageEffectObject(BulletDefinition bulletDefinition)
 	{
+		GameObject gameObject = new GameObject();
+		DamageEffect damageEffect = gameObject.AddComponent<DamageEffect>();
+		damageEffect.damage = bulletDefinition.damage;
+		damageEffect.attackType = bulletDefinition.attackType;
+		return gameObject;
+	}
+	
+	private void AddTargetHitEffect(Bullet bulletComponent, GameObject effectPrefab)
+	{
+		GameObject effect = (GameObject)Instantiate(effectPrefab, transform.position, transform.rotation);
+		bulletComponent.AddTargetHitEffect(effect);
+	}
+	
+	private void CreateAndThrowBullet(BulletDefinition bulletDefinition, GameObject target)
+	{
+		GameObject bulletPrefab = bulletDefinition.bullet;
+		
 		GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
 		Bullet bulletComponent = bullet.GetComponent<Bullet>();
 		if(bulletComponent == null)
@@ -148,7 +184,16 @@ public class Weapon : MonoBehaviour
 			Debug.LogError(bullet.name + " is invalid: bullet prefab must have Bullet component");
 			return;
 		}
+		
 		bulletComponent.target = target;
+		
+		GameObject damageEffect = CreateDamageEffectObject(bulletDefinition);
+		bulletComponent.AddTargetHitEffect(damageEffect);
+		
+		foreach(GameObject effect in bulletDefinition.additionalEffects)
+		{
+			AddTargetHitEffect(bulletComponent, effect);
+		}
 	}
 	
 	private void AttackWithAttackType(int index)
@@ -173,7 +218,7 @@ public class Weapon : MonoBehaviour
 		}
 		
 		GameObject target = targets[index];
-		CreateAndThrowBullet(attackType.bullet, target);
+		CreateAndThrowBullet(attackType, target);
 	}
 	
 	private void Attack()
