@@ -261,6 +261,19 @@ public class Target : MonoBehaviour
 		}
 	}
 	
+	private void DestroyEffects()
+	{
+		foreach(GameObject effect in effects)
+		{
+			Destroy(effect);
+		}
+	}
+	
+	void OnDestroy()
+	{
+		DestroyEffects();
+	}
+	
 	// Use this for initialization
 	void Start() 
 	{
