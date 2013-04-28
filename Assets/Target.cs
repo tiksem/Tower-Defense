@@ -236,6 +236,27 @@ public class Target : MonoBehaviour
 		characterMotorComponent.movement.maxFallSpeed *= coefficient;
 	}
 	
+	public void NotifyEffectDestroyed(GameObject effect)
+	{
+		effects.Remove(effect);
+	}
+	
+	private bool CheckEffect(GameObject effectPrefab)
+	{
+		TargetHitEffect effectComponent = effectPrefab.GetComponent<TargetHitEffect>();
+		if(!effectComponent.CanStack())
+		{
+			string effectName = effectPrefab.name;
+			return effects.Find((GameObject effect) 
+				=> effect != null && effect.name == effectName
+			) == null;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
 	public void AttachEffect(GameObject effectPrefab)
 	{
 		if(effectPrefab == null)
@@ -243,8 +264,22 @@ public class Target : MonoBehaviour
 			throw new ArgumentNullException();
 		}
 		
+		if(!CheckEffect(effectPrefab))
+		{
+			return;
+		}
+		
 		GameObject effect = (GameObject)Instantiate(effectPrefab);
+		effect.name = effectPrefab.name;
 		effect.transform.parent = gameObject.transform;
+		
+		TargetHitEffect effectComponent = effect.GetComponent<TargetHitEffect>();
+		if(effectComponent == null)
+		{
+			throw new System.ArgumentException("effect must have TargetHitEffect component");
+		}
+		effectComponent.target = gameObject;
+		
 		effects.Add(effect);
 	}
 	

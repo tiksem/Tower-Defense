@@ -2360,9 +2360,10 @@ MonoBehaviour:
     bullet: {fileID: 100000, guid: b9cc2a88295238e4b9f315d16bf4255b, type: 2}
     cooldown: 1
     range: 1000
-    damage: 10
+    damage: 5
     attackType: 0
-    additionalEffects: []
+    additionalEffects:
+    - {fileID: 100000, guid: 0cf786dd761de7d4891fbe88b2b3cdc8, type: 2}
 --- !u!1 &897304216
 GameObject:
   m_ObjectHideFlags: 0

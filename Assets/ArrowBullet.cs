@@ -32,7 +32,8 @@ public class ArrowBullet : Bullet
 	
 	protected override bool IsTargetHit()
 	{
-		Vector3 firstPositionToTarget = target.transform.position - firstPosition;
+		Vector3 targetPosition = GetTargetPosition();
+		Vector3 firstPositionToTarget = targetPosition - firstPosition;
 		Vector3 firstPositionToCurrent = transform.position - firstPosition;
 		return firstPositionToCurrent.sqrMagnitude >= firstPositionToTarget.sqrMagnitude;
 	}

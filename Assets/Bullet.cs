@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public abstract class Bullet : MonoBehaviour 
 {	
 	protected GameObject target;
+	private Vector3 lastTargetPosition;
 	private GameObject[] targetHitEffects;
 	private int damage;
 	private Weapon.AttackType attackType;
@@ -32,9 +33,25 @@ public abstract class Bullet : MonoBehaviour
 	
 	protected void OnTargetHit()
 	{
-		DamageTarget();
-		AttachEffectsToTarget();
+		if(target != null)
+		{
+			DamageTarget();
+			AttachEffectsToTarget();
+		}
+		
 		Destroy(gameObject);
+	}
+	
+	protected Vector3 GetTargetPosition()
+	{
+		if(target != null)
+		{
+			return target.transform.position;
+		}
+		else
+		{
+			return lastTargetPosition;
+		}
 	}
 	
 	public void Throw(GameObject target, int damage = 0, 
@@ -84,6 +101,11 @@ public abstract class Bullet : MonoBehaviour
 		else
 		{
 			MoveToTarget();
+		}
+		
+		if(target != null)
+		{
+			lastTargetPosition = target.transform.position;
 		}
 	}
 }
