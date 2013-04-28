@@ -158,21 +158,6 @@ public class Weapon : MonoBehaviour
 		Attack();
 	}
 	
-	private GameObject CreateDamageEffectObject(BulletDefinition bulletDefinition)
-	{
-		GameObject gameObject = new GameObject();
-		DamageEffect damageEffect = gameObject.AddComponent<DamageEffect>();
-		damageEffect.damage = bulletDefinition.damage;
-		damageEffect.attackType = bulletDefinition.attackType;
-		return gameObject;
-	}
-	
-	private void AddTargetHitEffect(Bullet bulletComponent, GameObject effectPrefab)
-	{
-		GameObject effect = (GameObject)Instantiate(effectPrefab, transform.position, transform.rotation);
-		bulletComponent.AddTargetHitEffect(effect);
-	}
-	
 	private void CreateAndThrowBullet(BulletDefinition bulletDefinition, GameObject target)
 	{
 		GameObject bulletPrefab = bulletDefinition.bullet;
@@ -185,15 +170,8 @@ public class Weapon : MonoBehaviour
 			return;
 		}
 		
-		bulletComponent.target = target;
-		
-		GameObject damageEffect = CreateDamageEffectObject(bulletDefinition);
-		bulletComponent.AddTargetHitEffect(damageEffect);
-		
-		foreach(GameObject effect in bulletDefinition.additionalEffects)
-		{
-			AddTargetHitEffect(bulletComponent, effect);
-		}
+		bulletComponent.Throw(target, bulletDefinition.damage, 
+			bulletDefinition.attackType, bulletDefinition.additionalEffects);
 	}
 	
 	private void AttackWithAttackType(int index)

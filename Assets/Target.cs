@@ -99,6 +99,7 @@ public class Target : MonoBehaviour
 	private int currentPhysicalArmor;
 	private HashSet<Weapon.AttackType> immunitiesSet = new HashSet<Weapon.AttackType>();
 	private CharacterMotor characterMotorComponent;
+	private List<GameObject> effects = new List<GameObject>();
 	
 	private void ValidateImmunities()
 	{
@@ -233,6 +234,31 @@ public class Target : MonoBehaviour
 		characterMotorComponent.movement.maxForwardSpeed *= coefficient;
 		characterMotorComponent.movement.maxBackwardsSpeed *= coefficient;
 		characterMotorComponent.movement.maxFallSpeed *= coefficient;
+	}
+	
+	public void AttachEffect(GameObject effectPrefab)
+	{
+		if(effectPrefab == null)
+		{
+			throw new ArgumentNullException();
+		}
+		
+		GameObject effect = (GameObject)Instantiate(effectPrefab);
+		effect.transform.parent = gameObject.transform;
+		effects.Add(effect);
+	}
+	
+	public void AttachEffects(GameObject[] effects)
+	{
+		if(effects == null)
+		{
+			throw new ArgumentNullException();
+		}
+		
+		foreach(GameObject effect in effects)
+		{
+			AttachEffect(effect);
+		}
 	}
 	
 	// Use this for initialization

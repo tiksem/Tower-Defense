@@ -4,41 +4,64 @@ using System.Collections.Generic;
 
 public abstract class Bullet : MonoBehaviour 
 {	
-	[HideInInspector]
-	public GameObject target;
-	
-	private List<GameObject> targetHitEffects = new List<GameObject>();
-	private bool targetDefined = false;
+	protected GameObject target;
+	private GameObject[] targetHitEffects;
+	private int damage;
+	private Weapon.AttackType attackType;
+	private bool wasThrown = false;
+	private Target targetComponent;
 	
 	protected abstract void MoveToTarget();
 	
 	protected abstract bool IsTargetHit();
 	
-	private void CreateAndApplyEffectToTarget(GameObject effect)
+	private void AttachEffectsToTarget()
 	{
-		TargetHitEffect effectComponent = effect.GetComponent<TargetHitEffect>();
-		if(effectComponent == null)
+		if(targetHitEffects == null)
 		{
-			Debug.LogError(effect.name + " is invalid: effect prefab must have TargetHitEffect component");
 			return;
 		}
 		
-		effect.transform.position = target.transform.position;
-		effectComponent.target = target;
+		targetComponent.AttachEffects(targetHitEffects);
 	}
 	
-	private void ApplyTargetHitEffects()
+	private void DamageTarget()
 	{
-		foreach(GameObject effect in targetHitEffects)
-		{
-			CreateAndApplyEffectToTarget(effect);
-		}
+		targetComponent.Damage(attackType, damage);
 	}
 	
 	protected void OnTargetHit()
 	{
-		ApplyTargetHitEffects();
+		DamageTarget();
+		AttachEffectsToTarget();
 		Destroy(gameObject);
+	}
+	
+	public void Throw(GameObject target, int damage = 0, 
+		Weapon.AttackType attackType = Weapon.AttackType.NORMAL, GameObject[] targetHitEffects = null)
+	{
+		if(wasThrown)
+		{
+			return;
+		}
+		
+		if(target == null)
+		{
+			throw new System.ArgumentNullException();
+		}
+		
+		this.target = target;
+		this.damage = damage;
+		this.attackType = attackType;
+		this.targetHitEffects = targetHitEffects;
+		
+		targetComponent = target.GetComponent<Target>();
+		if(targetComponent == null)
+		{
+			throw new System.ArgumentException("target must have Target component");
+		}
+		
+		wasThrown = true;
 	}
 	
 	void Start()
@@ -46,35 +69,12 @@ public abstract class Bullet : MonoBehaviour
 		
 	}
 	
-	public void AddTargetHitEffect(GameObject effect)
-	{
-		targetHitEffects.Add(effect);
-	}
-	
-	private void DestroyEffects()
-	{
-		foreach(GameObject effect in targetHitEffects)
-		{
-			Destroy(effect);
-		}
-	}
-	
 	// Update is called once per frame
 	void Update() 
 	{
-		if(target == null)
+		if(!wasThrown)
 		{
-			if(targetDefined)
-			{				
-				DestroyEffects();
-				Destroy(gameObject);
-			}
-			
 			return;
-		}
-		else
-		{
-			targetDefined = true;
 		}
 		
 		if(IsTargetHit())
