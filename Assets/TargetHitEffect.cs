@@ -10,6 +10,11 @@ public abstract class TargetHitEffect : MonoBehaviour
 	
 	protected abstract void ApplyToTarget();
 	
+	public virtual bool CanBeAttachedToTarget(Target target)
+	{
+		return true;
+	}
+	
 	public bool CanStack()
 	{
 		return false;

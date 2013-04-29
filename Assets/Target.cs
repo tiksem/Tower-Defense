@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using AssemblyCSharp;
 
 public class Target : MonoBehaviour 
 {
@@ -244,6 +245,12 @@ public class Target : MonoBehaviour
 	private bool CheckEffect(GameObject effectPrefab)
 	{
 		TargetHitEffect effectComponent = effectPrefab.GetComponent<TargetHitEffect>();
+		
+		if(!effectComponent.CanBeAttachedToTarget(this))
+		{
+			return false;
+		}
+		
 		if(!effectComponent.CanStack())
 		{
 			string effectName = effectPrefab.name;
@@ -269,9 +276,7 @@ public class Target : MonoBehaviour
 			return;
 		}
 		
-		GameObject effect = (GameObject)Instantiate(effectPrefab);
-		effect.name = effectPrefab.name;
-		effect.transform.parent = gameObject.transform;
+		GameObject effect = Utilities.InstantiateChildOf(effectPrefab, gameObject);
 		
 		TargetHitEffect effectComponent = effect.GetComponent<TargetHitEffect>();
 		if(effectComponent == null)
