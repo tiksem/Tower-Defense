@@ -11,6 +11,15 @@ public class WayPointFollower : MonoBehaviour
 	private int moveToWayPointIndex;
 	private MovableObject movableObjectComponent;
 	
+	private string wayPointTag;
+	
+	public void SetWayPointTag(string wayPointTag)
+	{
+		this.wayPointTag = wayPointTag;
+		wayPoints = GameObject.FindGameObjectsWithTag(wayPointTag);
+		InitWayPoints();
+	}
+	
 	private int WayPointsComparator(GameObject a, GameObject b)
 	{
 		int aId = int.Parse(a.name);
@@ -94,16 +103,19 @@ public class WayPointFollower : MonoBehaviour
 		StartCoroutine(StartMovingWithTimerCoroutine());
 	}
 	
+	void InitWayPoints()
+	{
+		wayPoints = GameObject.FindGameObjectsWithTag(wayPointTag);
+		SortWayPoints();
+		StartMovingWithTimer();
+	}
+	
 	// Use this for initialization
 	void Start() 
 	{
-		wayPoints = GameObject.FindGameObjectsWithTag("WayPoint");
-		SortWayPoints();
 		moveToWayPointIndex = 0;
 		movableObjectComponent = GetComponent<MovableObject>();
 		movableObjectComponent.onStop = OnWayPointGotten;
-		
-		StartMovingWithTimer();
 	}
 	
 	// Update is called once per frame

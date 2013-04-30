@@ -16,12 +16,15 @@ public class GameManager : MonoBehaviour
 	
 	public int maxLeaveTargetCount = 50;
 	public Party[] parties;
+	public string[] wayPointTags = new string[]{"WayPoint1", "WayPoint2"};
 	
 	private int partyIndex = -1;
 	
 	private int leaveTargetCount = 0;
 	
 	private bool win = false;
+	
+	private GameObject[] partyAppearingPoints;
 	
 	public void NotifyTargetLeave()
 	{
@@ -35,40 +38,62 @@ public class GameManager : MonoBehaviour
 	
 	private bool AllTargetsDestroyed()
 	{
-		GameObject[] targets = Weapon.GetvailibleTargets();
+		GameObject[] targets = Weapon.GetAvailibleTargets();
 		return targets.Length <= 0;
 	}
 	
 	private float GetTargetWidth(GameObject target)
 	{
-		CharacterController characterController = target.GetComponent<CharacterController>();
-		return characterController.radius;
+		CapsuleCollider capsuleCollider = target.GetComponent<CapsuleCollider>();
+		return capsuleCollider.radius;
 	}
 	
-	private GameObject CreatePartyTarget(Party party, int x, int y)
+	private void AssignTargetWayPointTag(int partyPointIndex, GameObject target)
+	{
+		WayPointFollower wayPointFollower = target.GetComponent<WayPointFollower>();
+		if(wayPointFollower == null)
+		{
+			throw new System.ArgumentException("target must have WayPointFollower component");
+		}
+		
+		string tag = wayPointTags[partyPointIndex];
+		wayPointFollower.SetWayPointTag(tag);
+	}
+	
+	private GameObject CreatePartyTarget(Party party, int partyPointIndex, int x, int y)
 	{
 		GameObject target = (GameObject)Instantiate(party.targetPrefab);
 		float targetWidth = GetTargetWidth(target);
+		GameObject partyPositionPoint = partyAppearingPoints[partyPointIndex];
 		
-		Vector3 position = transform.position;
-		position.x += targetWidth * x;
-		position.z += targetWidth * y;
+		AssignTargetWayPointTag(partyPointIndex, target);
+		
+		Vector3 position = partyPositionPoint.transform.position;
+		position.x += targetWidth * x * 2;
+		position.z += targetWidth * y * 2;
 		
 		target.transform.position = position;
-		//target.transform.rotation = transform.rotation;
 		
 		return target;
 	}
 	
-	private void CreateParty()
+	private void CreateParty(int partyPointIndex)
 	{
 		Party partyToCreate = parties[partyIndex];
 		for(int y = 0; y < partyToCreate.height; y++)
 		{
 			for(int x = 0; x < partyToCreate.width; x++)
 			{
-				CreatePartyTarget(partyToCreate, x, y);
+				CreatePartyTarget(partyToCreate, partyPointIndex, x, y);
 			}
+		}
+	}
+	
+	private void CreateParties()
+	{
+		for(int i = 0; i < partyAppearingPoints.Length; i++)
+		{
+			CreateParty(i);
 		}
 	}
 	
@@ -82,12 +107,17 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 		
-		CreateParty();
+		CreateParties();
 	}
 	
 	private void OnWin()
 	{
 		
+	}
+	
+	private void InitPartiesPoints()
+	{
+		partyAppearingPoints = GameObject.FindGameObjectsWithTag("PartyPoint");
 	}
 	
 	// Use this for initialization
@@ -99,6 +129,8 @@ public class GameManager : MonoBehaviour
 		}
 		
 		instance = this;
+		
+		InitPartiesPoints();
 	}
 	
 	// Update is called once per frame

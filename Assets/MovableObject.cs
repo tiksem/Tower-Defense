@@ -2,15 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-[RequireComponent (typeof (CharacterMotor))]
+[RequireComponent (typeof (RigidBodyCharacterController))]
 [RequireComponent (typeof (Animation))]
 public class MovableObject : MonoBehaviour 
 {
 	public float rotationSpeed = 1.0f;
+	public float velocity = 1.0f;
 	
-	private CharacterMotor motor;
-	private CharacterController characterController;
 	private Animation animation;
+	private RigidBodyCharacterController characterController;
 	private Vector3 movingDirection = Vector3.zero;
 	private bool smoothRotationActivated = false;
 	private float shouldBeStopedAfterSqrDistance = float.PositiveInfinity;
@@ -26,9 +26,8 @@ public class MovableObject : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-		motor = GetComponent<CharacterMotor>();
 		animation = GetComponent<Animation>();
-		characterController = GetComponent<CharacterController>();
+		characterController = GetComponent<RigidBodyCharacterController>();
 		ResetPositionBeforeStartingMoving();
 	}
 	
@@ -60,7 +59,7 @@ public class MovableObject : MonoBehaviour
 		
 		movingDirection.Normalize();
 		
-		this.movingDirection = motor.inputMoveDirection = movingDirection;
+		this.movingDirection = characterController.movingDirection = movingDirection;
 		
 		if(!rotateSmoothy)
 		{
@@ -108,14 +107,14 @@ public class MovableObject : MonoBehaviour
 	
 	public void Stop()
 	{
-		movingDirection = motor.inputMoveDirection = Vector3.zero;
+		movingDirection = characterController.movingDirection = Vector3.zero;
 		ApplyStopAnimation();
 		OnStop();
 	}
 	
 	public bool IsMoving()
 	{
-		return motor.inputMoveDirection != Vector3.zero;
+		return characterController.movingDirection != Vector3.zero;
 	}
 	
 	private Vector3 GetMovingWayVector()

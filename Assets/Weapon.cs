@@ -108,14 +108,14 @@ public class Weapon : MonoBehaviour
 		return DistanceComparator(target, attackType.range) <= 0;
 	}
 	
-	public static GameObject[] GetvailibleTargets()
+	public static GameObject[] GetAvailibleTargets()
 	{
 		return GameObject.FindGameObjectsWithTag("Target");
 	}
 	
 	private void UpdateAvailibleTargets()
 	{
-		availibleTargets = GetvailibleTargets();
+		availibleTargets = GetAvailibleTargets();
 		System.Array.Sort(availibleTargets, DistanceComparator);
 	}
 	

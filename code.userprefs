@@ -1,21 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TargetPartyCreator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MovableObject.cs">
     <Files>
-      <File FileName="Assets\Target.cs" Line="1" Column="1" />
+      <File FileName="Assets\GameManager.cs" Line="73" Column="37" />
+      <File FileName="Assets\Target.cs" Line="25" Column="4" />
       <File FileName="Assets\PoisonEffect.cs" Line="21" Column="42" />
-      <File FileName="Assets\TargetHitEffect.cs" Line="1" Column="1" />
-      <File FileName="Assets\WayPointFollower.cs" Line="1" Column="1" />
-      <File FileName="Assets\MovableObject.cs" Line="25" Column="2" />
+      <File FileName="Assets\TargetHitEffect.cs" Line="23" Column="31" />
+      <File FileName="Assets\WayPointFollower.cs" Line="26" Column="29" />
+      <File FileName="Assets\MovableObject.cs" Line="160" Column="26" />
       <File FileName="Assets\MoveAroundSimulator.cs" Line="1" Column="1" />
-      <File FileName="Assets\GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets\ComprasionComparer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Weapon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Weapon.cs" Line="118" Column="44" />
       <File FileName="Assets\Bullet.cs" Line="1" Column="1" />
       <File FileName="Assets\ArrowBullet.cs" Line="1" Column="1" />
       <File FileName="Assets\DamageEffect.cs" Line="1" Column="1" />
       <File FileName="Assets\Utilities.cs" Line="1" Column="1" />
-      <File FileName="Assets\TargetPartyCreator.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
