@@ -26,7 +26,7 @@ public class ArrowBullet : Bullet
 	{
 		LookAtTarget();
 		Vector3 translation = transform.TransformDirection(Vector3.forward);
-		translation = translation.normalized * velocity;
+		translation = translation.normalized * velocity * Time.deltaTime;
 		transform.position += translation;
 	}
 	

@@ -39,7 +39,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59664e13ed0a6a34399a32a0f152db5c, type: 3}
   m_Name: 
-  velocity: 3
+  velocity: 200
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

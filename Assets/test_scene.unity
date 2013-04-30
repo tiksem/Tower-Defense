@@ -27,7 +27,7 @@ RenderSettings:
   m_SpotCookie: {fileID: 0}
   m_ObjectHideFlags: 0
 --- !u!127 &3
-GameManager:
+LevelGameManager:
   m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
@@ -760,15 +760,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 6d4cdab8a99f3d8468b946da8f5003c8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 11.5334473
+      value: 472.43277
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6d4cdab8a99f3d8468b946da8f5003c8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 28.2711258
+      value: 55.0927353
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6d4cdab8a99f3d8468b946da8f5003c8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 869.975281
+      value: 869.975769
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6d4cdab8a99f3d8468b946da8f5003c8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -786,6 +786,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: .707106829
       objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 6d4cdab8a99f3d8468b946da8f5003c8, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e097e0ca551c28647a5a126e44c35bbc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d4cdab8a99f3d8468b946da8f5003c8, type: 2}
   m_RootGameObject: {fileID: 1431231293}
@@ -2849,8 +2853,7 @@ MonoBehaviour:
     range: 500
     damage: 1
     attackType: 0
-    additionalEffects:
-    - {fileID: 0}
+    additionalEffects: []
 --- !u!4 &755225698
 Transform:
   m_ObjectHideFlags: 0
@@ -4690,7 +4693,7 @@ Transform:
   m_PrefabInternal: {fileID: 173097964}
   m_GameObject: {fileID: 1431231293}
   m_LocalRotation: {x: -.707106829, y: -3.63935072e-07, z: -3.63935072e-07, w: .707106829}
-  m_LocalPosition: {x: 11.5334473, y: 28.2711258, z: 869.975281}
+  m_LocalPosition: {x: 472.43277, y: 55.0927353, z: 869.975769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4707,7 +4710,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: c78b114ae617a4914a6f9b9e0f796a0b, type: 2}
+  - {fileID: 2100000, guid: e097e0ca551c28647a5a126e44c35bbc, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -5788,7 +5791,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59664e13ed0a6a34399a32a0f152db5c, type: 3}
   m_Name: 
-  velocity: 3
+  velocity: 200
 --- !u!1 &1467634027
 GameObject:
   m_ObjectHideFlags: 0
