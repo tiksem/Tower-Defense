@@ -6,95 +6,78 @@ using System;
 [RequireComponent (typeof (Animation))]
 public class MovableObject : MonoBehaviour 
 {
-	public float rotationSpeed = 1.0f;
-	public float velocity = 1.0f;
-	
-	private Animation animation;
-	private RigidBodyCharacterController characterController;
-	private Vector3 movingDirection = Vector3.zero;
-	private bool smoothRotationActivated = false;
-	private float shouldBeStopedAfterSqrDistance = float.PositiveInfinity;
-	private Vector3 positionBeforeStartingMoving;
-	
+	[HideInInspector]
 	public Func<System.Void> onStop;
 	
-	private void ResetPositionBeforeStartingMoving()
+	public float pointSqrApproximationRadius = 200.0f;
+	
+	private RigidBodyCharacterController characterController;
+	private Vector3 moveToPoint;
+	private Vector3 positionBeforeMoveToPointInvoked;
+	
+	private void ChangeMovingDirection(Vector3 direction)
 	{
-		positionBeforeStartingMoving = transform.position;
+		characterController.movingDirection = direction;
+		transform.rotation = Quaternion.LookRotation(direction);
 	}
 	
-	// Use this for initialization
-	void Start() 
+	public void Move(Vector3 direction)
 	{
-		animation = GetComponent<Animation>();
-		characterController = GetComponent<RigidBodyCharacterController>();
-		ResetPositionBeforeStartingMoving();
+		moveToPoint = Vector3.zero;
+		PlayRunAnimation();
+		ChangeMovingDirection(direction);
 	}
 	
-	private void ApplyRudeRotation()
+	private Vector3 GetMoveToPointDirection()
 	{
-		transform.rotation = Quaternion.LookRotation(movingDirection);
+		return moveToPoint - transform.position;
 	}
 	
-	private void ApplySmoothRotation()
+	private float GetMoveToPointPassedSqrMagnitude()
 	{
-		float rotationPortion = Time.deltaTime * rotationSpeed;
-		Quaternion lookAt = Quaternion.LookRotation(movingDirection);
-		transform.rotation = Quaternion.Slerp(transform.rotation, lookAt, rotationPortion);
+		Vector3 passed = transform.position - positionBeforeMoveToPointInvoked;
+		return passed.sqrMagnitude;
 	}
 	
-	public void MoveWithSmoothyRotation(Vector3 movingDirection)
+	public void MoveToPoint(Vector3 point)
 	{
-		Move(movingDirection, true);
+		moveToPoint = point;
+		positionBeforeMoveToPointInvoked = transform.position;
+		Vector3 moveToPointDirection = GetMoveToPointDirection();
 	}
 	
-	private void StartMoving(Vector3 movingDirection, bool rotateSmoothy)
+	private bool ShouldBeStopped()
 	{
-		if(movingDirection == Vector3.zero)
+		float sqrMagnitudeDif = Math.Abs(transform.position.sqrMagnitude - moveToPoint.sqrMagnitude);
+		return sqrMagnitudeDif <= pointSqrApproximationRadius;
+	}
+	
+	private void UpdateMoveToPointState()
+	{
+		if(moveToPoint == Vector3.zero)
 		{
-			throw new System.ArgumentException("movingDirection = Vector3.zero");
+			return;
 		}
 		
-		ResetPositionBeforeStartingMoving();
-		
-		movingDirection.Normalize();
-		
-		this.movingDirection = characterController.movingDirection = movingDirection;
-		
-		if(!rotateSmoothy)
+		if(ShouldBeStopped())
 		{
-			ApplyRudeRotation();
-			smoothRotationActivated = false;
+			Stop();
 		}
 		else
 		{
-			smoothRotationActivated = true;
+			Vector3 direction = GetMoveToPointDirection();
+			ChangeMovingDirection(direction.normalized);
 		}
-		
-		ApplyRunAnimation();
 	}
 	
-	public void Move(Vector3 movingDirection, bool rotateSmoothy = false)
+	private void PlayStopAnimation()
 	{
-		StartMoving(movingDirection, rotateSmoothy);
-		shouldBeStopedAfterSqrDistance = float.PositiveInfinity;
+		animation.Play("idle");
 	}
 	
-	private Func<Void> drawLineDebug = null;
-	
-	public void MoveToPoint(Vector3 moveToPoint, bool rotateSmoothy = false)
+	private void PlayRunAnimation()
 	{
-		Vector3 movingDirection = moveToPoint - transform.position;
-		
-		drawLineDebug = () => Debug.DrawLine(transform.position, moveToPoint);
-		
-		StartMoving(movingDirection, rotateSmoothy);
-		shouldBeStopedAfterSqrDistance = movingDirection.sqrMagnitude;
-	}
-	
-	public void MoveToPointWithSmoothyRotation(Vector3 movingDirection)
-	{
-		MoveToPoint(movingDirection, true);
+		animation.Play("run");
 	}
 	
 	private void OnStop()
@@ -103,13 +86,15 @@ public class MovableObject : MonoBehaviour
 		{
 			onStop();
 		}
+		
+		PlayStopAnimation();
 	}
 	
 	public void Stop()
 	{
-		movingDirection = characterController.movingDirection = Vector3.zero;
-		ApplyStopAnimation();
-		OnStop();
+		characterController.movingDirection = Vector3.zero;
+		moveToPoint = Vector3.zero;
+		onStop();
 	}
 	
 	public bool IsMoving()
@@ -117,52 +102,13 @@ public class MovableObject : MonoBehaviour
 		return characterController.movingDirection != Vector3.zero;
 	}
 	
-	private Vector3 GetMovingWayVector()
+	void Start()
 	{
-		return transform.position - positionBeforeStartingMoving;
-	}
-	
-	private bool ShoudBeStopped()
-	{
-		if(float.IsPositiveInfinity(shouldBeStopedAfterSqrDistance))
-		{
-			return false;
-		}
-		
-		Vector3 way = GetMovingWayVector();
-		return way.sqrMagnitude >= shouldBeStopedAfterSqrDistance;
+		characterController = GetComponent<RigidBodyCharacterController>();
 	}
 	
 	void Update()
 	{
-		if(IsMoving())
-		{
-			if(smoothRotationActivated)
-			{
-				ApplySmoothRotation();
-			}
-			
-			if(ShoudBeStopped())
-			{
-				Stop();
-			}
-		}
-		
-		if(drawLineDebug != null)
-		{
-			drawLineDebug();
-		}
-	}
-	
-	private void ApplyStopAnimation()
-	{
-		animation.Stop("run");
-		animation.Play("idle");
-	}
-	
-	private void ApplyRunAnimation()
-	{
-		animation.Stop("idle");
-		animation.Play("run");
+		UpdateMoveToPointState();
 	}
 }
