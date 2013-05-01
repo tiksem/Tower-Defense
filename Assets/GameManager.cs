@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
 		AssignTargetWayPointTag(partyPointIndex, target);
 		
 		Vector3 position = partyPositionPoint.transform.position;
-		position.x += targetWidth * x * 2;
-		position.z += targetWidth * y * 2;
+		position.x += targetWidth * x * 3;
+		position.z += targetWidth * y * 3;
 		
 		target.transform.position = position;
 		

@@ -10,6 +10,7 @@ public class MovableObject : MonoBehaviour
 	public Func<System.Void> onStop;
 	
 	public float pointSqrApproximationRadius = 50.0f;
+	public float stopSqrApproximationRadius = 50.0f;
 	
 	private RigidBodyCharacterController characterController;
 	private Vector3 moveToPoint;
@@ -56,7 +57,7 @@ public class MovableObject : MonoBehaviour
 	private bool ShouldBeStopped()
 	{
 		float passedSqrMagnitude = GetMoveToPointPassedSqrMagnitude();
-		return passedSqrMagnitude >= sqrMagnitudeToPoint;
+		return passedSqrMagnitude >= sqrMagnitudeToPoint - stopSqrApproximationRadius;
 	}
 	
 	private void UpdateMoveToPointState()

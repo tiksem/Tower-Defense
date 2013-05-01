@@ -45,10 +45,11 @@ public class RigidBodyCharacterController : MonoBehaviour {
 	    grounded = false;
 	}
  
-	void OnCollisionStay () {
-	    grounded = true;    
+	void OnCollisionStay (Collision collision) 
+	{
+	    grounded = true;
 	}
- 
+	
 	float CalculateJumpVerticalSpeed () {
 	    // From the jump height and gravity we deduce the upwards speed 
 	    // for the character to reach at the apex.
