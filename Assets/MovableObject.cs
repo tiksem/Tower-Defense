@@ -9,11 +9,12 @@ public class MovableObject : MonoBehaviour
 	[HideInInspector]
 	public Func<System.Void> onStop;
 	
-	public float pointSqrApproximationRadius = 200.0f;
+	public float pointSqrApproximationRadius = 50.0f;
 	
 	private RigidBodyCharacterController characterController;
 	private Vector3 moveToPoint;
 	private Vector3 positionBeforeMoveToPointInvoked;
+	private float sqrMagnitudeToPoint;
 	
 	private void ChangeMovingDirection(Vector3 direction)
 	{
@@ -44,12 +45,18 @@ public class MovableObject : MonoBehaviour
 		moveToPoint = point;
 		positionBeforeMoveToPointInvoked = transform.position;
 		Vector3 moveToPointDirection = GetMoveToPointDirection();
+		sqrMagnitudeToPoint = moveToPointDirection.sqrMagnitude;
+	}
+	
+	private float GetsqrMagnitudeDifBetweenMoveToPointAndPosition()
+	{
+		return Math.Abs(transform.position.sqrMagnitude - moveToPoint.sqrMagnitude);
 	}
 	
 	private bool ShouldBeStopped()
 	{
-		float sqrMagnitudeDif = Math.Abs(transform.position.sqrMagnitude - moveToPoint.sqrMagnitude);
-		return sqrMagnitudeDif <= pointSqrApproximationRadius;
+		float passedSqrMagnitude = GetMoveToPointPassedSqrMagnitude();
+		return passedSqrMagnitude >= sqrMagnitudeToPoint;
 	}
 	
 	private void UpdateMoveToPointState()
@@ -65,6 +72,11 @@ public class MovableObject : MonoBehaviour
 		}
 		else
 		{
+			if(GetsqrMagnitudeDifBetweenMoveToPointAndPosition() <= pointSqrApproximationRadius)
+			{
+				return;
+			}
+			
 			Vector3 direction = GetMoveToPointDirection();
 			ChangeMovingDirection(direction.normalized);
 		}
