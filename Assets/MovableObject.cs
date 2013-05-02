@@ -11,16 +11,18 @@ public class MovableObject : MonoBehaviour
 	
 	public float pointSqrApproximationRadius = 50.0f;
 	public float stopSqrApproximationRadius = 50.0f;
+	public float rotationTime = 1.0f;
 	
 	private RigidBodyCharacterController characterController;
 	private Vector3 moveToPoint;
+	private Quaternion rotateTo;
 	private Vector3 positionBeforeMoveToPointInvoked;
 	private float sqrMagnitudeToPoint;
 	
 	private void ChangeMovingDirection(Vector3 direction)
 	{
 		characterController.movingDirection = direction;
-		transform.rotation = Quaternion.LookRotation(direction);
+		rotateTo = Quaternion.LookRotation(direction);
 	}
 	
 	public void Move(Vector3 direction)
@@ -107,6 +109,7 @@ public class MovableObject : MonoBehaviour
 	{
 		characterController.movingDirection = Vector3.zero;
 		moveToPoint = Vector3.zero;
+		rotateTo = Quaternion.identity;
 		onStop();
 	}
 	
@@ -118,6 +121,28 @@ public class MovableObject : MonoBehaviour
 	void Start()
 	{
 		characterController = GetComponent<RigidBodyCharacterController>();
+	}
+	
+	private void UpdateRotationState()
+	{
+		if(rotateTo != Quaternion.identity)
+		{
+			if(rotateTo != transform.rotation)
+			{
+				float rotationDeltaSize = Time.deltaTime / rotationTime;
+        		rigidbody.rotation = Quaternion.Slerp(rigidbody.rotation, rotateTo, rotationDeltaSize);
+			}
+		}
+	}
+	
+	public void Rotate(Quaternion rotation)
+	{
+		rotateTo = rotation;
+	}
+	
+	void FixedUpdate()
+	{
+		UpdateRotationState();
 	}
 	
 	void Update()
