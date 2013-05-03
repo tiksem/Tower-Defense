@@ -301,6 +301,11 @@ public class Target : MonoBehaviour
 		}
 	}
 	
+	public int GetCurrentHP()
+	{
+		return currentHP;
+	}
+	
 	private void DestroyEffects()
 	{
 		foreach(GameObject effect in effects)
