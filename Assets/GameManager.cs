@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 	public int maxLeaveTargetCount = 50;
 	public Party[] parties;
 	public string[] wayPointTags = new string[]{"WayPoint1", "WayPoint2"};
+	public float defaultTargetRadius = 0.5f;
 	
 	private int partyIndex = -1;
 	
@@ -44,8 +45,15 @@ public class GameManager : MonoBehaviour
 	
 	private float GetTargetWidth(GameObject target)
 	{
-		CapsuleCollider capsuleCollider = target.GetComponent<CapsuleCollider>();
-		return capsuleCollider.radius;
+		NavMeshAgent navMeshAgent = target.GetComponent<NavMeshAgent>();
+		if(navMeshAgent != null)
+		{
+			return navMeshAgent.radius;
+		}
+		else
+		{
+			return defaultTargetRadius;
+		}
 	}
 	
 	private void AssignTargetWayPointTag(int partyPointIndex, GameObject target)

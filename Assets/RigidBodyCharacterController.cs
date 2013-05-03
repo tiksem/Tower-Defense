@@ -19,6 +19,7 @@ public class RigidBodyCharacterController : MonoBehaviour {
 	void Awake () {
 	    rigidbody.freezeRotation = true;
 	    rigidbody.useGravity = false;
+		rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 	}
  
 	void FixedUpdate () {

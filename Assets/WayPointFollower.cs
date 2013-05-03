@@ -2,125 +2,122 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-[RequireComponent (typeof (MovableObject))]
+[RequireComponent (typeof(NavMeshAgent))]
 public class WayPointFollower : MonoBehaviour 
 {
-	public float timeBeforeMoving = 0.0f;
+	private String wayPointTag;
 	
-	private GameObject[] wayPoints;
-	private int moveToWayPointIndex;
-	private MovableObject movableObjectComponent;
+	public float wayPointRadius = 10.0f;
 	
-	private string wayPointTag;
+	private int currentWayPointIndex = -1;
+	private Vector3[] wayPoints;
+	private NavMeshAgent navMeshAgent;
+	private bool finishGotten = false;
+	private float sqrWayPointRadius;
+	
+	void OnValidate()
+	{
+		sqrWayPointRadius = wayPointRadius * wayPointRadius;
+	}
+	
+	private void InitNavMeshAgentIfNeed()
+	{
+		if(navMeshAgent != null)
+		{
+			return;
+		}
+		
+		navMeshAgent = GetComponent<NavMeshAgent>();
+		navMeshAgent.stoppingDistance = 5.0f;
+	}
+	
+	private void InitWayPoints()
+	{
+		GameObject[] wayPointObjects = GameObject.FindGameObjectsWithTag(wayPointTag);
+		Array.Sort(wayPointObjects, (GameObject a, GameObject b) => 
+		{
+			int intA = int.Parse(a.name);
+			int intB = int.Parse(b.name);
+			return intA.CompareTo(intB);
+		});
+		
+		wayPoints = new Vector3[wayPointObjects.Length];
+		
+		for(int i = 0; i < wayPointObjects.Length; i++)
+		{
+			wayPoints[i] = wayPointObjects[i].transform.position;
+		}
+	}
 	
 	public void SetWayPointTag(string wayPointTag)
 	{
 		this.wayPointTag = wayPointTag;
-		wayPoints = GameObject.FindGameObjectsWithTag(wayPointTag);
+		currentWayPointIndex = -1;
+		InitNavMeshAgentIfNeed();
 		InitWayPoints();
+		MoveToNextWayPoint();
 	}
 	
-	private int WayPointsComparator(GameObject a, GameObject b)
-	{
-		int aId = int.Parse(a.name);
-		int bId = int.Parse(b.name);
-		return aId.CompareTo(bId);
-	}
-	
-	private void SortWayPoints()
-	{
-		System.Array.Sort(wayPoints, WayPointsComparator);
-	}
-	
-	private GameObject GetCurrentWayPoint()
-	{
-		if(moveToWayPointIndex < wayPoints.Length)
-		{
-			return wayPoints[moveToWayPointIndex];
-		}
-		else
-		{
-			return null;
-		}
-	}
-	
-	private Vector3 GetCurrentWayPointPosition()
-	{
-		GameObject wayPoint = GetCurrentWayPoint();
-		return wayPoint.transform.position;
-	}
-	
-	private void MoveToNextWayPoint()
-	{
-		Vector3 wayPointPosition = GetCurrentWayPointPosition();
-		movableObjectComponent.MoveToPoint(wayPointPosition);
-	}
-	
-	private void MoveNext()
-	{
-		if(HasNextWayPoint())
-		{
-			MoveToNextWayPoint();
-		}
-		else
-		{
-			OnFinish();
-		}
-	}
-	
-	private void OnFinish()
+	public void Start()
 	{
 		
 	}
 	
-	private bool HasNextWayPoint()
-	{
-		return moveToWayPointIndex < wayPoints.Length;
-	}
-	
 	private void OnWayPointGotten()
 	{
-		moveToWayPointIndex++;
-		MoveNext();
+		MoveToNextWayPoint();
 	}
 	
-	private void Move()
+	private void OnFinish()
 	{
-		if(!movableObjectComponent.IsMoving())
+		finishGotten = true;
+	}
+	
+	private Vector3 GetCurrentWayPoint()
+	{
+		return wayPoints[currentWayPointIndex];
+	}
+	
+	private bool IsWayPointGotten()
+	{
+		Vector3 direction = navMeshAgent.destination - transform.position;
+		return direction.sqrMagnitude <= sqrWayPointRadius;
+	}
+	
+	private void MoveToWayPoint(Vector3 wayPoint)
+	{
+		navMeshAgent.destination = wayPoint;
+	}
+	
+	private void MoveToNextWayPoint()
+	{
+		currentWayPointIndex++;
+		if(currentWayPointIndex >= wayPoints.Length)
 		{
-			MoveNext();
+			OnFinish();
+		}
+		else
+		{
+			Vector3 wayPoint = wayPoints[currentWayPointIndex];
+			MoveToWayPoint(wayPoint);
 		}
 	}
 	
-	private IEnumerator StartMovingWithTimerCoroutine()
+	void Update()
 	{
-		yield return new WaitForSeconds(timeBeforeMoving);
-		Move();
-	}
-	
-	private void StartMovingWithTimer()
-	{
-		StartCoroutine(StartMovingWithTimerCoroutine());
-	}
-	
-	void InitWayPoints()
-	{
-		wayPoints = GameObject.FindGameObjectsWithTag(wayPointTag);
-		SortWayPoints();
-		StartMovingWithTimer();
-	}
-	
-	// Use this for initialization
-	void Start() 
-	{
-		moveToWayPointIndex = 0;
-		movableObjectComponent = GetComponent<MovableObject>();
-		movableObjectComponent.onStop = OnWayPointGotten;
-	}
-	
-	// Update is called once per frame
-	void Update() 
-	{
-	
+		if(wayPointTag == null)
+		{
+			return;
+		}
+		
+		if(finishGotten)
+		{
+			return;
+		}
+		
+		if(IsWayPointGotten())
+		{
+			OnWayPointGotten();
+		}
 	}
 }
