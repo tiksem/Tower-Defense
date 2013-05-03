@@ -629,13 +629,10 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  defaultTargetWidth: 1
-  minCameraDistance: 6
-  maxCameraDistance: 30
-  minWidth: .0500000007
-  maxWidth: .200000003
-  minHeight: .00100000005
-  maxHeight: .00999999978
+  height: 2
+  width: 15
+  xOffest: 0
+  yOffest: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

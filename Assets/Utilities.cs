@@ -20,7 +20,7 @@ namespace AssemblyCSharp
 			return child;
 		}
 		
-		public static float Remap(float value, float from1, float to1, float from2, float to2) 
+		public static float ProjectFromOneRangeToAnother(float value, float from1, float to1, float from2, float to2) 
 		{
 			if(from1 > from2)
 			{
@@ -32,22 +32,12 @@ namespace AssemblyCSharp
 				throw new System.ArgumentException("to1 > to2");
 			}
 			
-			if(value < from1)
-			{
-				value = from1;
-			}
-			
-			if(value > from2)
-			{
-				value = from2;
-			}
-			
     		return to1 + (value - from1) * (to2 - to1) / (from2 - from1);
 		}
 		
-		public static int Remap(int value, int from1, int to1, int from2, int to2) 
+		public static int ProjectFromOneRangeToAnother(int value, int from1, int to1, int from2, int to2) 
 		{
-    		return (int)Math.Round(Remap((float)value, (float)from1, (float)to1, (float)from2, (float)to2));
+    		return (int)Math.Round(ProjectFromOneRangeToAnother((float)value, (float)from1, (float)to1, (float)from2, (float)to2));
 		}
 	}
 }

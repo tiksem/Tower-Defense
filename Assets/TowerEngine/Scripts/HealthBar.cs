@@ -16,17 +16,17 @@ public class HealthBar : MonoBehaviour
 	
 	public float height = 20.0f;
 	public float width = 80.0f;
-	public float xOffest = 0.0f;
-	public float yOffest = 0.0f;
+	
 	
 	private static readonly int TEXTURE_WIDTH = 100;
 	private static readonly int TEXTURE_HEIGHT = 15;
 	private static readonly int TEXTURE_BORDER = 2;
 	
 	private Target target;
-	private NavMeshAgent navMeshAgent;
 	private int lastHP = -1;
 	private Texture2D texture;
+	private GUITexture guiTextureComponent;
+	private GameObject guiTextureObject;
 	
 	void OnValidate()
 	{
@@ -37,12 +37,14 @@ public class HealthBar : MonoBehaviour
 	}
 	
 	// Use this for initialization
-	void Start() 
+	void Start()
 	{
 		GUI.backgroundColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
 		target = GetComponent<Target>();
-		navMeshAgent = GetComponent<NavMeshAgent>();
 		texture = new Texture2D(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+		guiTextureObject = new GameObject();
+		guiTextureComponent = guiTextureObject.AddComponent<GUITexture>();
+		guiTextureComponent.texture = texture;
 	}
 	
 	private Color GetColorFromHP()
@@ -69,7 +71,7 @@ public class HealthBar : MonoBehaviour
 		Color hpColor = GetColorFromHP();
 		int maxHP = target.maxHP;
 		int hp = target.GetCurrentHP();
-		int hpColorEnd = Utilities.Remap(hp, 0, TEXTURE_BORDER, maxHP, TEXTURE_WIDTH - TEXTURE_BORDER);
+		int hpColorEnd = Utilities.ProjectFromOneRangeToAnother(hp, 0, TEXTURE_BORDER, maxHP, TEXTURE_WIDTH - TEXTURE_BORDER);
 		
 		for(int y = 0; y < TEXTURE_HEIGHT; y++)
 		{
@@ -108,25 +110,29 @@ public class HealthBar : MonoBehaviour
 		return Vector3.Distance(Camera.main.transform.position, transform.position);
 	}
 	
-	private Rect GetTextureDrawRect(Vector2 screenPosition, float width, float height)
-	{
-		Rect result = new Rect();
-		result.x = screenPosition.x + xOffest;
-		result.y = Screen.height - screenPosition.y + yOffest;
-		result.width = width;
-		result.height = height;
-		return result;
-	}
-	
 	private void DrawTexture()
 	{
-		Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+		Vector3 texturePosition = Camera.main.WorldToScreenPoint(renderer.bounds.center);
+		//Debug.Log(texturePosition);
 		
-		Rect rect = GetTextureDrawRect(screenPosition, width, height);
-		GUI.DrawTexture(rect, texture, ScaleMode.StretchToFill, false);
+		guiTextureObject.transform.rotation = transform.rotation;
+		
+		texturePosition.x = Utilities.ProjectFromOneRangeToAnother(texturePosition.x, 0.0f, 0.0f, Screen.width, 1.0f);
+		texturePosition.y = Utilities.ProjectFromOneRangeToAnother(texturePosition.y, 0.0f, 0.0f, Screen.height, 1.0f);
+		texturePosition.z = 0.0f;
+		
+		guiTextureObject.transform.localScale = Vector3.zero;
+		guiTextureObject.transform.position = texturePosition;
+		
+		float xOffset = -width / 2; //Utilities.ProjectFromOneRangeToAnother(texturePosition.x, 0.0f, 0.0f, 1.0f, width);
+		float yOffset = 0;//Utilities.ProjectFromOneRangeToAnother(texturePosition.y, 0.0f, 0.0f, 1.0f, height);
+		
+		guiTextureComponent.pixelInset = new Rect(xOffset, yOffset, width, height);
+
+		guiTextureComponent.texture = texture;
 	}
-	
-	void OnGUI()
+
+	void Update()
 	{
 		UpdateTextureState();
 		DrawTexture();
