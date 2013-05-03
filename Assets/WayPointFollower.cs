@@ -8,6 +8,8 @@ public class WayPointFollower : MonoBehaviour
 	private String wayPointTag;
 	
 	public float wayPointRadius = 10.0f;
+	public float wayPointOffsetX = 0.0f;
+	public float wayPointOffsetY = 0.0f;
 	
 	private int currentWayPointIndex = -1;
 	private Vector3[] wayPoints;
@@ -45,7 +47,10 @@ public class WayPointFollower : MonoBehaviour
 		
 		for(int i = 0; i < wayPointObjects.Length; i++)
 		{
-			wayPoints[i] = wayPointObjects[i].transform.position;
+			Vector3 wayPoint = wayPointObjects[i].transform.position;
+			wayPoint.x += wayPointOffsetX;
+			wayPoint.y += wayPointOffsetY;
+			wayPoints[i] = wayPoint;
 		}
 	}
 	

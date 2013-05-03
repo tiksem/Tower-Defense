@@ -77,10 +77,17 @@ public class GameManager : MonoBehaviour
 		AssignTargetWayPointTag(partyPointIndex, target);
 		
 		Vector3 position = partyPositionPoint.transform.position;
-		position.x += targetWidth * x * 3;
-		position.z += targetWidth * y * 3;
+		position.x += targetWidth * x;
+		position.z += targetWidth * y;
 		
 		target.transform.position = position;
+		
+		/*WayPointFollower wayPointFollower = target.GetComponent<WayPointFollower>();
+		if(wayPointFollower != null)
+		{
+			wayPointFollower.wayPointOffsetX = party.height + targetWidth * x * 2;
+			wayPointFollower.wayPointOffsetY = party.height + targetWidth * y * 2;
+		}*/
 		
 		return target;
 	}
