@@ -1,6 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TowerEngine\Scripts\CameraZoomPinch">
+    <Files>
+      <File FileName="Assets\TowerEngine\Scripts\HealthBar.cs" Line="14" Column="12" />
+      <File FileName="Assets\FPS.cs" Line="1" Column="1" />
+      <File FileName="Assets\Utilities.cs" Line="1" Column="1" />
+      <File FileName="Assets\TowerEngine\Scripts\CameraUtilities.cs" Line="1" Column="1" />
+      <File FileName="Assets\TowerEngine\Scripts\RTSCamera.cs" Line="23" Column="28" />
+      <File FileName="Assets\TowerEngine\Scripts\CameraZoomPinch" Line="14" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Catchpoint exceptionName="UnityEngine.MissingReferenceException" />

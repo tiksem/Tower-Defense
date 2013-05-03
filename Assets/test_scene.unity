@@ -2705,6 +2705,8 @@ GameObject:
   - 92: {fileID: 1597681926}
   - 124: {fileID: 1597681925}
   - 81: {fileID: 1597681924}
+  - 114: {fileID: 1597681929}
+  - 114: {fileID: 1597681930}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2751,7 +2753,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 60
+  field of view: 78.6999969
   orthographic: 0
   orthographic size: 100
   m_Depth: -1
@@ -2772,6 +2774,40 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1597681929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1597681923}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd79bbffbcfaad343b9a6786fba23555, type: 3}
+  m_Name: 
+  maxX: 100
+  maxY: 50
+  maxZ: 100
+  minX: 0
+  minY: 8
+  minZ: 0
+  zoomSpeed: 1
+  scrollSpeed: 1
+--- !u!114 &1597681930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1597681923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bab7013a14c1ee46bbbf7b329b5c711, type: 3}
+  m_Name: 
+  speed: 4
+  selectedCamera: {fileID: 0}
+  MINSCALE: 2
+  MAXSCALE: 5
+  minPinchSpeed: 5
+  varianceInDistances: 5
 --- !u!1 &1627787359
 GameObject:
   m_ObjectHideFlags: 0
