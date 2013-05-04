@@ -2706,7 +2706,6 @@ GameObject:
   - 124: {fileID: 1597681925}
   - 81: {fileID: 1597681924}
   - 114: {fileID: 1597681929}
-  - 114: {fileID: 1597681930}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2780,29 +2779,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1597681923}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd79bbffbcfaad343b9a6786fba23555, type: 3}
   m_Name: 
-  maxX: 100
-  maxY: 50
-  maxZ: 100
-  minX: 0
-  minY: 8
-  minZ: 0
-  zoomSpeed: 1
-  scrollSpeed: 1
---- !u!114 &1597681930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1597681923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bab7013a14c1ee46bbbf7b329b5c711, type: 3}
-  m_Name: 
   zoomSpeed: 4
+  dragSpeed: .699999988
   maxFieldOfViewSize: 90
   minFieldOfViewSize: 15
   mapStartX: 0
@@ -2812,6 +2794,9 @@ MonoBehaviour:
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 5
+    moveSpeed: 100
+  mouseSettings:
+    zoomSpeed: 5
 --- !u!1 &1627787359
 GameObject:
   m_ObjectHideFlags: 0
