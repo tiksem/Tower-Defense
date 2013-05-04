@@ -3,8 +3,74 @@ using UnityEngine;
 
 namespace AssemblyCSharp
 {
+	public struct ScreenRect
+	{
+		public Vector3 leftTop;
+		public Vector3 leftBottom;
+		public Vector3 rightTop;
+		public Vector3 rightBottom;
+	}
+	
+	public struct ScreenDiagonal
+	{
+		public Vector3 leftBottom;
+		public Vector3 rightTop;
+	}
+	
 	static public class CameraUtilities
 	{
+		public static Vector3 GetWorldVectorFromScreenPoints(Camera camera, Vector2 a, Vector2 b)
+		{
+			Vector3 worldA = ScreenToWorldPoint(camera, a);
+			Vector3 worldB = ScreenToWorldPoint(camera, b);
+			return worldA - worldB;
+		}
+		
+		public static float GetWorldDistanceBetweenScreenPoints(Camera camera, Vector2 a, Vector2 b)
+		{
+			Vector3 vector = GetWorldVectorFromScreenPoints(camera, a, b);
+			return vector.magnitude;
+		}
+		
+		public static Vector3 ScreenToWorldPoint(Camera camera, Vector2 screenPoint)
+		{
+			Vector3 screenPoint3 = new Vector3(screenPoint.x, screenPoint.y, camera.nearClipPlane);
+			return camera.ScreenToWorldPoint(screenPoint3);
+		}
+		
+		public static ScreenRect GetCameraWorldRectPoints(Camera camera)
+		{
+			ScreenRect result = new ScreenRect();
+			
+			Vector3 screenPosition = new Vector3(0, 0, camera.nearClipPlane);
+			result.leftBottom = camera.ScreenToWorldPoint(screenPosition);
+			
+			screenPosition.y = camera.pixelHeight;
+			result.leftTop = camera.ScreenToWorldPoint(screenPosition);
+			
+			screenPosition.x = camera.pixelWidth;
+			result.rightTop = camera.ScreenToWorldPoint(screenPosition);
+			
+			screenPosition.y = 0;
+			result.rightBottom = camera.ScreenToWorldPoint(screenPosition);
+			
+			return result;
+		}
+		
+		public static ScreenDiagonal GetCameraWorldDiagonalPoints(Camera camera)
+		{
+			ScreenDiagonal result = new ScreenDiagonal();
+			
+			Vector3 screenPosition = new Vector3(0, 0, camera.nearClipPlane);
+			result.leftBottom = camera.ScreenToWorldPoint(screenPosition);
+			
+			screenPosition.y = camera.pixelHeight;			
+			screenPosition.x = camera.pixelWidth;
+			result.rightTop = camera.ScreenToWorldPoint(screenPosition);
+			
+			return result;
+		}
+		
 		public static Vector3 WorldToNormalizedViewportPoint(Camera camera, Vector3 point) 
 		{
     		// Use the default camera matrix to normalize XY,

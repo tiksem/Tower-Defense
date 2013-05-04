@@ -2802,12 +2802,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bab7013a14c1ee46bbbf7b329b5c711, type: 3}
   m_Name: 
-  speed: 4
-  selectedCamera: {fileID: 0}
-  MINSCALE: 2
-  MAXSCALE: 5
-  minPinchSpeed: 5
-  varianceInDistances: 5
+  zoomSpeed: 4
+  maxFieldOfViewSize: 90
+  minFieldOfViewSize: 15
+  mapStartX: 0
+  mapStartZ: 0
+  mapWidth: 100
+  mapHeight: 100
+  touchSettings:
+    minTouchZoomSpeed: 5
+    zoomTouchDeltaOffset: 5
 --- !u!1 &1627787359
 GameObject:
   m_ObjectHideFlags: 0
