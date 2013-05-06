@@ -61,7 +61,7 @@ namespace AssemblyCSharp
 		{
 			ScreenDiagonal result = new ScreenDiagonal();
 			
-			Vector3 screenPosition = new Vector3(0, 0, camera.nearClipPlane);
+			Vector3 screenPosition = new Vector3(0, 0, camera.transform.position.y);
 			result.leftBottom = camera.ScreenToWorldPoint(screenPosition);
 			
 			screenPosition.y = camera.pixelHeight;			

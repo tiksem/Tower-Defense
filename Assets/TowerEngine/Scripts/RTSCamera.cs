@@ -68,85 +68,60 @@ public class RTSCamera : MonoBehaviour
 		selectedCamera.transform.position = cameraPosition;
 	}
 	
-	private bool ValidateCameraMinXPosition(float leftX)
-	{
-		if(leftX >= mapStartX)
-		{
-			return true;
-		}
-		
-		Vector3 cameraPosition = selectedCamera.transform.position;
-		cameraPosition.x = mapStartX;
-		selectedCamera.transform.position = cameraPosition;
-		
-		return false;
-	}
-	
-	private bool ValidateCameraMinZPosition(float bottomZ)
-	{
-		if(bottomZ >= mapStartZ)
-		{
-			return true;
-		}
-		
-		Vector3 cameraPosition = selectedCamera.transform.position;
-		cameraPosition.z = mapStartZ;
-		selectedCamera.transform.position = cameraPosition;
-		
-		return false;
-	}
-	
-	private bool ValidateCameraMaxZPosition(float topZ)
-	{
-		var maxZ = mapStartZ + mapHeight;
-		if(topZ <= maxZ)
-		{
-			return true;
-		}
-		
-		Vector3 cameraPosition = selectedCamera.transform.position;
-		cameraPosition.z = maxZ;
-		selectedCamera.transform.position = cameraPosition;
-		
-		return false;
-	}
-	
-	private bool ValidateCameraMaxXPosition(float rightX)
-	{
-		var maxX = mapStartX + mapWidth;
-		if(rightX <= maxX)
-		{
-			return true;
-		}
-		
-		Vector3 cameraPosition = selectedCamera.transform.position;
-		cameraPosition.x = maxX;
-		selectedCamera.transform.position = cameraPosition;
-		
-		return false;
-	}
-	
 	private void ValidateCameraPosition()
 	{
 		ScreenDiagonal screenDiagonal = CameraUtilities.GetCameraWorldDiagonalPoints(selectedCamera);
 		Vector3 leftBottom = screenDiagonal.leftBottom;
 		Vector3 rightTop = screenDiagonal.rightTop;
 		
-		bool validateMinXSuccess = ValidateCameraMinXPosition(leftBottom.x);
-		bool validateMinZSuccess = ValidateCameraMinZPosition(leftBottom.z);
-		bool validateMaxZSuccess = ValidateCameraMaxZPosition(rightTop.z);
-		bool validateMaxXSuccess = ValidateCameraMaxXPosition(rightTop.x);
+		bool validateMinXSuccess = leftBottom.x >= mapStartX;
+		bool validateMinZSuccess = leftBottom.z >= mapStartZ;
+		bool validateMaxZSuccess = rightTop.z <= mapStartZ + mapHeight;
+		bool validateMaxXSuccess = rightTop.x <= mapStartX + mapWidth;
 		
 		if((!validateMinXSuccess && !validateMaxXSuccess) || (!validateMinZSuccess && !validateMaxZSuccess))
 		{
 			throw new System.ArgumentException("Camera position validation failed, check your camera settings");
 		}
+		
+		Vector3 cameraPosition = selectedCamera.transform.position;
+		
+		if(!validateMinXSuccess)
+		{
+			float xDif = leftBottom.x - mapStartX;
+			cameraPosition.x -= xDif;
+		}
+			
+		if(!validateMinZSuccess)
+		{
+			float zDif = leftBottom.z - mapStartZ;
+			cameraPosition.z -= zDif;
+		}
+		
+		if(!validateMaxXSuccess)
+		{
+			float xDif = rightTop.x - mapStartX - mapWidth;
+			cameraPosition.x -= xDif;
+		}
+			
+		if(!validateMaxZSuccess)
+		{
+			float zDif = rightTop.z - mapStartZ - mapHeight;
+			cameraPosition.z -= zDif;
+		}
+		
+		selectedCamera.transform.position = cameraPosition;
 	}
 	
 	private void SetCameraPosition(Vector2 screenPoint, float zoomSpeed)
 	{
 		ChangeCameraFieldOfView(zoomSpeed);
-		MoveCameraToScreenPoint(screenPoint);
+		
+		if(zoomSpeed < 0.0f)
+		{
+			MoveCameraToScreenPoint(screenPoint);
+		}
+		
 		ValidateCameraPosition();
 	}
 	
@@ -159,12 +134,15 @@ public class RTSCamera : MonoBehaviour
     	// Get direction of movement.  (Note: Don't normalize, the magnitude of change is going to be Vector3.Distance(current_position-hit_position)
     	// anyways.  
     	Vector3 direction = Camera.main.ScreenToWorldPoint(currentMouseMovingPosition) - Camera.main.ScreenToWorldPoint(lastMouseMovingPosition);
+		direction.y = 0;
 
     	// Invert direction to that terrain appears to move with the mouse.
     	direction = direction * -1 * dragSpeed;
     	transform.position += direction;
 		
 		lastMouseMovingPosition = currentMouseMovingPosition;
+		
+		ValidateCameraPosition();
 	}
 	
 	private void UpdateMouseMoving()
