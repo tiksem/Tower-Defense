@@ -6,9 +6,11 @@ namespace AssemblyCSharp
 	public class SplatPrototypeVisibilityTrigger
 	{
 		private SplatPrototype splatPrototype;
-		private bool isShown = false;
+		private bool isShown = true;
 		private Texture2D savedTexture;
 		private static Texture2D transparentTexture;
+		private Terrain terrain;
+		private int splatPrototypeIndex;
 		
 		private static void InitTransparentTextureIfNeed()
 		{
@@ -18,9 +20,20 @@ namespace AssemblyCSharp
 			}
 		}
 		
-		public SplatPrototypeVisibilityTrigger(SplatPrototype splatPrototype)
+		public SplatPrototypeVisibilityTrigger(Terrain terrain, Texture2D texture)
 		{
-			this.splatPrototype = splatPrototype;
+			SplatPrototype[] splatPrototypes = terrain.terrainData.splatPrototypes;
+			int index = Array.FindIndex(splatPrototypes, 
+				(SplatPrototype obj) => obj.texture == texture);
+			
+			if(index < 0)
+			{
+				throw new System.ArgumentException("could not find the texture in terrain splats");
+			}
+			
+			this.terrain = terrain;
+			splatPrototypeIndex = index;
+			splatPrototype = splatPrototypes[index];
 			InitTransparentTextureIfNeed();
 		}
 		
@@ -39,6 +52,19 @@ namespace AssemblyCSharp
 			savedTexture = splatPrototype.texture;
 			splatPrototype.texture = transparentTexture;
 			isShown = false;
+			
+			UpdateTerrain();
+		}
+		
+		public void UpdateTerrain()
+		{
+			TerrainData terrainData = terrain.terrainData;
+			SplatPrototype[] splatPrototypes = terrainData.splatPrototypes;
+			splatPrototypes[splatPrototypeIndex] = splatPrototype;
+			terrainData.splatPrototypes = splatPrototypes;
+			terrainData.RefreshPrototypes();
+			terrain.terrainData = terrainData;
+			terrain.Flush();
 		}
 		
 		public void Show()
@@ -51,6 +77,8 @@ namespace AssemblyCSharp
 			
 			splatPrototype.texture = savedTexture;
 			isShown = true;
+			
+			UpdateTerrain();
 		}
 	}
 }

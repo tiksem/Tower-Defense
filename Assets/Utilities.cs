@@ -56,6 +56,42 @@ namespace AssemblyCSharp
 			
 			return texture;
 		}
+		
+		public static Vector3 GetGameObjectRayIntersectionPoint(GameObject gameObject, Ray ray, bool ignoreOtherObjects = false)
+		{
+			int layerMask = gameObject.layer;
+			if(!ignoreOtherObjects)
+			{
+				RaycastHit raycastHit = new RaycastHit();
+				if(Physics.Raycast(ray, out raycastHit, float.PositiveInfinity, layerMask))
+				{
+					if(raycastHit.collider.gameObject == gameObject)
+					{
+						return raycastHit.point;
+					}
+				}
+				
+				return Vector3.zero;
+			}
+			else
+			{
+				RaycastHit[] hits = Physics.RaycastAll(ray, float.PositiveInfinity, layerMask);
+				foreach(RaycastHit hit in hits)
+				{
+					if(hit.collider.gameObject == gameObject)
+					{
+						return hit.point;
+					}
+				}
+				
+				return Vector3.zero;
+			}
+		}
+		
+		public static float RemoveModuloPart(float value, float divideBy)
+		{
+			return ((float)(int)(value / divideBy)) * divideBy;
+		}
 	}
 }
 
