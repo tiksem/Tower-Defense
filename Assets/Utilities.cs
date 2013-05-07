@@ -39,6 +39,23 @@ namespace AssemblyCSharp
 		{
     		return (int)Math.Round(ProjectFromOneRangeToAnother((float)value, (float)from1, (float)to1, (float)from2, (float)to2));
 		}
+		
+		public static Texture2D CreateTransparentTexture(int width = 2, int height = 2)
+		{
+			Texture2D texture = new Texture2D(width, height);
+			Color color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+			for(int y = 0; y < height; y++)
+			{
+				for(int x = 0; x < width; x++)
+				{
+					texture.SetPixel(x, y, color);
+				}
+			}
+			
+			texture.Apply();
+			
+			return texture;
+		}
 	}
 }
 
