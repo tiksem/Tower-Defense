@@ -8,6 +8,11 @@ namespace AssemblyCSharp
 		private Vector3 onMouseDownPosition;
 		private Vector3 onMouseUpPosition;
 		
+		public MouseClickHandler()
+		{
+			isClickAccepted = DefaultIsClickAccepted;
+		}
+		
 		public static bool DefaultIsClickAccepted(Vector3 onMouseDownPosition, Vector3 onMouseUpPosition)
 		{
 			return onMouseDownPosition == onMouseUpPosition;
@@ -15,11 +20,6 @@ namespace AssemblyCSharp
 		
 		public Func<Vector3, Vector3, bool> isClickAccepted;
 		public Func<Void> onClick;
-		
-		public MouseClickHandler()
-		{
-			
-		}
 		
 		private bool IsClickAccepted()
 		{

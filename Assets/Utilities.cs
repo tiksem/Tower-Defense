@@ -75,7 +75,7 @@ namespace AssemblyCSharp
 			}
 			else
 			{
-				RaycastHit[] hits = Physics.RaycastAll(ray, float.PositiveInfinity, layerMask);
+				RaycastHit[] hits = Physics.RaycastAll(ray);
 				foreach(RaycastHit hit in hits)
 				{
 					if(hit.collider.gameObject == gameObject)

@@ -28,7 +28,7 @@ Mesh:
   m_Skin: []
   m_BindPose: []
   m_VertexData:
-    m_CurrentChannels: 11
+    m_CurrentChannels: 15
     m_VertexCount: 4
     m_Channels:
     - stream: 0
@@ -40,11 +40,11 @@ Mesh:
       format: 0
       dimension: 3
     - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
       offset: 24
+      format: 2
+      dimension: 1
+    - stream: 0
+      offset: 28
       format: 0
       dimension: 2
     - stream: 0
@@ -56,9 +56,9 @@ Mesh:
       format: 0
       dimension: 0
     m_Streams:
-    - channelMask: 11
+    - channelMask: 15
       offset: 0
-      stride: 32
+      stride: 36
       dividerOp: 0
       frequency: 0
     - channelMask: 0
@@ -76,8 +76,8 @@ Mesh:
       stride: 0
       dividerOp: 0
       frequency: 0
-    m_DataSize: 128
-    _typelessdata: 000000bf00000000000000bf000000000000803f0000000000000000000000000000003f00000000000000bf000000000000803f000000000000803f00000000000000bf000000000000003f000000000000803f00000000000000000000803f0000003f000000000000003f000000000000803f000000000000803f0000803f
+    m_DataSize: 144
+    _typelessdata: 000000bf00000000000000bf000000000000803f00000000ffffffff00000000000000000000003f00000000000000bf000000000000803f00000000ffffffff0000803f00000000000000bf000000000000003f000000000000803f00000000ffffffff000000000000803f0000003f000000000000003f000000000000803f00000000ffffffff0000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0

@@ -38,7 +38,7 @@ namespace AssemblyCSharp
 			x = Utilities.RemoveModuloPart(x, towerSize);
 			y = Utilities.RemoveModuloPart(y, towerSize);
 			
-			return new Vector2(x, y);
+			return new Vector2(min.x + x, min.y + y);
 		}
 	}
 }

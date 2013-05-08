@@ -9,7 +9,8 @@ public class TowerManager : MonoBehaviour
 	public enum MapState
 	{
 		ACTIVE,
-		BUILDING_TOWER,
+		SELECTING_TOWER,
+		SELECTING_TOWER_PLACE,
 	}
 	
 	public int startGold = 200;
@@ -17,11 +18,12 @@ public class TowerManager : MonoBehaviour
 	public float towerSize = 3;
 	public GameObject[] availibleTowerPlaces;
 	public Terrain terrain;
+	public GameObject towerBuildButton;
 	
 	private TowerPlace[] towerPlaces;
 	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
 	private MapState mapState = MapState.ACTIVE;
-	private GameObject selectedTower;
+	public GameObject selectedTower;
 	private int currentGold;
 	
 	public static TowerManager Instance
@@ -81,8 +83,9 @@ public class TowerManager : MonoBehaviour
 	
 	private Vector3 GetTowerPosition(Vector3 requestedPosition)
 	{
-		TowerPlace towerPlace = GetTowerPlace(requestedPosition);
-		return GetTowerPosition(towerPlace, requestedPosition);
+		requestedPosition.x = Utilities.RemoveModuloPart(requestedPosition.x, towerSize);
+		requestedPosition.y = Utilities.RemoveModuloPart(requestedPosition.y, towerSize);
+		return requestedPosition;
 	}
 	
 	private TowerPlace GetTowerPlace(Vector3 requestedPosition)
@@ -104,7 +107,7 @@ public class TowerManager : MonoBehaviour
 	
 	public void OpenTowerBuildMenu()
 	{
-		StartTowerBuildingAction();
+		OpenTowerSelectionMenu();
 	}
 	
 	private void SetGridVisibility(bool value)
@@ -125,9 +128,9 @@ public class TowerManager : MonoBehaviour
 		SetGridVisibility(false);
 	}
 	
-	private void StartTowerBuildingAction()
+	private void OpenTowerPlaceSelectionMenu()
 	{
-		mapState = MapState.BUILDING_TOWER;
+		mapState = MapState.SELECTING_TOWER_PLACE;
 		ShowGrid();
 	}
 	
@@ -143,9 +146,34 @@ public class TowerManager : MonoBehaviour
 		BuildTower(towerPosition, selectedTower);
 	}
 	
-	private void OnTowerBuildingActionClick()
+	private void SetTowerBuildButtonVisibility(bool value)
 	{
-		Vector3 mouseOnTerrain = MouseUtilities.GetMousePositionOnGameObject(terrain.gameObject);
+		if(towerBuildButton == null)
+		{
+			return;
+		}
+		
+		towerBuildButton.SetActive(value);
+	}
+	
+	private void ShowTowerBuildButton()
+	{
+		SetTowerBuildButtonVisibility(true);
+	}
+	
+	private void HideTowerBuildButton()
+	{
+		SetTowerBuildButtonVisibility(false);
+	}
+	
+	private void OnTowerSelectionClick()
+	{
+		
+	}
+	
+	private void OnTowerPlaceSelectionClick()
+	{
+		Vector3 mouseOnTerrain = MouseUtilities.GetMousePositionOnGameObject(terrain.gameObject, true);
 		if(mouseOnTerrain == Vector3.zero)
 		{
 			return;
@@ -160,12 +188,22 @@ public class TowerManager : MonoBehaviour
 		
 	}
 	
+	private void OpenTowerSelectionMenu()
+	{
+		mapState = MapState.SELECTING_TOWER;
+		HideTowerBuildButton();
+		OpenTowerPlaceSelectionMenu();
+	}
+	
 	private void OnClick()
 	{
 		switch(mapState)
 		{
-		case MapState.BUILDING_TOWER:
-			OnTowerBuildingActionClick();
+		case MapState.SELECTING_TOWER_PLACE:
+			OnTowerPlaceSelectionClick();
+			break;
+		case MapState.SELECTING_TOWER:
+			OnTowerSelectionClick();
 			break;
 		case MapState.ACTIVE:
 			OnMapActiveClick();
@@ -185,6 +223,6 @@ public class TowerManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		mouseClickHandler.Update();
 	}
 }

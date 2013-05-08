@@ -34,7 +34,7 @@ namespace AssemblyCSharp
 		
 		public static Vector3 ScreenToWorldPoint(Camera camera, Vector2 screenPoint)
 		{
-			Vector3 screenPoint3 = new Vector3(screenPoint.x, screenPoint.y, camera.transform.position.y);
+			Vector3 screenPoint3 = new Vector3(screenPoint.x, screenPoint.y, camera.nearClipPlane);
 			return camera.ScreenToWorldPoint(screenPoint3);
 		}
 		
