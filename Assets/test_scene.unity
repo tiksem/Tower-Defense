@@ -425,8 +425,8 @@ MonoBehaviour:
   availibleTowerPlaces:
   - {fileID: 1364790118}
   terrain: {fileID: 1726857887}
-  towerBuildButton: {fileID: 771182393}
-  selectedTower: {fileID: 100002, guid: 4c37ed405010233489453c57a887e392, type: 2}
+  towerBuildButton: {fileID: 0}
+  selectedTower: {fileID: 0}
 --- !u!1 &1364790118
 GameObject:
   m_ObjectHideFlags: 0
