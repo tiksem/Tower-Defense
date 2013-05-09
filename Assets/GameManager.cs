@@ -70,17 +70,18 @@ public class GameManager : MonoBehaviour
 	
 	private GameObject CreatePartyTarget(Party party, int partyPointIndex, int x, int y)
 	{
-		GameObject target = (GameObject)Instantiate(party.targetPrefab);
-		float targetWidth = GetTargetWidth(target);
+		NavMeshAgent navMeshAgent = party.targetPrefab.GetComponent<NavMeshAgent>();
+		float targetWidth = GetTargetWidth(party.targetPrefab);
 		GameObject partyPositionPoint = partyAppearingPoints[partyPointIndex];
-		
-		AssignTargetWayPointTag(partyPointIndex, target);
 		
 		Vector3 position = partyPositionPoint.transform.position;
 		position.x += targetWidth * x;
 		position.z += targetWidth * y;
 		
-		target.transform.position = position;
+		GameObject target = (GameObject)Instantiate(party.targetPrefab, position, party.targetPrefab.transform.rotation);
+		AssignTargetWayPointTag(partyPointIndex, target);
+		
+		//target.transform.position = position;
 		
 		/*WayPointFollower wayPointFollower = target.GetComponent<WayPointFollower>();
 		if(wayPointFollower != null)
