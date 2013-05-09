@@ -6,6 +6,7 @@ public class Tower : MonoBehaviour
 	public int goldPrice;
 	public int level;
 	public int crystalPrice;
+	public string name = "Unnamed";
 	
 	// Use this for initialization
 	void Start()

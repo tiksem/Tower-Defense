@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using AssemblyCSharp;
 
 public class TowerManager : MonoBehaviour 
@@ -20,11 +20,11 @@ public class TowerManager : MonoBehaviour
 	public Terrain terrain;
 	public GameObject towerBuildButton;
 	
-	private TowerPlace[] towerPlaces;
-	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
 	private MapState mapState = MapState.ACTIVE;
 	public GameObject selectedTower;
 	private int currentGold;
+	private GuiEventsHandler towerBuildButtonHandler;
+	private IDictionary<Vector2, string> towerNameByPlaceMap = new Dictionary<Vector2, string>();
 	
 	public static TowerManager Instance
 	{
@@ -40,19 +40,6 @@ public class TowerManager : MonoBehaviour
 		{
 			return;
 		}
-		
-		towerPlaces = new TowerPlace[availibleTowerPlaces.Length];
-		for(int i = 0; i < towerPlaces.Length; i++)
-		{
-			GameObject gameObject = availibleTowerPlaces[i];
-			if(gameObject == null)
-			{
-				continue;
-			}
-			
-			TowerPlace towerPlace = new TowerPlace(gameObject.renderer.bounds, towerSize);
-			towerPlaces[i] = towerPlace;
-		}
 	}
 	
 	void Awake()
@@ -65,34 +52,12 @@ public class TowerManager : MonoBehaviour
 		instance = this;
 	}
 	
-	private Vector3 GetTowerPosition(TowerPlace towerPlace, Vector3 requestedPosition)
-	{
-		if(towerPlace == null)
-		{
-			return Vector3.zero;
-		}
-		
-		Vector2 requestedPosition2D = new Vector2(requestedPosition.x, requestedPosition.z);
-		Vector2 result = towerPlace.CalculatePosition(requestedPosition2D);
-		float x = result.x;
-		float y = result.y;
-		float z = terrain.SampleHeight(new Vector3(x, requestedPosition.y, y));
-		return new Vector3(x, y, z);
-		
-	}
-	
 	private Vector3 GetTowerPosition(Vector3 requestedPosition)
 	{
 		requestedPosition.x = Utilities.RemoveModuloPart(requestedPosition.x, towerSize);
-		requestedPosition.y = Utilities.RemoveModuloPart(requestedPosition.y, towerSize);
+		requestedPosition.z = Utilities.RemoveModuloPart(requestedPosition.z, towerSize);
+		requestedPosition.y = terrain.SampleHeight(requestedPosition);
 		return requestedPosition;
-	}
-	
-	private TowerPlace GetTowerPlace(Vector3 requestedPosition)
-	{
-		Vector2 requestedPosition2D = new Vector2(requestedPosition.x, requestedPosition.z);
-		TowerPlace towerPlace = System.Array.Find(towerPlaces, (TowerPlace obj) => obj.IsIn(requestedPosition2D));
-		return towerPlace;
 	}
 	
 	private void BuildTower()
@@ -139,6 +104,7 @@ public class TowerManager : MonoBehaviour
 		GameObject tower = (GameObject)Instantiate(towerPrefab, towerPosition, towerPrefab.transform.rotation);
 		Tower towerComponent = tower.GetComponent<Tower>();
 		currentGold -= towerComponent.goldPrice;
+		towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.name;
 	}
 	
 	private void BuildSelectedTower(Vector3 towerPosition)
@@ -171,6 +137,35 @@ public class TowerManager : MonoBehaviour
 		
 	}
 	
+	private void ReplaceTower(Vector3 towerPosition)
+	{
+		
+	}
+	
+	private string GetTowerName(GameObject tower)
+	{
+		Tower towerComponent = tower.GetComponent<Tower>();
+		return towerComponent.name;
+	}
+	
+	private void HandleTowerPlaceSelection(Vector3 towerPosition)
+	{
+		string towerName = "";
+		
+		if(!towerNameByPlaceMap.TryGetValue(new Vector3(towerPosition.x, towerPosition.z), out towerName))
+		{
+			BuildSelectedTower(towerPosition);
+		}
+		else
+		{
+			string selectedTowerName = GetTowerName(selectedTower);
+			if(towerName != selectedTowerName)
+			{
+				ReplaceTower(towerPosition);
+			}
+		}
+	}
+	
 	private void OnTowerPlaceSelectionClick()
 	{
 		Vector3 mouseOnTerrain = MouseUtilities.GetMousePositionOnGameObject(terrain.gameObject, true);
@@ -180,7 +175,12 @@ public class TowerManager : MonoBehaviour
 		}
 		
 		Vector3 towerPosition = GetTowerPosition(mouseOnTerrain);
-		BuildSelectedTower(towerPosition);
+		HandleTowerPlaceSelection(towerPosition);
+	}
+	
+	private void OnTowerBuildButtonClick()
+	{
+		OpenTowerBuildMenu();
 	}
 	
 	private void OnMapActiveClick()
@@ -195,19 +195,27 @@ public class TowerManager : MonoBehaviour
 		OpenTowerPlaceSelectionMenu();
 	}
 	
-	private void OnClick()
+	private void UpdateClicks()
 	{
-		switch(mapState)
+		if(towerBuildButtonHandler.Update())
 		{
-		case MapState.SELECTING_TOWER_PLACE:
-			OnTowerPlaceSelectionClick();
-			break;
-		case MapState.SELECTING_TOWER:
-			OnTowerSelectionClick();
-			break;
-		case MapState.ACTIVE:
-			OnMapActiveClick();
-			break;
+			return;
+		}
+		
+		if(Input.GetMouseButton(0))
+		{
+			switch(mapState)
+			{
+			case MapState.SELECTING_TOWER_PLACE:
+				OnTowerPlaceSelectionClick();
+				break;
+			case MapState.SELECTING_TOWER:
+				OnTowerSelectionClick();
+				break;
+			case MapState.ACTIVE:
+				OnMapActiveClick();
+				break;
+			}
 		}
 	}
 	
@@ -216,13 +224,13 @@ public class TowerManager : MonoBehaviour
 	{
 		OnValidate();
 		HideGrid();
-		//mouseClickHandler.isClickAccepted = IsClickAccepted;
-		mouseClickHandler.onClick = OnClick;
+		towerBuildButtonHandler = new GuiEventsHandler(towerBuildButton);
+		towerBuildButtonHandler.onMouseClick = OnTowerBuildButtonClick;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		mouseClickHandler.Update();
+		UpdateClicks();
 	}
 }

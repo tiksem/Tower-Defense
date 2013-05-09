@@ -4,7 +4,8 @@ using UnityEngine;
 namespace AssemblyCSharp
 {
 	public class MouseClickHandler
-	{	
+	{
+		private static float MAX_CLICK_OFFSET = 0.1f;
 		private Vector3 onMouseDownPosition;
 		private Vector3 onMouseUpPosition;
 		
@@ -15,7 +16,7 @@ namespace AssemblyCSharp
 		
 		public static bool DefaultIsClickAccepted(Vector3 onMouseDownPosition, Vector3 onMouseUpPosition)
 		{
-			return onMouseDownPosition == onMouseUpPosition;
+			return Vector3.Distance(onMouseDownPosition, onMouseUpPosition) <= MAX_CLICK_OFFSET;
 		}
 		
 		public Func<Vector3, Vector3, bool> isClickAccepted;

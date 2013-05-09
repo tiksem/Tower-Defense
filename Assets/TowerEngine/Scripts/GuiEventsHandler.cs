@@ -1,20 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
-public abstract class GuiEventsHandler : MonoBehaviour
+public class GuiEventsHandler
 {
 	private GUIElement guiElement;  
 	private bool lastMouseDownOn = false;
-	
-	virtual protected void OnMouseDown()
-	{
-		
-	}
-	
-	virtual protected void OnMouseUp()
-	{
-		
-	}
+
+	public Func<System.Void> onMouseDown;
+	public Func<System.Void> onMouseUp;
+	public Func<System.Void> onMouseClick;
 	
 	virtual protected void OnClick()
 	{
@@ -26,9 +21,10 @@ public abstract class GuiEventsHandler : MonoBehaviour
 		return guiElement.HitTest(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 	}
 	
-	private void UpdateMouseEvents()
+	private bool UpdateMouseEvents()
 	{
 		bool isMouseOn = IsMouseOn();
+		bool eventFired = false;
 		
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -36,25 +32,36 @@ public abstract class GuiEventsHandler : MonoBehaviour
 			
 			if(isMouseOn)
 			{
-				OnMouseDown();
+				if(onMouseDown != null)
+				{
+					onMouseDown();
+				}
+				
+				eventFired = true;
 			}
 		}
 		
 		if(isMouseOn && Input.GetMouseButtonUp(0))
 		{
-			OnMouseUp();
-			
-			if(lastMouseDownOn)
+			if(onMouseUp != null)
 			{
-				OnClick();
+				onMouseUp();
+			}
+			
+			eventFired = true;
+			
+			if(lastMouseDownOn && onMouseClick != null)
+			{
+				onMouseClick();
 			}
 		}
+		
+		return eventFired;
 	}
-	
-	// Use this for initialization
-	void Start()
+
+	public GuiEventsHandler(GameObject guiObject)
 	{
-		guiElement = GetComponent<GUIElement>();
+		guiElement = guiObject.GetComponent<GUIElement>();
 		if(guiElement == null)
 		{
 			throw new System.ArgumentException("GuiEventsHandler should be attached to GUIElement");
@@ -62,8 +69,8 @@ public abstract class GuiEventsHandler : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update()
+	public bool Update()
 	{
-		UpdateMouseEvents();
+		return UpdateMouseEvents();
 	}
 }
