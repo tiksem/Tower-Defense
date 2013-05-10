@@ -88,9 +88,29 @@ namespace AssemblyCSharp
 			}
 		}
 		
+		public static RaycastHit FindFirstGameObjectHitInRay(GameObject[] gameObjects, Ray ray)
+		{
+			RaycastHit[] hits = Physics.RaycastAll(ray);
+			return Array.Find(hits, (RaycastHit hit) => 
+			{
+				return Array.Find(gameObjects, (x) => x == hit.collider.gameObject);
+			});
+		}
+		
+		public static Vector3 FindFirstGameObjectIntersectionPointInRay(GameObject[] gameObjects, Ray ray)
+		{
+			RaycastHit raycastHit = FindFirstGameObjectHitInRay(gameObjects, ray);
+			return raycastHit.point;
+		}
+		
 		public static float RemoveModuloPart(float value, float divideBy)
 		{
 			return ((float)(int)(value / divideBy)) * divideBy;
+		}
+		
+		public static float GetModuloPart(float value, float divideBy)
+		{
+			return value - RemoveModuloPart(value, divideBy);
 		}
 	}
 }

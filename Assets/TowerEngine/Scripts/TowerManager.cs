@@ -25,6 +25,8 @@ public class TowerManager : MonoBehaviour
 	private int currentGold;
 	private GuiEventsHandler towerBuildButtonHandler;
 	private IDictionary<Vector2, string> towerNameByPlaceMap = new Dictionary<Vector2, string>();
+	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
+	private Vector3 towerPosition;
 	
 	public static TowerManager Instance
 	{
@@ -36,10 +38,7 @@ public class TowerManager : MonoBehaviour
 	
 	void OnValidate()
 	{
-		if(terrain == null)
-		{
-			return;
-		}
+		
 	}
 	
 	void Awake()
@@ -52,11 +51,27 @@ public class TowerManager : MonoBehaviour
 		instance = this;
 	}
 	
-	private Vector3 GetTowerPosition(Vector3 requestedPosition)
+	private Vector2 GetGridOffset(Vector3 position)
 	{
-		requestedPosition.x = Utilities.RemoveModuloPart(requestedPosition.x, towerSize);
-		requestedPosition.z = Utilities.RemoveModuloPart(requestedPosition.z, towerSize);
-		requestedPosition.y = terrain.SampleHeight(requestedPosition);
+		float offsetX = Utilities.GetModuloPart(position.x, towerSize);
+		float offsetY = Utilities.GetModuloPart(position.y, towerSize);
+		return new Vector2(offsetX, offsetY);
+	}
+	
+	private Vector3 GetTowerPosition(RaycastHit raycastHit)
+	{
+		Vector3 requestedPosition = raycastHit.point;
+		Vector3 hitObjectPosition = raycastHit.collider.bounds.min;
+		
+		Vector3 localPosition = requestedPosition - hitObjectPosition;
+		localPosition.y = requestedPosition.y;
+		localPosition.x = Utilities.RemoveModuloPart(localPosition.x, towerSize);
+		localPosition.z = Utilities.RemoveModuloPart(localPosition.z, towerSize);
+		localPosition.x += towerSize / 2;
+		localPosition.z += towerSize / 2;
+		hitObjectPosition.y = 0;
+		requestedPosition = hitObjectPosition + localPosition;
+		
 		return requestedPosition;
 	}
 	
@@ -101,7 +116,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void BuildTower(Vector3 towerPosition, GameObject towerPrefab)
 	{
-		GameObject tower = (GameObject)Instantiate(towerPrefab, towerPosition, towerPrefab.transform.rotation);
+		GameObject tower = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
 		Tower towerComponent = tower.GetComponent<Tower>();
 		currentGold -= towerComponent.goldPrice;
 		towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.name;
@@ -148,7 +163,7 @@ public class TowerManager : MonoBehaviour
 		return towerComponent.name;
 	}
 	
-	private void HandleTowerPlaceSelection(Vector3 towerPosition)
+	private void HandleTowerPlaceSelection()
 	{
 		string towerName = "";
 		
@@ -166,16 +181,29 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
-	private void OnTowerPlaceSelectionClick()
+	private void OnClick()
 	{
-		Vector3 mouseOnTerrain = MouseUtilities.GetMousePositionOnGameObject(terrain.gameObject, true);
-		if(mouseOnTerrain == Vector3.zero)
+		switch(mapState)
 		{
-			return;
+		case MapState.SELECTING_TOWER_PLACE:
+			CheckTowerPlaceSelection();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private bool CheckTowerPlaceSelection()
+	{
+		RaycastHit mouseOnGrid = MouseUtilities.FindFirstGameObjectHitInMouseRay(availibleTowerPlaces);
+		if(mouseOnGrid.point == Vector3.zero)
+		{
+			return false;
 		}
 		
-		Vector3 towerPosition = GetTowerPosition(mouseOnTerrain);
-		HandleTowerPlaceSelection(towerPosition);
+		towerPosition = GetTowerPosition(mouseOnGrid);
+		HandleTowerPlaceSelection();
+		return true;
 	}
 	
 	private void OnTowerBuildButtonClick()
@@ -202,21 +230,7 @@ public class TowerManager : MonoBehaviour
 			return;
 		}
 		
-		if(Input.GetMouseButton(0))
-		{
-			switch(mapState)
-			{
-			case MapState.SELECTING_TOWER_PLACE:
-				OnTowerPlaceSelectionClick();
-				break;
-			case MapState.SELECTING_TOWER:
-				OnTowerSelectionClick();
-				break;
-			case MapState.ACTIVE:
-				OnMapActiveClick();
-				break;
-			}
-		}
+		mouseClickHandler.Update();
 	}
 	
 	// Use this for initialization
@@ -226,6 +240,8 @@ public class TowerManager : MonoBehaviour
 		HideGrid();
 		towerBuildButtonHandler = new GuiEventsHandler(towerBuildButton);
 		towerBuildButtonHandler.onMouseClick = OnTowerBuildButtonClick;
+		//mouseClickHandler.isClickAccepted = IsMouseClickAccepted;
+		mouseClickHandler.onClick = OnClick;
 	}
 	
 	// Update is called once per frame

@@ -6,20 +6,20 @@ namespace AssemblyCSharp
 	public class MouseClickHandler
 	{
 		private static float MAX_CLICK_OFFSET = 0.1f;
-		private Vector3 onMouseDownPosition;
-		private Vector3 onMouseUpPosition;
+		private Vector2 onMouseDownPosition;
+		private Vector2 onMouseUpPosition;
 		
 		public MouseClickHandler()
 		{
 			isClickAccepted = DefaultIsClickAccepted;
 		}
 		
-		public static bool DefaultIsClickAccepted(Vector3 onMouseDownPosition, Vector3 onMouseUpPosition)
+		public static bool DefaultIsClickAccepted(Vector2 onMouseDownPosition, Vector2 onMouseUpPosition)
 		{
 			return Vector3.Distance(onMouseDownPosition, onMouseUpPosition) <= MAX_CLICK_OFFSET;
 		}
 		
-		public Func<Vector3, Vector3, bool> isClickAccepted;
+		public Func<Vector2, Vector2, bool> isClickAccepted;
 		public Func<Void> onClick;
 		
 		private bool IsClickAccepted()
@@ -27,16 +27,25 @@ namespace AssemblyCSharp
 			return isClickAccepted(onMouseDownPosition, onMouseUpPosition);
 		}
 		
-		private void CheckClick()
+		private bool CheckClick()
 		{
 			if(IsClickAccepted())
 			{
-				onClick(); 
+				if(onClick != null)
+				{
+					onClick();
+				}
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
-		public void Update()
+		public bool Update()
 		{
+			bool eventFired = false;
+			
 			if(Input.GetMouseButtonDown(0))
 			{
         		onMouseDownPosition = Input.mousePosition;
@@ -45,8 +54,10 @@ namespace AssemblyCSharp
     		if(Input.GetMouseButtonUp(0))
 			{
         		onMouseUpPosition = Input.mousePosition;
-				CheckClick();
+				eventFired = CheckClick();
     		}
+			
+			return eventFired;
 		}
 	}
 }

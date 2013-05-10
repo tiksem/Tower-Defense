@@ -18,7 +18,8 @@ public class GuiEventsHandler
 	
 	private bool IsMouseOn()
 	{
-		return guiElement.HitTest(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+		bool isActive = guiElement.enabled && guiElement.gameObject.activeSelf;
+		return isActive && guiElement.HitTest(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 	}
 	
 	private bool UpdateMouseEvents()
