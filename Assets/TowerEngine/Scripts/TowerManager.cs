@@ -14,11 +14,11 @@ public class TowerManager : MonoBehaviour
 	}
 	
 	public int startGold = 200;
-	public GameObject[] towers;
-	public float towerSize = 3;
 	public GameObject[] availibleTowerPlaces;
+	public float towerSize = 3;
 	public Terrain terrain;
 	public GameObject towerBuildButton;
+	public GameObject towersBar;
 	
 	private MapState mapState = MapState.ACTIVE;
 	public GameObject selectedTower;
@@ -27,6 +27,7 @@ public class TowerManager : MonoBehaviour
 	private IDictionary<Vector2, string> towerNameByPlaceMap = new Dictionary<Vector2, string>();
 	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
 	private Vector3 towerPosition;
+	private TowersBar towersBarComponent;
 	
 	public static TowerManager Instance
 	{
@@ -36,9 +37,23 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
+	private void InitTowersBar()
+	{
+		if(towersBar == null)
+		{
+			return;
+		}
+		
+		towersBarComponent = towersBar.GetComponent<TowersBar>();
+		if(towersBarComponent == null)
+		{
+			throw new System.ArgumentException("towersBar must have TowersBar component");
+		}
+	}
+	
 	void OnValidate()
 	{
-		
+		InitTowersBar();
 	}
 	
 	void Awake()
@@ -85,11 +100,6 @@ public class TowerManager : MonoBehaviour
 		
 	}
 	
-	public void OpenTowerBuildMenu()
-	{
-		OpenTowerSelectionMenu();
-	}
-	
 	private void SetGridVisibility(bool value)
 	{
 		foreach(GameObject towerPlace in availibleTowerPlaces)
@@ -106,6 +116,21 @@ public class TowerManager : MonoBehaviour
 	private void HideGrid()
 	{
 		SetGridVisibility(false);
+	}
+	
+	private void SetTowersBarVisibility(bool value)
+	{
+		towersBar.SetActive(value);
+	}
+	
+	private void ShowTowersBar()
+	{
+		SetTowersBarVisibility(true);
+	}
+	
+	private void HideTowersBar()
+	{
+		SetTowersBarVisibility(false);
 	}
 	
 	private void OpenTowerPlaceSelectionMenu()
@@ -208,7 +233,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void OnTowerBuildButtonClick()
 	{
-		OpenTowerBuildMenu();
+		OpenTowerSelectionMenu();
 	}
 	
 	private void OnMapActiveClick()
@@ -220,14 +245,32 @@ public class TowerManager : MonoBehaviour
 	{
 		mapState = MapState.SELECTING_TOWER;
 		HideTowerBuildButton();
-		OpenTowerPlaceSelectionMenu();
+		ShowTowersBar();
+	}
+	
+	private void UpdateSelectedTower()
+	{
+		selectedTower = towersBarComponent.GetSelectedTower();
+		if(selectedTower != null)
+		{
+			OpenTowerPlaceSelectionMenu();
+		}
 	}
 	
 	private void UpdateClicks()
 	{
-		if(towerBuildButtonHandler.Update())
+		if(towerBuildButtonHandler.Update() != GuiEventsHandler.State.NONE)
 		{
 			return;
+		}
+		
+		if(mapState == MapState.SELECTING_TOWER)
+		{
+			if(towersBarComponent.UpdateEvents())
+			{
+				UpdateSelectedTower();
+				return;
+			}
 		}
 		
 		mouseClickHandler.Update();
@@ -236,8 +279,9 @@ public class TowerManager : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-		OnValidate();
+		InitTowersBar();
 		HideGrid();
+		HideTowersBar();
 		towerBuildButtonHandler = new GuiEventsHandler(towerBuildButton);
 		towerBuildButtonHandler.onMouseClick = OnTowerBuildButtonClick;
 		//mouseClickHandler.isClickAccepted = IsMouseClickAccepted;

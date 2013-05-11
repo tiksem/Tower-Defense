@@ -6,7 +6,15 @@ public class GuiEventsHandler
 {
 	private GUIElement guiElement;  
 	private bool lastMouseDownOn = false;
-
+	
+	public enum State
+	{
+		NONE,
+		CLICK,
+		DOWN,
+		UP,
+	}
+	
 	public Func<System.Void> onMouseDown;
 	public Func<System.Void> onMouseUp;
 	public Func<System.Void> onMouseClick;
@@ -22,10 +30,10 @@ public class GuiEventsHandler
 		return isActive && guiElement.HitTest(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 	}
 	
-	private bool UpdateMouseEvents()
+	private State UpdateMouseEvents()
 	{
 		bool isMouseOn = IsMouseOn();
-		bool eventFired = false;
+		State state = State.NONE;
 		
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -38,7 +46,7 @@ public class GuiEventsHandler
 					onMouseDown();
 				}
 				
-				eventFired = true;
+				return State.DOWN;
 			}
 		}
 		
@@ -49,15 +57,20 @@ public class GuiEventsHandler
 				onMouseUp();
 			}
 			
-			eventFired = true;
+			state = State.UP;
 			
-			if(lastMouseDownOn && onMouseClick != null)
+			if(lastMouseDownOn)
 			{
-				onMouseClick();
+				state = State.CLICK;
+				
+				if(onMouseClick != null)
+				{
+					onMouseClick();
+				}
 			}
 		}
 		
-		return eventFired;
+		return state;
 	}
 
 	public GuiEventsHandler(GameObject guiObject)
@@ -70,7 +83,7 @@ public class GuiEventsHandler
 	}
 	
 	// Update is called once per frame
-	public bool Update()
+	public State Update()
 	{
 		return UpdateMouseEvents();
 	}

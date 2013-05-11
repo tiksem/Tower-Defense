@@ -112,6 +112,13 @@ namespace AssemblyCSharp
 		{
 			return value - RemoveModuloPart(value, divideBy);
 		}
+		
+		public static bool IsPointInsideCircle(Vector2 point, Vector2 center, float circleRadius)
+		{
+			float sqrRadius = circleRadius * circleRadius;
+			Vector2 dif = point - center;
+			return sqrRadius >= dif.sqrMagnitude;
+		}
 	}
 }
 

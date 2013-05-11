@@ -397,6 +397,75 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!1 &904939901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 904939903}
+  - 131: {fileID: 904939902}
+  - 114: {fileID: 904939904}
+  m_Layer: 0
+  m_Name: TowersBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!131 &904939902
+GUITexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 904939901}
+  m_Enabled: 1
+  m_Texture: {fileID: 2800000, guid: eceb0683971de9b40a4686c5feee5814, type: 3}
+  m_Color: {r: .5, g: .5, b: .5, a: .5}
+  m_PixelInset:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 640
+    height: 98.125
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
+--- !u!4 &904939903
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 904939901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &904939904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 904939901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b95407bf50ebbb4a8a8cfdc2082c95e, type: 3}
+  m_Name: 
+  towers:
+  - {fileID: 100002, guid: 4c37ed405010233489453c57a887e392, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  barSettings:
+    iconWidth: .128999993
+    iconHeight: .834500015
+    firstIconLeft: .0799999982
+    iconBottom: .108000003
+    distanceBetweenIcons: .0130000003
 --- !u!1 &1113357790
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,14 +618,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
   startGold: 200
-  towers: []
-  towerSize: 5
   availibleTowerPlaces:
   - {fileID: 1364790118}
   - {fileID: 1113357790}
   - {fileID: 1256967518}
+  towerSize: 5
   terrain: {fileID: 1726857887}
   towerBuildButton: {fileID: 771182393}
+  towersBar: {fileID: 904939901}
   selectedTower: {fileID: 100002, guid: 4c37ed405010233489453c57a887e392, type: 2}
 --- !u!1 &1256967518
 GameObject:
@@ -583,7 +652,7 @@ Transform:
   m_PrefabInternal: {fileID: 2054847958}
   m_GameObject: {fileID: 1256967518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.6508026, y: -21.7302551, z: -.853935242}
+  m_LocalPosition: {x: 26.5410995, y: -21.7302551, z: .411647797}
   m_LocalScale: {x: 10, y: 1, z: 15}
   m_Children: []
   m_Father: {fileID: 1380002037}
@@ -4307,7 +4376,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: a0a7ad303ea13c6409476a4ca53d3b6f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 26.6508026
+      value: 26.5410995
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a0a7ad303ea13c6409476a4ca53d3b6f, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4315,7 +4384,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a0a7ad303ea13c6409476a4ca53d3b6f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.853935242
+      value: .411647797
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a0a7ad303ea13c6409476a4ca53d3b6f, type: 2}
       propertyPath: m_LocalRotation.x
