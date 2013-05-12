@@ -28,6 +28,7 @@ public class TowerManager : MonoBehaviour
 	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
 	private Vector3 towerPosition;
 	private TowersBar towersBarComponent;
+	private TextureTrigger towerBuildButtonTrigger;
 	
 	public static TowerManager Instance
 	{
@@ -90,11 +91,6 @@ public class TowerManager : MonoBehaviour
 		return requestedPosition;
 	}
 	
-	private void BuildTower()
-	{
-		
-	}
-	
 	public void NotifyTargetDestroyed(Target target)
 	{
 		
@@ -154,12 +150,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void SetTowerBuildButtonVisibility(bool value)
 	{
-		if(towerBuildButton == null)
-		{
-			return;
-		}
-		
-		towerBuildButton.SetActive(value);
+		towerBuildButtonTrigger.ChangeTexture(value);
 	}
 	
 	private void ShowTowerBuildButton()
@@ -170,11 +161,6 @@ public class TowerManager : MonoBehaviour
 	private void HideTowerBuildButton()
 	{
 		SetTowerBuildButtonVisibility(false);
-	}
-	
-	private void OnTowerSelectionClick()
-	{
-		
 	}
 	
 	private void ReplaceTower(Vector3 towerPosition)
@@ -231,9 +217,24 @@ public class TowerManager : MonoBehaviour
 		return true;
 	}
 	
+	private void CloseTowerBuildMenu()
+	{
+		mapState = MapState.ACTIVE;
+		HideGrid();
+		HideTowersBar();
+		ShowTowerBuildButton(); 
+	}
+	
 	private void OnTowerBuildButtonClick()
 	{
-		OpenTowerSelectionMenu();
+		if(mapState == MapState.ACTIVE)
+		{
+			OpenTowerSelectionMenu();
+		}
+		else
+		{
+			CloseTowerBuildMenu();
+		}
 	}
 	
 	private void OnMapActiveClick()
@@ -286,6 +287,7 @@ public class TowerManager : MonoBehaviour
 		towerBuildButtonHandler.onMouseClick = OnTowerBuildButtonClick;
 		//mouseClickHandler.isClickAccepted = IsMouseClickAccepted;
 		mouseClickHandler.onClick = OnClick;
+		towerBuildButtonTrigger = towerBuildButton.GetComponent<TextureTrigger>();
 	}
 	
 	// Update is called once per frame
