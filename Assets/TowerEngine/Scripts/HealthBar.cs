@@ -131,7 +131,12 @@ public class HealthBar : MonoBehaviour
 
 		guiTextureComponent.texture = texture;
 	}
-
+	
+	void OnDestroy()
+	{
+		Destroy(guiTextureObject);
+	}
+	
 	void Update()
 	{
 		UpdateTextureState();
