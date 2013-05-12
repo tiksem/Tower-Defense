@@ -5,7 +5,11 @@ namespace AssemblyCSharp
 {
 	public class MouseClickHandler
 	{
+#if UNITY_EDITOR
 		private static float MAX_CLICK_OFFSET = 0.1f;
+#else
+		private static float MAX_CLICK_OFFSET = 20.0f;
+#endif
 		private Vector2 onMouseDownPosition;
 		private Vector2 onMouseUpPosition;
 		

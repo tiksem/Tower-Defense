@@ -2,42 +2,15 @@ using UnityEngine;
 using System.Collections.Generic;
 using AssemblyCSharp;
 
-[RequireComponent (typeof(GUITexture))]
+[RequireComponent (typeof(BarWithCircleButtons))]
 public class TowersBar : MonoBehaviour
 {
 	public GameObject[] towers = new GameObject[5];
-	public BarWithCircleButtons barSettings;
 	
 	private GuiEventsHandler guiEventsHandler;
 	private GameObject selectedTower;
-	private GUITexture barTexture;
-	
-	private void InitTexture()
-	{
-		if(barTexture == null)
-		{
-			barTexture = GetComponent<GUITexture>();
-		}
-		
-		ResizeTexture();
-	}
-	
-	private void UpdateBarSettings()
-	{
-		barSettings.Update(towers.Length + 1, barTexture);
-	}
-	
-	void OnValidate()
-	{
-		InitTexture();
-		UpdateBarSettings();
-	}
-	
-	private void ResizeTexture()
-	{
-		GUIUtilities.ResizeGUITextureToFitScreenWidth(barTexture);
-	}
-	
+	private BarWithCircleButtons bar;
+
 	public GameObject GetSelectedTower()
 	{
 		return selectedTower;
@@ -57,35 +30,37 @@ public class TowersBar : MonoBehaviour
 	{
 		if(guiEventsHandler.Update() == GuiEventsHandler.State.CLICK)
 		{
-			int clickedButtonIndex = barSettings.GetClickedButtonIndex();
-			if(clickedButtonIndex < 0)
-			{
-				selectedTower = null;
-				return true;
-			}
-			
-			if(clickedButtonIndex < towers.Length)
-			{
-				OnTowerClick(clickedButtonIndex);
-			}
-			else
-			{
-				OnFractionsClick();
-			}
-			
 			return true;
 		}
-		else
+		
+		int clickedButtonIndex = bar.GetClickedButtonIndex();
+		if(clickedButtonIndex < 0)
 		{
 			selectedTower = null;
 			return false;
 		}
+			
+		if(clickedButtonIndex < towers.Length)
+		{
+			OnTowerClick(clickedButtonIndex);
+			return true;
+		}
+		else if(clickedButtonIndex ==  towers.Length - 1)
+		{
+			OnFractionsClick();
+			return true;
+		}
+		else
+		{
+			 selectedTower = null;
+		}
+			
+		return false;
 	}
 	
 	void Start()
 	{
-		InitTexture();
-		UpdateBarSettings();
+		bar = gameObject.GetComponent<BarWithCircleButtons>();
 		guiEventsHandler = new GuiEventsHandler(gameObject);
 	}
 

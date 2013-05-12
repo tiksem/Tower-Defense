@@ -119,6 +119,69 @@ namespace AssemblyCSharp
 			Vector2 dif = point - center;
 			return sqrRadius >= dif.sqrMagnitude;
 		}
+		
+		public static void SetActiveForAll(GameObject[] gameObjects, bool value)
+		{
+			foreach(GameObject gameObject in gameObjects)
+			{
+				if(gameObject != null)
+				{
+					gameObject.SetActive(value);
+				}
+			}
+		}
+		
+		public static void DisableAll(GameObject[] gameObjects)
+		{
+			SetActiveForAll(gameObjects, false);
+		}
+		
+		public static void EnableAll(GameObject[] gameObjects)
+		{
+			SetActiveForAll(gameObjects, true);
+		}
+		
+		public static void SetActiveForAll(MonoBehaviour[] components, bool value)
+		{
+			foreach(MonoBehaviour component in components)
+			{
+				if(component != null)
+				{
+					component.gameObject.SetActive(value);
+				}
+			}
+		}
+		
+		public static void DisableAll(MonoBehaviour[] components)
+		{
+			SetActiveForAll(components, false);
+		}
+		
+		public static void EnableAll(MonoBehaviour[] components)
+		{
+			SetActiveForAll(components, true);
+		}
+		
+		public static void SetActiveForAll(GUIElement[] components, bool value)
+		{
+			foreach(GUIElement component in components)
+			{
+				if(component != null)
+				{
+					component.gameObject.SetActive(value);
+				}
+			}
+		}
+		
+		public static void DisableAll(GUIElement[] components)
+		{
+			SetActiveForAll(components, false);
+		}
+		
+		public static void EnableAll(GUIElement[] components)
+		{
+			SetActiveForAll(components, true);
+		}
 	}
 }
 

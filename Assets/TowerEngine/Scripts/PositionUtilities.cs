@@ -8,7 +8,7 @@ namespace AssemblyCSharp
 		public static void PutGameObjectCenterOnXZPlane(GameObject gameObject, Vector3 position, Bounds bounds)
 		{
 			Vector3 offset = bounds.extents;
-			position += offset;
+			position.y += offset.y;
 			gameObject.transform.position = position;
 		}
 		
