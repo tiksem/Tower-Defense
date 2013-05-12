@@ -11,10 +11,13 @@ ModelImporter:
     400004: small
     2300000: crystals
     2300002: small
+    2300004: //RootNode
     3300000: crystals
     3300002: small
+    3300004: //RootNode
     4300000: small
     4300002: crystals
+    4300004: simple
     9500000: //RootNode
   materials:
     importMaterials: 1
