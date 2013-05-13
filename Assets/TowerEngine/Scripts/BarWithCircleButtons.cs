@@ -26,6 +26,7 @@ using AssemblyCSharp;
 		public float distanceBetweenIcons = 0.1f;
 		
 		public Texture2D defaultButtonTexture;
+		public int buttonsCount = 0;
 		public Button[] buttonTextures;
 		
 		private GUITexture barTexture;
@@ -52,6 +53,11 @@ using AssemblyCSharp;
 		
 		private Texture GetTexture(int index, ButtonState buttonState)
 		{
+			if(index >= buttonTextures.Length)
+			{
+				return defaultButtonTexture;
+			}
+		
 			Button button = buttonTextures[index];
 			
 			if(button == null)
@@ -83,9 +89,9 @@ using AssemblyCSharp;
 			return GUIUtilities.CreateGUITextureGameObject(texture, buttonPixelInset, x, y);
 		}
 	
-		public ButtonState? GetButtonState(int buttonIndex)
+		public ButtonState GetButtonState(int buttonIndex)
 		{
-			return buttonsStates[buttonIndex];
+			return (ButtonState)buttonsStates[buttonIndex];
 		}
 	
 		public void SetButtonState(int buttonIndex, ButtonState buttonState)
@@ -102,8 +108,8 @@ using AssemblyCSharp;
 	
 		public void UpdateButtons()
 		{
-			buttons = new GUITexture[buttonTextures.Length];
-			buttonsStates = new ButtonState?[buttonTextures.Length];
+			buttons = new GUITexture[buttonsCount];
+			buttonsStates = new ButtonState?[buttonsCount];
 		
 			float screenWidth = Camera.main.pixelWidth;
 			float screenHeight = Camera.main.pixelHeight;
@@ -118,7 +124,7 @@ using AssemblyCSharp;
 			float x = firstIconLeft;
 			float y = iconBottom * widthHeightCoefficient;
 			float xStep = distanceBetweenIcons + iconWidth;
-			for(int i = 0; i < buttonTextures.Length; i++)
+			for(int i = 0; i < buttonsCount; i++)
 			{
 				Texture texture = GetTexture(i, ButtonState.NORMAL);
 				

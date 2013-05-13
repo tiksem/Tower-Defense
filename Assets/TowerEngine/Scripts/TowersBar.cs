@@ -27,11 +27,25 @@ public class TowersBar : MonoBehaviour
 	{
 		if(towerIndex >= 0 && towerIndex < towers.Length)
 		{
-			selectedTower = towers[towerIndex];
+			selectedTower = towers[towerIndex];	
+			
+			if(selectedTowerIndex >= 0)
+			{
+				BarWithCircleButtons.ButtonState selectedTowerState = bar.GetButtonState(selectedTowerIndex);
+				if(selectedTowerState == BarWithCircleButtons.ButtonState.SELECTED)
+				{
+					bar.SetButtonState(selectedTowerIndex, BarWithCircleButtons.ButtonState.NORMAL);
+				}
+			}
+			
+			BarWithCircleButtons.ButtonState towerState = bar.GetButtonState(towerIndex);
+			if(towerState != BarWithCircleButtons.ButtonState.DISABLED)
+			{
+				bar.SetButtonState(towerIndex, BarWithCircleButtons.ButtonState.SELECTED);
+			}
 		}
 		
 		selectedTowerIndex = towerIndex;
-		bar.SetButtonState(towerIndex, BarWithCircleButtons.ButtonState.SELECTED);
 	}
 	
 	private void OnFractionsClick()
