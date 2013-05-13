@@ -132,12 +132,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee38c33f359e2c047b9f89425acd1280, type: 3}
   m_Name: 
-  attackingEnabled: 0
+  attackingEnabled: 1
   attackTypes:
   - name: 
     bullet: {fileID: 100000, guid: 28b300c37ae3da04e9425897ff671fb0, type: 2}
     cooldown: 1
-    range: 7
+    range: 100
     damage: 10
     attackType: 2
     additionalEffects: []

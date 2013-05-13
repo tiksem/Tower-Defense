@@ -19,6 +19,7 @@ public class TowerManager : MonoBehaviour
 	public Terrain terrain;
 	public GameObject towerBuildButton;
 	public GameObject towersBar;
+	public GameObject goldBar;
 	
 	private MapState mapState = MapState.ACTIVE;
 	public GameObject selectedTower;
@@ -29,12 +30,35 @@ public class TowerManager : MonoBehaviour
 	private Vector3 towerPosition;
 	private TowersBar towersBarComponent;
 	private TextureTrigger towerBuildButtonTrigger;
+	private GUIText goldText;
 	
 	public static TowerManager Instance
 	{
 		get
 		{
 			return instance;
+		}
+	}
+	
+	private int CurrentGold
+	{
+		get
+		{
+			return currentGold;
+		}
+		
+		set
+		{
+			currentGold = value;
+			UpdateGoldBar();
+		}
+	}
+	
+	private void UpdateGoldBar()
+	{
+		if(goldText != null)
+		{
+			goldText.text = CurrentGold.ToString();
 		}
 	}
 	
@@ -139,7 +163,7 @@ public class TowerManager : MonoBehaviour
 	{
 		GameObject tower = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
 		Tower towerComponent = tower.GetComponent<Tower>();
-		currentGold -= towerComponent.goldPrice;
+		CurrentGold -= towerComponent.goldPrice;
 		towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.name;
 	}
 	
@@ -288,6 +312,13 @@ public class TowerManager : MonoBehaviour
 		//mouseClickHandler.isClickAccepted = IsMouseClickAccepted;
 		mouseClickHandler.onClick = OnClick;
 		towerBuildButtonTrigger = towerBuildButton.GetComponent<TextureTrigger>();
+		
+		if(goldBar != null)
+		{
+			goldText = goldBar.GetComponent<GUIText>();
+		}
+		
+		CurrentGold = startGold;
 	}
 	
 	// Update is called once per frame

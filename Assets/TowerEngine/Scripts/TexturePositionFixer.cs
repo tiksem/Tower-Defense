@@ -11,13 +11,23 @@ public class TexturePositionFixer : MonoBehaviour
 	private GUITexture guiTexture;
 	private float textureBorderX;
 	private float textureBorderY;
+	private Vector3? initialPosition;
 	
-	// Use this for initialization
-	void Start()
+	public Vector3 GetInitialPosition()
 	{
-		guiTexture = GetComponent<GUITexture>();
-		
-		Vector3 position = transform.position;
+		if(initialPosition == null)
+		{
+			return transform.position;
+		}
+		else
+		{
+			return (Vector3)initialPosition;
+		}
+	}
+	
+	public void UpdatePosition()
+	{
+		Vector3 position = GetInitialPosition();
 		
 		Rect pixelInset = guiTexture.pixelInset;
 		float screenWidth = Camera.main.pixelWidth;
@@ -37,6 +47,14 @@ public class TexturePositionFixer : MonoBehaviour
 		position.y = Utilities.ProjectFromOneRangeToAnother(position.y, 0.0f, textureBorderY, 1.0f, 1.0f - textureHeight - textureBorderY);
 		
 		transform.position = position;
+	}
+	
+	// Use this for initialization
+	void Start()
+	{
+		guiTexture = GetComponent<GUITexture>();
+		initialPosition = transform.position;
+		UpdatePosition();
 	}
 	
 	// Update is called once per frame
