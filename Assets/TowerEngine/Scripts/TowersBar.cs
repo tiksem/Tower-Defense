@@ -31,6 +31,7 @@ public class TowersBar : MonoBehaviour
 		}
 		
 		selectedTowerIndex = towerIndex;
+		bar.SetButtonState(towerIndex, BarWithCircleButtons.ButtonState.SELECTED);
 	}
 	
 	private void OnFractionsClick()
@@ -63,7 +64,13 @@ public class TowersBar : MonoBehaviour
 	
 	public void UpdateTowersGoldState(int currentGold)
 	{
-		
+		for(int i = 0; i < towersGold.Length; i++)
+		{
+			if(currentGold < towersGold[i])
+			{
+				bar.SetButtonState(i, BarWithCircleButtons.ButtonState.DISABLED);
+			}
+		}
 	}
 	
 	public int GetTowerGoldPrice(int towerIndex)

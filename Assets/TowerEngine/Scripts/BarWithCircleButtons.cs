@@ -5,13 +5,28 @@ using AssemblyCSharp;
 	[RequireComponent(typeof(GUITexture))]
 	public class BarWithCircleButtons : MonoBehaviour
 	{
+		public enum ButtonState
+		{
+			NORMAL,
+			SELECTED,
+			DISABLED
+		}
+	
+		[System.Serializable]
+		public class Button
+		{
+			public Texture2D normalState;
+			public Texture2D selectedState;
+			public Texture2D disabledState;
+		}
+	
 		public float iconSize = 0.1f;
 		public float firstIconLeft = 0.1f;
 		public float iconBottom = 0.1f;
 		public float distanceBetweenIcons = 0.1f;
 		
 		public Texture2D defaultButtonTexture;
-		public Texture2D[] buttonTextures;
+		public Button[] buttonTextures;
 		
 		private GUITexture barTexture;
 		private float buttonRadius;
@@ -20,6 +35,7 @@ using AssemblyCSharp;
 		private GUITexture[] buttons;
 		private Rect buttonPixelInset;
 		private GuiEventsHandlerCombiner eventsHandler;
+		private ButtonState?[] buttonsStates;
 		
 		private void InitTexture()
 		{
@@ -34,26 +50,60 @@ using AssemblyCSharp;
 			GUIUtilities.ResizeGUITextureToFitScreenWidth(barTexture);
 		}
 		
-		private Texture2D GetTexture(int index)
+		private Texture GetTexture(int index, ButtonState buttonState)
 		{
-			Texture2D texture = buttonTextures[index];
+			Button button = buttonTextures[index];
 			
-			if(texture == null)
+			if(button == null)
 			{
 				return defaultButtonTexture;
 			}
 			
+			Texture texture = button.normalState;
+			if(buttonState == ButtonState.DISABLED)
+			{
+				if(button.disabledState != null)
+				{
+					texture = button.disabledState;
+				}
+			}
+			else if(buttonState == ButtonState.SELECTED)
+			{
+				if(button.selectedState != null)
+				{
+					texture = button.selectedState;
+				}
+			}
+		
 			return texture;
 		}
 		
-		private GUITexture CreateButton(Texture2D texture, float x, float y)
+		private GUITexture CreateButton(Texture texture, float x, float y)
 		{
 			return GUIUtilities.CreateGUITextureGameObject(texture, buttonPixelInset, x, y);
 		}
+	
+		public ButtonState? GetButtonState(int buttonIndex)
+		{
+			return buttonsStates[buttonIndex];
+		}
+	
+		public void SetButtonState(int buttonIndex, ButtonState buttonState)
+		{
+			Texture texture = GetTexture(buttonIndex, buttonState);
+			if(texture == null)
+			{
+				return;
+			}
 		
+			buttons[buttonIndex].texture = texture;
+			buttonsStates[buttonIndex] = buttonState;
+		}
+	
 		public void UpdateButtons()
 		{
 			buttons = new GUITexture[buttonTextures.Length];
+			buttonsStates = new ButtonState?[buttonTextures.Length];
 		
 			float screenWidth = Camera.main.pixelWidth;
 			float screenHeight = Camera.main.pixelHeight;
@@ -70,10 +120,12 @@ using AssemblyCSharp;
 			float xStep = distanceBetweenIcons + iconWidth;
 			for(int i = 0; i < buttonTextures.Length; i++)
 			{
-				Texture2D texture = GetTexture(i);
+				Texture texture = GetTexture(i, ButtonState.NORMAL);
+				
 				if(texture != null)
 				{
 					buttons[i] = CreateButton(texture, x, y);
+					buttonsStates[i] = ButtonState.NORMAL;
 				}
 				
 				x += xStep;
