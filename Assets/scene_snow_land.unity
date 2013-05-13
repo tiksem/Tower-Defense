@@ -208,7 +208,7 @@ Transform:
   m_PrefabInternal: {fileID: 1754824385}
   m_GameObject: {fileID: 382965313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 153.280396, y: 10, z: 50.64431}
+  m_LocalPosition: {x: 150, y: 10, z: 50.64431}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -306,7 +306,7 @@ MonoBehaviour:
   dragSpeed: .699999988
   maxFieldOfViewSize: 50
   minFieldOfViewSize: 15
-  mapStartX: 0
+  mapStartX: -10
   mapStartZ: 20
   mapWidth: 105
   mapHeight: 80
@@ -528,7 +528,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 911c4dd89c9ef4744b6ac02cd8920f31, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 153.280396
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 911c4dd89c9ef4744b6ac02cd8920f31, type: 2}
       propertyPath: m_LocalPosition.y
