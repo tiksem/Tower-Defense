@@ -10,7 +10,6 @@ public class TowerManager : MonoBehaviour
 	{
 		ACTIVE,
 		SELECTING_TOWER,
-		SELECTING_TOWER_PLACE,
 	}
 	
 	public int startGold = 200;
@@ -20,6 +19,9 @@ public class TowerManager : MonoBehaviour
 	public GameObject towerBuildButton;
 	public GameObject towersBar;
 	public GameObject goldBar;
+	public GameObject messenger;
+	public string notEnoughGoldMessage = "Not enough gold";
+	public string towerNotSelectedMessage = "Select tower";
 	
 	private MapState mapState = MapState.ACTIVE;
 	public GameObject selectedTower;
@@ -31,6 +33,7 @@ public class TowerManager : MonoBehaviour
 	private TowersBar towersBarComponent;
 	private TextureTrigger towerBuildButtonTrigger;
 	private GUIText goldText;
+	private Messenger messengerComponent;
 	
 	public static TowerManager Instance
 	{
@@ -153,18 +156,32 @@ public class TowerManager : MonoBehaviour
 		SetTowersBarVisibility(false);
 	}
 	
-	private void OpenTowerPlaceSelectionMenu()
+	private void ShowMessage(string message)
 	{
-		mapState = MapState.SELECTING_TOWER_PLACE;
-		ShowGrid();
+		if(messengerComponent != null)
+		{
+			messengerComponent.ShowMessage(message);
+		}
+	}
+	
+	private void OnNotEnoughGold()
+	{
+		ShowMessage(notEnoughGoldMessage);
 	}
 	
 	private void BuildTower(Vector3 towerPosition, GameObject towerPrefab)
 	{
-		GameObject tower = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
-		Tower towerComponent = tower.GetComponent<Tower>();
-		CurrentGold -= towerComponent.goldPrice;
-		towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.name;
+		int gold = towersBarComponent.TryBuySelectedTower(CurrentGold);
+		if(gold < 0)
+		{
+			OnNotEnoughGold();
+		}
+		else
+		{
+			GameObject tower = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
+			towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.name;
+			CurrentGold -= gold;
+		}
 	}
 	
 	private void BuildSelectedTower(Vector3 towerPosition)
@@ -216,15 +233,16 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
+	private void OnTowerPlaceClickWhenTowerNotSelected()
+	{
+		ShowMessage(towerNotSelectedMessage);
+	}
+	
 	private void OnClick()
 	{
-		switch(mapState)
+		if(mapState == MapState.SELECTING_TOWER)
 		{
-		case MapState.SELECTING_TOWER_PLACE:
 			CheckTowerPlaceSelection();
-			break;
-		default:
-			break;
 		}
 	}
 	
@@ -233,6 +251,12 @@ public class TowerManager : MonoBehaviour
 		RaycastHit mouseOnGrid = MouseUtilities.FindFirstGameObjectHitInMouseRay(availibleTowerPlaces);
 		if(mouseOnGrid.point == Vector3.zero)
 		{
+			return false;
+		}
+		
+		if(selectedTower == null)
+		{
+			OnTowerPlaceClickWhenTowerNotSelected();
 			return false;
 		}
 		
@@ -271,15 +295,12 @@ public class TowerManager : MonoBehaviour
 		mapState = MapState.SELECTING_TOWER;
 		HideTowerBuildButton();
 		ShowTowersBar();
+		ShowGrid();
 	}
 	
 	private void UpdateSelectedTower()
 	{
 		selectedTower = towersBarComponent.GetSelectedTower();
-		if(selectedTower != null)
-		{
-			OpenTowerPlaceSelectionMenu();
-		}
 	}
 	
 	private void UpdateClicks()
@@ -319,6 +340,15 @@ public class TowerManager : MonoBehaviour
 		}
 		
 		CurrentGold = startGold;
+		
+		if(messenger != null)
+		{
+			messengerComponent = messenger.GetComponent<Messenger>();
+			if(messengerComponent == null)
+			{
+				throw new System.ArgumentException("messenger must have MessengerComponent");
+			}
+		}
 	}
 	
 	// Update is called once per frame

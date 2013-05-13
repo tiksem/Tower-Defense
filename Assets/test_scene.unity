@@ -74,6 +74,78 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 19400000, guid: 989d709d69cee214a9e465a237e84bbf, type: 2}
+--- !u!1 &300348334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 300348335}
+  - 132: {fileID: 300348337}
+  - 114: {fileID: 300348336}
+  - 114: {fileID: 300348338}
+  m_Layer: 0
+  m_Name: Messenger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300348335
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300348334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .100000001, y: .5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &300348336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300348334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb1af4e5d8deb8419af6651668da7c0, type: 3}
+  m_Name: 
+  fadeDuration: 1
+  fadeAfter: 1
+--- !u!132 &300348337
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300348334}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: 
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!114 &300348338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300348334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1bda86425d42c41a2073c019da5c0b, type: 3}
+  m_Name: 
+  textColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &532028201
 Prefab:
   m_ObjectHideFlags: 0
@@ -108,6 +180,10 @@ Prefab:
     - target: {fileID: 400000, guid: a184ec9f02c2642caacb01fa5dc77ea8, type: 2}
       propertyPath: m_LocalRotation.w
       value: .0960665792
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a184ec9f02c2642caacb01fa5dc77ea8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a184ec9f02c2642caacb01fa5dc77ea8, type: 2}
@@ -492,7 +568,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f56b3c5f6ab43647829ab9117f5f9a5, type: 3}
   m_Name: 
-  iconSize: .100000001
+  iconSize: .128999993
   firstIconLeft: .0810000002
   iconBottom: .0165999997
   distanceBetweenIcons: .0137
@@ -500,6 +576,7 @@ MonoBehaviour:
     type: 3}
   buttonTextures:
   - {fileID: 2800000, guid: d44abdb014c4e214891ff55d3504b0b2, type: 3}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -665,6 +742,9 @@ MonoBehaviour:
   towerBuildButton: {fileID: 771182393}
   towersBar: {fileID: 904939901}
   goldBar: {fileID: 1601990658}
+  messenger: {fileID: 300348334}
+  notEnoughGoldMessage: Not enough gold
+  towerNotSelectedMessage: Select tower
   selectedTower: {fileID: 100002, guid: 4c37ed405010233489453c57a887e392, type: 2}
 --- !u!1 &1256967518
 GameObject:
@@ -993,7 +1073,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1597681923}
-  m_LocalRotation: {x: .573576629, y: 0, z: 0, w: .819151938}
+  m_LocalRotation: {x: .500000119, y: 0, z: 0, w: .866025329}
   m_LocalPosition: {x: 50.4810104, y: 36.752861, z: 33.3659248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1012,10 +1092,10 @@ MonoBehaviour:
   dragSpeed: .699999988
   maxFieldOfViewSize: 50
   minFieldOfViewSize: 15
-  mapStartX: 0
-  mapStartZ: 0
-  mapWidth: 90
-  mapHeight: 90
+  mapStartX: 10
+  mapStartZ: 15
+  mapWidth: 75
+  mapHeight: 80
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 0
@@ -3552,7 +3632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2111342305
 MonoBehaviour:
   m_ObjectHideFlags: 0

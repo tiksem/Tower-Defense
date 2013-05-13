@@ -9,16 +9,28 @@ public class TowersBar : MonoBehaviour
 	
 	private GuiEventsHandler guiEventsHandler;
 	private GameObject selectedTower;
+	private int selectedTowerIndex = -1;
 	private BarWithCircleButtons bar;
+	private int[] towersGold;
 
 	public GameObject GetSelectedTower()
 	{
 		return selectedTower;
 	}
 	
+	public int GetSelectedTowerIndex()
+	{
+		return selectedTowerIndex;
+	}
+	
 	private void OnTowerClick(int towerIndex)
 	{
-		selectedTower = towers[towerIndex];
+		if(towerIndex >= 0 && towerIndex < towers.Length)
+		{
+			selectedTower = towers[towerIndex];
+		}
+		
+		selectedTowerIndex = towerIndex;
 	}
 	
 	private void OnFractionsClick()
@@ -34,34 +46,73 @@ public class TowersBar : MonoBehaviour
 		}
 		
 		int clickedButtonIndex = bar.GetClickedButtonIndex();
-		if(clickedButtonIndex < 0)
+		
+		if(clickedButtonIndex ==  towers.Length - 1)
 		{
-			selectedTower = null;
-			return false;
+			OnTowerClick(-1);
+			OnFractionsClick();
 		}
-			
-		if(clickedButtonIndex < towers.Length)
+		else if(clickedButtonIndex >= 0)
 		{
 			OnTowerClick(clickedButtonIndex);
 			return true;
 		}
-		else if(clickedButtonIndex ==  towers.Length - 1)
+			
+		return false;
+	}
+	
+	public void UpdateTowersGoldState(int currentGold)
+	{
+		
+	}
+	
+	public int GetTowerGoldPrice(int towerIndex)
+	{
+		return towersGold[towerIndex];
+	}
+	
+	public int TryBuyTower(int towerIndex, int currentGold)
+	{
+		int towerGold = towersGold[towerIndex];
+		if(towerGold <= currentGold)
 		{
-			OnFractionsClick();
-			return true;
+			UpdateTowersGoldState(currentGold - towerGold);
+			return towerGold;
 		}
 		else
 		{
-			 selectedTower = null;
+			return -1;
 		}
+	}
+	
+	public int TryBuySelectedTower(int currentGold)
+	{
+		return TryBuyTower(selectedTowerIndex, currentGold);
+	}
+	
+	private void InitTowersGold()
+	{
+		int length = towers.Length;
+		towersGold = new int[length];
+		for(int i = 0; i < length; i++)
+		{
+			GameObject towerObject = towers[i];
+			if(towerObject == null)
+			{
+				towersGold[i] = -1;
+				continue;
+			}
 			
-		return false;
+			Tower tower = towerObject.GetComponent<Tower>();
+			towersGold[i] = tower.goldPrice;
+		}
 	}
 	
 	void Start()
 	{
 		bar = gameObject.GetComponent<BarWithCircleButtons>();
 		guiEventsHandler = new GuiEventsHandler(gameObject);
+		InitTowersGold();
 	}
 
 	void Update()
