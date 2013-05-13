@@ -66,7 +66,7 @@ using AssemblyCSharp;
 			buttonPixelInset.height = iconHeight * screenHeight;
 			
 			float x = firstIconLeft;
-			float y = iconBottom;
+			float y = iconBottom * widthHeightCoefficient;
 			float xStep = distanceBetweenIcons + iconWidth;
 			for(int i = 0; i < buttonTextures.Length; i++)
 			{
