@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Name: 
   towers:
   - {fileID: 100000, guid: 26b84090d682b2f47b65d23d5ab61dd4, type: 2}
-  - {fileID: 0}
+  - {fileID: 100002, guid: 0f9dd2c350ef9a64480d972160e20c89, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -576,9 +576,12 @@ MonoBehaviour:
     type: 3}
   buttonsCount: 6
   buttonTextures:
-  - normalState: {fileID: 2800000, guid: d44abdb014c4e214891ff55d3504b0b2, type: 3}
+  - normalState: {fileID: 2800000, guid: ff5bfc17b7234fa47b971b309861797b, type: 3}
     selectedState: {fileID: 2800000, guid: 09f37a46a93ebbc44a3bca4870202461, type: 3}
     disabledState: {fileID: 2800000, guid: 19405d47c0c715d40be9b3677daf4aa4, type: 3}
+  - normalState: {fileID: 2800000, guid: 4b67d6a0fd0e2c74c9a2f860003bd9ed, type: 3}
+    selectedState: {fileID: 2800000, guid: 1182ee5a1fb136f4a877686ff22b8661, type: 3}
+    disabledState: {fileID: 2800000, guid: a08ad730ce96434458a8e33b59757fbc, type: 3}
 --- !u!1 &1113357790
 GameObject:
   m_ObjectHideFlags: 0
