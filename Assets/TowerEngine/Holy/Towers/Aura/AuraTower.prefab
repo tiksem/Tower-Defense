@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
+  - 114: {fileID: 11400000}
+  - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: AuraTower
   m_TagString: Untagged
@@ -53,6 +55,32 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Mesh: {fileID: 4300004, guid: 4a2007b53eae32d46ac02545ea3ff35a, type: 3}
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .300000012, y: .300000012, z: .300000012}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
+  m_Name: 
+  goldPrice: 100
+  level: 0
+  crystalPrice: 0
+  name: Unnamed
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
