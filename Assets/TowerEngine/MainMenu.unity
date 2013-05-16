@@ -201,7 +201,7 @@ MonoBehaviour:
     action: 0
   maps:
   - name: Ugly Field
-    texture: {fileID: 2800000, guid: 0049817ea47a7394db80593792da5ca6, type: 3}
+    texture: {fileID: 2800000, guid: 743b9fd0a9a16a547b824504539db2c8, type: 3}
     sceneName: test_scene
   - name: Snow Field
     texture: {fileID: 2800000, guid: 47e45e4c1254fb244b770bcfa1808f42, type: 3}
