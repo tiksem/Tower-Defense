@@ -54,10 +54,11 @@ public class MainMenu : MonoBehaviour
 	public float startButtonY = 0.5f;
 	public Texture startButtonTexture;
 	public string startButtonText = "Start";
+	public Texture backgroundDarkenTexture;
 	public GUIStyle buttonStyle = new GUIStyle();
 	
-	
 	private float buttonYOffset;
+	private bool backgroundShouldBeDarken = false;
 	
 	void OnValidate()
 	{
@@ -119,6 +120,24 @@ public class MainMenu : MonoBehaviour
 		}
 	}
 	
+	private void MakeBackgroundDarkenIfRequired()
+	{
+		if(backgroundShouldBeDarken)
+		{
+			MakeBackgroundDarken();
+		}
+	}
+	
+	private void MakeBackgroundDarken()
+	{
+		if(backgroundDarkenTexture == null)
+		{
+			return;
+		}
+		
+		GUIUtilities.DrawBackground(backgroundDarkenTexture);
+	}
+	
 	private void OnFractionChangeButtonClick()
 	{
 		
@@ -126,7 +145,7 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnMapChangeButtonClick()
 	{
-		
+		backgroundShouldBeDarken = true;
 	}
 	
 	private void DrawMapButton()
@@ -204,9 +223,14 @@ public class MainMenu : MonoBehaviour
 	void OnGUI()
 	{
 		DrawBackground();
-		DrawButtons();
-		DrawMapButton();
-		DrawFractionButton();
-		DrawStartButton();
+		MakeBackgroundDarkenIfRequired();
+		
+		if(!backgroundShouldBeDarken)
+		{
+			DrawButtons();
+			DrawMapButton();
+			DrawFractionButton();
+			DrawStartButton();
+		}
 	}
 }

@@ -220,6 +220,8 @@ MonoBehaviour:
   startButtonY: .889999986
   startButtonTexture: {fileID: 2800000, guid: ac5b17e7e64cfda46a8803b794322857, type: 3}
   startButtonText: Start
+  backgroundDarkenTexture: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99,
+    type: 3}
   buttonStyle:
     m_Name: 
     m_Normal:
