@@ -26,6 +26,38 @@ namespace AssemblyCSharp
 			buttonGameObject.transform.position = new Vector3(x, y, 0);
 			return button;
 		}
+		
+		public static Rect GetScreenRect()
+		{
+			return new Rect(0.0f, 0.0f, Camera.main.pixelWidth, Camera.main.pixelHeight);
+		}
+		
+		public static void DrawBackground(Texture image)
+		{
+			Rect screenRect = GetScreenRect();
+			GUI.DrawTexture(screenRect, image, ScaleMode.StretchToFill);
+		}
+		
+		public static float ScreenXToGUIX(float x)
+		{
+			return x * Camera.main.pixelWidth;
+		}
+		
+		public static float ScreenYToGUIY(float y)
+		{
+			return y * Camera.main.pixelHeight;
+		}
+		
+		public static Rect ScreenToGUIRect(float x, float y, float width, float height)
+		{
+			Rect rect = new Rect();
+			rect.x = ScreenXToGUIX(x);
+			rect.y = ScreenYToGUIY(y);
+			rect.width = ScreenXToGUIX(width);
+			rect.height = ScreenYToGUIY(height);
+			
+			return rect;
+		}
 	}
 }
 
