@@ -6,7 +6,11 @@ public class MainMenu : MonoBehaviour
 {
 	public enum ButtonAction
 	{
-		SINGLE_PLAYER
+		SINGLE_PLAYER,
+		LOAD_GAME,
+		OPTIONS,
+		MULTIPLAYER,
+		EXIT
 	}
 	
 	[System.Serializable]
@@ -57,6 +61,7 @@ public class MainMenu : MonoBehaviour
 	public Texture backgroundDarkenTexture;
 	public GUIButtonGrid mapPeekGridSettings;
 	public GUIButtonGrid fractionPeekGridSettings;
+	public ButtonAction selectedAction = ButtonAction.SINGLE_PLAYER;
 	public GUIStyle buttonStyle = new GUIStyle();
 	
 	private float buttonYOffset;
@@ -114,13 +119,50 @@ public class MainMenu : MonoBehaviour
 		
 	}
 	
+	private void OnMultiPlayerButtonClick()
+	{
+		
+	}
+	
+	private void OnOptionsButtonClick()
+	{
+		
+	}
+	
+	private void OnExitButtonClick()
+	{
+		
+	}
+	
+	private void OnLoadGameButtonClick()
+	{
+		
+	}
+	
 	private void OnButtonClick(int index)
 	{
 		ButtonAction button = buttons[index].action;
 		switch(button)
 		{
 		case ButtonAction.SINGLE_PLAYER:
+			selectedAction = ButtonAction.SINGLE_PLAYER;
 			OnSinglePlayerButtonClick();
+			break;
+		case ButtonAction.MULTIPLAYER:
+			selectedAction = ButtonAction.MULTIPLAYER;
+			OnMultiPlayerButtonClick();
+			break;
+		case ButtonAction.LOAD_GAME:
+			selectedAction = ButtonAction.LOAD_GAME;
+			OnLoadGameButtonClick();
+			break;
+		case ButtonAction.OPTIONS:
+			selectedAction = ButtonAction.OPTIONS;
+			OnOptionsButtonClick();
+			break;
+		case ButtonAction.EXIT:
+			selectedAction = ButtonAction.EXIT;
+			OnExitButtonClick();
 			break;
 		}
 	}
@@ -283,11 +325,8 @@ public class MainMenu : MonoBehaviour
 		mapPeekGridSettings.onClick = OnMapPeek;
 	}
 	
-	void OnGUI()
+	private void OnSinglePlayer()
 	{
-		DrawBackground();
-		MakeBackgroundDarkenIfRequired();
-		
 		if(!backgroundShouldBeDarken)
 		{
 			DrawButtons();
@@ -304,6 +343,51 @@ public class MainMenu : MonoBehaviour
 		if(shouldDrawFractionPeekGrid)
 		{
 			DrawFractionPeekGrid();
+		}
+	}
+	
+	private void OnOptions()
+	{
+		
+	}
+	
+	private void OnMultiplayer()
+	{
+		
+	}
+	
+	private void OnLoadGame()
+	{
+		
+	}
+	
+	private void OnExit()
+	{
+		
+	}
+	
+	void OnGUI()
+	{
+		DrawBackground();
+		MakeBackgroundDarkenIfRequired();
+		
+		switch(selectedAction)
+		{
+		case ButtonAction.SINGLE_PLAYER:
+			OnSinglePlayer();
+			break;
+		case ButtonAction.OPTIONS:
+			OnOptions();
+			break;
+		case ButtonAction.MULTIPLAYER:
+			OnMultiplayer();
+			break;
+		case ButtonAction.LOAD_GAME:
+			OnLoadGame();
+			break;
+		case ButtonAction.EXIT:
+			OnExit();
+			break;
 		}
 	}
 }
