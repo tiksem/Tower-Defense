@@ -60,6 +60,11 @@ namespace AssemblyCSharp
 			return y * Camera.main.pixelHeight;
 		}
 		
+		public static float GetHeightFromWidthForSquareButton(float width)
+		{
+			return width * Camera.main.pixelWidth / Camera.main.pixelHeight;
+		}
+		
 		public static Rect ScreenToGUIRect(float x, float y, float width, float height)
 		{
 			Rect rect = new Rect();

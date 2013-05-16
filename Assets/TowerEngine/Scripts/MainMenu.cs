@@ -55,14 +55,52 @@ public class MainMenu : MonoBehaviour
 	public Texture startButtonTexture;
 	public string startButtonText = "Start";
 	public Texture backgroundDarkenTexture;
+	public GUIButtonGrid mapPeekGridSettings;
+	public GUIButtonGrid fractionPeekGridSettings;
 	public GUIStyle buttonStyle = new GUIStyle();
 	
 	private float buttonYOffset;
 	private bool backgroundShouldBeDarken = false;
+	private bool shouldDrawMapPeekGrid = false;
+	private bool shouldDrawFractionPeekGrid = false;
+	
+	private Texture[] GetMapsTextures()
+	{
+		Texture[] result = new Texture[maps.Length];
+		for(int i = 0; i < result.Length; i++)
+		{
+			result[i] = maps[i].texture;
+		}
+		
+		return result;
+	}
+	
+	private Texture[] GetFractionsTextures()
+	{
+		Texture[] result = new Texture[fractions.Length];
+		for(int i = 0; i < result.Length; i++)
+		{
+			result[i] = fractions[i].texture;
+		}
+		
+		return result;
+	}
 	
 	void OnValidate()
 	{
 		buttonYOffset = buttonHeight + distanceBetweenButtons;
+		
+		if(maps != null)
+		{
+			Texture[] textures = GetMapsTextures();
+			mapPeekGridSettings.SetButtons(textures);
+		}
+		
+		if(fractions != null)
+		{
+			Texture[] textures = GetFractionsTextures();
+			fractionPeekGridSettings.SetButtons(textures);
+		}
 	}
 	
 	private Rect GetButtonRect(int index)
@@ -146,6 +184,7 @@ public class MainMenu : MonoBehaviour
 	private void OnMapChangeButtonClick()
 	{
 		backgroundShouldBeDarken = true;
+		shouldDrawMapPeekGrid = true;
 	}
 	
 	private void DrawMapButton()
@@ -194,6 +233,16 @@ public class MainMenu : MonoBehaviour
 		}
 	}
 	
+	private void DrawFractionPeekGrid()
+	{
+		fractionPeekGridSettings.Draw();
+	}
+	
+	private void DrawMapPeekGrid()
+	{
+		mapPeekGridSettings.Draw();
+	}
+	
 	private void OnStartButtonClick()
 	{
 		string sceneName = maps[mapIndex].sceneName;
@@ -217,7 +266,7 @@ public class MainMenu : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		
+		OnValidate();
 	}
 	
 	void OnGUI()
@@ -231,6 +280,16 @@ public class MainMenu : MonoBehaviour
 			DrawMapButton();
 			DrawFractionButton();
 			DrawStartButton();
+		}
+		
+		if(shouldDrawMapPeekGrid)
+		{
+			DrawMapPeekGrid();
+		}
+		
+		if(shouldDrawFractionPeekGrid)
+		{
+			DrawFractionPeekGrid();
 		}
 	}
 }

@@ -6,8 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/TowerEngine/MainMenu.unity
+  - enabled: 1
     path: Assets/test_scene.unity
   - enabled: 0
     path: Assets/scene_for_terrain2.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/scene_snow_land.unity
