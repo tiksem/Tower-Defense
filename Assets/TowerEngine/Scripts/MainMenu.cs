@@ -42,27 +42,35 @@ public class MainMenu : MonoBehaviour
 	public float buttonsLeft;
 	public float buttonWidth;
 	public float buttonHeight;
+	
 	public Button[] buttons;
 	public Map[] maps;
 	public int mapIndex;
 	public Fraction[] fractions;
 	public int fractionIndex;
 	public float mapsButtonSize;
+	
 	public float chooseMapFractionButtonSize = 0.2f;
 	public float chooseMapFractionButtonX = 0.2f;
 	public float chooseMapButtonY = 0.2f;
 	public float chooseFractionButtonY = 0.2f;
+	
 	public float startButtonWidth = 0.1f;
 	public float startButtonHeight = 0.04f;
 	public float startButtonX = 0.5f;
 	public float startButtonY = 0.5f;
 	public Texture startButtonTexture;
 	public string startButtonText = "Start";
+	
 	public Texture backgroundDarkenTexture;
 	public GUIButtonGrid mapPeekGridSettings;
 	public GUIButtonGrid fractionPeekGridSettings;
+	
 	public ButtonAction selectedAction = ButtonAction.SINGLE_PLAYER;
+	
 	public GUIStyle buttonStyle = new GUIStyle();
+	public GUIStyle selectedButtonStyle = new GUIStyle();
+
 	
 	private float buttonYOffset;
 	private bool backgroundShouldBeDarken = false;
@@ -131,7 +139,7 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnExitButtonClick()
 	{
-		
+		Application.Quit();
 	}
 	
 	private void OnLoadGameButtonClick()
@@ -173,9 +181,22 @@ public class MainMenu : MonoBehaviour
 		Button button = buttons[index];
 		string text = button.text;
 		
-		if(GUI.Button(rect, text, buttonStyle))
+		GUIStyle style;
+		if(selectedAction == button.action)
 		{
-			OnButtonClick(index);
+			style = selectedButtonStyle;
+		}
+		else
+		{
+			style = buttonStyle;
+		}
+		
+		if(GUI.Button(rect, text, style))
+		{
+			if(!backgroundShouldBeDarken)
+			{
+				OnButtonClick(index);
+			}
 		}
 	}
 	
@@ -329,7 +350,6 @@ public class MainMenu : MonoBehaviour
 	{
 		if(!backgroundShouldBeDarken)
 		{
-			DrawButtons();
 			DrawMapButton();
 			DrawFractionButton();
 			DrawStartButton();
@@ -361,14 +381,10 @@ public class MainMenu : MonoBehaviour
 		
 	}
 	
-	private void OnExit()
-	{
-		
-	}
-	
 	void OnGUI()
 	{
 		DrawBackground();
+		DrawButtons();
 		MakeBackgroundDarkenIfRequired();
 		
 		switch(selectedAction)
@@ -384,9 +400,6 @@ public class MainMenu : MonoBehaviour
 			break;
 		case ButtonAction.LOAD_GAME:
 			OnLoadGame();
-			break;
-		case ButtonAction.EXIT:
-			OnExit();
 			break;
 		}
 	}
