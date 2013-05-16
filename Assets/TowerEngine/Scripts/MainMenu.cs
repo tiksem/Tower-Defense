@@ -202,6 +202,11 @@ public class MainMenu : MonoBehaviour
 	
 	private void DrawButtons()
 	{
+		if(backgroundShouldBeDarken)
+		{
+			return;
+		}
+		
 		if(buttons == null)
 		{
 			return;
@@ -383,6 +388,11 @@ public class MainMenu : MonoBehaviour
 	
 	void OnGUI()
 	{
+		if(selectedAction == ButtonAction.EXIT)
+		{
+			return;
+		}
+		
 		DrawBackground();
 		DrawButtons();
 		MakeBackgroundDarkenIfRequired();
