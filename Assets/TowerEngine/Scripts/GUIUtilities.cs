@@ -38,6 +38,18 @@ namespace AssemblyCSharp
 			GUI.DrawTexture(screenRect, image, ScaleMode.StretchToFill);
 		}
 		
+		public static bool DrawSquareTextureButtonUsingWidth(float x, float y, float width, Texture texture)
+		{
+			float height = width * Camera.main.pixelWidth / Camera.main.pixelHeight;
+			return DrawTextureButton(x, y, width, height, texture);
+		}
+		
+		public static bool DrawTextureButton(float x, float y, float width, float height, Texture texture)
+		{
+			Rect rect = ScreenToGUIRect(x, y, width, height);
+			return GUI.Button(rect, texture);
+		}
+		
 		public static float ScreenXToGUIX(float x)
 		{
 			return x * Camera.main.pixelWidth;
