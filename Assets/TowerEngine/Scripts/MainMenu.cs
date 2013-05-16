@@ -243,6 +243,19 @@ public class MainMenu : MonoBehaviour
 		mapPeekGridSettings.Draw();
 	}
 	
+	private void HideAllGrids()
+	{
+		shouldDrawMapPeekGrid = false;
+		backgroundShouldBeDarken = false;
+		shouldDrawFractionPeekGrid = false;
+	}
+	
+	private void OnMapPeek(int index)
+	{
+		mapIndex = index;
+		HideAllGrids();
+	}
+	
 	private void OnStartButtonClick()
 	{
 		string sceneName = maps[mapIndex].sceneName;
@@ -267,6 +280,7 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		OnValidate();
+		mapPeekGridSettings.onClick = OnMapPeek;
 	}
 	
 	void OnGUI()

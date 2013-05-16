@@ -28,6 +28,14 @@ namespace AssemblyCSharp
 			return GUIUtilities.ScreenToGUIRect(buttonsLeft, buttonsTop, width, height);
 		}
 		
+		private void OnClick(int index)
+		{
+			if(onClick != null)
+			{
+				onClick(index);
+			}
+		}
+		
 		public void Draw()
 		{
 			float x = buttonsLeft;
@@ -44,7 +52,10 @@ namespace AssemblyCSharp
 			for(int i = 0; i < buttons.Length; i++)
 			{
 				Texture texture = buttons[i];
-				GUIUtilities.DrawTextureButton(x, y, buttonSize, buttonHeight, texture);
+				if(GUIUtilities.DrawTextureButton(x, y, buttonSize, buttonHeight, texture))
+				{
+					OnClick(i);
+				}
 				
 				if(i % buttonsOnLine == buttonsOnLine - 1)
 				{
