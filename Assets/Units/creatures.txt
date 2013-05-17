@@ -1,23 +1,23 @@
-g					a				Giant Goose			speed
-g						h			Redneck				ground
-	f				a				Pterodactyl			air
-		i.g				h			Yeti				water
-g					a				Unicorn				armored
-g						h			Knight				vulcano
-	f				a				Phoenix				fire
-		i.f				h			Angel				holy
-g					a				Dog Octopus(Dolph)	fun		
-g						h			Zombie				death
-	f				a				Bat					speed
-		i.g				h			Stone Golem			ground
-g					a				Jinn				air
-g						h			Mermaid				water
-	f				a				Dragon				armored
-		i.f				h			Ghost				vulcano
-g					a				Cerberus			fire
-g						h			Priest				holy
-	f				a				Bee Rider			fun
-		i.g				h			Demon				death
+g					a				Giant Goose/Ostrich		speed
+g						h			Ninja					ground
+	f				a				Pterodactyl				air
+		i.g				h			Yeti					water
+g					a				Unicorn					armored
+g						h			Knight					vulcano
+	f				a				Phoenix					fire
+		i.f				h			Angel					holy
+g					a				Dog Octopus(Dolph)		fun
+g						h			Zombie					death
+	f				a				Bat						speed
+		i.g				h			Kentaurus				ground
+g					a				Elemental				air
+g						h			Water Snake				water
+	f				a				Dragon					armored
+		i.f				h			Ghost					vulcano
+g					a				Cerberus				fire
+g						h			Priest					holy
+	f				a				Bee Rider				fun
+		i.g				h			Demon					death
 --------------
 armored
 death
