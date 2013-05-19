@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: f2f1f3dac5ec75241b742ee60a5dd0c8
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: back leg
+    100002: back leg01
+    100004: //RootNode
+    100006: Box01
+    100008: GeoSphere0
+    100010: GeoSphere1
+    100012: Loft01
+    100014: Loft02
+    100016: Loft03
+    100018: Loft04
+    100020: Loft05
+    100022: Loft06
+    100024: Loft07
+    100026: Loft08
+    100028: wing
+    100030: wing shea0
+    100032: wing sheat
+    100034: wing01
+    400000: back leg
+    400002: back leg01
+    400004: //RootNode
+    400006: Box01
+    400008: GeoSphere0
+    400010: GeoSphere1
+    400012: Loft01
+    400014: Loft02
+    400016: Loft03
+    400018: Loft04
+    400020: Loft05
+    400022: Loft06
+    400024: Loft07
+    400026: Loft08
+    400028: wing
+    400030: wing shea0
+    400032: wing sheat
+    400034: wing01
+    2300000: back leg
+    2300002: back leg01
+    2300004: Box01
+    2300006: GeoSphere0
+    2300008: GeoSphere1
+    2300010: Loft01
+    2300012: Loft02
+    2300014: Loft03
+    2300016: Loft04
+    2300018: Loft05
+    2300020: Loft06
+    2300022: Loft07
+    2300024: Loft08
+    2300026: wing
+    2300028: wing shea0
+    2300030: wing sheat
+    2300032: wing01
+    3300000: back leg
+    3300002: back leg01
+    3300004: Box01
+    3300006: GeoSphere0
+    3300008: GeoSphere1
+    3300010: Loft01
+    3300012: Loft02
+    3300014: Loft03
+    3300016: Loft04
+    3300018: Loft05
+    3300020: Loft06
+    3300022: Loft07
+    3300024: Loft08
+    3300026: wing
+    3300028: wing shea0
+    3300030: wing sheat
+    3300032: wing01
+    4300000: Box01
+    4300002: Loft08
+    4300004: Loft04
+    4300006: Loft05
+    4300008: back leg
+    4300010: Loft03
+    4300012: Loft07
+    4300014: back leg01
+    4300016: Loft06
+    4300018: Loft02
+    4300020: GeoSphere0
+    4300022: GeoSphere1
+    4300024: Loft01
+    4300026: wing
+    4300028: wing sheat
+    4300030: wing01
+    4300032: wing shea0
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
