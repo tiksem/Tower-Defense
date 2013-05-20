@@ -223,7 +223,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 0
+  m_FontSize: 24
   m_FontStyle: 0
   m_PixelCorrect: 1
   m_RichText: 1
@@ -553,9 +553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b95407bf50ebbb4a8a8cfdc2082c95e, type: 3}
   m_Name: 
   towers:
-  - {fileID: 100000, guid: 26b84090d682b2f47b65d23d5ab61dd4, type: 2}
-  - {fileID: 100002, guid: 255ef341a59cf9147851557e07113970, type: 2}
-  - {fileID: 100002, guid: 0f9dd2c350ef9a64480d972160e20c89, type: 2}
+  - {fileID: 100000, guid: 293a08d6922c4ff4896330129954ae17, type: 2}
+  - {fileID: 100002, guid: c5b21d73bdfb5ef4888289cb80ed7a7a, type: 2}
+  - {fileID: 100002, guid: 3e86bd66cc01b0e41b5b6ab521ef3a26, type: 2}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &904939905
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   maxLeaveTargetCount: 50
   parties:
-  - targetPrefab: {fileID: 100040, guid: 3eed797ec51403141be17cb76b6ebfb8, type: 2}
+  - targetPrefab: {fileID: 0}
     leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
     width: 3
     height: 3
@@ -749,7 +749,7 @@ MonoBehaviour:
   messenger: {fileID: 300348334}
   notEnoughGoldMessage: Not enough gold
   towerNotSelectedMessage: Select tower
-  selectedTower: {fileID: 100002, guid: 4c37ed405010233489453c57a887e392, type: 2}
+  selectedTower: {fileID: 0}
 --- !u!1 &1256967518
 GameObject:
   m_ObjectHideFlags: 0
