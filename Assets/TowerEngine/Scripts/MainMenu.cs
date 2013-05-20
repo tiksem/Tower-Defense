@@ -42,6 +42,8 @@ public class MainMenu : MonoBehaviour
 	public float buttonsLeft;
 	public float buttonWidth;
 	public float buttonHeight;
+	public float buttonTextSize = 1.0f;
+	public float fontSizeForResolutionX = 960;
 	
 	public Button[] buttons;
 	public Map[] maps;
@@ -68,14 +70,21 @@ public class MainMenu : MonoBehaviour
 	
 	public ButtonAction selectedAction = ButtonAction.SINGLE_PLAYER;
 	
+	public Texture cancelButton;
+	public float cancelButtonSize;
+	public float cancelButtonBorder;
+	public Texture multiplayerBackground;
+	
 	public GUIStyle buttonStyle = new GUIStyle();
 	public GUIStyle selectedButtonStyle = new GUIStyle();
-
+	
 	
 	private float buttonYOffset;
+	private float buttonFontSizeCoefficient;
 	private bool backgroundShouldBeDarken = false;
 	private bool shouldDrawMapPeekGrid = false;
 	private bool shouldDrawFractionPeekGrid = false;
+	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
 	
 	private Texture[] GetMapsTextures()
 	{
@@ -99,6 +108,22 @@ public class MainMenu : MonoBehaviour
 		return result;
 	}
 	
+	private void InitButtonFontSizeCoefficient()
+	{
+		buttonFontSizeCoefficient = Camera.main.pixelWidth / fontSizeForResolutionX;
+	}
+	
+	private void CalculateFontSize(ref GUIStyle style)
+	{
+		style.fontSize = Mathf.RoundToInt(buttonFontSizeCoefficient * (float)style.fontSize);
+	}
+	
+	private void FixButtonsFontSize()
+	{
+		CalculateFontSize(ref buttonStyle);
+		CalculateFontSize(ref selectedButtonStyle);
+	}
+	
 	void OnValidate()
 	{
 		buttonYOffset = buttonHeight + distanceBetweenButtons;
@@ -114,6 +139,9 @@ public class MainMenu : MonoBehaviour
 			Texture[] textures = GetFractionsTextures();
 			fractionPeekGridSettings.SetButtons(textures);
 		}
+		
+		InitButtonFontSizeCoefficient();
+		FixButtonsFontSize();
 	}
 	
 	private Rect GetButtonRect(int index)
@@ -129,7 +157,7 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnMultiPlayerButtonClick()
 	{
-		
+		backgroundShouldBeDarken = true;
 	}
 	
 	private void OnOptionsButtonClick()
@@ -147,34 +175,42 @@ public class MainMenu : MonoBehaviour
 		
 	}
 	
-	private void OnButtonClick(int index)
+	private void HandleButtonClick(ButtonAction action)
 	{
-		ButtonAction button = buttons[index].action;
-		switch(button)
+		if(action == selectedAction)
+		{
+			return;
+		}
+		
+		prevSelectedAction = selectedAction;
+		selectedAction = action;
+		
+		switch(action)
 		{
 		case ButtonAction.SINGLE_PLAYER:
-			selectedAction = ButtonAction.SINGLE_PLAYER;
 			OnSinglePlayerButtonClick();
 			break;
 		case ButtonAction.MULTIPLAYER:
-			selectedAction = ButtonAction.MULTIPLAYER;
 			OnMultiPlayerButtonClick();
 			break;
 		case ButtonAction.LOAD_GAME:
-			selectedAction = ButtonAction.LOAD_GAME;
 			OnLoadGameButtonClick();
 			break;
 		case ButtonAction.OPTIONS:
-			selectedAction = ButtonAction.OPTIONS;
 			OnOptionsButtonClick();
 			break;
 		case ButtonAction.EXIT:
-			selectedAction = ButtonAction.EXIT;
 			OnExitButtonClick();
 			break;
 		}
 	}
-		
+	
+	private void OnButtonClick(int index)
+	{
+		ButtonAction button = buttons[index].action;
+		HandleButtonClick(button);
+	}
+	
 	private void DrawButton(int index)
 	{
 		Rect rect = GetButtonRect(index);
@@ -311,6 +347,11 @@ public class MainMenu : MonoBehaviour
 		mapPeekGridSettings.Draw();
 	}
 	
+	private bool DrawCancelButton()
+	{
+		return GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
+	}
+	
 	private void HideAllGrids()
 	{
 		shouldDrawMapPeekGrid = false;
@@ -376,9 +417,30 @@ public class MainMenu : MonoBehaviour
 		
 	}
 	
+	private void ReturnToPrevAction()
+	{
+		HideAllGrids();
+		HandleButtonClick(prevSelectedAction);
+	}
+	
+	private void DrawMiltiplayerBackground()
+	{
+		GUIUtilities.DrawBackground(multiplayerBackground);
+	}
+	
 	private void OnMultiplayer()
 	{
+		if(cancelButton == null || multiplayerBackground == null)
+		{
+			return;
+		}
 		
+		if(DrawCancelButton())
+		{
+			ReturnToPrevAction();
+		}
+		
+		DrawMiltiplayerBackground();
 	}
 	
 	private void OnLoadGame()

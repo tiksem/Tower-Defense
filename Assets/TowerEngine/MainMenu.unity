@@ -196,6 +196,7 @@ MonoBehaviour:
   buttonsLeft: .0240000002
   buttonWidth: .300000012
   buttonHeight: .119999997
+  buttonTextSize: 1
   buttons:
   - text: Single Player
     action: 0
@@ -243,6 +244,11 @@ MonoBehaviour:
     buttonsTop: .0500000007
     buttonsOnLine: 2
   selectedAction: 0
+  cancelButton: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
+  cancelButtonSize: .0599999987
+  cancelButtonBorder: .0299999993
+  multiplayerBackground: {fileID: 2800000, guid: 2c236acf878ded24883a0afb08063a5b,
+    type: 3}
   buttonStyle:
     m_Name: 
     m_Normal:
@@ -290,7 +296,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: 627b927025dc3ce4a90a4b27438ba244, type: 3}
-    m_FontSize: 0
+    m_FontSize: 30
     m_FontStyle: 1
     m_Alignment: 4
     m_WordWrap: 0
@@ -349,7 +355,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: 627b927025dc3ce4a90a4b27438ba244, type: 3}
-    m_FontSize: 0
+    m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 4
     m_WordWrap: 0

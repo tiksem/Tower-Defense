@@ -5,6 +5,8 @@ namespace AssemblyCSharp
 {
 	public static class GUIUtilities
 	{
+		private static Matrix4x4 pushedGUIMatrix;
+		
 		public static void ResizeGUITextureToFitScreenWidth(GUITexture guiTexture)
 		{
 			Rect pixelInset = guiTexture.pixelInset;
@@ -74,6 +76,38 @@ namespace AssemblyCSharp
 			rect.height = ScreenYToGUIY(height);
 			
 			return rect;
+		}
+		
+		public static bool DrawButtonInRightTopCorner(Texture texture, float width, 
+			float height, float buttonBorderWidth = 0.0f, float buttonBorderHeight = 0.0f)
+		{
+			float x = 1.0f - width - buttonBorderWidth;
+			float y = buttonBorderHeight;
+			return DrawTextureButton(x, y, width, height, texture);
+		}
+		
+		public static bool DrawSquareButtonInRightTopCorner(Texture texture, float size, float border = 0.0f)
+		{
+			float heightK = Camera.main.pixelWidth / Camera.main.pixelHeight;
+			float height = size * heightK;
+			float heightBorder = border * heightK;
+			
+			return DrawButtonInRightTopCorner(texture, size, height, border, heightBorder);
+		}
+		
+		public static void PushGUIScale(float precentageScale)
+		{
+			pushedGUIMatrix = GUI.matrix;
+			
+			Vector3 scale = Vector3.zero * precentageScale;
+			Quaternion rotation = Quaternion.AngleAxis(0, new Vector3(0, 1, 0));
+			Vector3 position = new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 1);
+			GUI.matrix = Matrix4x4.TRS(scale, rotation, position);
+		}
+		
+		public static void PopGUIMatrix()
+		{
+			GUI.matrix = pushedGUIMatrix;
 		}
 	}
 }
