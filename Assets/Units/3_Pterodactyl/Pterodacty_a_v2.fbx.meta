@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: a1b7f1aeced54134387314e3de3e3d37
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Abdomen
+    100002: AbdomenPoint
+    100004: Erkz
+    100006: Head
+    100008: lFoot
+    100010: lFootPoint
+    100012: lHead
+    100014: lMiddleFeather
+    100016: lShin
+    100018: lSmallFeather
+    100020: lWind
+    100022: lWindHolder
+    100024: lWindPoint
+    100026: mHead
+    100028: Neck
+    100030: //RootNode
+    100032: rFoot
+    100034: rFootPoint
+    100036: rMiddleFeather
+    100038: rShin
+    100040: rSmallFeather
+    100042: rWind
+    100044: rWindHolder
+    100046: rWindPoint
+    100048: Skin
+    100050: Tail
+    100052: uHead
+    400000: Abdomen
+    400002: AbdomenPoint
+    400004: Erkz
+    400006: Head
+    400008: lFoot
+    400010: lFootPoint
+    400012: lHead
+    400014: lMiddleFeather
+    400016: lShin
+    400018: lSmallFeather
+    400020: lWind
+    400022: lWindHolder
+    400024: lWindPoint
+    400026: mHead
+    400028: Neck
+    400030: //RootNode
+    400032: rFoot
+    400034: rFootPoint
+    400036: rMiddleFeather
+    400038: rShin
+    400040: rSmallFeather
+    400042: rWind
+    400044: rWindHolder
+    400046: rWindPoint
+    400048: Skin
+    400050: Tail
+    400052: uHead
+    4300000: Group1
+    7400000: run
+    7400002: idle
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 2
+    clipAnimations:
+    - name: run
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 55
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: idle
+      takeName: C4D Animation Take
+      firstFrame: 40
+      lastFrame: 41
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00749999983
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

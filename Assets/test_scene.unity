@@ -494,32 +494,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!1 &904877282
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 904877283}
-  m_Layer: 0
-  m_Name: 1
-  m_TagString: WayPoint1
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &904877283
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 904877282}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.6027069, y: 1, z: 65.1882782}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &904939901
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,10 +692,10 @@ MonoBehaviour:
   m_Name: 
   maxLeaveTargetCount: 50
   parties:
-  - targetPrefab: {fileID: 100062, guid: 906fbd457ac64eb48b9fdcc4567fd4e7, type: 2}
+  - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
     leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
-    width: 3
-    height: 3
+    width: 5
+    height: 2
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5
@@ -1010,7 +984,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1520437345}
   m_Layer: 0
-  m_Name: 2
+  m_Name: 1
   m_TagString: WayPoint1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +997,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1520437344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 67.1243668, y: 1, z: 35.660099}
+  m_LocalPosition: {x: 65.0373688, y: 1, z: 65.1882782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
