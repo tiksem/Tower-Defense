@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: 715b03804895deb4fb71a4ce2f968943
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Abdomen
+    100002: Body
+    100004: Camera
+    100006: //RootNode
+    100008: Dilophosaurus_SETUP
+    100010: Figure_1_node
+    100012: Head
+    100014: Hip
+    100016: Lamp
+    100018: Left_Foot
+    100020: Left_Shin
+    100022: Left_Thigh
+    100024: lToe
+    100026: neck1
+    100028: Poser_scene_root
+    100030: Posing_Camera
+    100032: Right_Foot
+    100034: Right_Shin
+    100036: Right_Thigh
+    100038: rToe
+    100040: tail1
+    100042: tail10
+    100044: tail11
+    100046: tail12
+    100048: tail2
+    100050: tail3
+    100052: tail4
+    100054: tail5
+    100056: tail6
+    100058: tail7
+    100060: tail8
+    100062: tail9
+    400000: Abdomen
+    400002: Body
+    400004: Camera
+    400006: //RootNode
+    400008: Dilophosaurus_SETUP
+    400010: Figure_1_node
+    400012: Head
+    400014: Hip
+    400016: Lamp
+    400018: Left_Foot
+    400020: Left_Shin
+    400022: Left_Thigh
+    400024: lToe
+    400026: neck1
+    400028: Poser_scene_root
+    400030: Posing_Camera
+    400032: Right_Foot
+    400034: Right_Shin
+    400036: Right_Thigh
+    400038: rToe
+    400040: tail1
+    400042: tail10
+    400044: tail11
+    400046: tail12
+    400048: tail2
+    400050: tail3
+    400052: tail4
+    400054: tail5
+    400056: tail6
+    400058: tail7
+    400060: tail8
+    400062: tail9
+    4300000: Figure_1_node
+    7400000: run
+    7400002: Poser_scene_rootAction
+    7400004: idle
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Figure_1_node
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 2
+    clipAnimations:
+    - name: run
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 96
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: idle
+      takeName: Default Take
+      firstFrame: 17
+      lastFrame: 18
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.5
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 
