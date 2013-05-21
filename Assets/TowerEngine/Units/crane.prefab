@@ -420,21 +420,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100056
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400056}
-  m_Layer: 0
-  m_Name: Lamp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100058
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,22 +430,7 @@ GameObject:
   - 4: {fileID: 400058}
   - 137: {fileID: 13700000}
   m_Layer: 0
-  m_Name: Figure_1_node
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400060}
-  m_Layer: 0
-  m_Name: Camera
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,6 +447,8 @@ GameObject:
   - 111: {fileID: 11100000}
   - 195: {fileID: 19500000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: crane
   m_TagString: Target
@@ -819,17 +791,6 @@ Transform:
   m_Children:
   - {fileID: 400052}
   m_Father: {fileID: 400062}
---- !u!4 &400056
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100056}
-  m_LocalRotation: {x: .169075772, y: -.755880296, z: .272171319, w: .570947587}
-  m_LocalPosition: {x: -6.11436796, y: 8.855793, z: -1.50818086}
-  m_LocalScale: {x: .99999994, y: 1, z: .999999881}
-  m_Children: []
-  m_Father: {fileID: 400062}
 --- !u!4 &400058
 Transform:
   m_ObjectHideFlags: 1
@@ -839,17 +800,6 @@ Transform:
   m_LocalRotation: {x: 5.96046519e-08, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400062}
---- !u!4 &400060
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100060}
-  m_LocalRotation: {x: .210611343, y: .905240178, z: -.089281708, w: -.358066887}
-  m_LocalPosition: {x: -11.2216969, y: 8.01549721, z: 9.76145935}
-  m_LocalScale: {x: 1, y: .999999881, z: .99999994}
   m_Children: []
   m_Father: {fileID: 400062}
 --- !u!4 &400062
@@ -862,9 +812,7 @@ Transform:
   m_LocalPosition: {x: 29.4818783, y: .332681686, z: 55.5435715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400060}
   - {fileID: 400058}
-  - {fileID: 400056}
   - {fileID: 400054}
   m_Father: {fileID: 0}
 --- !u!111 &11100000
@@ -899,6 +847,48 @@ MonoBehaviour:
   wayPointRadius: 10
   wayPointOffsetX: 0
   wayPointOffsetY: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
+  m_Name: 
+  maxHP: 100
+  armorType: 1
+  immunities:
+    death: 0
+    fire: 0
+    ground: 0
+    holy: 0
+    ice: 0
+    poison: 0
+    wind: 0
+  physicalArmor: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
+  m_Name: 
+  background: {r: 0, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: .921568632, b: .0156862754, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  height: .00400000019
+  width: .0399999991
+  yOffset: .0399999991
+  xOffset: 0
+  childWithRendererName: body
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -14,8 +14,11 @@ public class HealthBar : MonoBehaviour
 		Color.red
 	};
 	
-	public float height = 20.0f;
-	public float width = 80.0f;
+	public float height = 0.005f;
+	public float width = 0.07f;
+	public float yOffset = 0.0f;
+	public float xOffset = 0.0f;
+	public string childWithRendererName = "body";
 	
 	
 	private static readonly int TEXTURE_WIDTH = 100;
@@ -27,6 +30,41 @@ public class HealthBar : MonoBehaviour
 	private Texture2D texture;
 	private GUITexture guiTextureComponent;
 	private GameObject guiTextureObject;
+	private Renderer rendererComponent;
+	private float pixelHeight;
+	private float pixelWidth;
+	private float pixelYOffset;
+	private float pixelXOffset;
+	
+	private void InitRendererComponent()
+	{
+		if(rendererComponent != null)
+		{
+			return;
+		}
+		
+		if(renderer != null)
+		{
+			rendererComponent = renderer;
+		}
+		else
+		{
+			Transform rendererTransform = transform.FindChild(childWithRendererName);
+			if(rendererTransform == null)
+			{
+				Debug.LogError("No such child '" + childWithRendererName + "'");
+			}
+			else
+			{
+				GameObject rendererObject = rendererTransform.gameObject;
+				rendererComponent = rendererObject.renderer;
+				if(rendererComponent == null)
+				{
+					Debug.LogError("Child '" + childWithRendererName + "' should have renderer component");
+				}
+			}
+		}
+	}
 	
 	void OnValidate()
 	{
@@ -34,11 +72,19 @@ public class HealthBar : MonoBehaviour
 		{
 			Debug.LogError("Colors length should not be 0");
 		}
+		
+		InitRendererComponent();
+		pixelHeight = GUIUtilities.ScreenXToGUIX(height);
+		pixelWidth = GUIUtilities.ScreenYToGUIY(width);
+		pixelXOffset = GUIUtilities.ScreenXToGUIX(xOffset);
+		pixelYOffset = GUIUtilities.ScreenYToGUIY(yOffset);
 	}
 	
 	// Use this for initialization
 	void Start()
 	{
+		OnValidate();
+		
 		GUI.backgroundColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
 		target = GetComponent<Target>();
 		texture = new Texture2D(TEXTURE_WIDTH, TEXTURE_HEIGHT);
@@ -112,22 +158,24 @@ public class HealthBar : MonoBehaviour
 	
 	private void DrawTexture()
 	{
-		Vector3 texturePosition = Camera.main.WorldToScreenPoint(renderer.bounds.center);
+		Vector3 texturePosition = Camera.main.WorldToScreenPoint(rendererComponent.bounds.center);
 		//Debug.Log(texturePosition);
 		
 		guiTextureObject.transform.rotation = transform.rotation;
 		
-		texturePosition.x = Utilities.ProjectFromOneRangeToAnother(texturePosition.x, 0.0f, 0.0f, Screen.width, 1.0f);
-		texturePosition.y = Utilities.ProjectFromOneRangeToAnother(texturePosition.y, 0.0f, 0.0f, Screen.height, 1.0f);
+		float textureMaxX = Camera.main.pixelWidth - pixelWidth;
+		float textureMaxY = Camera.main.pixelHeight - pixelHeight;
+		texturePosition.x = Utilities.ProjectFromOneRangeToAnother(texturePosition.x, 0.0f, 0.0f, textureMaxX, 1.0f);
+		texturePosition.y = Utilities.ProjectFromOneRangeToAnother(texturePosition.y, 0.0f, 0.0f, textureMaxY, 1.0f);
 		texturePosition.z = 0.0f;
 		
 		guiTextureObject.transform.localScale = Vector3.zero;
 		guiTextureObject.transform.position = texturePosition;
 		
-		float xOffset = -width / 2; //Utilities.ProjectFromOneRangeToAnother(texturePosition.x, 0.0f, 0.0f, 1.0f, width);
-		float yOffset = 0;//Utilities.ProjectFromOneRangeToAnother(texturePosition.y, 0.0f, 0.0f, 1.0f, height);
+		float xOffset = -pixelWidth / 2 + pixelXOffset; //Utilities.ProjectFromOneRangeToAnother(texturePosition.x, 0.0f, 0.0f, 1.0f, width);
+		float yOffset = pixelHeight / 2 + pixelYOffset;//Utilities.ProjectFromOneRangeToAnother(texturePosition.y, 0.0f, 0.0f, 1.0f, height);
 		
-		guiTextureComponent.pixelInset = new Rect(xOffset, yOffset, width, height);
+		guiTextureComponent.pixelInset = new Rect(xOffset, yOffset, pixelWidth, pixelHeight);
 
 		guiTextureComponent.texture = texture;
 	}
