@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent (typeof(NavMeshAgent))]
+[RequireComponent (typeof(AnimationSpeedController))]
 public class WayPointFollower : MonoBehaviour 
 {
 	private String wayPointTag;
