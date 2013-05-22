@@ -197,6 +197,7 @@ MonoBehaviour:
   buttonWidth: .300000012
   buttonHeight: .119999997
   buttonTextSize: 1
+  fontSizeForResolutionX: 960
   buttons:
   - text: Single Player
     action: 0
@@ -215,6 +216,9 @@ MonoBehaviour:
   - name: Snow Field
     texture: {fileID: 2800000, guid: 1fa5186ee7b7f1f458ebeb711f921273, type: 3}
     sceneName: scene_snow_land
+  - name: Rock Field
+    texture: {fileID: 2800000, guid: cf6f2994f0265054688ad623029cbdf0, type: 3}
+    sceneName: RockMap
   mapIndex: 0
   fractions: []
   fractionIndex: 0
@@ -232,11 +236,11 @@ MonoBehaviour:
   backgroundDarkenTexture: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99,
     type: 3}
   mapPeekGridSettings:
-    buttonSize: .300000012
-    distanceBetweenButtons: .0500000007
+    buttonSize: .200000003
+    distanceBetweenButtons: .0250000004
     buttonsLeft: .180000007
     buttonsTop: .209999993
-    buttonsOnLine: 2
+    buttonsOnLine: 3
   fractionPeekGridSettings:
     buttonSize: .100000001
     distanceBetweenButtons: .0500000007

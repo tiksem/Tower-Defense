@@ -139,9 +139,6 @@ public class MainMenu : MonoBehaviour
 			Texture[] textures = GetFractionsTextures();
 			fractionPeekGridSettings.SetButtons(textures);
 		}
-		
-		InitButtonFontSizeCoefficient();
-		FixButtonsFontSize();
 	}
 	
 	private Rect GetButtonRect(int index)
@@ -389,6 +386,8 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		OnValidate();
+		InitButtonFontSizeCoefficient();
+		FixButtonsFontSize();
 		mapPeekGridSettings.onClick = OnMapPeek;
 	}
 	
