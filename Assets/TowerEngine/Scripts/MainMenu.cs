@@ -77,6 +77,12 @@ public class MainMenu : MonoBehaviour
 	
 	public Texture loadingBackground;
 	
+	public Texture gameLogo;
+	public float gameLogoX = 0.0f;
+	public float gameLogoY = 0.0f;
+	public float gameLogoWidth = 0.1f;
+	public float gameLogoHeight = 0.1f;
+	
 	public GUIStyle buttonStyle = new GUIStyle();
 	public GUIStyle selectedButtonStyle = new GUIStyle();
 	
@@ -472,6 +478,16 @@ public class MainMenu : MonoBehaviour
 		return false;
 	}
 	
+	private void DrawGameLogo()
+	{	
+		if(gameLogo == null || backgroundShouldBeDarken)
+		{
+			return;
+		}
+		
+		GUIUtilities.DrawTexture(gameLogoX, gameLogoY, gameLogoWidth, gameLogoHeight, gameLogo);
+	}
+	
 	void OnGUI()
 	{
 		if(selectedAction == ButtonAction.EXIT)
@@ -487,6 +503,7 @@ public class MainMenu : MonoBehaviour
 		DrawBackground();
 		DrawButtons();
 		MakeBackgroundDarkenIfRequired();
+		DrawGameLogo();
 		
 		switch(selectedAction)
 		{

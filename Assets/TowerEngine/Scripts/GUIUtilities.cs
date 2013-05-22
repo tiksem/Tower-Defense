@@ -52,6 +52,12 @@ namespace AssemblyCSharp
 			return GUI.Button(rect, texture, GUI.skin.label);
 		}
 		
+		public static void DrawTexture(float x, float y, float width, float height, Texture texture)
+		{
+			Rect rect = ScreenToGUIRect(x, y, width, height);
+			GUI.DrawTexture(rect, texture);
+		}
+		
 		public static float ScreenXToGUIX(float x)
 		{
 			return x * Camera.main.pixelWidth;
