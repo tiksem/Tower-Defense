@@ -75,6 +75,8 @@ public class MainMenu : MonoBehaviour
 	public float cancelButtonBorder;
 	public Texture multiplayerBackground;
 	
+	public Texture loadingBackground;
+	
 	public GUIStyle buttonStyle = new GUIStyle();
 	public GUIStyle selectedButtonStyle = new GUIStyle();
 	
@@ -85,6 +87,7 @@ public class MainMenu : MonoBehaviour
 	private bool shouldDrawMapPeekGrid = false;
 	private bool shouldDrawFractionPeekGrid = false;
 	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
+	private AsyncOperation loadingOperation;
 	
 	private Texture[] GetMapsTextures()
 	{
@@ -364,8 +367,8 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnStartButtonClick()
 	{
-		string sceneName = maps[mapIndex].sceneName;
-		Application.LoadLevel(sceneName);
+		Map map = maps[mapIndex];
+		LoadMap(map);
 	}
 	
 	private void DrawStartButton()
@@ -447,9 +450,36 @@ public class MainMenu : MonoBehaviour
 		
 	}
 	
+	private void LoadMap(Map map)
+	{
+		string levelName = map.sceneName;
+		loadingOperation = Application.LoadLevelAsync(levelName);
+	}
+	
+	private void DrawLoading()
+	{
+		GUIUtilities.DrawBackground(loadingBackground);
+	}
+	
+	private bool DrawLoadingIfNeed()
+	{
+		if(loadingOperation != null && !loadingOperation.isDone)
+		{
+			DrawLoading();
+			return true;
+		}
+		
+		return false;
+	}
+	
 	void OnGUI()
 	{
 		if(selectedAction == ButtonAction.EXIT)
+		{
+			return;
+		}
+		
+		if(DrawLoadingIfNeed())
 		{
 			return;
 		}

@@ -245,9 +245,9 @@ MonoBehaviour:
   backgroundDarkenTexture: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99,
     type: 3}
   mapPeekGridSettings:
-    buttonSize: .189999998
+    buttonSize: .25
     distanceBetweenButtons: .00999999978
-    buttonsLeft: .209999993
+    buttonsLeft: .119999997
     buttonsTop: .0799999982
     buttonsOnLine: 3
   fractionPeekGridSettings:
@@ -262,6 +262,7 @@ MonoBehaviour:
   cancelButtonBorder: .0299999993
   multiplayerBackground: {fileID: 2800000, guid: 2c236acf878ded24883a0afb08063a5b,
     type: 3}
+  loadingBackground: {fileID: 2800000, guid: 0a02562a68b97c74c8db7d4361cb56e3, type: 3}
   buttonStyle:
     m_Name: 
     m_Normal:
