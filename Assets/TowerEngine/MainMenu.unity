@@ -219,6 +219,9 @@ MonoBehaviour:
   - name: Rock Field
     texture: {fileID: 2800000, guid: cf6f2994f0265054688ad623029cbdf0, type: 3}
     sceneName: RockMap
+  - name: Mordor
+    texture: {fileID: 2800000, guid: 647c5024a3d29f547bea3d1a8237330e, type: 3}
+    sceneName: Mordor
   mapIndex: 0
   fractions: []
   fractionIndex: 0
@@ -236,10 +239,10 @@ MonoBehaviour:
   backgroundDarkenTexture: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99,
     type: 3}
   mapPeekGridSettings:
-    buttonSize: .200000003
-    distanceBetweenButtons: .0250000004
-    buttonsLeft: .180000007
-    buttonsTop: .209999993
+    buttonSize: .189999998
+    distanceBetweenButtons: .00999999978
+    buttonsLeft: .209999993
+    buttonsTop: .0799999982
     buttonsOnLine: 3
   fractionPeekGridSettings:
     buttonSize: .100000001
