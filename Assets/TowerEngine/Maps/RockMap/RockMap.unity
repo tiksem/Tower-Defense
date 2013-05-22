@@ -129,6 +129,38 @@ Prefab:
       propertyPath: mapStartZ
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.width
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.height
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.width
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.height
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
   m_RootGameObject: {fileID: 1349696679}
@@ -305,10 +337,18 @@ MonoBehaviour:
   dragSpeed: .699999988
   maxFieldOfViewSize: 50
   minFieldOfViewSize: 15
-  mapStartX: 5
-  mapStartZ: 5
-  mapWidth: 135
-  mapHeight: 130
+  minFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 0
+    y: 10
+    width: 140
+    height: 120
+  maxFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 0
+    y: 10
+    width: 140
+    height: 120
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 0

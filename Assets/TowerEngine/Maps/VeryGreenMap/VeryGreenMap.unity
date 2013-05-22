@@ -151,7 +151,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 50.752861
+      value: 45.752861
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -175,7 +175,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
       propertyPath: maxFieldOfViewSize
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
       propertyPath: mapWidth
@@ -184,6 +184,38 @@ Prefab:
     - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
       propertyPath: mapHeight
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.height
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.height
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.width
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.width
+      value: 110
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
@@ -233,12 +265,20 @@ MonoBehaviour:
   m_Name: 
   zoomSpeed: 4
   dragSpeed: .699999988
-  maxFieldOfViewSize: 50
+  maxFieldOfViewSize: 45
   minFieldOfViewSize: 15
-  mapStartX: 10
-  mapStartZ: 15
-  mapWidth: 150
-  mapHeight: 150
+  minFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 20
+    y: 30
+    width: 110
+    height: 80
+  maxFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 20
+    y: 30
+    width: 110
+    height: 80
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 0
@@ -305,7 +345,7 @@ Transform:
   m_PrefabInternal: {fileID: 1315711469}
   m_GameObject: {fileID: 1515849896}
   m_LocalRotation: {x: .500000119, y: 0, z: 0, w: .866025329}
-  m_LocalPosition: {x: 50.4810104, y: 50.752861, z: 33.3659248}
+  m_LocalPosition: {x: 50.4810104, y: 45.752861, z: 33.3659248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

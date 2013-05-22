@@ -186,6 +186,30 @@ Prefab:
       propertyPath: mapHeight
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.height
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.height
+      value: 95
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
   m_RootGameObject: {fileID: 1444620558}
@@ -276,10 +300,18 @@ MonoBehaviour:
   dragSpeed: .699999988
   maxFieldOfViewSize: 45
   minFieldOfViewSize: 15
-  mapStartX: 0
-  mapStartZ: 0
-  mapWidth: 150
-  mapHeight: 150
+  minFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 25
+    y: 25
+    width: 100
+    height: 95
+  maxFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 25
+    y: 25
+    width: 100
+    height: 95
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 0

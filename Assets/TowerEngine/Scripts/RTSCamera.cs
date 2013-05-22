@@ -21,10 +21,8 @@ public class RTSCamera : MonoBehaviour
 	public float dragSpeed = 0.7f;
 	public float maxFieldOfViewSize = 90;
 	public float minFieldOfViewSize = 15;
-	public float mapStartX = 0.0f;
-	public float mapStartZ = 0.0f;
-	public float mapWidth = 100.0f;
-	public float mapHeight = 100.0f;
+	public Rect minFieldOfViewMapRect = new Rect(0.0f, 0.0f, 100.0f, 100.0f);
+	public Rect maxFieldOfViewMapRect = new Rect(0.0f, 0.0f, 100.0f, 100.0f);
  
 	public TouchSettings touchSettings;
 	public MouseSettings mouseSettings;
@@ -68,11 +66,41 @@ public class RTSCamera : MonoBehaviour
 		selectedCamera.transform.position = cameraPosition;
 	}
 	
+	private float SelectValueFromRangeByFieldOfView(float a, float b)
+	{
+		return Utilities.SelectValueFromRangeUsingValueInRange(a, b, Camera.main.fieldOfView, minFieldOfViewSize, maxFieldOfViewSize);
+	}
+	
+	private float GetMapStartX()
+	{
+		return SelectValueFromRangeByFieldOfView(minFieldOfViewMapRect.x, maxFieldOfViewMapRect.x);
+	}
+	
+	private float GetMapStartZ()
+	{
+		return SelectValueFromRangeByFieldOfView(minFieldOfViewMapRect.y, maxFieldOfViewMapRect.y);
+	}
+	
+	private float GetMapWidth()
+	{
+		return SelectValueFromRangeByFieldOfView(minFieldOfViewMapRect.width, maxFieldOfViewMapRect.width);
+	}
+	
+	private float GetMapHeight()
+	{
+		return SelectValueFromRangeByFieldOfView(minFieldOfViewMapRect.height, maxFieldOfViewMapRect.height);
+	}
+	
 	private void ValidateCameraPosition()
 	{
 		ScreenDiagonal screenDiagonal = CameraUtilities.GetCameraWorldDiagonalPoints(selectedCamera);
 		Vector3 leftBottom = screenDiagonal.leftBottom;
 		Vector3 rightTop = screenDiagonal.rightTop;
+		
+		float mapStartX = GetMapStartX();
+		float mapStartZ = GetMapStartZ();
+		float mapWidth = GetMapWidth();
+		float mapHeight = GetMapHeight();
 		
 		bool validateMinXSuccess = leftBottom.x >= mapStartX;
 		bool validateMinZSuccess = leftBottom.z >= mapStartZ;

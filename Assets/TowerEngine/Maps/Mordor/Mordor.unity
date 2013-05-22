@@ -180,10 +180,18 @@ MonoBehaviour:
   dragSpeed: .699999988
   maxFieldOfViewSize: 50
   minFieldOfViewSize: 15
-  mapStartX: 10
-  mapStartZ: 10
-  mapWidth: 120
-  mapHeight: 120
+  minFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 10
+    y: 20
+    width: 110
+    height: 110
+  maxFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 10
+    y: 20
+    width: 110
+    height: 110
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 0
@@ -348,6 +356,38 @@ Prefab:
     - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
       propertyPath: maxFieldOfViewSize
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.height
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.height
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: maxFieldOfViewMapRect.width
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}
+      propertyPath: minFieldOfViewMapRect.width
+      value: 110
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 970efab7f934d6242a99c6cf65d581c4, type: 2}

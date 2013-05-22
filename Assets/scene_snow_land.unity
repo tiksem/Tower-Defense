@@ -1796,10 +1796,18 @@ MonoBehaviour:
   dragSpeed: .699999988
   maxFieldOfViewSize: 50
   minFieldOfViewSize: 15
-  mapStartX: -10
-  mapStartZ: 20
-  mapWidth: 105
-  mapHeight: 80
+  minFieldOfViewMapRect:
+    serializedVersion: 2
+    x: 5
+    y: 10
+    width: 95
+    height: 100
+  maxFieldOfViewMapRect:
+    serializedVersion: 2
+    x: -10
+    y: 10
+    width: 120
+    height: 100
   touchSettings:
     minTouchZoomSpeed: 5
     zoomTouchDeltaOffset: 5

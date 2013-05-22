@@ -20,6 +20,22 @@ namespace AssemblyCSharp
 			return child;
 		}
 		
+		public static float SelectValueFromRangeUsingValueInRange(float a, float b, float value, float fromA, float fromB)
+		{
+			if(value < fromA)
+			{
+				value = fromA;
+			}
+			
+			if(value > fromB)
+			{
+				value = fromB;
+			}
+			
+			float k = (a - b) / (fromA - fromB);
+			return value * k + a;
+		}
+		
 		public static float ProjectFromOneRangeToAnother(float value, float from1, float to1, float from2, float to2) 
 		{
 			if(from1 > from2)
