@@ -36,11 +36,20 @@ public class Weapon : MonoBehaviour
 	}
 	
 	public bool attackingEnabled = true;
+	public bool renderWhileAttackingOnly = false;
+	public float renderingDuration = 0.5f;
+	public float delayBeforeRender = 0.5f;
+	
 	public BulletDefinition[] attackTypes;
 	
 	private GameObject[] targets;
 	private GameObject[] availibleTargets;
 	private float[] lastAttackTimePerAttackType;
+	
+	private ParticleSystem particleSystem;
+	private Renderer rendererComponent;
+	
+	private bool shouldUpdateRenderingState = true;
 	
 	private int DistanceComparator(object a, object b)
 	{		
@@ -60,12 +69,6 @@ public class Weapon : MonoBehaviour
 		lastAttackTimePerAttackType = new float[attackTypes.Length];
 		System.Array.Sort(attackTypes, (BulletDefinition a, BulletDefinition b) => -a.range.CompareTo(b.range));
 		CheckBulletDefinitions();
-	}
-	
-	// Use this for initialization
-	void Start () 
-	{
-		
 	}
 	
 	private float GetDistanceTo(object target)
@@ -157,6 +160,55 @@ public class Weapon : MonoBehaviour
 		}
 	}
 	
+	private void EnableRendering()
+	{
+		if(particleSystem != null)
+		{
+			particleSystem.Play();
+		}
+		
+		if(renderer != null)
+		{
+			renderer.enabled = true;
+		}
+	}
+	
+	private void DisableRendering()
+	{
+		if(particleSystem != null)
+		{
+			particleSystem.Stop(true);
+		}
+		
+		if(renderer != null)
+		{
+			renderer.enabled = false;
+		}
+	}
+	
+	private IEnumerator UpdateRenderingStateAction()
+	{
+		yield return new WaitForSeconds(delayBeforeRender);
+		StopCoroutine("DisableRenderingAction");
+		EnableRendering();
+		StartCoroutine("DisableRenderingAction");
+	}
+	
+	private void UpdateRenderingState()
+	{
+		if(renderWhileAttackingOnly && shouldUpdateRenderingState)
+		{
+			StopCoroutine("UpdateRenderingStateAction");
+			StartCoroutine("UpdateRenderingStateAction");
+		}
+	}
+	
+	private IEnumerator DisableRenderingAction()
+	{
+		yield return new WaitForSeconds(renderingDuration);
+		DisableRendering();
+	}
+	
 	private void StartAttacking()
 	{
 		UpdateTargets();
@@ -192,6 +244,8 @@ public class Weapon : MonoBehaviour
 		
 		if(currentTime - lastAttackTime < attackType.cooldown)
 		{
+			UpdateRenderingState();
+			shouldUpdateRenderingState = false;
 			return;
 		}
 		
@@ -207,16 +261,30 @@ public class Weapon : MonoBehaviour
 		
 		GameObject target = targets[index];
 		CreateAndThrowBullet(attackType, target);
+		shouldUpdateRenderingState = true;
 	}
 	
 	private void Attack()
 	{
+		bool isAttacking = false;
+		
 		for(int i = 0; i < targets.Length; i++)
 		{
 			if(targets[i] != null)
 			{
+				isAttacking = true;
 				AttackWithAttackType(i);
 			}
+		}
+	}
+	
+	void Start()
+	{
+		particleSystem = GetComponent<ParticleSystem>();
+		rendererComponent = renderer;
+		if(renderWhileAttackingOnly)
+		{
+			DisableRendering();
 		}
 	}
 	
