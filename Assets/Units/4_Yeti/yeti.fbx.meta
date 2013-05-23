@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: e069bd0676086cc4b8dd0a3e5970091e
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Body
+    100002: Chest
+    100004: Figure_2_node
+    100006: Hip
+    100008: Lamp
+    100010: Left_Foot
+    100012: Left_Forearm
+    100014: Left_Shin
+    100016: Left_Shoulder
+    100018: Left_Thigh
+    100020: Neck
+    100022: Poser_scene_root
+    100024: Posing_Camera
+    100026: Right_Foot
+    100028: Right_Forearm
+    100030: Right_Shin
+    100032: Right_Shoulder
+    100034: Right_Thigh
+    100036: Ryan_SETUP
+    100038: //RootNode
+    400000: Body
+    400002: Chest
+    400004: Figure_2_node
+    400006: Hip
+    400008: Lamp
+    400010: Left_Foot
+    400012: Left_Forearm
+    400014: Left_Shin
+    400016: Left_Shoulder
+    400018: Left_Thigh
+    400020: Neck
+    400022: Poser_scene_root
+    400024: Posing_Camera
+    400026: Right_Foot
+    400028: Right_Forearm
+    400030: Right_Shin
+    400032: Right_Shoulder
+    400034: Right_Thigh
+    400036: Ryan_SETUP
+    400038: //RootNode
+    4300000: Figure_2_node
+    7400000: run
+    7400002: Poser_scene_rootAction
+    7400004: idle
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Figure_2_node
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: run
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: idle
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 2
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 
