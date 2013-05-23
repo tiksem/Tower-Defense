@@ -53,6 +53,11 @@ public abstract class Bullet : MonoBehaviour
 		}
 	}
 	
+	protected virtual void DestroyGameObject()
+	{
+		Destroy(gameObject);
+	}
+	
 	protected void OnTargetHit(TargetHit targetHit)
 	{
 		if(targetHit.targets != null)
@@ -61,7 +66,7 @@ public abstract class Bullet : MonoBehaviour
 			AttachEffectsToTargets(targetHit.targets);
 		}
 		
-		Destroy(gameObject);
+		DestroyGameObject();
 	}
 	
 	protected Vector3 GetTargetPosition()
@@ -101,6 +106,13 @@ public abstract class Bullet : MonoBehaviour
 		}
 		
 		wasThrown = true;
+	}
+	
+	protected TargetHit CreateTargetHitForCurrentTarget()
+	{
+		TargetHit targetHit = new TargetHit();
+		targetHit.targets = new Target[]{target.GetComponent<Target>()};
+		return targetHit;
 	}
 	
 	// Update is called once per frame

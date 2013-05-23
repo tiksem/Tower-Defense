@@ -34,7 +34,7 @@ public class ArrowBullet : Bullet
 	{
 		if(target == null)
 		{
-			return null;
+			return new TargetHit();
 		}
 		
 		Vector3 targetPosition = GetTargetPosition();
