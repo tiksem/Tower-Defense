@@ -448,6 +448,8 @@ GameObject:
   - 195: {fileID: 19500000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: goose_crane
   m_TagString: Target
@@ -857,6 +859,48 @@ MonoBehaviour:
   wayPointRadius: 10
   wayPointOffsetX: 0
   wayPointOffsetY: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
+  m_Name: 
+  maxHP: 100
+  armorType: 1
+  immunities:
+    death: 0
+    fire: 0
+    ground: 0
+    holy: 0
+    ice: 0
+    poison: 0
+    wind: 0
+  physicalArmor: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
+  m_Name: 
+  background: {r: 0, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: .921568632, b: .0156862754, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  height: .00300000003
+  width: .0500000007
+  yOffset: .0350000001
+  xOffset: -.0199999996
+  childWithRendererName: body
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
