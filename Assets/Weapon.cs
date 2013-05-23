@@ -172,7 +172,7 @@ public class Weapon : MonoBehaviour
 			throw new System.ArgumentNullException("Please specify bullet for your weapon: '" + name + "'");
 		}
 		
-		GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
+		GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
 		Bullet bulletComponent = bullet.GetComponent<Bullet>();
 		if(bulletComponent == null)
 		{
