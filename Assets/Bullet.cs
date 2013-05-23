@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 public abstract class Bullet : MonoBehaviour 
 {	
+	protected class TargetHit
+	{
+		public Target[] targets;
+		public object data;
+	}
+	
 	protected GameObject target;
 	private Vector3 lastTargetPosition;
 	private GameObject[] targetHitEffects;
@@ -14,29 +20,45 @@ public abstract class Bullet : MonoBehaviour
 	
 	protected abstract void MoveToTarget();
 	
-	protected abstract bool IsTargetHit();
+	protected abstract TargetHit CheckTargetHit();
 	
-	private void AttachEffectsToTarget()
+	private void AttachEffectsToTarget(Target target)
 	{
 		if(targetHitEffects == null)
 		{
 			return;
 		}
 		
-		targetComponent.AttachEffects(targetHitEffects);
+		target.AttachEffects(targetHitEffects);
 	}
 	
-	private void DamageTarget()
+	private void DamageTarget(Target target)
 	{
-		targetComponent.Damage(attackType, damage);
+		target.Damage(attackType, damage);
 	}
 	
-	protected void OnTargetHit()
+	private void DamageTargets(Target[] targets)
 	{
-		if(target != null)
+		foreach(Target target in targets)
 		{
-			DamageTarget();
-			AttachEffectsToTarget();
+			DamageTarget(target);
+		}
+	}
+	
+	private void AttachEffectsToTargets(Target[] targets)
+	{
+		foreach(Target target in targets)
+		{
+			AttachEffectsToTarget(target);
+		}
+	}
+	
+	protected void OnTargetHit(TargetHit targetHit)
+	{
+		if(targetHit.targets != null)
+		{
+			DamageTargets(targetHit.targets);
+			AttachEffectsToTargets(targetHit.targets);
 		}
 		
 		Destroy(gameObject);
@@ -81,11 +103,6 @@ public abstract class Bullet : MonoBehaviour
 		wasThrown = true;
 	}
 	
-	void Start()
-	{
-		
-	}
-	
 	// Update is called once per frame
 	void Update() 
 	{
@@ -94,9 +111,10 @@ public abstract class Bullet : MonoBehaviour
 			return;
 		}
 		
-		if(IsTargetHit())
+		TargetHit targetHit = CheckTargetHit();
+		if(targetHit != null)
 		{
-			OnTargetHit();
+			OnTargetHit(targetHit);
 		}
 		else
 		{

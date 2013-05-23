@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour
 		public GameObject[] additionalEffects;
 	}
 	
-	public bool attackingEnabled = false;
+	public bool attackingEnabled = true;
 	public BulletDefinition[] attackTypes;
 	
 	private GameObject[] targets;

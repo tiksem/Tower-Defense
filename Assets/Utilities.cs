@@ -198,6 +198,40 @@ namespace AssemblyCSharp
 		{
 			SetActiveForAll(components, true);
 		}
+		
+		public static T[] GetGameObjectsInSphereWithComponent<T>(Vector3 position, float radius, int maxCount = int.MaxValue)
+			where T : Component
+		{
+			Collider[] targetsColliders = Physics.OverlapSphere(position, radius);
+			T[] components = new T[Math.Min(maxCount, targetsColliders.Length)];
+		
+			int componentIndex = 0;
+			for(int i = 0; i < targetsColliders.Length && componentIndex < components.Length; i++)
+			{
+				GameObject gameObject = targetsColliders[i].gameObject;
+				T component = gameObject.GetComponent<T>();
+				if(component != null)
+				{
+					components[componentIndex++] = component;
+				}
+			}
+			
+			if(componentIndex == components.Length - 1)
+			{
+				return components;
+			}
+			else if(componentIndex == 0)
+			{
+				return new T[0];
+			}
+			else
+			{
+				int componentsCount = componentIndex;
+				T[] result = new T[componentsCount];
+				Array.Copy(components, result, componentsCount);
+				return result;
+			}
+		}
 	}
 }
 

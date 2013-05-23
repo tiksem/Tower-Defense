@@ -30,11 +30,26 @@ public class ArrowBullet : Bullet
 		transform.position += translation;
 	}
 	
-	protected override bool IsTargetHit()
+	protected override TargetHit CheckTargetHit()
 	{
+		if(target == null)
+		{
+			return null;
+		}
+		
 		Vector3 targetPosition = GetTargetPosition();
 		Vector3 firstPositionToTarget = targetPosition - firstPosition;
 		Vector3 firstPositionToCurrent = transform.position - firstPosition;
-		return firstPositionToCurrent.sqrMagnitude >= firstPositionToTarget.sqrMagnitude;
+		
+		if(firstPositionToCurrent.sqrMagnitude >= firstPositionToTarget.sqrMagnitude)
+		{
+			TargetHit targetHit = new TargetHit();
+			targetHit.targets = new Target[]{target.GetComponent<Target>()};
+			return targetHit;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }
