@@ -15,6 +15,11 @@ public abstract class AreaBullet : Bullet
 	
 	private Target[] GetTargets()
 	{
+		if(target == null)
+		{
+			return null;
+		}
+		
 		Vector3 center = GetEpicenter();
 		return Utilities.GetGameObjectsInSphereWithComponent<Target>(center, radius, maxTargetsCount);
 	}
