@@ -216,7 +216,7 @@ namespace AssemblyCSharp
 				}
 			}
 			
-			if(componentIndex == components.Length - 1)
+			if(componentIndex == components.Length)
 			{
 				return components;
 			}

@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent (typeof(ParticleSystem))]
 public class ParticleSystemAreaBullet : AreaBullet
 {
-	private ParticleSystem particleSystem;
+	protected ParticleSystem particleSystem;
 	
 	protected override bool IsTargetHit()
 	{
