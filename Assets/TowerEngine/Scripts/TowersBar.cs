@@ -62,7 +62,7 @@ public class TowersBar : MonoBehaviour
 		
 		int clickedButtonIndex = bar.GetClickedButtonIndex();
 		
-		if(clickedButtonIndex ==  towers.Length - 1)
+		if(clickedButtonIndex == towers.Length)
 		{
 			OnTowerClick(-1);
 			OnFractionsClick();
