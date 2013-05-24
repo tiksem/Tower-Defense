@@ -17,7 +17,7 @@ namespace AssemblyCSharp
 			guiTexture.pixelInset = pixelInset;
 		}
 		
-		public static GUITexture CreateGUITextureGameObject(Texture texture, Rect pixelInset, float x, float y)
+		public static GUITexture CreateGUITextureGameObject(Texture texture, Rect pixelInset, float x, float y, float z = 0.0f)
 		{
 			GameObject buttonGameObject = new GameObject();
 			GUITexture button = buttonGameObject.AddComponent<GUITexture>();
@@ -25,7 +25,7 @@ namespace AssemblyCSharp
 			buttonGameObject.transform.localScale = Vector3.zero;
 			button.pixelInset = pixelInset;
 			//buttonGameObject.transform.parent = gameObject.transform;
-			buttonGameObject.transform.position = new Vector3(x, y, 0);
+			buttonGameObject.transform.position = new Vector3(x, y, z);
 			return button;
 		}
 		
@@ -56,6 +56,27 @@ namespace AssemblyCSharp
 		{
 			Rect rect = ScreenToGUIRect(x, y, width, height);
 			GUI.DrawTexture(rect, texture);
+		}
+		
+		public static void AdjustTextWidthAndHeight(ref float width, ref float height, string text, GUIStyle textStyle)
+		{
+			GUIContent content = new GUIContent(text);
+			Vector2 size = textStyle.CalcSize(content);
+			if(width < 0)
+			{
+				width = size.x;
+			}
+			if(height < 0)
+			{
+				height = size.y;
+			}
+		}
+		
+		public static void DrawText(float x, float y, string text, GUIStyle textStyle, float width = -0.1f, float height = -0.1f)
+		{
+			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
+			Rect rect = ScreenToGUIRect(x, y, width, height);
+			GUI.Label(rect, text, textStyle);
 		}
 		
 		public static float ScreenXToGUIX(float x)

@@ -21,6 +21,11 @@ namespace AssemblyCSharp
 			this.buttons = buttons;
 		}
 		
+		public void SetButton(int index, Texture texture)
+		{
+			buttons[index] = texture;
+		}
+		
 		Rect GetScrollViewRect()
 		{
 			float width = 1.0f - buttonsLeft;

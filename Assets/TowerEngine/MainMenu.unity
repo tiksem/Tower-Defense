@@ -227,13 +227,34 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: 14cf2354cf257e54fb6fdc6b367f5627, type: 3}
     sceneName: VeryGreenMap
   mapIndex: 0
-  fractions: []
+  fractions:
+  - name: Holy
+    texture: {fileID: 2800000, guid: 1c5a92ff1cbe2ca458566a9ce6b1cb5b, type: 3}
+    isDisabled: 0
+  - name: Death
+    texture: {fileID: 2800000, guid: 51142c3d961840b4e9a24271c878360e, type: 3}
+    isDisabled: 0
+  - name: Fire
+    texture: {fileID: 2800000, guid: 25c2007545799b144a0bf946d8fd24a1, type: 3}
+    isDisabled: 0
+  - name: Ice
+    texture: {fileID: 2800000, guid: b338998839277454db813e645b76e5e6, type: 3}
+    isDisabled: 0
+  - name: Air
+    texture: {fileID: 2800000, guid: 31375c640b1202e429349e6acafc99f3, type: 3}
+    isDisabled: 0
+  - name: Ground
+    texture: {fileID: 2800000, guid: aa3fd11aad20a694b862e54cac1d7134, type: 3}
+    isDisabled: 0
   fractionIndex: 0
   mapsButtonSize: 0
-  chooseMapFractionButtonSize: .200000003
-  chooseMapFractionButtonX: .574999988
+  chooseMapFractionButtonSize: .150000006
+  chooseMapFractionButtonX: .610000014
   chooseMapButtonY: .0799999982
   chooseFractionButtonY: .5
+  chooseMapFractionTextYOffset: -.0500000007
+  chooseMapText: Choose a map
+  chooseFractionText: Choose a fraction
   startButtonWidth: .200000003
   startButtonHeight: .100000001
   startButtonX: .579999983
@@ -249,16 +270,18 @@ MonoBehaviour:
     buttonsTop: .0799999982
     buttonsOnLine: 3
   fractionPeekGridSettings:
-    buttonSize: .100000001
-    distanceBetweenButtons: .0500000007
-    buttonsLeft: .100000001
-    buttonsTop: .0500000007
-    buttonsOnLine: 2
+    buttonSize: .25
+    distanceBetweenButtons: .00999999978
+    buttonsLeft: .119999997
+    buttonsTop: .0799999982
+    buttonsOnLine: 3
   selectedAction: 0
   cancelButton: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
   cancelButtonSize: .0599999987
   cancelButtonBorder: .0299999993
   multiplayerBackground: {fileID: 2800000, guid: 2c236acf878ded24883a0afb08063a5b,
+    type: 3}
+  fractionNotAvailableBackground: {fileID: 2800000, guid: 31e1a043879a7dc468e3b9e368d890b0,
     type: 3}
   loadingBackground: {fileID: 2800000, guid: 0a02562a68b97c74c8db7d4361cb56e3, type: 3}
   gameLogo: {fileID: 2800000, guid: 89a9b28f5e543d14492b9a3555a170c3, type: 3}
@@ -375,6 +398,65 @@ MonoBehaviour:
     m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  otherTextStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: 627b927025dc3ce4a90a4b27438ba244, type: 3}
+    m_FontSize: 30
+    m_FontStyle: 1
+    m_Alignment: 1
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0

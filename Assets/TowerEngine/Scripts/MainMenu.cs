@@ -49,13 +49,16 @@ public class MainMenu : MonoBehaviour
 	public Map[] maps;
 	public int mapIndex;
 	public Fraction[] fractions;
-	public int fractionIndex;
+	public int fractionIndex = 0;
 	public float mapsButtonSize;
 	
 	public float chooseMapFractionButtonSize = 0.2f;
 	public float chooseMapFractionButtonX = 0.2f;
 	public float chooseMapButtonY = 0.2f;
 	public float chooseFractionButtonY = 0.2f;
+	public float chooseMapFractionTextYOffset = 0.1f;
+	public string chooseMapText = "Choose a map";
+	public string chooseFractionText = "Choose a fraction";
 	
 	public float startButtonWidth = 0.1f;
 	public float startButtonHeight = 0.04f;
@@ -74,6 +77,7 @@ public class MainMenu : MonoBehaviour
 	public float cancelButtonSize;
 	public float cancelButtonBorder;
 	public Texture multiplayerBackground;
+	public Texture fractionNotAvailableBackground;
 	
 	public Texture loadingBackground;
 	
@@ -85,6 +89,7 @@ public class MainMenu : MonoBehaviour
 	
 	public GUIStyle buttonStyle = new GUIStyle();
 	public GUIStyle selectedButtonStyle = new GUIStyle();
+	public GUIStyle otherTextStyle = new GUIStyle();
 	
 	
 	private float buttonYOffset;
@@ -92,6 +97,7 @@ public class MainMenu : MonoBehaviour
 	private bool backgroundShouldBeDarken = false;
 	private bool shouldDrawMapPeekGrid = false;
 	private bool shouldDrawFractionPeekGrid = false;
+	private bool shouldDrawFractionNotReady = false;
 	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
 	private AsyncOperation loadingOperation;
 	
@@ -131,6 +137,7 @@ public class MainMenu : MonoBehaviour
 	{
 		CalculateFontSize(ref buttonStyle);
 		CalculateFontSize(ref selectedButtonStyle);
+		CalculateFontSize(ref otherTextStyle);
 	}
 	
 	void OnValidate()
@@ -288,13 +295,27 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnFractionChangeButtonClick()
 	{
-		
+		backgroundShouldBeDarken = true;
+		shouldDrawFractionPeekGrid = true;
 	}
 	
 	private void OnMapChangeButtonClick()
 	{
 		backgroundShouldBeDarken = true;
 		shouldDrawMapPeekGrid = true;
+	}
+	
+	private void DrawPeekButton(Texture texture, string text, float y, System.Func<System.Void> onClick)
+	{
+		float x = chooseMapFractionButtonX;
+		float width = chooseMapFractionButtonSize;	
+		if(GUIUtilities.DrawSquareTextureButtonUsingWidth(x, y, width, texture))
+		{
+			onClick();
+		}
+		
+		y += chooseMapFractionTextYOffset;
+		GUIUtilities.DrawText(x, y, text, otherTextStyle, width);
 	}
 	
 	private void DrawMapButton()
@@ -311,13 +332,7 @@ public class MainMenu : MonoBehaviour
 		
 		Texture mapTexture = maps[mapIndex].texture;
 			
-		float x = chooseMapFractionButtonX;
-		float y = chooseMapButtonY;
-		float width = chooseMapFractionButtonSize;	
-		if(GUIUtilities.DrawSquareTextureButtonUsingWidth(x, y, width, mapTexture))
-		{
-			OnMapChangeButtonClick();
-		}
+		DrawPeekButton(mapTexture, chooseMapText, chooseMapButtonY, OnMapChangeButtonClick);
 	}
 	
 	private void DrawFractionButton()
@@ -333,14 +348,8 @@ public class MainMenu : MonoBehaviour
 		}
 		
 		Texture fractionTexture = fractions[fractionIndex].texture;
-		
-		float x = chooseMapFractionButtonX;
-		float y = chooseFractionButtonY;
-		float width = chooseMapFractionButtonSize;
-		if(GUIUtilities.DrawSquareTextureButtonUsingWidth(x, y, width, fractionTexture))
-		{
-			OnFractionChangeButtonClick();
-		}
+			
+		DrawPeekButton(fractionTexture, chooseFractionText, chooseFractionButtonY, OnFractionChangeButtonClick);
 	}
 	
 	private void DrawFractionPeekGrid()
@@ -358,17 +367,31 @@ public class MainMenu : MonoBehaviour
 		return GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
 	}
 	
-	private void HideAllGrids()
+	private void HideAllPopUps()
 	{
 		shouldDrawMapPeekGrid = false;
 		backgroundShouldBeDarken = false;
 		shouldDrawFractionPeekGrid = false;
+		shouldDrawFractionNotReady = false;
 	}
 	
 	private void OnMapPeek(int index)
 	{
 		mapIndex = index;
-		HideAllGrids();
+		HideAllPopUps();
+	}
+	
+	private void OnFractionPeek(int index)
+	{
+		fractionIndex = 0;
+		
+		HideAllPopUps();
+		
+		if(index != 0)
+		{
+			backgroundShouldBeDarken = true;
+			shouldDrawFractionNotReady = true;
+		}
 	}
 	
 	private void OnStartButtonClick()
@@ -398,6 +421,7 @@ public class MainMenu : MonoBehaviour
 		InitButtonFontSizeCoefficient();
 		FixButtonsFontSize();
 		mapPeekGridSettings.onClick = OnMapPeek;
+		fractionPeekGridSettings.onClick = OnFractionPeek;
 	}
 	
 	private void OnSinglePlayer()
@@ -418,6 +442,15 @@ public class MainMenu : MonoBehaviour
 		{
 			DrawFractionPeekGrid();
 		}
+		
+		if(shouldDrawFractionNotReady)
+		{
+			DrawFractionNotReady();
+			if(DrawCancelButton())
+			{
+				HideAllPopUps();
+			}
+		}
 	}
 	
 	private void OnOptions()
@@ -427,13 +460,18 @@ public class MainMenu : MonoBehaviour
 	
 	private void ReturnToPrevAction()
 	{
-		HideAllGrids();
+		HideAllPopUps();
 		HandleButtonClick(prevSelectedAction);
 	}
 	
 	private void DrawMiltiplayerBackground()
 	{
 		GUIUtilities.DrawBackground(multiplayerBackground);
+	}
+	
+	private void DrawFractionNotReady()
+	{
+		GUIUtilities.DrawBackground(fractionNotAvailableBackground);
 	}
 	
 	private void OnMultiplayer()

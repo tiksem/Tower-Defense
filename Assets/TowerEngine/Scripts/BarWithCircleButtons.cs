@@ -86,7 +86,7 @@ using AssemblyCSharp;
 		
 		private GUITexture CreateButton(Texture texture, float x, float y)
 		{
-			return GUIUtilities.CreateGUITextureGameObject(texture, buttonPixelInset, x, y);
+			return GUIUtilities.CreateGUITextureGameObject(texture, buttonPixelInset, x, y, -1);
 		}
 	
 		public ButtonState GetButtonState(int buttonIndex)
