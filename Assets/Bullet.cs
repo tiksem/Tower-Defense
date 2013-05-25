@@ -23,7 +23,7 @@ public abstract class Bullet : MonoBehaviour
 	
 	protected abstract TargetHit CheckTargetHit();
 	
-	private void AttachEffectsToTarget(Target target)
+	protected virtual void AttachEffectsToTarget(Target target)
 	{
 		if(targetHitEffects == null)
 		{
@@ -33,7 +33,7 @@ public abstract class Bullet : MonoBehaviour
 		target.AttachEffects(targetHitEffects);
 	}
 	
-	private void DamageTarget(Target target)
+	protected virtual void DamageTarget(Target target, int damage)
 	{
 		target.Damage(attackType, damage);
 	}
@@ -42,11 +42,11 @@ public abstract class Bullet : MonoBehaviour
 	{
 		foreach(Target target in targets)
 		{
-			DamageTarget(target);
+			DamageTarget(target, damage);
 		}
 	}
 	
-	private void AttachEffectsToTargets(Target[] targets)
+	protected virtual void AttachEffectsToTargets(Target[] targets)
 	{
 		foreach(Target target in targets)
 		{

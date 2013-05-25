@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(LineRenderer))]
 public class LaserBullet : Bullet
@@ -12,6 +13,8 @@ public class LaserBullet : Bullet
 	Vector3 startPosition;
 	private Vector3 laserEndPosition;
 	private float startTime;
+	private bool isLaserOnTarget = false;
+	private bool effectsAttached = false;
 	
 	private float GetTimeElapsed()
 	{
@@ -60,8 +63,25 @@ public class LaserBullet : Bullet
 	
 	private IEnumerator DestroyAction()
 	{
+		isLaserOnTarget = true;
+		effectsAttached = false;
 		yield return new WaitForSeconds(delayBeforeDestroy);
 		base.DestroyGameObject();
+		isLaserOnTarget = false;
+	}
+	
+	protected override void AttachEffectsToTargets(Target[] targets)
+	{
+		if(!effectsAttached)
+		{
+			base.AttachEffectsToTargets(targets);
+			effectsAttached = true;
+		}
+	}
+	
+	protected override void DamageTarget(Target target, int damage)
+	{
+		base.DamageTarget(target, Mathf.RoundToInt(damage * Time.deltaTime));
 	}
 	
 	protected override void DestroyGameObject()
