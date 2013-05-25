@@ -18,6 +18,7 @@ public class GameMenu : MonoBehaviour
 	public Texture saveGame;
 	public Texture endGame;
 	public Texture darkenBackground;
+	public Texture loadingBackground;
 	
 	public Texture cancelButton;
 	public float cancelButtonSize = 0.1f;
@@ -30,6 +31,7 @@ public class GameMenu : MonoBehaviour
 	public float menuButtonY = 0.0f;
 	
 	private bool isShown = false;
+	private bool isLoading = false;
 	
 	private void InitButtons()
 	{
@@ -98,7 +100,9 @@ public class GameMenu : MonoBehaviour
 	
 	private void EndGame()
 	{
-		
+		ResumeGame();
+		Application.LoadLevelAsync(0);
+		isLoading = true;
 	}
 	
 	private Texture GetSoundButtonTexture()
@@ -152,6 +156,11 @@ public class GameMenu : MonoBehaviour
 		}
 	}
 	
+	private void DrawLoading()
+	{
+		GUIUtilities.DrawBackground(loadingBackground);
+	}
+	
 	private void TriggerMenuVisibility()
 	{
 		isShown = !isShown;
@@ -194,6 +203,12 @@ public class GameMenu : MonoBehaviour
 	
 	void OnGUI()
 	{
+		if(isLoading)
+		{
+			DrawLoading();
+			return;
+		}
+		
 		if(isShown)
 		{
 			DrawMenu();
