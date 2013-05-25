@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Name: 
   maxLeaveTargetCount: 50
   parties:
-  - targetPrefab: {fileID: 100058, guid: 783be9d82402bf740884ea9d5b596d51, type: 2}
+  - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
     leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
     width: 5
     height: 2
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
-  startGold: 200
+  startGold: 5000
   availibleTowerPlaces:
   - {fileID: 1364790118}
   - {fileID: 1113357790}

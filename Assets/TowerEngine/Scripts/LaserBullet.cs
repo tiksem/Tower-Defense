@@ -11,8 +11,6 @@ public class LaserBullet : Bullet
 	private bool isTargetHit = false;
 	Vector3 startPosition;
 	private Vector3 laserEndPosition;
-	private Transform targetTransform;
-	private Vector3 targetPosition;
 	private float startTime;
 	
 	private float GetTimeElapsed()
@@ -22,6 +20,7 @@ public class LaserBullet : Bullet
 	
 	private void UpdateLaserEndPosition()
 	{
+		Vector3 targetPosition = GetTargetPosition();
 		Vector3 direction = targetPosition - startPosition;
 		float maxDistance = direction.magnitude;
 		Vector3 normilizedDirection = direction / maxDistance;
@@ -42,19 +41,6 @@ public class LaserBullet : Bullet
 		lineRenderer.SetPosition(1, laserEndPosition);
 	}
 	
-	private void UpdateTargetPosition()
-	{
-		if(target != null)
-		{
-			if(targetTransform == null)
-			{
-				targetTransform = target.transform;
-			}
-			
-			targetPosition = targetTransform.position;
-		}
-	}
-	
 	// Use this for initialization
 	void Start()
 	{
@@ -69,7 +55,6 @@ public class LaserBullet : Bullet
 	
 	protected override void MoveToTarget()
 	{
-		UpdateTargetPosition();
 		UpdateLaserEndPosition();
 	}
 	

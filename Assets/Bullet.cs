@@ -17,6 +17,7 @@ public abstract class Bullet : MonoBehaviour
 	private Weapon.AttackType attackType;
 	private bool wasThrown = false;
 	private Target targetComponent;
+	private Renderer rendererComponent;
 	
 	protected abstract void MoveToTarget();
 	
@@ -53,6 +54,16 @@ public abstract class Bullet : MonoBehaviour
 		}
 	}
 	
+	private void InitTargetRenderer()
+	{
+		rendererComponent = target.renderer;
+		if(rendererComponent == null)
+		{
+			Transform body = target.transform.FindChild("body");
+			rendererComponent = body.gameObject.renderer;
+		}
+	}
+	
 	protected virtual void DestroyGameObject()
 	{
 		Destroy(gameObject);
@@ -69,11 +80,16 @@ public abstract class Bullet : MonoBehaviour
 		DestroyGameObject();
 	}
 	
+	protected virtual Vector3 GetTargetCenter()
+	{
+		return rendererComponent.bounds.center;
+	}
+	
 	protected Vector3 GetTargetPosition()
 	{
 		if(target != null)
 		{
-			return target.transform.position;
+			return GetTargetCenter();
 		}
 		else
 		{
@@ -105,6 +121,8 @@ public abstract class Bullet : MonoBehaviour
 			throw new System.ArgumentException("target must have Target component");
 		}
 		
+		InitTargetRenderer();
+		
 		wasThrown = true;
 	}
 	
@@ -135,7 +153,7 @@ public abstract class Bullet : MonoBehaviour
 		
 		if(target != null)
 		{
-			lastTargetPosition = target.transform.position;
+			lastTargetPosition = GetTargetCenter();
 		}
 	}
 }

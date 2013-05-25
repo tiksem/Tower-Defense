@@ -11,7 +11,8 @@ public class ArrowBullet : Bullet
 	{
 		if(target != null)
 		{
-			transform.LookAt(target.transform);
+			Vector3 targetPosition = GetTargetPosition();
+			transform.LookAt(targetPosition);
 		}
 	}
 	

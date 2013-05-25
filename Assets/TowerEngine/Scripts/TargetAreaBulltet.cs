@@ -9,7 +9,7 @@ public class TargetAreaBulltet : ParticleSystemAreaBullet
 	
 	private void SetInitalPosition()
 	{
-		Vector3 position = target.transform.position;
+		Vector3 position = GetTargetPosition();
 		position.y += initialHeight;
 		transform.position = position;
 		positioned = true;
@@ -30,6 +30,6 @@ public class TargetAreaBulltet : ParticleSystemAreaBullet
 	
 	protected override Vector3 GetEpicenter()
 	{
-		return target.transform.position;
+		return target.collider.bounds.center;
 	}
 }

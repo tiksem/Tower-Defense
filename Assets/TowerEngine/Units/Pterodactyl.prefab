@@ -402,6 +402,8 @@ GameObject:
   - 111: {fileID: 11100000}
   - 195: {fileID: 19500000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Pterodactyl
   m_TagString: Target
@@ -764,6 +766,48 @@ MonoBehaviour:
   wayPointRadius: 10
   wayPointOffsetX: 0
   wayPointOffsetY: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
+  m_Name: 
+  maxHP: 1000
+  armorType: 1
+  immunities:
+    death: 0
+    fire: 0
+    ground: 0
+    holy: 0
+    ice: 0
+    poison: 0
+    wind: 0
+  physicalArmor: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
+  m_Name: 
+  background: {r: 0, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: .921568632, b: .0156862754, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  height: .00499999989
+  width: .0700000003
+  yOffset: 0
+  xOffset: 0
+  childWithRendererName: body
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
