@@ -17,6 +17,10 @@ public class GameMenu : MonoBehaviour
 	public Texture soundOff;
 	public Texture saveGame;
 	public Texture endGame;
+	public Texture darkenBackground;
+	public Texture cancelButton;
+	public float cancelButtonSize = 0.1f;
+	public float cancelButtonBorder = 0.1f;
 	
 	private bool isShown = false;
 	private AudioListener audioListener;
@@ -73,6 +77,16 @@ public class GameMenu : MonoBehaviour
 		UpdateSoundButtonsTextures(); 
 	}
 	
+	private void PauseGame()
+	{
+		GameUtilities.PauseGame();
+	}
+	
+	private void ResumeGame()
+	{
+		GameUtilities.ResumeGame();
+	}
+	
 	private void SaveGame()
 	{
 		
@@ -106,6 +120,37 @@ public class GameMenu : MonoBehaviour
 		}
 	}
 	
+	private void DrawCancelButton()
+	{
+		GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
+	}
+	
+	private void MakeBackgroundDarken()
+	{
+		GUIUtilities.DrawBackground(darkenBackground);
+	}
+	
+	private void DrawMenu()
+	{
+		MakeBackgroundDarken();
+		buttons.Draw();
+		DrawCancelButton();
+	}
+	
+	private void HandleIsShownParam()
+	{
+		if(isShown)
+		{
+			TowerManager.Instance.HideAllControls();
+			PauseGame();
+		}
+		else
+		{
+			TowerManager.Instance.ShowAllControls();
+			ResumeGame();
+		}
+	}
+	
 	void OnValidate()
 	{
 		InitButtons();
@@ -113,15 +158,17 @@ public class GameMenu : MonoBehaviour
 	
 	void Start()
 	{
+		isShown = false;
 		InitButtons();
 		buttons.onClick = OnButtonClick;
 	}
 	
 	void Update()
 	{
-		if(Input.GetKeyUp(KeyCode.Escape))
+		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.A))
 		{
 			isShown = !isShown;
+			HandleIsShownParam();
 		}
 	}
 	
@@ -129,7 +176,7 @@ public class GameMenu : MonoBehaviour
 	{
 		if(isShown)
 		{
-			buttons.Draw();
+			DrawMenu();
 		}
 	}
 }

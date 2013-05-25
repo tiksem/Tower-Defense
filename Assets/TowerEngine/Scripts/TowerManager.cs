@@ -34,6 +34,7 @@ public class TowerManager : MonoBehaviour
 	private TextureTrigger towerBuildButtonTrigger;
 	private GUIText goldText;
 	private Messenger messengerComponent;
+	private bool towersBarWasShown = false;
 	
 	public static TowerManager Instance
 	{
@@ -320,6 +321,22 @@ public class TowerManager : MonoBehaviour
 		}
 		
 		mouseClickHandler.Update();
+	}
+	
+	public void HideAllControls()
+	{
+		towersBarWasShown = towersBar.activeSelf;
+		HideTowersBar();
+		towerBuildButton.SetActive(false);
+	}
+	
+	public void ShowAllControls()
+	{
+		if(towersBarWasShown)
+		{
+			ShowTowersBar();
+		}
+		towerBuildButton.SetActive(true);
 	}
 	
 	// Use this for initialization

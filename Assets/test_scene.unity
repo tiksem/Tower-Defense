@@ -2445,10 +2445,14 @@ MonoBehaviour:
     buttonsTop: .0500000007
     buttonsOnLine: 2
   buttonsOrder: 020000000000000001000000
-  soundOn: {fileID: 0}
-  soundOff: {fileID: 0}
+  soundOn: {fileID: 2800000, guid: f23753f9a61203e4fb78e59f86bfc4e5, type: 3}
+  soundOff: {fileID: 2800000, guid: 435397671bb2b3e46982cf21e264b0d5, type: 3}
   saveGame: {fileID: 0}
   endGame: {fileID: 0}
+  darkenBackground: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99, type: 3}
+  cancelButton: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
+  cancelButtonSize: .0700000003
+  cancelButtonBorder: .0399999991
 --- !u!1 &1771949809
 GameObject:
   m_ObjectHideFlags: 0
