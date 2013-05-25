@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Name: 
   maxLeaveTargetCount: 50
   parties:
-  - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
+  - targetPrefab: {fileID: 100056, guid: 260811c4ac9404546bb68534699ffafe, type: 2}
     leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
     width: 5
     height: 2
