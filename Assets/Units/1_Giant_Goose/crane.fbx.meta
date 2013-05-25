@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3dd6428a939e8f34d93580319722dc90
+guid: 56626fba39d1ecc4fa8278f548b409a5
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -10,28 +10,30 @@ ModelImporter:
     100008: Figure_1_node
     100010: Head
     100012: Hip
-    100014: Left_Foot
-    100016: Left_Shin
-    100018: Left_Thigh
-    100020: lToe
-    100022: neck1
-    100024: Posing_Camera
-    100026: Right_Foot
-    100028: Right_Shin
-    100030: Right_Thigh
-    100032: rToe
-    100034: tail1
-    100036: tail10
-    100038: tail11
-    100040: tail12
-    100042: tail2
-    100044: tail3
-    100046: tail4
-    100048: tail5
-    100050: tail6
-    100052: tail7
-    100054: tail8
-    100056: tail9
+    100014: Lamp
+    100016: Left_Foot
+    100018: Left_Shin
+    100020: Left_Thigh
+    100022: lToe
+    100024: neck1
+    100026: Poser_scene_root
+    100028: Posing_Camera
+    100030: Right_Foot
+    100032: Right_Shin
+    100034: Right_Thigh
+    100036: rToe
+    100038: tail1
+    100040: tail10
+    100042: tail11
+    100044: tail12
+    100046: tail2
+    100048: tail3
+    100050: tail4
+    100052: tail5
+    100054: tail6
+    100056: tail7
+    100058: tail8
+    100060: tail9
     400000: Abdomen
     400002: Body
     400004: //RootNode
@@ -39,34 +41,34 @@ ModelImporter:
     400008: Figure_1_node
     400010: Head
     400012: Hip
-    400014: Left_Foot
-    400016: Left_Shin
-    400018: Left_Thigh
-    400020: lToe
-    400022: neck1
-    400024: Posing_Camera
-    400026: Right_Foot
-    400028: Right_Shin
-    400030: Right_Thigh
-    400032: rToe
-    400034: tail1
-    400036: tail10
-    400038: tail11
-    400040: tail12
-    400042: tail2
-    400044: tail3
-    400046: tail4
-    400048: tail5
-    400050: tail6
-    400052: tail7
-    400054: tail8
-    400056: tail9
-    2300000: Dilophosaurus_SETUP
-    3300000: Dilophosaurus_SETUP
-    4300000: Dilophosaurus_SETUP
-    4300002: Figure_1_node
+    400014: Lamp
+    400016: Left_Foot
+    400018: Left_Shin
+    400020: Left_Thigh
+    400022: lToe
+    400024: neck1
+    400026: Poser_scene_root
+    400028: Posing_Camera
+    400030: Right_Foot
+    400032: Right_Shin
+    400034: Right_Thigh
+    400036: rToe
+    400038: tail1
+    400040: tail10
+    400042: tail11
+    400044: tail12
+    400046: tail2
+    400048: tail3
+    400050: tail4
+    400052: tail5
+    400054: tail6
+    400056: tail7
+    400058: tail8
+    400060: tail9
+    4300000: Figure_1_node
     7400000: run
-    7400002: idle
+    7400002: Poser_scene_rootAction
+    7400004: idle
     9500000: //RootNode
     11100000: //RootNode
     13700000: Figure_1_node
@@ -84,9 +86,9 @@ ModelImporter:
     animationWrapMode: 0
     clipAnimations:
     - name: run
-      takeName: Take 001
-      firstFrame: 3
-      lastFrame: 33
+      takeName: Default Take
+      firstFrame: 22
+      lastFrame: 46
       wrapMode: 2
       orientationOffsetY: 0
       level: 0
@@ -105,7 +107,7 @@ ModelImporter:
       curves: []
       transformMask: []
     - name: idle
-      takeName: Take 001
+      takeName: Default Take
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -128,7 +130,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 4
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
