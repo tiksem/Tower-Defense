@@ -30,14 +30,11 @@ public class GameMenu : MonoBehaviour
 	public float menuButtonY = 0.0f;
 	
 	private bool isShown = false;
-	private AudioListener audioListener;
 	
 	private void InitButtons()
 	{
 		int count = buttonsOrder.Length;
 		Texture[] textures = new Texture[count];
-		
-		audioListener = Camera.main.GetComponent<AudioListener>();
 		
 		for(int i = 0; i < count; i++)
 		{
@@ -80,8 +77,8 @@ public class GameMenu : MonoBehaviour
 	
 	private void ToggleSound()
 	{
-		audioListener.enabled = !audioListener.enabled;
-		UpdateSoundButtonsTextures(); 
+		GameSettings.Instance.SoundEnabled = !GameSettings.Instance.SoundEnabled;
+		UpdateSoundButtonsTextures();
 	}
 	
 	private void PauseGame()
@@ -106,7 +103,7 @@ public class GameMenu : MonoBehaviour
 	
 	private Texture GetSoundButtonTexture()
 	{
-		return audioListener.enabled ? soundOn : soundOff;
+		return GameSettings.Instance.SoundEnabled ? soundOn : soundOff;
 	}
 	
 	private void OnButtonClick(int index)
