@@ -103,6 +103,7 @@ public class GameMenu : MonoBehaviour
 	
 	private void ShowEndGameConfirmationMessage()
 	{
+		MakeBackgroundDarken();
 		GUIUtilities.MessageBoxResult result = GUIUtilities.DrawMessageBox(endGameMessage, GUIUtilities.MessageBoxType.YES_NO);
 		if(result == GUIUtilities.MessageBoxResult.YES)
 		{
