@@ -16,6 +16,11 @@ public class TextureTrigger : MonoBehaviour
 		guiTexture.texture = textures[textureIndex];
 	}
 	
+	public bool GetState()
+	{
+		return guiTexture.texture != alternateTexture;
+	}
+	
 	private void InitGuiTextureComponentIfNeed()
 	{
 		if(guiTexture == null)
@@ -32,13 +37,13 @@ public class TextureTrigger : MonoBehaviour
 		}
 		
 		InitGuiTextureComponentIfNeed();
-		textures = new Texture[]{guiTexture.texture, alternateTexture};
 	}
 		
 	// Use this for initialization
 	void Start()
 	{
 		OnValidate();
+		textures = new Texture[]{guiTexture.texture, alternateTexture};
 	}
 	
 	// Update is called once per frame

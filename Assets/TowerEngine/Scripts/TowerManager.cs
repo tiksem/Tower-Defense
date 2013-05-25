@@ -35,6 +35,7 @@ public class TowerManager : MonoBehaviour
 	private GUIText goldText;
 	private Messenger messengerComponent;
 	private bool towersBarWasShown = false;
+	private bool towerBuildButtonStateBeforeHide = false;
 	
 	public static TowerManager Instance
 	{
@@ -327,6 +328,7 @@ public class TowerManager : MonoBehaviour
 	{
 		towersBarWasShown = towersBar.activeSelf;
 		HideTowersBar();
+		towerBuildButtonStateBeforeHide = towerBuildButtonTrigger.GetState();
 		towerBuildButton.SetActive(false);
 	}
 	
@@ -337,6 +339,7 @@ public class TowerManager : MonoBehaviour
 			ShowTowersBar();
 		}
 		towerBuildButton.SetActive(true);
+		towerBuildButtonTrigger.ChangeTexture(towerBuildButtonStateBeforeHide);
 	}
 	
 	// Use this for initialization
