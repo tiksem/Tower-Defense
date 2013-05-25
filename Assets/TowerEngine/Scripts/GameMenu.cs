@@ -120,9 +120,9 @@ public class GameMenu : MonoBehaviour
 		}
 	}
 	
-	private void DrawCancelButton()
+	private bool DrawCancelButton()
 	{
-		GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
+		return GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
 	}
 	
 	private void MakeBackgroundDarken()
@@ -134,7 +134,16 @@ public class GameMenu : MonoBehaviour
 	{
 		MakeBackgroundDarken();
 		buttons.Draw();
-		DrawCancelButton();
+		if(DrawCancelButton())
+		{
+			TriggerMenuVisibility();
+		}
+	}
+	
+	private void TriggerMenuVisibility()
+	{
+		isShown = !isShown;
+		HandleIsShownParam();
 	}
 	
 	private void HandleIsShownParam()
@@ -167,8 +176,7 @@ public class GameMenu : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.A))
 		{
-			isShown = !isShown;
-			HandleIsShownParam();
+			TriggerMenuVisibility();
 		}
 	}
 	
