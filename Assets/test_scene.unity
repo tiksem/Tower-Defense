@@ -711,7 +711,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 1
@@ -831,10 +831,11 @@ MonoBehaviour:
   m_Name: 
   maxLeaveTargetCount: 50
   parties:
+  - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
   - targetPrefab: {fileID: 100058, guid: 260811c4ac9404546bb68534699ffafe, type: 2}
     leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
-    width: 5
-    height: 2
+    width: 6
+    height: 1
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5
@@ -1113,32 +1114,6 @@ Transform:
   - {fileID: 1364790121}
   - {fileID: 1256967519}
   - {fileID: 1113357791}
-  m_Father: {fileID: 0}
---- !u!1 &1520437344
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1520437345}
-  m_Layer: 0
-  m_Name: 2
-  m_TagString: WayPoint1
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1520437345
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1520437344}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.2815208, y: 1, z: 65.1882782}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1597681923
 GameObject:

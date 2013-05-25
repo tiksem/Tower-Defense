@@ -800,6 +800,9 @@ MonoBehaviour:
     poison: 0
     wind: 0
   physicalArmor: 0
+  goldForKill: 1
+  goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
+    type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -816,9 +819,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: .00499999989
-  width: .0700000003
-  yOffset: 0
+  height: .00300000003
+  width: .0399999991
+  yOffset: .0199999996
   xOffset: 0
   childWithRendererName: body
 --- !u!137 &13700000

@@ -33,8 +33,7 @@ namespace AssemblyCSharp
 			}
 		}
 		
-		public static IEnumerator CreateFade(GameObject gameObject, float fadeTo, float duration, 
-			 float executeAfter = 0.0f, Func<bool> shouldBeStopped = null)
+		public static Material GetObjectMaterial(GameObject gameObject)
 		{
 			Renderer renderer = gameObject.renderer;
 			Material material;
@@ -54,6 +53,14 @@ namespace AssemblyCSharp
 					throw new System.ArgumentException("gameObject should have Renderer or GUIText component to create fade");
 				}
 			}
+			
+			return material;
+		}
+		
+		public static IEnumerator CreateFade(GameObject gameObject, float fadeTo, float duration, 
+			 float executeAfter = 0.0f, Func<bool> shouldBeStopped = null)
+		{
+			Material material = GetObjectMaterial(gameObject);
 			
 			float startAlpha = material.color.a;
 			float fadeDif = fadeTo - startAlpha;

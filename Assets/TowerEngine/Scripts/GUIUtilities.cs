@@ -247,10 +247,25 @@ namespace AssemblyCSharp
 			GUI.matrix = pushedGUIMatrix;
 		}
 	
+		public static void CalculateFontSize(GUIText text)
+		{
+			float buttonFontSizeCoefficient = Camera.main.pixelWidth / FONT_SIZE_RESOLUTION_X;
+			text.fontSize = Mathf.RoundToInt(buttonFontSizeCoefficient * (float)text.fontSize);
+		}
+		
 		public static void CalculateFontSize(ref GUIStyle style)
 		{
 			float buttonFontSizeCoefficient = Camera.main.pixelWidth / FONT_SIZE_RESOLUTION_X;
 			style.fontSize = Mathf.RoundToInt(buttonFontSizeCoefficient * (float)style.fontSize);
+		}
+		
+		public static Vector3 WorldToGUIElementPositionPoint(Vector3 point)
+		{
+			point = Camera.main.WorldToScreenPoint(point);
+			point.x /= Camera.main.pixelWidth;
+			point.y /= Camera.main.pixelHeight;
+			point.z = 0;
+			return point;
 		}
 	}
 }

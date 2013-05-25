@@ -94,6 +94,8 @@ public class Target : MonoBehaviour
 	public ArmorType armorType = ArmorType.NORMAL;
 	public Immunities immunities = new Immunities();
 	public int physicalArmor = 0;
+	public int goldForKill = 1;
+	public GameObject goldForKillPointerPrefab;
 	
 	private int currentHP;
 	private float currentPhysicalArmorCoefficient;
@@ -191,8 +193,28 @@ public class Target : MonoBehaviour
 		return ARMOR_TABLE[armorType][attackType];
 	}
 	
+	private void ShowReceivedGold()
+	{
+		if(goldForKillPointerPrefab == null)
+		{
+			return;
+		}
+		
+		Vector3 center = Rendering.GetObjectCenter(gameObject);
+		center = GUIUtilities.WorldToGUIElementPositionPoint(center);
+		
+		GUIText goldText = Utilities.InstantiateAndGetComponent<GUIText>(goldForKillPointerPrefab, center);
+		if(goldText == null)
+		{
+			throw new System.ArgumentException("goldForKillPointerPrefab must have GUIText component");
+		}
+		
+		goldText.text += goldForKill;
+	}
+	
 	protected void Die()
 	{
+		ShowReceivedGold();
 		Destroy(gameObject);
 	}
 	
