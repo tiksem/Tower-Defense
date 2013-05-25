@@ -43,7 +43,6 @@ public class MainMenu : MonoBehaviour
 	public float buttonWidth;
 	public float buttonHeight;
 	public float buttonTextSize = 1.0f;
-	public float fontSizeForResolutionX = 960;
 	
 	public Button[] buttons;
 	public Map[] maps;
@@ -123,21 +122,11 @@ public class MainMenu : MonoBehaviour
 		return result;
 	}
 	
-	private void InitButtonFontSizeCoefficient()
-	{
-		buttonFontSizeCoefficient = Camera.main.pixelWidth / fontSizeForResolutionX;
-	}
-	
-	private void CalculateFontSize(ref GUIStyle style)
-	{
-		style.fontSize = Mathf.RoundToInt(buttonFontSizeCoefficient * (float)style.fontSize);
-	}
-	
 	private void FixButtonsFontSize()
 	{
-		CalculateFontSize(ref buttonStyle);
-		CalculateFontSize(ref selectedButtonStyle);
-		CalculateFontSize(ref otherTextStyle);
+		GUIUtilities.CalculateFontSize(ref buttonStyle);
+		GUIUtilities.CalculateFontSize(ref selectedButtonStyle);
+		GUIUtilities.CalculateFontSize(ref otherTextStyle);
 	}
 	
 	void OnValidate()
@@ -418,7 +407,6 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		OnValidate();
-		InitButtonFontSizeCoefficient();
 		FixButtonsFontSize();
 		mapPeekGridSettings.onClick = OnMapPeek;
 		fractionPeekGridSettings.onClick = OnFractionPeek;

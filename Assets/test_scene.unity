@@ -591,6 +591,113 @@ MonoBehaviour:
   - normalState: {fileID: 2800000, guid: 4b67d6a0fd0e2c74c9a2f860003bd9ed, type: 3}
     selectedState: {fileID: 2800000, guid: 1182ee5a1fb136f4a877686ff22b8661, type: 3}
     disabledState: {fileID: 2800000, guid: a08ad730ce96434458a8e33b59757fbc, type: 3}
+--- !u!1 &1086973626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1086973627}
+  - 114: {fileID: 1086973628}
+  m_Layer: 0
+  m_Name: MessageBoxSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1086973627
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1086973626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.0096874, y: 3.41807866, z: 51.0460968}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1086973628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1086973626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9b8ca90f889a446842f8a317eb2953, type: 3}
+  m_Name: 
+  width: .300000012
+  height: .300000012
+  background: {fileID: 2800000, guid: 966d27c48541f8340a94a16d27a37e69, type: 3}
+  close: {fileID: 0}
+  cancel: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
+  ok: {fileID: 2800000, guid: d52bd10deaeb3074e99faed7687dddb2, type: 3}
+  textBorderX: 0
+  textBorderY: .0500000007
+  buttonSize: .0599999987
+  buttonOffsetY: -0
+  distanceBetweenButtons: .0399999991
+  textStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_Alignment: 1
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!1 &1113357790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2566,7 @@ MonoBehaviour:
   menuButtonHeight: .119999997
   menuButtonX: 0
   menuButtonY: 0
+  endGameMessage: Exit game?
 --- !u!1 &1771949809
 GameObject:
   m_ObjectHideFlags: 0

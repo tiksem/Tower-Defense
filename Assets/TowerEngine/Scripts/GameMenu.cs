@@ -30,8 +30,11 @@ public class GameMenu : MonoBehaviour
 	public float menuButtonX = 0.0f;
 	public float menuButtonY = 0.0f;
 	
+	public string endGameMessage = "Exit game?";
+	
 	private bool isShown = false;
 	private bool isLoading = false;
+	private bool shouldShowEndGameConfirmationMessage = false;
 	
 	private void InitButtons()
 	{
@@ -98,11 +101,29 @@ public class GameMenu : MonoBehaviour
 		
 	}
 	
+	private void ShowEndGameConfirmationMessage()
+	{
+		GUIUtilities.MessageBoxResult result = GUIUtilities.DrawMessageBox(endGameMessage, GUIUtilities.MessageBoxType.YES_NO);
+		if(result == GUIUtilities.MessageBoxResult.YES)
+		{
+			EndGame();
+		}
+		else if(result == GUIUtilities.MessageBoxResult.NO)
+		{
+			shouldShowEndGameConfirmationMessage = false;
+		}
+	}
+	
 	private void EndGame()
 	{
 		ResumeGame();
 		Application.LoadLevelAsync(0);
 		isLoading = true;
+	}
+	
+	private void OnEndGameClick()
+	{
+		shouldShowEndGameConfirmationMessage = true;
 	}
 	
 	private Texture GetSoundButtonTexture()
@@ -123,7 +144,7 @@ public class GameMenu : MonoBehaviour
 			SaveGame();
 			break;
 		case ButtonAction.END_GAME:
-			EndGame();
+			OnEndGameClick();
 			break;
 		}
 	}
@@ -211,7 +232,14 @@ public class GameMenu : MonoBehaviour
 		
 		if(isShown)
 		{
-			DrawMenu();
+			if(!shouldShowEndGameConfirmationMessage)
+			{
+				DrawMenu();
+			}
+			else
+			{
+				ShowEndGameConfirmationMessage();
+			}
 		}
 		else
 		{

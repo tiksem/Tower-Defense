@@ -6,6 +6,77 @@ namespace AssemblyCSharp
 	public static class GUIUtilities
 	{
 		private static Matrix4x4 pushedGUIMatrix;
+		private static MessageBoxSettings messageBoxSettings;
+		private static readonly float FONT_SIZE_RESOLUTION_X = 960;
+		
+		public static void SetMessageBoxSettings(MessageBoxSettings messageBoxSettings)
+		{
+			GUIUtilities.messageBoxSettings = messageBoxSettings;
+		}
+		
+		public enum MessageBoxType
+		{
+			OK,
+			YES_NO
+		}
+		
+		public enum MessageBoxResult
+		{
+			NONE,
+			OK,
+			YES,
+			NO
+		}
+		
+		public static MessageBoxResult DrawMessageBox(string message, MessageBoxType type = MessageBoxType.OK)
+		{
+			if(messageBoxSettings == null)
+			{
+				throw new UnityEngine.MissingReferenceException("Add MessageBoxSettings gameObject to your scene");
+			}
+			
+			Vector2 xy = DrawTextureInCenter(messageBoxSettings.width, messageBoxSettings.height, messageBoxSettings.background);
+			
+			float textBorderX = messageBoxSettings.textBorderX;
+			float textBorderY = messageBoxSettings.textBorderY;
+			float textX = xy.x + textBorderX;
+			float textY = xy.y + textBorderY;
+			float textWidth = messageBoxSettings.width - textBorderX / 2;
+			
+			DrawText(textX, textY, message, messageBoxSettings.textStyle, textWidth);
+			
+			float buttonWidth = messageBoxSettings.buttonSize;
+			float buttonHeight = GetHeightFromWidthForSquareButton(buttonWidth);
+			float buttonY = xy.y + messageBoxSettings.height - buttonHeight - messageBoxSettings.buttonOffsetY;
+			
+			MessageBoxResult messageBoxResult = MessageBoxResult.NONE;
+			
+			if(type == MessageBoxType.OK)
+			{
+				float buttonX = (1.0f - messageBoxSettings.width) / 2;
+				if(DrawTextureButton(buttonX, buttonY, buttonWidth, buttonHeight, messageBoxSettings.ok))
+				{
+					messageBoxResult = MessageBoxResult.OK;
+				}
+			}
+			else
+			{
+				float buttonX = xy.x + (messageBoxSettings.width - buttonWidth * 2 - messageBoxSettings.distanceBetweenButtons) / 2;
+				
+				if(DrawTextureButton(buttonX, buttonY, buttonWidth, buttonHeight, messageBoxSettings.ok))
+				{
+					messageBoxResult = MessageBoxResult.YES;
+				}
+				
+				buttonX += messageBoxSettings.distanceBetweenButtons + buttonWidth;
+				if(DrawTextureButton(buttonX, buttonY, buttonWidth, buttonHeight, messageBoxSettings.cancel))
+				{
+					messageBoxResult = MessageBoxResult.NO;
+				}
+			}
+			
+			return messageBoxResult;
+		}
 		
 		public static void ResizeGUITextureToFitScreenWidth(GUITexture guiTexture)
 		{
@@ -66,6 +137,11 @@ namespace AssemblyCSharp
 			GUI.DrawTexture(rect, texture);
 		}
 		
+		public static void DrawTexture(Vector2 xy, float width, float height, Texture texture)
+		{
+			DrawTexture(xy.x, xy.y, width, height, texture);
+		}
+		
 		public static void AdjustTextWidthAndHeight(ref float width, ref float height, string text, GUIStyle textStyle)
 		{
 			GUIContent content = new GUIContent(text);
@@ -84,6 +160,7 @@ namespace AssemblyCSharp
 		{
 			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
 			Rect rect = ScreenToGUIRect(x, y, width, height);
+			rect.height = height;
 			GUI.Label(rect, text, textStyle);
 		}
 		
@@ -100,6 +177,31 @@ namespace AssemblyCSharp
 		public static float GetHeightFromWidthForSquareButton(float width)
 		{
 			return width * Camera.main.pixelWidth / Camera.main.pixelHeight;
+		}
+		
+		public static float GetCentricCoordinateBySize(float size, float maxSize = 1.0f)
+		{
+			if(size > maxSize || size < 0.0f)
+			{
+				throw new System.ArgumentException("size > maxSize || size < 0.0f");
+			}
+			
+			return (maxSize - size) / 2;
+		}
+		
+		public static Vector2 GetCentricScreenRectXY(float width, float height)
+		{
+			Vector2 result = new Vector2();
+			result.x = GetCentricCoordinateBySize(width);
+			result.y = GetCentricCoordinateBySize(height);
+			return result;
+		}
+		
+		public static Vector2 DrawTextureInCenter(float width, float height, Texture texture)
+		{
+			Vector2 xy = GetCentricScreenRectXY(width, height);
+			DrawTexture(xy, width, height, texture);
+			return xy;
 		}
 		
 		public static Rect ScreenToGUIRect(float x, float y, float width, float height)
@@ -143,6 +245,12 @@ namespace AssemblyCSharp
 		public static void PopGUIMatrix()
 		{
 			GUI.matrix = pushedGUIMatrix;
+		}
+	
+		public static void CalculateFontSize(ref GUIStyle style)
+		{
+			float buttonFontSizeCoefficient = Camera.main.pixelWidth / FONT_SIZE_RESOLUTION_X;
+			style.fontSize = Mathf.RoundToInt(buttonFontSizeCoefficient * (float)style.fontSize);
 		}
 	}
 }
