@@ -49,7 +49,15 @@ namespace AssemblyCSharp
 		public static bool DrawTextureButton(float x, float y, float width, float height, Texture texture)
 		{
 			Rect rect = ScreenToGUIRect(x, y, width, height);
-			return GUI.Button(rect, texture, GUI.skin.label);
+			GUI.DrawTexture(rect, texture);
+			return GUI.Button(rect, "", GUI.skin.label);
+		}
+		
+		public static bool DrawTextureButtonInLeftTopCorner(float width, float height, Texture texture)
+		{
+			float x = 0;
+			float y = 0;
+			return DrawTextureButton(x, y, width, height, texture);
 		}
 		
 		public static void DrawTexture(float x, float y, float width, float height, Texture texture)

@@ -2453,6 +2453,11 @@ MonoBehaviour:
   cancelButton: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
   cancelButtonSize: .0700000003
   cancelButtonBorder: .0399999991
+  menuButton: {fileID: 2800000, guid: 2f32f862ec81a21489e970bad1a01a3f, type: 3}
+  menuButtonWidth: .200000003
+  menuButtonHeight: .119999997
+  menuButtonX: 0
+  menuButtonY: 0
 --- !u!1 &1771949809
 GameObject:
   m_ObjectHideFlags: 0

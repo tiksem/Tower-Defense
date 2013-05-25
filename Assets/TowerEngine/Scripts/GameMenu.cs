@@ -18,9 +18,16 @@ public class GameMenu : MonoBehaviour
 	public Texture saveGame;
 	public Texture endGame;
 	public Texture darkenBackground;
+	
 	public Texture cancelButton;
 	public float cancelButtonSize = 0.1f;
 	public float cancelButtonBorder = 0.1f;
+	
+	public Texture menuButton;
+	public float menuButtonWidth = 0.1f;
+	public float menuButtonHeight = 0.1f;
+	public float menuButtonX = 0.0f;
+	public float menuButtonY = 0.0f;
 	
 	private bool isShown = false;
 	private AudioListener audioListener;
@@ -130,6 +137,14 @@ public class GameMenu : MonoBehaviour
 		GUIUtilities.DrawBackground(darkenBackground);
 	}
 	
+	private void DrawMenuButton()
+	{
+		if(GUIUtilities.DrawTextureButton(menuButtonX, menuButtonY, menuButtonWidth, menuButtonHeight, menuButton))
+		{
+			TriggerMenuVisibility();
+		}
+	}
+	
 	private void DrawMenu()
 	{
 		MakeBackgroundDarken();
@@ -185,6 +200,10 @@ public class GameMenu : MonoBehaviour
 		if(isShown)
 		{
 			DrawMenu();
+		}
+		else
+		{
+			DrawMenuButton();
 		}
 	}
 }
