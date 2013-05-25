@@ -2,7 +2,48 @@ fileFormatVersion: 2
 guid: 0ad6967e14fac2045a272d4c0234c709
 ModelImporter:
   serializedVersion: 15
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: Box01
+    100002: Object02
+    100004: Object03
+    100006: Object04
+    100008: Spot01
+    100010: Spot01.Target
+    100012: Spot02
+    100014: Spot02.Target
+    100016: Spot03
+    100018: Spot03.Target
+    100020: Spot04
+    100022: Spot04.Target
+    100024: Spot05
+    100026: Spot05.Target
+    100028: //RootNode
+    400000: Box01
+    400002: Object02
+    400004: Object03
+    400006: Object04
+    400008: Spot01
+    400010: Spot01.Target
+    400012: Spot02
+    400014: Spot02.Target
+    400016: Spot03
+    400018: Spot03.Target
+    400020: Spot04
+    400022: Spot04.Target
+    400024: Spot05
+    400026: Spot05.Target
+    400028: //RootNode
+    2300000: Box01
+    2300002: Object03
+    2300004: Object04
+    3300000: Box01
+    3300002: Object03
+    3300004: Object04
+    4300000: Box01
+    4300002: Object03
+    4300004: Object04
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
