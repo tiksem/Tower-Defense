@@ -214,6 +214,7 @@ public class Target : MonoBehaviour
 	
 	protected void Die()
 	{
+		TowerManager.Instance.NotifyTargetDestroyed(this);
 		ShowReceivedGold();
 		Destroy(gameObject);
 	}

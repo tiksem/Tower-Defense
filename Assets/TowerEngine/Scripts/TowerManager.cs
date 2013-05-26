@@ -122,7 +122,7 @@ public class TowerManager : MonoBehaviour
 	
 	public void NotifyTargetDestroyed(Target target)
 	{
-		
+		CurrentGold += target.goldForKill;
 	}
 	
 	private void SetGridVisibility(bool value)
