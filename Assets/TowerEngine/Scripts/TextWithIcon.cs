@@ -9,17 +9,41 @@ public class TextWithIcon : MonoBehaviour
 	
 	//private 
 	
+	private void TryAssignGUITextureIfNeed()
+	{
+		if(guiTexture == null)
+		{
+			Transform parent = transform.parent;
+			if(parent == null)
+			{
+				return;
+			}
+			
+			guiTexture = parent.gameObject.guiTexture;
+		}
+	}
+	
+	private void UpdatePosition()
+	{
+		if(guiTexture == null)
+		{
+			return;
+		}
+		
+		Vector3 position =  guiTexture.transform.position + transform.position;
+		position.x += guiTexture.pixelInset.width / Camera.main.pixelWidth + offset;
+		transform.position = position;
+	}
+	
 	// Use this for initialization
 	void Start()
 	{
-		
+		TryAssignGUITextureIfNeed();
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
-		Vector2 pixelOffset = guiText.pixelOffset;
-		pixelOffset.x = guiTexture.pixelInset.width + offset * Camera.main.pixelWidth;
-		guiText.pixelOffset = pixelOffset;
+		UpdatePosition();
 	}
 }
