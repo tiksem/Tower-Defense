@@ -20,6 +20,7 @@ public class Messenger : MonoBehaviour
 	
 	public string notEnoughGoldMessage = "Not enough gold";
 	public string towerNotSelectedMessage = "Select tower";
+	public string selectTowerUpgradeMessage = "Select tower upgrade";
 	
 	private bool isFadeStopped = false;
 	

@@ -5,40 +5,36 @@ using System.Collections;
 public class TowerSkillsBar : MonoBehaviour
 {
 	[System.Serializable]
-	public struct TowerUpgrade
+	public class TowerUpgrade
 	{
 		public Tower tower;
 		public Texture icon;
 		public int goldCost;
 	}
 	
-	/*public bool GetSelectedTowerUpgrade(TowerUpgrade )
-	{
-		
-	}*/
-	
 	public TowerUpgrade[] upgrades;
 	
 	private BarWithCircleButtons bar;
 	
-	private void DoUpgradeIfCan(TowerUpgrade towerUpgrade)
-	{
-		//if(towerUpgrade.goldCost < TowerManager.
-	}
-	
-	private void HandleClicks()
-	{
-		int upgradeIndex = bar.GetClickedButtonIndex();
-		if(upgradeIndex < 0 || upgradeIndex >= upgrades.Length)
-		{
-			return;
-		}
-		
-		TowerUpgrade towerUpgrade = upgrades[upgradeIndex];
-	}
-	
-	void Start() 
+	void Start()
 	{
 		bar = GetComponent<BarWithCircleButtons>();
+	}
+	
+	public bool GetTowerUpgradesCheckClicks(out TowerUpgrade towerUpgrade)
+	{
+		towerUpgrade = null;
+		int buttonIndex = bar.GetClickedButtonIndex();
+		if(buttonIndex < 0)
+		{
+			return false;
+		}
+		
+		if(buttonIndex < upgrades.Length)
+		{
+			towerUpgrade = upgrades[buttonIndex];
+		}
+		
+		return true;
 	}
 }

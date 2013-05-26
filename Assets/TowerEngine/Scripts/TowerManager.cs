@@ -10,6 +10,7 @@ public class TowerManager : MonoBehaviour
 	{
 		ACTIVE,
 		SELECTING_TOWER,
+		UPGRADING_TOWER
 	}
 	
 	public int startGold = 200;
@@ -17,14 +18,19 @@ public class TowerManager : MonoBehaviour
 	public float towerSize = 3;
 	public Terrain terrain;
 	public GameObject towerBuildButton;
+	public TowerSkillsBar towerSkillsBar;
 	public GameObject towersBar;
+	public Texture towerSkillsBarClose;
+	public float towerSkillsBarCloseSize = 0.1f;
+	public float towerSkillsBarCloseBorder = 0.1f;
+	
 	public GameObject goldBar;
 	
 	private MapState mapState = MapState.ACTIVE;
 	public GameObject selectedTower;
 	private int currentGold;
 	private GuiEventsHandler towerBuildButtonHandler;
-	private IDictionary<Vector2, string> towerNameByPlaceMap = new Dictionary<Vector2, string>();
+	private IDictionary<Vector2, Tower> towerNameByPlaceMap = new Dictionary<Vector2, Tower>();
 	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
 	private Vector3 towerPosition;
 	private TowersBar towersBarComponent;
@@ -32,6 +38,7 @@ public class TowerManager : MonoBehaviour
 	private GUIText goldText;
 	private bool towersBarWasShown = false;
 	private bool towerBuildButtonStateBeforeHide = false;
+	private bool skillsBarClosed = false;
 	
 	public static TowerManager Instance
 	{
@@ -116,6 +123,12 @@ public class TowerManager : MonoBehaviour
 		return requestedPosition;
 	}
 	
+	private Vector2 GetTowerXY(RaycastHit raycastHit)
+	{
+		Vector3 position = GetTowerPosition(raycastHit);
+		return new Vector2(position.x, position.z);
+	}
+	
 	public void NotifyTargetDestroyed(Target target)
 	{
 		CurrentGold += target.goldForKill;
@@ -125,7 +138,7 @@ public class TowerManager : MonoBehaviour
 	{
 		foreach(GameObject towerPlace in availibleTowerPlaces)
 		{
-			towerPlace.SetActive(value);
+			Rendering.SetRenderingEnabled(towerPlace, value);
 		}
 	}
 	
@@ -177,7 +190,7 @@ public class TowerManager : MonoBehaviour
 		else
 		{
 			GameObject tower = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
-			towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.name;
+			towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.GetComponent<Tower>();
 			CurrentGold -= gold;
 		}
 	}
@@ -215,15 +228,16 @@ public class TowerManager : MonoBehaviour
 	
 	private void HandleTowerPlaceSelection()
 	{
-		string towerName = "";
+		Tower tower = null;
 		
-		if(!towerNameByPlaceMap.TryGetValue(new Vector3(towerPosition.x, towerPosition.z), out towerName))
+		if(!towerNameByPlaceMap.TryGetValue(new Vector3(towerPosition.x, towerPosition.z), out tower))
 		{
 			BuildSelectedTower(towerPosition);
 		}
 		else
 		{
 			string selectedTowerName = GetTowerName(selectedTower);
+			string towerName = tower.name;
 			if(towerName != selectedTowerName)
 			{
 				ReplaceTower(towerPosition);
@@ -236,17 +250,62 @@ public class TowerManager : MonoBehaviour
 		ShowMessage(Messenger.Instance.towerNotSelectedMessage);
 	}
 	
-	private void OnClick()
+	private void OnTowerClick(Tower tower)
+	{
+		towerSkillsBar.upgrades = tower.upgrades;
+		ShowSkillsBar();
+	}
+	
+	private void OnMapClick()
 	{
 		if(mapState == MapState.SELECTING_TOWER)
 		{
 			CheckTowerPlaceSelection();
 		}
+		else if(mapState == MapState.ACTIVE)
+		{
+			if(towerSkillsBar == null)
+			{
+				return;
+			}
+			
+			Tower tower = GetClickedTower();
+			if(tower != null)
+			{
+				OnTowerClick(tower);
+			}
+		}
+	}
+	
+	private RaycastHit GetTowerPlaceHit()
+	{
+		return MouseUtilities.FindFirstGameObjectHitInMouseRay(availibleTowerPlaces);
+	}
+	
+	private Tower GetTowerByHit(RaycastHit raycastHit)
+	{
+		Vector3 position = raycastHit.point;
+		if(position == Vector3.zero)
+		{
+			return null;
+		}
+		
+		Vector2 towerPosition = GetTowerXY(raycastHit);
+		
+		Tower tower = null;
+		towerNameByPlaceMap.TryGetValue(towerPosition, out tower);
+		return tower;
+	}
+	
+	private Tower GetClickedTower()
+	{
+		RaycastHit towerPlace = GetTowerPlaceHit();
+		return GetTowerByHit(towerPlace);
 	}
 	
 	private bool CheckTowerPlaceSelection()
 	{
-		RaycastHit mouseOnGrid = MouseUtilities.FindFirstGameObjectHitInMouseRay(availibleTowerPlaces);
+		RaycastHit mouseOnGrid = GetTowerPlaceHit();
 		if(mouseOnGrid.point == Vector3.zero)
 		{
 			return false;
@@ -301,6 +360,28 @@ public class TowerManager : MonoBehaviour
 		selectedTower = towersBarComponent.GetSelectedTower();
 	}
 	
+	private void SetSkillsBarVisibility(bool value)
+	{
+		mapState = value ? MapState.UPGRADING_TOWER : MapState.ACTIVE;
+		towerSkillsBar.gameObject.SetActive(value);
+		towerBuildButton.SetActive(!value);
+	}
+	
+	private void ShowSkillsBar()
+	{
+		SetSkillsBarVisibility(true);
+	}
+	
+	private void HideSkillsBar()
+	{
+		SetSkillsBarVisibility(false);
+	}
+	
+	private void OnNoTowerUpgradeSelected()
+	{
+		Messenger.Instance.ShowMessage(Messenger.Instance.selectTowerUpgradeMessage);
+	}
+	
 	private void UpdateClicks()
 	{
 		if(towerBuildButtonHandler.Update() != GuiEventsHandler.State.NONE)
@@ -313,6 +394,26 @@ public class TowerManager : MonoBehaviour
 			if(towersBarComponent.UpdateEvents())
 			{
 				UpdateSelectedTower();
+				return;
+			}
+		}
+		else if(mapState == MapState.UPGRADING_TOWER)
+		{
+			if(skillsBarClosed)
+			{
+				HideSkillsBar();
+				skillsBarClosed = false;
+				return;
+			}
+			
+			TowerSkillsBar.TowerUpgrade towerUpgrade;
+			if(towerSkillsBar.GetTowerUpgradesCheckClicks(out towerUpgrade))
+			{
+				if(towerUpgrade != null)
+				{
+					OnNoTowerUpgradeSelected();
+				}
+				
 				return;
 			}
 		}
@@ -344,10 +445,11 @@ public class TowerManager : MonoBehaviour
 		InitTowersBar();
 		HideGrid();
 		HideTowersBar();
+		HideSkillsBar();
 		towerBuildButtonHandler = new GuiEventsHandler(towerBuildButton);
 		towerBuildButtonHandler.onMouseClick = OnTowerBuildButtonClick;
 		//mouseClickHandler.isClickAccepted = IsMouseClickAccepted;
-		mouseClickHandler.onClick = OnClick;
+		mouseClickHandler.onClick = OnMapClick;
 		towerBuildButtonTrigger = towerBuildButton.GetComponent<TextureTrigger>();
 		
 		if(goldBar != null)
@@ -356,6 +458,22 @@ public class TowerManager : MonoBehaviour
 		}
 		
 		CurrentGold = startGold;
+	}
+	
+	private void DrawCloseButton()
+	{
+		if(GUIUtilities.DrawSquareButtonInRightTopCorner(towerSkillsBarClose, towerSkillsBarCloseSize, towerSkillsBarCloseBorder))
+		{
+			skillsBarClosed = true;
+		}
+	}
+	
+	void OnGUI()
+	{
+		if(mapState == MapState.UPGRADING_TOWER)
+		{
+			DrawCloseButton();
+		}
 	}
 	
 	// Update is called once per frame

@@ -39,6 +39,25 @@ namespace AssemblyCSharp
 			Bounds bounds = GetObjectBounds(gameObject);
 			return bounds.center;
 		}
+		
+		public static void SetAlpha(Material material, float value)
+		{
+			Color color = material.color;
+			color.a = value;
+			material.color = color;
+		}
+		
+		public static void SetAlpha(GameObject gameObject, float value)
+		{
+			Material material = Animations.GetObjectMaterial(gameObject);	
+			SetAlpha(material, value);
+		}
+		
+		public static void SetRenderingEnabled(GameObject gameObject, bool value)
+		{
+			Renderer renderer = GetRenderer(gameObject);
+			renderer.enabled = value;
+		}
 	}
 }
 

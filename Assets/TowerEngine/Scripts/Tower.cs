@@ -8,6 +8,8 @@ public class Tower : MonoBehaviour
 	public int crystalPrice;
 	public string name = "Unnamed";
 	
+	public TowerSkillsBar.TowerUpgrade[] upgrades;
+	
 	// Use this for initialization
 	void Start()
 	{

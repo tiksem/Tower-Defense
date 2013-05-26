@@ -170,6 +170,7 @@ MonoBehaviour:
   fadeAfter: 1
   notEnoughGoldMessage: Not enough gold
   towerNotSelectedMessage: Select tower
+  selectTowerUpgradeMessage: Select tower upgrade
 --- !u!132 &300348337
 GUIText:
   m_ObjectHideFlags: 0
@@ -912,7 +913,11 @@ MonoBehaviour:
   towerSize: 5
   terrain: {fileID: 1726857887}
   towerBuildButton: {fileID: 771182393}
+  towerSkillsBar: {fileID: 1293938472}
   towersBar: {fileID: 904939901}
+  towerSkillsBarClose: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
+  towerSkillsBarCloseSize: .0700000003
+  towerSkillsBarCloseBorder: .0399999991
   goldBar: {fileID: 1601990658}
   selectedTower: {fileID: 0}
 --- !u!1 &1256967518
@@ -983,6 +988,67 @@ MeshFilter:
   m_PrefabInternal: {fileID: 2054847958}
   m_GameObject: {fileID: 1256967518}
   m_Mesh: {fileID: 4300000, guid: 96f0c1bcebe37b140a4d42a40c170bc7, type: 2}
+--- !u!1 &1293938468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+  m_PrefabInternal: {fileID: 2001958881}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1293938471}
+  - 114: {fileID: 1293938469}
+  - 114: {fileID: 1293938472}
+  m_Layer: 0
+  m_Name: TowerSkillsBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1293938469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1,
+    type: 2}
+  m_PrefabInternal: {fileID: 2001958881}
+  m_GameObject: {fileID: 1293938468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f56b3c5f6ab43647829ab9117f5f9a5, type: 3}
+  m_Name: 
+  iconSize: .128999993
+  firstIconLeft: .0810000002
+  iconBottom: .0165999997
+  distanceBetweenIcons: .0137
+  defaultButtonTexture: {fileID: 2800000, guid: 77aabc0e41fc20f48b923093e80c6dcd,
+    type: 3}
+  footerTexture: {fileID: 2800000, guid: eceb0683971de9b40a4686c5feee5814, type: 3}
+  footerHeight: .100000001
+  buttonsCount: 6
+  buttonTextures: []
+--- !u!4 &1293938471
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+  m_PrefabInternal: {fileID: 2001958881}
+  m_GameObject: {fileID: 1293938468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1293938472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1,
+    type: 2}
+  m_PrefabInternal: {fileID: 2001958881}
+  m_GameObject: {fileID: 1293938468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf47cec6687ddd549bce791751397a4f, type: 3}
+  m_Name: 
+  upgrades: []
 --- !u!1 &1327087348
 GameObject:
   m_ObjectHideFlags: 0
@@ -3773,6 +3839,50 @@ MonoBehaviour:
   m_Name: 
   height: .0500000007
   align: 1
+--- !u!1001 &2001958881
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+  m_RootGameObject: {fileID: 1293938468}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &2054847958
 Prefab:
   m_ObjectHideFlags: 0
