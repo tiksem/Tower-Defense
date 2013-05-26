@@ -239,6 +239,12 @@ namespace AssemblyCSharp
 			GameObject gameObject = (GameObject)GameObject.Instantiate(prefab, position, prefab.transform.rotation);
 			return gameObject.GetComponent<T>();
 		}
+		
+		public static T InstantiateAndGetComponent<T>(GameObject prefab)
+			where T : Component
+		{
+			return InstantiateAndGetComponent<T>(prefab, prefab.transform.position);
+		}
 	}
 }
 

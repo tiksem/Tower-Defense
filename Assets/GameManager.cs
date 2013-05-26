@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 	public float defaultTargetRadius = 0.5f;
 	public string wonText = "You won!!!";
 	public Texture wonBackground;
+	public GUITimer roundTimerPrefab;
 	
 	private int partyIndex = -1;
 	
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
 	
 	private GameObject[] partyAppearingPoints;
 	
+	private bool roundTimerFired = false;
+	
 	private void NotifyTargetLeave(WayPointFollower target)
 	{
 		leaveTargetCount++;
@@ -37,7 +40,15 @@ public class GameManager : MonoBehaviour
 	
 	private void OnAllTargetsDestroyed()
 	{
-		NextParty();
+		if(roundTimerPrefab != null)
+		{
+			GUITimer.CreateFromPrefab(roundTimerPrefab, NextParty);
+			roundTimerFired = true;
+		}
+		else
+		{
+			NextParty();
+		}
 	}
 	
 	private bool AllTargetsDestroyed()
@@ -119,6 +130,8 @@ public class GameManager : MonoBehaviour
 	
 	private void NextParty()
 	{
+		roundTimerFired = false;
+		
 		partyIndex++;
 		if(partyIndex >= parties.Length)
 		{
@@ -176,7 +189,7 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 		
-		if(AllTargetsDestroyed())
+		if(!roundTimerFired && AllTargetsDestroyed())
 		{
 			OnAllTargetsDestroyed();
 		}
