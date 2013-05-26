@@ -19,9 +19,6 @@ public class TowerManager : MonoBehaviour
 	public GameObject towerBuildButton;
 	public GameObject towersBar;
 	public GameObject goldBar;
-	public GameObject messenger;
-	public string notEnoughGoldMessage = "Not enough gold";
-	public string towerNotSelectedMessage = "Select tower";
 	
 	private MapState mapState = MapState.ACTIVE;
 	public GameObject selectedTower;
@@ -33,7 +30,6 @@ public class TowerManager : MonoBehaviour
 	private TowersBar towersBarComponent;
 	private TextureTrigger towerBuildButtonTrigger;
 	private GUIText goldText;
-	private Messenger messengerComponent;
 	private bool towersBarWasShown = false;
 	private bool towerBuildButtonStateBeforeHide = false;
 	
@@ -160,15 +156,15 @@ public class TowerManager : MonoBehaviour
 	
 	private void ShowMessage(string message)
 	{
-		if(messengerComponent != null)
+		if(Messenger.Instance != null)
 		{
-			messengerComponent.ShowMessage(message);
+			Messenger.Instance.ShowMessage(message);
 		}
 	}
 	
 	private void OnNotEnoughGold()
 	{
-		ShowMessage(notEnoughGoldMessage);
+		ShowMessage(Messenger.Instance.notEnoughGoldMessage);
 	}
 	
 	private void BuildTower(Vector3 towerPosition, GameObject towerPrefab)
@@ -237,7 +233,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void OnTowerPlaceClickWhenTowerNotSelected()
 	{
-		ShowMessage(towerNotSelectedMessage);
+		ShowMessage(Messenger.Instance.towerNotSelectedMessage);
 	}
 	
 	private void OnClick()
@@ -360,15 +356,6 @@ public class TowerManager : MonoBehaviour
 		}
 		
 		CurrentGold = startGold;
-		
-		if(messenger != null)
-		{
-			messengerComponent = messenger.GetComponent<Messenger>();
-			if(messengerComponent == null)
-			{
-				throw new System.ArgumentException("messenger must have MessengerComponent");
-			}
-		}
 	}
 	
 	// Update is called once per frame

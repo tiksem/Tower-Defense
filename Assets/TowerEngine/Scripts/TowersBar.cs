@@ -7,7 +7,6 @@ public class TowersBar : MonoBehaviour
 {
 	public GameObject[] towers = new GameObject[5];
 	
-	private GuiEventsHandler guiEventsHandler;
 	private GameObject selectedTower;
 	private int selectedTowerIndex = -1;
 	private BarWithCircleButtons bar;
@@ -55,17 +54,13 @@ public class TowersBar : MonoBehaviour
 	
 	public bool UpdateEvents()
 	{
-		if(guiEventsHandler.Update() == GuiEventsHandler.State.CLICK)
-		{
-			return true;
-		}
-		
 		int clickedButtonIndex = bar.GetClickedButtonIndex();
 		
 		if(clickedButtonIndex == towers.Length)
 		{
 			OnTowerClick(-1);
 			OnFractionsClick();
+			return true;
 		}
 		else if(clickedButtonIndex >= 0)
 		{
@@ -132,7 +127,6 @@ public class TowersBar : MonoBehaviour
 	void Start()
 	{
 		bar = gameObject.GetComponent<BarWithCircleButtons>();
-		guiEventsHandler = new GuiEventsHandler(gameObject);
 		InitTowersGold();
 	}
 

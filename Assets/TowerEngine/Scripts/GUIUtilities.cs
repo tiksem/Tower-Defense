@@ -124,6 +124,19 @@ namespace AssemblyCSharp
 			return GUI.Button(rect, "", GUI.skin.label);
 		}
 		
+		public static void DrawTextureScaledByWidth(float y, float height, Texture texture)
+		{
+			float x = 0;
+			float width = 1.0f;
+			DrawTexture(x, y, width, height, texture);
+		}
+		
+		public static void DrawTextureScaledByWidthPlacedBottom(float height, Texture texture)
+		{
+			float y = 1.0f - height;
+			DrawTextureScaledByWidth(y, height, texture);
+		}
+		
 		public static bool DrawTextureButtonInLeftTopCorner(float width, float height, Texture texture)
 		{
 			float x = 0;
@@ -134,7 +147,7 @@ namespace AssemblyCSharp
 		public static void DrawTexture(float x, float y, float width, float height, Texture texture)
 		{
 			Rect rect = ScreenToGUIRect(x, y, width, height);
-			GUI.DrawTexture(rect, texture);
+			GUI.DrawTexture(rect, texture, ScaleMode.StretchToFill);
 		}
 		
 		public static void DrawTexture(Vector2 xy, float width, float height, Texture texture)

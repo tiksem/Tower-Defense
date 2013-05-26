@@ -5,8 +5,21 @@ using AssemblyCSharp;
 [RequireComponent (typeof(GUIText))]
 public class Messenger : MonoBehaviour
 {
+	private static Messenger instance;
+	
+	public static Messenger Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
+	
 	public float fadeDuration = 2.0f;
 	public float fadeAfter = 5.0f;
+	
+	public string notEnoughGoldMessage = "Not enough gold";
+	public string towerNotSelectedMessage = "Select tower";
 	
 	private bool isFadeStopped = false;
 	
@@ -33,6 +46,7 @@ public class Messenger : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		instance = this;
 		Color color = guiText.material.color;
 		color.a = 0.0f;
 		guiText.material.color = color;
