@@ -42,6 +42,14 @@ public class GameManager : MonoBehaviour
 	{
 		if(roundTimerPrefab != null)
 		{
+			partyIndex++;
+			if(partyIndex >= parties.Length)
+			{
+				OnWin();
+				win = true;
+				return;
+			}
+			
 			GUITimer.CreateFromPrefab(roundTimerPrefab, NextParty);
 			roundTimerFired = true;
 		}
@@ -131,15 +139,6 @@ public class GameManager : MonoBehaviour
 	private void NextParty()
 	{
 		roundTimerFired = false;
-		
-		partyIndex++;
-		if(partyIndex >= parties.Length)
-		{
-			OnWin();
-			win = true;
-			return;
-		}
-		
 		CreateParties();
 	}
 	
