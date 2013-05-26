@@ -53,7 +53,7 @@ namespace AssemblyCSharp
 			
 			if(type == MessageBoxType.OK)
 			{
-				float buttonX = (1.0f - messageBoxSettings.width) / 2;
+				float buttonX = (1.0f - messageBoxSettings.buttonSize) / 2;
 				if(DrawTextureButton(buttonX, buttonY, buttonWidth, buttonHeight, messageBoxSettings.ok))
 				{
 					messageBoxResult = MessageBoxResult.OK;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class GameManager : MonoBehaviour 
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
 	public Party[] parties;
 	public string[] wayPointTags = new string[]{"WayPoint1", "WayPoint2"};
 	public float defaultTargetRadius = 0.5f;
+	public string wonText = "You won!!!";
+	public Texture wonBackground;
 	
 	private int partyIndex = -1;
 	
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
 	
 	private GameObject[] partyAppearingPoints;
 	
-	public void NotifyTargetLeave()
+	private void NotifyTargetLeave(WayPointFollower target)
 	{
 		leaveTargetCount++;
 	}
@@ -66,6 +69,7 @@ public class GameManager : MonoBehaviour
 		
 		string tag = wayPointTags[partyPointIndex];
 		wayPointFollower.SetWayPointTag(tag);
+		wayPointFollower.onFinish = NotifyTargetLeave;
 	}
 	
 	private GameObject CreatePartyTarget(Party party, int partyPointIndex, int x, int y)
@@ -126,9 +130,25 @@ public class GameManager : MonoBehaviour
 		CreateParties();
 	}
 	
+	private void DrawWinBackground()
+	{
+		GUIUtilities.DrawBackground(wonBackground);
+	}
+	
+	private void DrawWinGUI()
+	{
+		GameMenu.Instance.HideAllControls();
+		DrawWinBackground();
+		if(GUIUtilities.DrawMessageBox(wonText,GUIUtilities.MessageBoxType.OK) == GUIUtilities.MessageBoxResult.OK)
+		{
+			GameMenu.Instance.EndGame();
+			win = false;
+		}
+	}
+	
 	private void OnWin()
 	{
-		
+		GameMenu.Instance.PauseGame();
 	}
 	
 	private void InitPartiesPoints()
@@ -160,6 +180,14 @@ public class GameManager : MonoBehaviour
 		if(AllTargetsDestroyed())
 		{
 			OnAllTargetsDestroyed();
+		}
+	}
+	
+	void OnGUI()
+	{
+		if(win)
+		{
+			DrawWinGUI();
 		}
 	}
 }

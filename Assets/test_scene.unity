@@ -861,13 +861,15 @@ MonoBehaviour:
     leaderPrefab: {fileID: 0}
     width: 4
     height: 3
-  - targetPrefab: {fileID: 100058, guid: 260811c4ac9404546bb68534699ffafe, type: 2}
+  - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
     leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
     width: 6
     height: 1
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5
+  wonText: You won!!!
+  wonBackground: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99, type: 3}
 --- !u!1 &1147129996
 GameObject:
   m_ObjectHideFlags: 0

@@ -596,7 +596,8 @@ MonoBehaviour:
     wind: 0
   physicalArmor: 0
   goldForKill: 1
-  goldForKillPointerPrefab: {fileID: 0}
+  goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
+    type: 2}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -12,6 +12,8 @@ public class WayPointFollower : MonoBehaviour
 	public float wayPointOffsetX = 0.0f;
 	public float wayPointOffsetY = 0.0f;
 	
+	public Func<WayPointFollower, Void> onFinish;
+	
 	private int currentWayPointIndex = -1;
 	private Vector3[] wayPoints;
 	private NavMeshAgent navMeshAgent;
@@ -77,6 +79,10 @@ public class WayPointFollower : MonoBehaviour
 	private void OnFinish()
 	{
 		finishGotten = true;
+		if(onFinish != null)
+		{
+			onFinish(this);
+		}
 	}
 	
 	private Vector3 GetCurrentWayPoint()

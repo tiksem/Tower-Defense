@@ -4,6 +4,16 @@ using AssemblyCSharp;
 
 public class GameMenu : MonoBehaviour
 {	
+	private static GameMenu instance;
+	
+	public static GameMenu Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
+	
 	public enum ButtonAction
 	{
 		SAVE_GAME,
@@ -35,6 +45,7 @@ public class GameMenu : MonoBehaviour
 	private bool isShown = false;
 	private bool isLoading = false;
 	private bool shouldShowEndGameConfirmationMessage = false;
+	private bool hideAllControls = false;
 	
 	private void InitButtons()
 	{
@@ -86,14 +97,20 @@ public class GameMenu : MonoBehaviour
 		UpdateSoundButtonsTextures();
 	}
 	
-	private void PauseGame()
+	public void PauseGame()
 	{
 		GameUtilities.PauseGame();
 	}
 	
-	private void ResumeGame()
+	public void ResumeGame()
 	{
 		GameUtilities.ResumeGame();
+	}
+	
+	public void HideAllControls()
+	{
+		hideAllControls = true;
+		TowerManager.Instance.HideAllControls();
 	}
 	
 	private void SaveGame()
@@ -115,7 +132,7 @@ public class GameMenu : MonoBehaviour
 		}
 	}
 	
-	private void EndGame()
+	public void EndGame()
 	{
 		ResumeGame();
 		Application.LoadLevelAsync(0);
@@ -208,6 +225,11 @@ public class GameMenu : MonoBehaviour
 		InitButtons();
 	}
 	
+	void Awake()
+	{
+		instance = this;
+	}
+	
 	void Start()
 	{
 		isShown = false;
@@ -224,10 +246,15 @@ public class GameMenu : MonoBehaviour
 	}
 	
 	void OnGUI()
-	{
+	{		
 		if(isLoading)
 		{
 			DrawLoading();
+			return;
+		}
+		
+		if(hideAllControls)
+		{
 			return;
 		}
 		
