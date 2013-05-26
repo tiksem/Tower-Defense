@@ -113,6 +113,11 @@ public class GameMenu : MonoBehaviour
 		TowerManager.Instance.HideAllControls();
 	}
 	
+	public bool IsLoading()
+	{
+		return isLoading;
+	}
+	
 	private void SaveGame()
 	{
 		

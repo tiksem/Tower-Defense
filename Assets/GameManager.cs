@@ -142,7 +142,6 @@ public class GameManager : MonoBehaviour
 		if(GUIUtilities.DrawMessageBox(wonText,GUIUtilities.MessageBoxType.OK) == GUIUtilities.MessageBoxResult.OK)
 		{
 			GameMenu.Instance.EndGame();
-			win = false;
 		}
 	}
 	
@@ -185,6 +184,11 @@ public class GameManager : MonoBehaviour
 	
 	void OnGUI()
 	{
+		if(GameMenu.Instance.IsLoading())
+		{
+			return;
+		}
+		
 		if(win)
 		{
 			DrawWinGUI();
