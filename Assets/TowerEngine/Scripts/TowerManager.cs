@@ -252,7 +252,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void OnTowerClick(Tower tower)
 	{
-		towerSkillsBar.upgrades = tower.upgrades;
+		//towerSkillsBar.upgrades = tower.upgrades;
 		ShowSkillsBar();
 	}
 	

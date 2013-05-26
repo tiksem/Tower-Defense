@@ -1026,7 +1026,25 @@ MonoBehaviour:
   footerTexture: {fileID: 2800000, guid: eceb0683971de9b40a4686c5feee5814, type: 3}
   footerHeight: .100000001
   buttonsCount: 6
-  buttonTextures: []
+  buttonTextures:
+  - normalState: {fileID: 0}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+  - normalState: {fileID: 0}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+  - normalState: {fileID: 0}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+  - normalState: {fileID: 0}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+  - normalState: {fileID: 0}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+  - normalState: {fileID: 2800000, guid: 7a9d6f7ead7649b4cbc9a652e1870d68, type: 3}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
 --- !u!4 &1293938471
 Transform:
   m_ObjectHideFlags: 0
@@ -3847,6 +3865,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: buttonTextures.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3879,6 +3901,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: buttonTextures.Array.data[4].normalState
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
+      propertyPath: buttonTextures.Array.data[5].normalState
+      value: 
+      objectReference: {fileID: 2800000, guid: 7a9d6f7ead7649b4cbc9a652e1870d68, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e69e1d0c09bc0e44b489485b6a1cfb1, type: 2}
   m_RootGameObject: {fileID: 1293938468}

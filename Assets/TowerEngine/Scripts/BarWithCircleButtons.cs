@@ -73,6 +73,11 @@ public class BarWithCircleButtons : MonoBehaviour
 			}
 		}
 		
+		if(texture == null)
+		{
+			return defaultButtonTexture;
+		}
+		
 		return texture;
 	}
 	
