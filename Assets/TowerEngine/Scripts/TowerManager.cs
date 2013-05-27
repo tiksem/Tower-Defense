@@ -60,6 +60,7 @@ public class TowerManager : MonoBehaviour
 		{
 			currentGold = value;
 			UpdateGoldBar();
+			towersBarComponent.UpdateTowersGoldState(currentGold);
 		}
 	}
 	

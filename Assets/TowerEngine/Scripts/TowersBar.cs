@@ -42,6 +42,10 @@ public class TowersBar : MonoBehaviour
 			{
 				bar.SetButtonState(towerIndex, BarWithCircleButtons.ButtonState.SELECTED);
 			}
+			else
+			{
+				Messenger.Instance.ShowMessage(Messenger.Instance.notEnoughGoldMessage);
+			}
 		}
 		
 		selectedTowerIndex = towerIndex;
