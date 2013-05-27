@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 	public string wonText = "You won!!!";
 	public Texture wonBackground;
 	public GUITimer roundTimerPrefab;
+	public GUIText levelsBar;
 	
 	private int partyIndex = -1;
 	
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
 				OnWin();
 				win = true;
 				return;
+			}
+			else
+			{
+				UpdateLevelIndex();
 			}
 			
 			GUITimer.CreateFromPrefab(roundTimerPrefab, NextParty);
@@ -136,8 +141,17 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
+	private void UpdateLevelIndex()
+	{
+		if(levelsBar != null)
+		{
+			levelsBar.text = (partyIndex + 1) + " level";
+		}
+	}
+	
 	private void NextParty()
 	{
+		UpdateLevelIndex();
 		roundTimerFired = false;
 		CreateParties();
 	}
