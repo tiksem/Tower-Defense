@@ -16,6 +16,7 @@ public class BarWithCircleButtons : MonoBehaviour
 		public Texture normalState;
 		public Texture selectedState;
 		public Texture disabledState;
+		public string additionalText = "";
 	}
 	
 	public float iconSize = 0.1f;
@@ -29,9 +30,14 @@ public class BarWithCircleButtons : MonoBehaviour
 	
 	public int buttonsCount = 0;
 	public Button[] buttonTextures;
+	public GUIStyle textStyle;
+	public GUIStyle disabledTextStyle;
+	public bool doNotUseDisabledTextStyle = false;
+	public float textOffsetY = -0.1f;
+	public float textOffsetX = 0.0f;
 	
 	public Func<int,Void> onButtonClick;
-		
+	
 	private Vector2[] centers;
 	private ButtonState[] buttonsStates;
 	private float iconY;
@@ -106,9 +112,44 @@ public class BarWithCircleButtons : MonoBehaviour
 		GUIUtilities.DrawTextureScaledByWidthPlacedBottom(footerHeight, footerTexture);
 	}
 	
+	public string GetText(int index)
+	{
+		if(index >= buttonTextures.Length)
+		{
+			return "";
+		}
+		
+		return buttonTextures[index].additionalText;
+	}
+	
+	public void SetText(int index, object text)
+	{
+		buttonTextures[index].additionalText = text.ToString();
+	}
+	
+	GUIStyle GetTextStyle(int index)
+	{
+		if(doNotUseDisabledTextStyle)
+		{
+			return textStyle;
+		}
+		
+		ButtonState buttonState = GetButtonState(index);
+		if(buttonState == ButtonState.DISABLED)
+		{
+			return disabledTextStyle;
+		}
+		else
+		{
+			return textStyle;
+		}
+	}
+	
 	private void DrawButtons()
 	{
 		clickedIndex = -1;
+		
+		DrawFooter();
 		
 		float y = iconY;
 		float x = firstIconLeft;
@@ -122,10 +163,16 @@ public class BarWithCircleButtons : MonoBehaviour
 				clickedIndex = i;
 			}
 			
+			string text = GetText(i);
+			
+			if(text != "")
+			{
+				GUIStyle style = GetTextStyle(i);
+				GUIUtilities.DrawText(x + textOffsetX, 1.0f - iconBottom + textOffsetY, text, style, iconWidth);
+			}
+			
 			x += xStep;
 		}
-		
-		DrawFooter();
 
 		if(clickedIndex >= 0)
 		{

@@ -128,7 +128,10 @@ public class TowersBar : MonoBehaviour
 			}
 			
 			Tower tower = towerObject.GetComponent<Tower>();
-			towersGold[i] = tower.goldPrice;
+			
+			int gold = tower.goldPrice;
+			towersGold[i] = gold;
+			bar.SetText(i, gold);
 		}
 	}
 	

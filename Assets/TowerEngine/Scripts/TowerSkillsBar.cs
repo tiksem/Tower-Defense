@@ -43,6 +43,15 @@ public class TowerSkillsBar : MonoBehaviour
 			TowerUpgrade upgrade = upgrades[i];
 			button.normalState = upgrade.icon;
 			button.disabledState = upgrade.disabledIcon;
+			
+			if(upgrade.tower != null)
+			{
+				bar.SetText(i, upgrade.goldCost);
+			}
+			else
+			{
+				bar.SetText(i, "");
+			}
 		}
 	}
 	
