@@ -413,6 +413,7 @@ public class TowerManager : MonoBehaviour
 		CurrentGold += tower.goldPrice / 2;
 		KickTower(tower);
 		HideSkillsBar();
+		towerBuildButton.SetActive(true);
 	}
 	
 	private void UpdateClicks()
