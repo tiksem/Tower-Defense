@@ -16,9 +16,20 @@ public class TowerSkillsBar : MonoBehaviour
 	
 	private BarWithCircleButtons bar;
 	
-	void Start()
+	void Awake()
 	{
 		bar = GetComponent<BarWithCircleButtons>();
+	}
+	
+	public void SetUpgrades(TowerUpgrade[] upgrades)
+	{
+		this.upgrades = upgrades;
+		
+		int length = Mathf.Min(upgrades.Length, bar.buttonsCount - 1);
+		for(int i = 0; i < length; i++)
+		{
+			bar.buttonTextures[i].normalState = upgrades[i].icon;
+		}
 	}
 	
 	public int GetClickedButtonIndex()

@@ -254,7 +254,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void OnTowerClick(Tower tower)
 	{
-		towerSkillsBar.upgrades = tower.upgrades;
+		towerSkillsBar.SetUpgrades(tower.upgrades);
 		lastClickedTower = tower;
 		ShowSkillsBar();
 	}
@@ -385,12 +385,17 @@ public class TowerManager : MonoBehaviour
 		Messenger.Instance.ShowMessage(Messenger.Instance.selectTowerUpgradeMessage);
 	}
 	
-	private void SellTower(Tower tower)
+	private void KickTower(Tower tower)
 	{
 		Vector2 position = PositionUtilities.XYZToXZ(tower.gameObject);
 		towerNameByPlaceMap.Remove(position);
-		CurrentGold += tower.goldPrice / 2;
 		Destroy(tower.gameObject);
+	}
+	
+	private void SellTower(Tower tower)
+	{
+		CurrentGold += tower.goldPrice / 2;
+		KickTower(tower);
 		HideSkillsBar();
 	}
 	
@@ -468,6 +473,32 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
+	private void ReplaceTower(Tower tower, Tower replaceTo)
+	{
+		Vector3 position = tower.transform.position;
+		Vector2 xy = PositionUtilities.XYZToXZ(position);
+		
+		GameObject replaceToObject = replaceTo.gameObject;
+		Instantiate(replaceToObject.gameObject, position, replaceToObject.transform.rotation);
+		towerNameByPlaceMap[xy] = replaceTo;
+		
+		Destroy(tower.gameObject);
+	}
+	
+	private void UpgradeTower(Tower upgradeTo, int cost)
+	{
+		CurrentGold -= cost;
+		ReplaceTower(lastClickedTower, upgradeTo);
+	}
+	
+	private void OnTowerUpgradeSelected(TowerSkillsBar.TowerUpgrade towerUpgrade)
+	{
+		if(towerUpgrade.tower != null)
+		{
+			UpgradeTower(towerUpgrade.tower, towerUpgrade.goldCost);
+		}
+	}
+	
 	private void OnClickWhileUpgradingTower(int index)
 	{
 		if(mapState == MapState.UPGRADING_TOWER)
@@ -475,7 +506,7 @@ public class TowerManager : MonoBehaviour
 			int buttonIndex = towerSkillsBar.GetClickedButtonIndex();
 			TowerSkillsBar.TowerUpgrade towerUpgrade = towerSkillsBar.GetTowerUpgradeByIndex(buttonIndex);
 			
-			if(towerUpgrade != null)
+			if(buttonIndex >= 0 && towerUpgrade == null)
 			{
 				OnNoTowerUpgradeSelected();
 			}
@@ -485,7 +516,7 @@ public class TowerManager : MonoBehaviour
 			}
 			else if(buttonIndex >= 0)
 			{
-				OnNoTowerUpgradeSelected();
+				OnTowerUpgradeSelected(towerUpgrade);
 			}
 		}
 	}
