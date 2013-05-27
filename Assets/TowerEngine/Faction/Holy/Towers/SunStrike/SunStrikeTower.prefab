@@ -169,10 +169,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
   m_Name: 
-  goldPrice: 0
+  goldPrice: 200
   level: 0
   crystalPrice: 0
   name: Unnamed
+  upgrades: []
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
