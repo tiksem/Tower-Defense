@@ -127,6 +127,7 @@ MonoBehaviour:
   upgrades:
   - tower: {fileID: 11400002, guid: c65a0e47b4f50964eaf16e9da56a1877, type: 2}
     icon: {fileID: 2800000, guid: 5f06f8178433cc649b07718bb44a0878, type: 3}
+    disabledIcon: {fileID: 2800000, guid: b92027dd7d05ab34c81c0e6211cc7ee8, type: 3}
     goldCost: 10
 --- !u!114 &11400002
 MonoBehaviour:

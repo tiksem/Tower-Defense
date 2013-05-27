@@ -44,5 +44,7 @@ public class MovingAndFadingGameObject : AnimatedObject
 			material.color = color;
 			yield return new WaitForEndOfFrame();
 		}
+		
+		Destroy(gameObject);
 	}
 }

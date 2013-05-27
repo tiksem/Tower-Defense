@@ -121,6 +121,11 @@ public class GameMenu : MonoBehaviour
 		return isLoading;
 	}
 	
+	public bool IsShown()
+	{
+		return isShown;
+	}
+	
 	private void SaveGame()
 	{
 		

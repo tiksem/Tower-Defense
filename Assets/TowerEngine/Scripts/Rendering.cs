@@ -58,6 +58,33 @@ namespace AssemblyCSharp
 			Renderer renderer = GetRenderer(gameObject);
 			renderer.enabled = value;
 		}
+		
+		public static Vector3 GetBoundMaxByY(Bounds bounds)
+		{
+			if(bounds.max.y > bounds.min.y)
+			{
+				return bounds.max;
+			}
+			else
+			{
+				return bounds.min;
+			}
+		}
+		
+		public static Vector3 GetBoundMaxByY(GameObject gameObject)
+		{
+			Bounds bounds = GetObjectBounds(gameObject);
+			return GetBoundMaxByY(bounds);
+		}
+		
+		public static Vector3 GetObjectTopCenter(GameObject gameObject)
+		{
+			Bounds bounds = GetObjectBounds(gameObject);
+			Vector3 top =  GetBoundMaxByY(gameObject);
+			top.x = bounds.center.x;
+			top.z = bounds.center.z;
+			return top;
+		}
 	}
 }
 

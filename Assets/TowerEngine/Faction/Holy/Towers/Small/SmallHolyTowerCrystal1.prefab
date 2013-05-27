@@ -149,6 +149,7 @@ MonoBehaviour:
   upgrades:
   - tower: {fileID: 11400000, guid: b842f6f07607b484ebc775f98b55876d, type: 2}
     icon: {fileID: 2800000, guid: f12daf47df1b3e24687b42602db7c52d, type: 3}
+    disabledIcon: {fileID: 2800000, guid: 1437da8c8d6870d4dacd825648f61ca5, type: 3}
     goldCost: 30
 --- !u!198 &19800000
 ParticleSystem:
