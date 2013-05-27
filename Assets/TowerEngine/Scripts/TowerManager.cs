@@ -39,6 +39,7 @@ public class TowerManager : MonoBehaviour
 	private bool towersBarWasShown = false;
 	private bool towerBuildButtonStateBeforeHide = false;
 	private bool skillsBarClosed = false;
+	private Tower lastClickedTower;
 	
 	public static TowerManager Instance
 	{
@@ -252,7 +253,8 @@ public class TowerManager : MonoBehaviour
 	
 	private void OnTowerClick(Tower tower)
 	{
-		//towerSkillsBar.upgrades = tower.upgrades;
+		towerSkillsBar.upgrades = tower.upgrades;
+		lastClickedTower = tower;
 		ShowSkillsBar();
 	}
 	
@@ -382,6 +384,15 @@ public class TowerManager : MonoBehaviour
 		Messenger.Instance.ShowMessage(Messenger.Instance.selectTowerUpgradeMessage);
 	}
 	
+	private void SellTower(Tower tower)
+	{
+		Vector2 position = PositionUtilities.XYZToXZ(tower.gameObject);
+		towerNameByPlaceMap.Remove(position);
+		CurrentGold += tower.goldPrice / 2;
+		Destroy(tower.gameObject);
+		HideSkillsBar();
+	}
+	
 	private void UpdateClicks()
 	{
 		if(towerBuildButtonHandler.Update() != GuiEventsHandler.State.NONE)
@@ -389,36 +400,10 @@ public class TowerManager : MonoBehaviour
 			return;
 		}
 		
-		if(mapState == MapState.SELECTING_TOWER)
+		if(!GUIManager.Instance.GetMouseOverFlag())
 		{
-			if(towersBarComponent.UpdateEvents())
-			{
-				UpdateSelectedTower();
-				return;
-			}
+			mouseClickHandler.Update();
 		}
-		else if(mapState == MapState.UPGRADING_TOWER)
-		{
-			if(skillsBarClosed)
-			{
-				HideSkillsBar();
-				skillsBarClosed = false;
-				return;
-			}
-			
-			TowerSkillsBar.TowerUpgrade towerUpgrade;
-			if(towerSkillsBar.GetTowerUpgradesCheckClicks(out towerUpgrade))
-			{
-				if(towerUpgrade != null)
-				{
-					OnNoTowerUpgradeSelected();
-				}
-				
-				return;
-			}
-		}
-		
-		mouseClickHandler.Update();
 	}
 	
 	public void HideAllControls()
@@ -450,6 +435,8 @@ public class TowerManager : MonoBehaviour
 		towerBuildButtonHandler.onMouseClick = OnTowerBuildButtonClick;
 		//mouseClickHandler.isClickAccepted = IsMouseClickAccepted;
 		mouseClickHandler.onClick = OnMapClick;
+		towersBarComponent.GetComponent<BarWithCircleButtons>().onButtonClick = OnClickWhileSelectingTower;
+		towerSkillsBar.GetComponent<BarWithCircleButtons>().onButtonClick = OnClickWhileUpgradingTower;
 		towerBuildButtonTrigger = towerBuildButton.GetComponent<TextureTrigger>();
 		
 		if(goldBar != null)
@@ -468,6 +455,40 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
+	private void OnClickWhileSelectingTower(int index)
+	{
+		if(mapState == MapState.SELECTING_TOWER)
+		{
+			if(towersBarComponent.UpdateEvents())
+			{
+				UpdateSelectedTower();
+				return;
+			}
+		}
+	}
+	
+	private void OnClickWhileUpgradingTower(int index)
+	{
+		if(mapState == MapState.UPGRADING_TOWER)
+		{	
+			int buttonIndex = towerSkillsBar.GetClickedButtonIndex();
+			TowerSkillsBar.TowerUpgrade towerUpgrade = towerSkillsBar.GetTowerUpgradeByIndex(buttonIndex);
+			
+			if(towerUpgrade != null)
+			{
+				OnNoTowerUpgradeSelected();
+			}
+			else if(buttonIndex == towerSkillsBar.GetButtonsCount() - 1)
+			{
+				SellTower(lastClickedTower);
+			}
+			else if(buttonIndex >= 0)
+			{
+				OnNoTowerUpgradeSelected();
+			}
+		}
+	}
+	
 	void OnGUI()
 	{
 		if(mapState == MapState.UPGRADING_TOWER)
@@ -477,8 +498,15 @@ public class TowerManager : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void LateUpdate() 
 	{
 		UpdateClicks();
+		
+		if(skillsBarClosed)
+		{
+			HideSkillsBar();
+			skillsBarClosed = false;
+			return;
+		}
 	}
 }

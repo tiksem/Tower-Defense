@@ -29,6 +29,8 @@ public class BarWithCircleButtons : MonoBehaviour
 	
 	public int buttonsCount = 0;
 	public Button[] buttonTextures;
+	
+	public Func<int,Void> onButtonClick;
 		
 	private Vector2[] centers;
 	private ButtonState[] buttonsStates;
@@ -124,6 +126,21 @@ public class BarWithCircleButtons : MonoBehaviour
 		}
 		
 		DrawFooter();
+
+		if(clickedIndex >= 0)
+		{
+			if(onButtonClick != null)
+			{
+				onButtonClick(clickedIndex);
+			}
+			
+			GUIManager.Instance.SetMouseOverFlag(true);
+		}
+	}
+	
+	public int GetButtonsCount()
+	{
+		return buttonsCount;
 	}
 	
 	public void Start()
@@ -133,6 +150,7 @@ public class BarWithCircleButtons : MonoBehaviour
 	
 	public void OnGUI()
 	{
+		GUIManager.Instance.SetMouseOverFlag(false);
 		DrawButtons();
 	}
 	

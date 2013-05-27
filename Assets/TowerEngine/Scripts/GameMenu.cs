@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using AssemblyCSharp;
+using System;
 
 public class GameMenu : MonoBehaviour
 {	
@@ -46,6 +47,8 @@ public class GameMenu : MonoBehaviour
 	private bool isLoading = false;
 	private bool shouldShowEndGameConfirmationMessage = false;
 	private bool hideAllControls = false;
+	
+	public Func<bool,Void> onMenuButtonClick;
 	
 	private void InitButtons()
 	{
@@ -184,9 +187,18 @@ public class GameMenu : MonoBehaviour
 	
 	private void DrawMenuButton()
 	{
+		bool fired = false;
+		
 		if(GUIUtilities.DrawTextureButton(menuButtonX, menuButtonY, menuButtonWidth, menuButtonHeight, menuButton))
 		{
+			fired = true;
 			TriggerMenuVisibility();
+			GUIManager.Instance.SetMouseOverFlag(true);
+		}
+		
+		if(onMenuButtonClick != null)
+		{
+			onMenuButtonClick(fired);
 		}
 	}
 	
@@ -196,6 +208,7 @@ public class GameMenu : MonoBehaviour
 		buttons.Draw();
 		if(DrawCancelButton())
 		{
+			GUIManager.Instance.SetMouseOverFlag(true);
 			TriggerMenuVisibility();
 		}
 	}
@@ -251,7 +264,9 @@ public class GameMenu : MonoBehaviour
 	}
 	
 	void OnGUI()
-	{		
+	{
+		GUIManager.Instance.SetMouseOverFlag(false);
+		
 		if(isLoading)
 		{
 			DrawLoading();

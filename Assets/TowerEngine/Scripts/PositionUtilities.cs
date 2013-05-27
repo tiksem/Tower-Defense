@@ -30,6 +30,16 @@ namespace AssemblyCSharp
 			PutGameObjectCenterOnXZPlane(gameObject, position, gameObject.collider.bounds);
 			return gameObject;
 		}
+		
+		public static Vector2 XYZToXZ(GameObject gameObject)
+		{
+			return XYZToXZ(gameObject.transform.position);
+		}
+		
+		public static Vector2 XYZToXZ(Vector3 position)
+		{
+			return new Vector2(position.x, position.z);
+		}
 	}
 }
 

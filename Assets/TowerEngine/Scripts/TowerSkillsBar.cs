@@ -21,20 +21,28 @@ public class TowerSkillsBar : MonoBehaviour
 		bar = GetComponent<BarWithCircleButtons>();
 	}
 	
-	public bool GetTowerUpgradesCheckClicks(out TowerUpgrade towerUpgrade)
+	public int GetClickedButtonIndex()
 	{
-		towerUpgrade = null;
-		int buttonIndex = bar.GetClickedButtonIndex();
-		if(buttonIndex < 0)
+		return bar.GetClickedButtonIndex();
+	}
+	
+	public int GetButtonsCount()
+	{
+		return bar.GetButtonsCount();
+	}
+	
+	public TowerUpgrade GetTowerUpgradeByIndex(int index)
+	{
+		if(index < 0)
 		{
-			return false;
+			return null;
 		}
 		
-		if(buttonIndex < upgrades.Length)
+		if(index < upgrades.Length)
 		{
-			towerUpgrade = upgrades[buttonIndex];
+			return upgrades[index];
 		}
 		
-		return true;
+		return null;
 	}
 }
