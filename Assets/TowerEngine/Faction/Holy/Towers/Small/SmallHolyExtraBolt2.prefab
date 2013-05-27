@@ -8,31 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 33: {fileID: 3300000}
-  - 23: {fileID: 2300000}
-  - 95: {fileID: 9500000}
-  - 65: {fileID: 6500000}
-  - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: SmallHolyTower
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100002
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400002}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
-  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: SmallHolyExtraBolt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,72 +24,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.50272024, y: -5.86197754e-17, z: -16.4791012}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400002}
-  m_Father: {fileID: 0}
---- !u!4 &400002
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 4.80324411, z: 0}
+  m_LocalPosition: {x: -31.1395741, y: 3.41807866, z: 51.0460968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400000}
---- !u!23 &2300000
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 022db9b1440047b4d8fc5b8434e751e4, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
---- !u!33 &3300000
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 4300004, guid: 937e727e3f0c35b44bcddde7aa2c4a9c, type: 3}
---- !u!65 &6500000
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .300000012, y: 0, z: .300000012}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &9500000
-Animator:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 937e727e3f0c35b44bcddde7aa2c4a9c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_ApplyRootMotion: 1
-  m_AnimatePhysics: 0
+  m_Father: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,49 +37,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 59664e13ed0a6a34399a32a0f152db5c, type: 3}
   m_Name: 
-  goldPrice: 10
-  level: 0
-  crystalPrice: 0
-  name: Unnamed
-  upgrades:
-  - tower: {fileID: 11400002, guid: c65a0e47b4f50964eaf16e9da56a1877, type: 2}
-    icon: {fileID: 2800000, guid: 5f06f8178433cc649b07718bb44a0878, type: 3}
-    disabledIcon: {fileID: 2800000, guid: b92027dd7d05ab34c81c0e6211cc7ee8, type: 3}
-    goldCost: 10
-  - tower: {fileID: 11400002, guid: eea39aa957f9fb74287c87ba0931f761, type: 2}
-    icon: {fileID: 2800000, guid: 0890eee335f70e342b4616b4137cc951, type: 3}
-    disabledIcon: {fileID: 2800000, guid: f4121bd1fe99d334c849d8e784e1e69c, type: 3}
-    goldCost: 10
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee38c33f359e2c047b9f89425acd1280, type: 3}
-  m_Name: 
-  attackingEnabled: 1
-  renderWhileAttackingOnly: 0
-  renderingDuration: .5
-  delayBeforeRender: .5
-  attackTypes:
-  - name: 
-    bullet: {fileID: 100000, guid: 140096660c685634ca17a341da7c43ba, type: 2}
-    cooldown: 1
-    range: 10
-    damage: 100
-    attackType: 0
-    additionalEffects: []
+  velocity: 10
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
+  m_GameObject: {fileID: 100000}
   lengthInSec: 5
   startDelay: 0
   speed: 1
@@ -205,7 +90,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: .100000001
+      scalar: .300000012
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -241,16 +126,16 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294966460
+          rgba: 4294967295
         key1:
           serializedVersion: 2
           rgba: 4278255608
         key2:
           serializedVersion: 2
-          rgba: 15846143
+          rgba: 37119
         key3:
           serializedVersion: 2
-          rgba: 16777215
+          rgba: 65517
         key4:
           serializedVersion: 2
           rgba: 0
@@ -1161,7 +1046,7 @@ ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
+  m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

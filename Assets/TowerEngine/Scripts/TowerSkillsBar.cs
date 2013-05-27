@@ -53,6 +53,14 @@ public class TowerSkillsBar : MonoBehaviour
 				bar.SetText(i, "");
 			}
 		}
+		
+		for(int i = length; i < bar.buttonsCount - 1; i++)
+		{
+			BarWithCircleButtons.Button button = bar.buttonTextures[i];
+			button.normalState = null;
+			button.selectedState = null;
+			button.additionalText = "";
+		}
 	}
 	
 	public int GetClickedButtonIndex()
