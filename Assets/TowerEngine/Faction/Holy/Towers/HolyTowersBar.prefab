@@ -76,9 +76,9 @@ MonoBehaviour:
   - normalState: {fileID: 2800000, guid: 5ff08a31d90f5ac4db2037a9c0338eea, type: 3}
     selectedState: {fileID: 2800000, guid: e11188309ae8fe44f83847c3277efc70, type: 3}
     disabledState: {fileID: 2800000, guid: 303cbc375e0e68f4aa5783ea30fba200, type: 3}
-  - normalState: {fileID: 2800000, guid: 4b67d6a0fd0e2c74c9a2f860003bd9ed, type: 3}
-    selectedState: {fileID: 2800000, guid: 1182ee5a1fb136f4a877686ff22b8661, type: 3}
-    disabledState: {fileID: 2800000, guid: a08ad730ce96434458a8e33b59757fbc, type: 3}
+  - normalState: {fileID: 2800000, guid: 3871ce3c8c1a1d84684fdc511a65df3a, type: 3}
+    selectedState: {fileID: 2800000, guid: 1bb42fd410bfea84ab9f9c97f58f3a6d, type: 3}
+    disabledState: {fileID: 2800000, guid: a731285518dbedd42bd524d2c3ec6a94, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
