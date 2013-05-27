@@ -82,7 +82,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 10
+  m_FontSize: 20
   m_FontStyle: 1
   m_PixelCorrect: 1
   m_RichText: 1

@@ -83,6 +83,10 @@ public class TowersBar : MonoBehaviour
 			{
 				bar.SetButtonState(i, BarWithCircleButtons.ButtonState.DISABLED);
 			}
+			else if(bar.GetButtonState(i) == BarWithCircleButtons.ButtonState.DISABLED)
+			{
+				bar.SetButtonState(i, BarWithCircleButtons.ButtonState.NORMAL);
+			}
 		}
 	}
 	
