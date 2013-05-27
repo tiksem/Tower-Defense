@@ -486,7 +486,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void DrawCloseButton()
 	{
-		if(GameMenu.Instance.IsShown())
+		if(GameMenu.Instance.IsShown() || GameMenu.Instance.IsLoading())
 		{
 			return;
 		}
