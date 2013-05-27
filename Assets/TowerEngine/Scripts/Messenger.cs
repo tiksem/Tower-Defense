@@ -21,6 +21,7 @@ public class Messenger : MonoBehaviour
 	public string notEnoughGoldMessage = "Not enough gold";
 	public string towerNotSelectedMessage = "Select tower";
 	public string selectTowerUpgradeMessage = "Select tower upgrade";
+	public string maxUpgradeSelectedMessage = "Upgraded to max";
 	
 	private bool isFadeStopped = false;
 	

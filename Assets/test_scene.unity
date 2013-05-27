@@ -215,6 +215,7 @@ MonoBehaviour:
   notEnoughGoldMessage: Not enough gold
   towerNotSelectedMessage: Select tower
   selectTowerUpgradeMessage: Select tower upgrade
+  maxUpgradeSelectedMessage: Upgraded to max
 --- !u!132 &300348337
 GUIText:
   m_ObjectHideFlags: 0

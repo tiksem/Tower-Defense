@@ -528,6 +528,11 @@ public class TowerManager : MonoBehaviour
 		ReplaceTower(lastClickedTower, upgradeTo);
 	}
 	
+	private void OnMaxUpgradeSelected()
+	{
+		Messenger.Instance.ShowMessage(Messenger.Instance.maxUpgradeSelectedMessage);
+	}
+	
 	private void OnTowerUpgradeSelected(TowerSkillsBar.TowerUpgrade towerUpgrade)
 	{
 		if(towerUpgrade.tower != null)
@@ -540,6 +545,10 @@ public class TowerManager : MonoBehaviour
 			{
 				OnNotEnoughGold();
 			}
+		}
+		else
+		{
+			OnMaxUpgradeSelected();
 		}
 	}
 	
