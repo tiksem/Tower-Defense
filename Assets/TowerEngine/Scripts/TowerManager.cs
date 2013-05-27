@@ -282,7 +282,7 @@ public class TowerManager : MonoBehaviour
 		{
 			CheckTowerPlaceSelection();
 		}
-		else if(mapState == MapState.ACTIVE)
+		else
 		{
 			if(towerSkillsBar == null)
 			{
