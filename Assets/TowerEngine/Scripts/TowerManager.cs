@@ -479,10 +479,11 @@ public class TowerManager : MonoBehaviour
 		Vector2 xy = PositionUtilities.XYZToXZ(position);
 		
 		GameObject replaceToObject = replaceTo.gameObject;
-		Instantiate(replaceToObject.gameObject, position, replaceToObject.transform.rotation);
+		replaceTo = Utilities.InstantiateAndGetComponent<Tower>(replaceToObject.gameObject, position);
 		towerNameByPlaceMap[xy] = replaceTo;
 		
 		Destroy(tower.gameObject);
+		OnTowerClick(replaceTo);
 	}
 	
 	private void UpgradeTower(Tower upgradeTo, int cost)
