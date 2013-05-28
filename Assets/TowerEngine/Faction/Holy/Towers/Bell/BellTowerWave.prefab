@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -26,10 +26,10 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   - 65: {fileID: 6500000}
   m_Layer: 0
-  m_Name: BellTower
+  m_Name: BellTowerWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: .00401166175, y: -.877630711, z: .00264065294, w: .479313403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -70,7 +70,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f3ae00bbf6d913e43b50e5cefbad44b5, type: 2}
+  - {fileID: 2100000, guid: b4b6f5e1a1099b247a745d9befce86c0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -100,25 +100,6 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
-  m_Name: 
-  goldPrice: 25
-  level: 0
-  crystalPrice: 0
-  name: Unnamed
-  upgrades:
-  - tower: {fileID: 11400002, guid: 7cb9e02ededd722439a881c7c71b8692, type: 2}
-    icon: {fileID: 2800000, guid: 3dcefefed66070a4b81f2517e7b3622d, type: 3}
-    disabledIcon: {fileID: 2800000, guid: 1e960f8b3b2e7a8428273fc1cd4a053e, type: 3}
-    goldCost: 30
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -130,12 +111,31 @@ MonoBehaviour:
   delayBeforeRender: .5
   attackTypes:
   - name: 
-    bullet: {fileID: 100012, guid: f81228e3647fdc0449bdf20653a1b8cb, type: 2}
+    bullet: {fileID: 100014, guid: c731d1992484ba94e918b5db6bed3560, type: 2}
     cooldown: 1
-    range: 7
+    range: 9
     damage: 10
     attackType: 0
     additionalEffects: []
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
+  m_Name: 
+  goldPrice: 25
+  level: 0
+  crystalPrice: 0
+  name: Unnamed
+  upgrades:
+  - tower: {fileID: 11400002, guid: 3edc8a07eeda41c42a784f8b6c90f1a5, type: 2}
+    icon: {fileID: 2800000, guid: bd5c53088d2a8d64183cf006fa15416f, type: 3}
+    disabledIcon: {fileID: 2800000, guid: f3461618244c3984bb588c3eacd08b70, type: 3}
+    goldCost: 30
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
