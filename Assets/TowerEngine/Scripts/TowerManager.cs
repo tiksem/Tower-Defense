@@ -206,19 +206,19 @@ public class TowerManager : MonoBehaviour
 		BuildTower(towerPosition, selectedTower);
 	}
 	
-	private void SetTowerBuildButtonVisibility(bool value)
+	private void SetTowerBuildButtonState(bool value)
 	{
 		towerBuildButtonTrigger.ChangeTexture(value);
 	}
 	
-	private void ShowTowerBuildButton()
+	private void SetTowerBuildButtonToNormal()
 	{
-		SetTowerBuildButtonVisibility(true);
+		SetTowerBuildButtonState(true);
 	}
 	
-	private void HideTowerBuildButton()
+	private void SetTowerBuildButtonToCancel()
 	{
-		SetTowerBuildButtonVisibility(false);
+		SetTowerBuildButtonState(false);
 	}
 	
 	private void ReplaceTower(Vector3 towerPosition)
@@ -232,13 +232,14 @@ public class TowerManager : MonoBehaviour
 		return towerComponent.name;
 	}
 	
-	private void HandleTowerPlaceSelection()
+	private bool HandleTowerPlaceSelection()
 	{
 		Tower tower = null;
 		
 		if(!towerNameByPlaceMap.TryGetValue(new Vector3(towerPosition.x, towerPosition.z), out tower))
 		{
 			BuildSelectedTower(towerPosition);
+			return true;
 		}
 		else
 		{
@@ -249,6 +250,8 @@ public class TowerManager : MonoBehaviour
 				ReplaceTower(towerPosition);
 			}
 		}
+		
+		return false;
 	}
 	
 	private void OnTowerPlaceClickWhenTowerNotSelected()
@@ -276,24 +279,35 @@ public class TowerManager : MonoBehaviour
 		towerBuildButton.SetActive(false);
 	}
 	
+	private void CheckClickedTower()
+	{
+		if(towerSkillsBar == null)
+		{
+			return;
+		}
+			
+		Tower tower = GetClickedTower();
+		if(tower != null)
+		{
+			OnTowerClick(tower);
+		}
+	}
+	
 	private void OnMapClick()
 	{
 		if(mapState == MapState.SELECTING_TOWER)
 		{
-			CheckTowerPlaceSelection();
+			if(!CheckTowerPlaceSelection())
+			{
+				CheckClickedTower();
+				SetTowerBuildButtonToNormal();
+				towerBuildButton.SetActive(false);
+				HideTowersBar();
+			}
 		}
 		else
 		{
-			if(towerSkillsBar == null)
-			{
-				return;
-			}
-			
-			Tower tower = GetClickedTower();
-			if(tower != null)
-			{
-				OnTowerClick(tower);
-			}
+			CheckClickedTower();
 		}
 	}
 	
@@ -338,8 +352,7 @@ public class TowerManager : MonoBehaviour
 		}
 		
 		towerPosition = GetTowerPosition(mouseOnGrid);
-		HandleTowerPlaceSelection();
-		return true;
+		return HandleTowerPlaceSelection();
 	}
 	
 	private void CloseTowerBuildMenu()
@@ -347,7 +360,7 @@ public class TowerManager : MonoBehaviour
 		mapState = MapState.ACTIVE;
 		HideGrid();
 		HideTowersBar();
-		ShowTowerBuildButton(); 
+		SetTowerBuildButtonToNormal(); 
 	}
 	
 	private void OnTowerBuildButtonClick()
@@ -370,7 +383,7 @@ public class TowerManager : MonoBehaviour
 	private void OpenTowerSelectionMenu()
 	{
 		mapState = MapState.SELECTING_TOWER;
-		HideTowerBuildButton();
+		SetTowerBuildButtonToCancel();
 		ShowTowersBar();
 		ShowGrid();
 	}
