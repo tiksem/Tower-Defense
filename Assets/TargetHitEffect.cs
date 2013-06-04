@@ -23,7 +23,12 @@ public abstract class TargetHitEffect : MonoBehaviour
 		return !target.HasImmunity(attackType);
 	}
 	
-	public bool CanStack()
+	virtual public bool CanStack()
+	{
+		return false;
+	}
+	
+	virtual public bool ShouldBeReplaced()
 	{
 		return false;
 	}
@@ -35,7 +40,10 @@ public abstract class TargetHitEffect : MonoBehaviour
 	
 	public void OnDestroy()
 	{
-		targetComponent.NotifyEffectDestroyed(gameObject);
+		if(targetComponent != null)
+		{
+			targetComponent.NotifyEffectDestroyed(gameObject);
+		}
 	}
 	
 	private void InitTargetComponentIfNeed()

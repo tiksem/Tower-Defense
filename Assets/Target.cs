@@ -285,6 +285,19 @@ public class Target : MonoBehaviour
 		effects.Remove(effect);
 	}
 	
+	public bool IsEffectAttachedButThis(TargetHitEffect targetHitEffect)
+	{
+		return effects.Find((GameObject effect) => 
+		{
+			return effect != targetHitEffect.gameObject && effect.name == targetHitEffect.name;
+		}) != null;
+	}
+	
+	public bool IsEffectAttached(TargetHitEffect targetHitEffect)
+	{
+		return effects.Find((GameObject effect) => effect.name == targetHitEffect.name) != null;
+	}
+	
 	private bool CheckEffect(GameObject effectPrefab)
 	{
 		TargetHitEffect effectComponent = effectPrefab.GetComponent<TargetHitEffect>();
@@ -297,14 +310,26 @@ public class Target : MonoBehaviour
 		if(!effectComponent.CanStack())
 		{
 			string effectName = effectPrefab.name;
-			return effects.Find((GameObject effect) 
+			GameObject find = effects.Find((GameObject effect) 
 				=> effect != null && effect.name == effectName
-			) == null;
+			);
+			
+			if(find != null)
+			{
+				if(effectComponent.ShouldBeReplaced())
+				{
+					effects.Remove(find);
+					Destroy(find);
+				}
+				else
+				{
+					return false;
+				}
+			}
+			
 		}
-		else
-		{
-			return true;
-		}
+		
+		return true;
 	}
 	
 	public void AttachEffect(GameObject effectPrefab)

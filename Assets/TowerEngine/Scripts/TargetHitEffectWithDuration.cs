@@ -12,6 +12,11 @@ public abstract class TargetHitEffectWithDuration : TargetHitEffect
 		Destroy(gameObject);
 	}
 	
+	public override bool ShouldBeReplaced()
+	{
+		return true;
+	}
+	
 	protected virtual void OnTimer()
 	{
 		

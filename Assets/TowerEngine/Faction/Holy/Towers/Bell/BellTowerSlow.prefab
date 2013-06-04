@@ -117,9 +117,9 @@ MonoBehaviour:
     damage: 10
     attackType: 0
     additionalEffects:
-    - {fileID: 0}
+    - {fileID: 100000, guid: 689bc49e06d62f24ba3c3b9ef00fbe26, type: 2}
     effectsChances:
-    - .300000012
+    - 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -40,7 +40,7 @@ MonoBehaviour:
   target: {fileID: 0}
   attackType: 0
   duration: 5
-  coefficient: .5
+  coefficient: .100000001
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
