@@ -33,7 +33,7 @@ public abstract class TargetHitEffect : MonoBehaviour
 		return false;
 	}
 	
-	public void OnTargetDestroyed ()
+	public void OnTargetDestroyed()
 	{
 		Destroy(gameObject);
 	}

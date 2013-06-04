@@ -35,7 +35,7 @@ namespace AssemblyCSharp
 		
 		public static Material GetObjectMaterial(GameObject gameObject)
 		{
-			Renderer renderer = gameObject.renderer;
+			Renderer renderer = Rendering.GetRenderer(gameObject);
 			Material material;
 			if(renderer != null)
 			{

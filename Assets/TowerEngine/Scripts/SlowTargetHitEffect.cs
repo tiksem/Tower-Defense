@@ -19,6 +19,7 @@ public class SlowTargetHitEffect : TargetHitEffectWithDuration
 	protected override void OnTimeReached()
 	{
 		targetComponent.SetSpeeds(speedBefore, angularSpeedBefore);
+		base.OnTimeReached();
 	}
 	
 	protected override void FirstApplyToTarget()
@@ -26,5 +27,6 @@ public class SlowTargetHitEffect : TargetHitEffectWithDuration
 		speedBefore = targetComponent.GetSpeed();
 		angularSpeedBefore = targetComponent.GetAngularSpeed();
 		targetComponent.ChangeMovementSpeed(coefficient, attackType);
+		base.FirstApplyToTarget();
 	}
 }

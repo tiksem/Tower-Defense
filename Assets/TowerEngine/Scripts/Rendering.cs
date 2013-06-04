@@ -11,7 +11,11 @@ namespace AssemblyCSharp
 			if(rendererComponent == null)
 			{
 				Transform body = gameObject.transform.FindChild("body");
-				rendererComponent = body.gameObject.renderer;
+				
+				if(body != null)
+				{
+					rendererComponent = body.gameObject.renderer;
+				}
 			}
 			
 			return rendererComponent;
@@ -51,6 +55,18 @@ namespace AssemblyCSharp
 		{
 			Material material = Animations.GetObjectMaterial(gameObject);	
 			SetAlpha(material, value);
+		}
+		
+		public static void SetMainColor(GameObject gameObject, Color value)
+		{
+			Material material = Animations.GetObjectMaterial(gameObject);
+			material.color = value;
+		}
+		
+		public static Color GetMainColor(GameObject gameObject)
+		{
+			Material material = Animations.GetObjectMaterial(gameObject);
+			return material.color;
 		}
 		
 		public static void SetRenderingEnabled(GameObject gameObject, bool value)
