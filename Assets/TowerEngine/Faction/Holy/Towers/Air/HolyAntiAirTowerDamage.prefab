@@ -47,7 +47,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: HolyAntiAirTower
+  m_Name: HolyAntiAirTowerDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: be86a769c3fedbe43b6c10cfed92ee42, type: 2}
+  - {fileID: 2100000, guid: 4c7c17cf04523d74094b9e03fd97d1b3, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -175,10 +175,10 @@ MonoBehaviour:
   crystalPrice: 0
   name: Unnamed
   upgrades:
-  - tower: {fileID: 11400002, guid: aab49a8c99b33e24a84312805babe691, type: 2}
-    icon: {fileID: 2800000, guid: 03392bba78b5b0343b7c5a0d05d795f9, type: 3}
-    disabledIcon: {fileID: 2800000, guid: bb501cfc73caa6d4a946d86c59d16c99, type: 3}
-    goldCost: 50
+  - tower: {fileID: 11400002, guid: 5909506b72c0fe340bc9df20e952cc15, type: 2}
+    icon: {fileID: 2800000, guid: 55c370c4b752dc6458f5dd974b02a0aa, type: 3}
+    disabledIcon: {fileID: 2800000, guid: 0049f5792313ccc409ffb0a52dadcc3c, type: 3}
+    goldCost: 0
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

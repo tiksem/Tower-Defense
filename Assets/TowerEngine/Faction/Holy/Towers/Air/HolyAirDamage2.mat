@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SlowBell
+  m_Name: HolyAirDamage2
   m_Shader: {fileID: 4, guid: 0000000000000000e000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
@@ -16,7 +16,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: f1b1be2b7770e1845aa009819d56c5b4, type: 3}
+          m_Texture: {fileID: 2800000, guid: 2571decf7aa95ee4f9a7f9fbc7c594e2, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -35,8 +35,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .783582091, g: 1, b: .972758591, a: 1}
+        second: {r: 1, g: .944055915, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .930069923, g: 1, b: 0, a: 1}
+        second: {r: 1, g: .524475515, b: 0, a: 1}
