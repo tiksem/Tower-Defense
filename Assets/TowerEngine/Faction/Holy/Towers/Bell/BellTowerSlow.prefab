@@ -116,7 +116,10 @@ MonoBehaviour:
     range: 7
     damage: 10
     attackType: 0
-    additionalEffects: []
+    additionalEffects:
+    - {fileID: 0}
+    effectsChances:
+    - .300000012
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using AssemblyCSharp;
 
 public class Weapon : MonoBehaviour 
 {
@@ -33,6 +34,7 @@ public class Weapon : MonoBehaviour
 		public AttackType attackType = AttackType.NORMAL;
 		
 		public GameObject[] additionalEffects;
+		public float[] effectsChances;
 	}
 	
 	public bool attackingEnabled = true;
@@ -69,6 +71,19 @@ public class Weapon : MonoBehaviour
 		lastAttackTimePerAttackType = new float[attackTypes.Length];
 		System.Array.Sort(attackTypes, (BulletDefinition a, BulletDefinition b) => -a.range.CompareTo(b.range));
 		CheckBulletDefinitions();
+	}
+	
+	private float GetEffectChance(BulletDefinition bulletDefinition, int index)
+	{
+		float[] effectsChances = bulletDefinition.effectsChances;
+		if(index < effectsChances.Length)
+		{
+			return effectsChances[index];
+		}
+		else
+		{
+			return 1.0f;
+		}
 	}
 	
 	private float GetDistanceTo(object target)
@@ -232,8 +247,10 @@ public class Weapon : MonoBehaviour
 			return;
 		}
 		
+		GameObject[] effects = RandomUtilites.Roll(bulletDefinition.additionalEffects, bulletDefinition.effectsChances);
+		
 		bulletComponent.Throw(target, bulletDefinition.damage, 
-			bulletDefinition.attackType, bulletDefinition.additionalEffects);
+			bulletDefinition.attackType, effects);
 	}
 	
 	private void AttackWithAttackType(int index)

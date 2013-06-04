@@ -4683,6 +4683,7 @@ MonoBehaviour:
     damage: 100
     attackType: 0
     additionalEffects: []
+    effectsChances: []
 --- !u!199 &1980164256
 ParticleSystemRenderer:
   m_ObjectHideFlags: 0

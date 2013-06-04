@@ -6,13 +6,21 @@ public abstract class TargetHitEffect : MonoBehaviour
 	[HideInInspector]
 	public GameObject target;
 	
+	public Weapon.AttackType attackType = Weapon.AttackType.NORMAL;
+	
 	protected Target targetComponent;
 	
+	private bool targetDetected = false;
+	
 	protected abstract void ApplyToTarget();
+	protected virtual void FirstApplyToTarget()
+	{
+		
+	}
 	
 	public virtual bool CanBeAttachedToTarget(Target target)
 	{
-		return true;
+		return !target.HasImmunity(attackType);
 	}
 	
 	public bool CanStack()
@@ -28,12 +36,6 @@ public abstract class TargetHitEffect : MonoBehaviour
 	public void OnDestroy()
 	{
 		targetComponent.NotifyEffectDestroyed(gameObject);
-	}
-	
-	// Use this for initialization
-	void Start() 
-	{
-		
 	}
 	
 	private void InitTargetComponentIfNeed()
@@ -54,6 +56,13 @@ public abstract class TargetHitEffect : MonoBehaviour
 		if(target != null)
 		{
 			InitTargetComponentIfNeed();
+			
+			if(!targetDetected)
+			{
+				FirstApplyToTarget();
+			}
+			targetDetected = true;
+			
 			ApplyToTarget();
 		}
 	}

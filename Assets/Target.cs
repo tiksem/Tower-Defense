@@ -101,8 +101,29 @@ public class Target : MonoBehaviour
 	private float currentPhysicalArmorCoefficient;
 	private int currentPhysicalArmor;
 	private HashSet<Weapon.AttackType> immunitiesSet = new HashSet<Weapon.AttackType>();
-	private CharacterMotor characterMotorComponent;
+	private NavMeshAgent navMeshAgent;
 	private List<GameObject> effects = new List<GameObject>();
+	
+	public NavMeshAgent GetNavMeshAgent()
+	{
+		return navMeshAgent;
+	}
+	
+	public float GetSpeed()
+	{
+		return navMeshAgent.speed;
+	}
+	
+	public float GetAngularSpeed()
+	{
+		return navMeshAgent.angularSpeed;
+	}
+	
+	public void SetSpeeds(float speed, float angularSpeed)
+	{
+		navMeshAgent.speed = speed;
+		navMeshAgent.angularSpeed = angularSpeed;
+	}
 	
 	private void ValidateImmunities()
 	{
@@ -240,7 +261,7 @@ public class Target : MonoBehaviour
 	
 	public void ChangeMovementSpeed(float coefficient, Weapon.AttackType? attackType = null)
 	{
-		if(characterMotorComponent == null)
+		if(navMeshAgent == null)
 		{
 			return;
 		}
@@ -255,9 +276,8 @@ public class Target : MonoBehaviour
 			return;
 		}
 		
-		characterMotorComponent.movement.maxForwardSpeed *= coefficient;
-		characterMotorComponent.movement.maxBackwardsSpeed *= coefficient;
-		characterMotorComponent.movement.maxFallSpeed *= coefficient;
+		navMeshAgent.speed *= coefficient;
+		navMeshAgent.angularSpeed *= coefficient;
 	}
 	
 	public void NotifyEffectDestroyed(GameObject effect)
@@ -346,7 +366,7 @@ public class Target : MonoBehaviour
 	void Start() 
 	{
 		currentHP = maxHP;
-		characterMotorComponent = GetComponent<CharacterMotor>();
+		navMeshAgent = GetComponent<NavMeshAgent>();
 	}
 	
 	// Update is called once per frame
