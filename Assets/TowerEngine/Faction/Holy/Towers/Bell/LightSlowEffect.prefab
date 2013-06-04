@@ -39,7 +39,10 @@ MonoBehaviour:
   m_Name: 
   target: {fileID: 0}
   attackType: 0
-  duration: 5
+  duration: .5
+  colorChangeSettings:
+    changeColor: 1
+    changeTo: {r: 1, g: .942281544, b: .410447776, a: 1}
   coefficient: .100000001
 --- !u!1001 &100100000
 Prefab:
