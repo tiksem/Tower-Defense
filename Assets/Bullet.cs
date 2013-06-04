@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class Bullet : MonoBehaviour 
-{	
+{
+	public AudioClip creationSound;
+	public AudioClip targetHitSound;
+	
 	protected class TargetHit
 	{
 		public Target[] targets;
@@ -33,8 +36,29 @@ public abstract class Bullet : MonoBehaviour
 		target.AttachEffects(targetHitEffects);
 	}
 	
+	private void PlaySound(AudioClip audio, Vector3 position)
+	{
+		if(audio == null)
+		{
+			return;
+		}
+		
+		AudioSource.PlayClipAtPoint(audio, position);
+	}
+	
+	private void PlayCreationSound()
+	{
+		PlaySound(creationSound, transform.position);
+	}
+	
+	private void PlayTargetHitSound(Vector3 position)
+	{
+		PlaySound(targetHitSound, position);
+	}
+	
 	protected virtual void DamageTarget(Target target, int damage)
 	{
+		PlayTargetHitSound(target.transform.position);
 		target.Damage(attackType, damage);
 	}
 	
@@ -122,6 +146,7 @@ public abstract class Bullet : MonoBehaviour
 		}
 		
 		InitTargetRenderer();
+		PlayCreationSound();
 		
 		wasThrown = true;
 	}

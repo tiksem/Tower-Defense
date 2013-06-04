@@ -174,7 +174,11 @@ MonoBehaviour:
   level: 0
   crystalPrice: 0
   name: Unnamed
-  upgrades: []
+  upgrades:
+  - tower: {fileID: 11400002, guid: 7dc2145595779954488f887079a3de88, type: 2}
+    icon: {fileID: 2800000, guid: 82cce373352facc47af5659e3f8158cc, type: 3}
+    disabledIcon: {fileID: 2800000, guid: 8379c8f2a1036a44b94597019737f935, type: 3}
+    goldCost: 100
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
