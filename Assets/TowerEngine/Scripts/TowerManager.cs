@@ -24,7 +24,7 @@ public class TowerManager : MonoBehaviour
 	public float towerSkillsBarCloseSize = 0.1f;
 	public float towerSkillsBarCloseBorder = 0.1f;
 	
-	public GameObject goldBar;
+	public TextWithIcon goldBar;
 	
 	public ObjectLabel towerSelectionTexture;
 	
@@ -37,7 +37,6 @@ public class TowerManager : MonoBehaviour
 	private Vector3 towerPosition;
 	private TowersBar towersBarComponent;
 	private TextureTrigger towerBuildButtonTrigger;
-	private GUIText goldText;
 	private bool towersBarWasShown = false;
 	private bool towerBuildButtonStateBeforeHide = false;
 	private bool skillsBarClosed = false;
@@ -70,9 +69,9 @@ public class TowerManager : MonoBehaviour
 	
 	private void UpdateGoldBar()
 	{
-		if(goldText != null)
+		if(goldBar != null)
 		{
-			goldText.text = CurrentGold.ToString();
+			goldBar.text = CurrentGold.ToString();
 		}
 	}
 	
@@ -484,11 +483,6 @@ public class TowerManager : MonoBehaviour
 		towersBarComponent.GetComponent<BarWithCircleButtons>().onButtonClick = OnClickWhileSelectingTower;
 		towerSkillsBar.GetComponent<BarWithCircleButtons>().onButtonClick = OnClickWhileUpgradingTower;
 		towerBuildButtonTrigger = towerBuildButton.GetComponent<TextureTrigger>();
-		
-		if(goldBar != null)
-		{
-			goldText = goldBar.GetComponent<GUIText>();
-		}
 		
 		CurrentGold = startGold;
 		

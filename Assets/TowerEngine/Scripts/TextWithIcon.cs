@@ -1,49 +1,44 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using AssemblyCSharp;
 
-[RequireComponent (typeof(GUIText))]
 public class TextWithIcon : MonoBehaviour
 {
-	public GUITexture guiTexture;
-	public float offset = 0.1f;
+	public string text;
 	
-	//private 
+	public Texture icon;
+	public float x = 0.1f;
+	public float y = 0.1f;
+	public float iconSize = 0.1f;
 	
-	private void TryAssignGUITextureIfNeed()
+	public float textXOffset = 0.1f;
+	public GUIStyle textStyle;
+	
+	public int IntText
 	{
-		if(guiTexture == null)
+		get
 		{
-			Transform parent = transform.parent;
-			if(parent == null)
-			{
-				return;
-			}
-			
-			guiTexture = parent.gameObject.guiTexture;
+			return StringUtilities.ParseInt(text);
+		}
+		set
+		{
+			text = value.ToString();
 		}
 	}
 	
-	private void UpdatePosition()
+	void OnValidate()
 	{
-		if(guiTexture == null)
-		{
-			return;
-		}
 		
-		Vector3 position =  guiTexture.transform.position + transform.position;
-		position.x += guiTexture.pixelInset.width / Camera.main.pixelWidth + offset;
-		transform.position = position;
 	}
 	
-	// Use this for initialization
 	void Start()
 	{
-		TryAssignGUITextureIfNeed();
+		GUIUtilities.CalculateFontSize(ref textStyle);
 	}
 	
-	// Update is called once per frame
-	void Update()
+	void OnGUI()
 	{
-		UpdatePosition();
+		GUIUtilities.DrawTextWidthIcon(x, y, iconSize, icon, text, textStyle, textXOffset);
 	}
 }

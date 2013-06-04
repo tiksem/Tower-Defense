@@ -174,7 +174,22 @@ namespace AssemblyCSharp
 			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
 			Rect rect = ScreenToGUIRect(x, y, width, height);
 			rect.height = height;
+			rect.width = width;
 			GUI.Label(rect, text, textStyle);
+		}
+		
+		public static void DrawTextWidthIcon(float x, float y, float iconSize, Texture icon, string text, GUIStyle textStyle, float textXOffset = 0.0f)
+		{
+			float textWidth = 0;
+			float textHeight = 0;
+			AdjustTextWidthAndHeight(ref textWidth, ref textHeight, text, textStyle);
+			
+			float iconHeight = GetHeightFromWidthForSquareButton(iconSize);
+			float textX = x + iconSize + textXOffset;
+			float textY = y + (iconHeight - textHeight) / 2;
+			
+			DrawTexture(x, y, iconSize, iconHeight, icon);
+			DrawText(textX, textY, text, textStyle, textWidth, textHeight);
 		}
 		
 		public static float ScreenXToGUIX(float x)
