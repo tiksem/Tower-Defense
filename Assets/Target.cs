@@ -96,6 +96,7 @@ public class Target : MonoBehaviour
 	public int physicalArmor = 0;
 	public int goldForKill = 1;
 	public GameObject goldForKillPointerPrefab;
+	public AudioClip deathSound;
 	
 	private int currentHP;
 	private float currentPhysicalArmorCoefficient;
@@ -233,10 +234,26 @@ public class Target : MonoBehaviour
 		goldText.text += goldForKill;
 	}
 	
+	private void PlaySound(AudioClip audio)
+	{
+		if(audio == null)
+		{
+			return;
+		}
+		
+		AudioSource.PlayClipAtPoint(audio, transform.position);
+	}
+	
+	private void PlayDeathSound()
+	{
+		PlaySound(deathSound);
+	}
+	
 	protected void Die()
 	{
 		TowerManager.Instance.NotifyTargetDestroyed(this);
 		ShowReceivedGold();
+		PlayDeathSound();
 		Destroy(gameObject);
 	}
 	
