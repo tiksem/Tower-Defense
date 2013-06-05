@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   creationSound: {fileID: 8300000, guid: 0a1fbab6bb628e44ea3b3ebe8e2b50a7, type: 3}
   targetHitSound: {fileID: 8300000, guid: 32b2ed22c66965948ad40c11576bef08, type: 3}
-  velocity: 50
+  velocity: 5000
   delayBeforeDestroy: .150000006
 --- !u!120 &12000000
 LineRenderer:

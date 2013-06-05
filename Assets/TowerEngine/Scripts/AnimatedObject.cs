@@ -13,7 +13,7 @@ public abstract class AnimatedObject : MonoBehaviour
 	
 	private IEnumerator AnimationAction()
 	{
-		return Animate();
+		yield return StartCoroutine(Animate());
 		animationFinished = true;
 	}
 	

@@ -57,22 +57,47 @@ namespace AssemblyCSharp
 			return material;
 		}
 		
-		public static IEnumerator CreateFade(GameObject gameObject, float fadeTo, float duration, 
-			 float executeAfter = 0.0f, Func<bool> shouldBeStopped = null)
+		public static IEnumerator CreateFadeDownOrUp(GameObject gameObject, float duration, 
+			float executeAfter = 0.0f, Func<bool> shouldBeStopped = null)
 		{
 			Material material = GetObjectMaterial(gameObject);
+			float startAlpha = material.color.a;
+			float endAlpha = 1.0f;
 			
+			if(startAlpha > 0.5f)
+			{
+				endAlpha = 0.0f;
+			}
+			
+			return CreateFade(material, endAlpha, duration, executeAfter, shouldBeStopped);
+		}
+		
+		public static IEnumerator CreateFade(Material material, float fadeTo, float duration, 
+			 float executeAfter = 0.0f, Func<bool> shouldBeStopped = null)
+		{
 			float startAlpha = material.color.a;
 			float fadeDif = fadeTo - startAlpha;
 			
 			Func<float,System.Void> fadeFunction = (float timeElapsed) =>
 			{
+				if(timeElapsed > 0)
+				{
+					int a = 10;
+				}
+				
 				Color color = material.color;
 				color.a = startAlpha + fadeDif * timeElapsed / duration;
 				material.color = color;
 			};
 			
 			return CreateFrameAnimation(fadeFunction, shouldBeStopped, duration, executeAfter);
+		}
+		
+		public static IEnumerator CreateFade(GameObject gameObject, float fadeTo, float duration, 
+			 float executeAfter = 0.0f, Func<bool> shouldBeStopped = null)
+		{
+			Material material = GetObjectMaterial(gameObject);
+			return CreateFade(material, fadeTo, duration, executeAfter, shouldBeStopped);
 		}
 	}
 }

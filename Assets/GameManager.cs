@@ -20,23 +20,63 @@ public class GameManager : MonoBehaviour
 	public string[] wayPointTags = new string[]{"WayPoint1", "WayPoint2"};
 	public float defaultTargetRadius = 0.5f;
 	public string wonText = "You won!!!";
+	public string looseText = "You loose!!!";
 	public Texture wonBackground;
+	public Texture looseBackground;
 	public GUITimer roundTimerPrefab;
 	public GUIText levelsBar;
+	
+	public float unitDisappearFadeDuration = 1.0f;
+	public float unitAppearFadeDuration = 1.0f;
+	public float durationBeforeLoose = 2.0f;
 	
 	private int partyIndex = -1;
 	
 	private int leaveTargetCount = 0;
 	
 	private bool win = false;
+	private bool loose = false;
 	
 	private GameObject[] partyAppearingPoints;
 	
 	private bool roundTimerFired = false;
 	
+	private IEnumerator LooseAction()
+	{
+		yield return new WaitForSeconds(durationBeforeLoose);
+		OnLoose();
+		loose = true;
+	}
+	
+	private void UpdateLeaveTargetsState()
+	{
+		if(leaveTargetCount >= maxLeaveTargetCount)
+		{
+			StartCoroutine(LooseAction());
+		}
+	}
+	
+	private IEnumerator FadeTargetAppearance(GameObject target)
+	{
+		return Animations.CreateFadeDownOrUp(target, unitAppearFadeDuration);
+	}
+	
+	private IEnumerator FadeTargetDisappearanceCoroutine(GameObject target)
+	{
+		return Animations.CreateFadeDownOrUp(target, unitDisappearFadeDuration);
+	}
+	
+	private IEnumerator FadeTargetDisappearance(GameObject target)
+	{
+		yield return StartCoroutine(FadeTargetDisappearanceCoroutine(target));
+		Destroy(target);
+	}
+	
 	private void NotifyTargetLeave(WayPointFollower target)
 	{
 		leaveTargetCount++;
+		StartCoroutine(FadeTargetDisappearance(target.gameObject));
+		UpdateLeaveTargetsState();
 	}
 	
 	private void OnAllTargetsDestroyed()
@@ -107,6 +147,9 @@ public class GameManager : MonoBehaviour
 		position.z += targetWidth * y;
 		
 		GameObject target = (GameObject)Instantiate(party.targetPrefab, position, party.targetPrefab.transform.rotation);
+		Rendering.SetAlpha(target, 0.0f);
+		StartCoroutine(FadeTargetAppearance(target));
+		
 		AssignTargetWayPointTag(partyPointIndex, target);
 		
 		//target.transform.position = position;
@@ -161,6 +204,21 @@ public class GameManager : MonoBehaviour
 		GUIUtilities.DrawBackground(wonBackground);
 	}
 	
+	private void DrawLooseBackground()
+	{
+		GUIUtilities.DrawBackground(looseBackground);
+	}
+	
+	private void DrawLooseGUI()
+	{
+		GameMenu.Instance.HideAllControls();
+		DrawWinBackground();
+		if(GUIUtilities.DrawMessageBox(looseText, GUIUtilities.MessageBoxType.OK) == GUIUtilities.MessageBoxResult.OK)
+		{
+			GameMenu.Instance.EndGame();
+		}
+	}
+	
 	private void DrawWinGUI()
 	{
 		GameMenu.Instance.HideAllControls();
@@ -172,6 +230,11 @@ public class GameManager : MonoBehaviour
 	}
 	
 	private void OnWin()
+	{
+		GameMenu.Instance.PauseGame();
+	}
+	
+	private void OnLoose()
 	{
 		GameMenu.Instance.PauseGame();
 	}
@@ -197,7 +260,7 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(win)
+		if(win || loose)
 		{
 			return;
 		}
@@ -218,6 +281,10 @@ public class GameManager : MonoBehaviour
 		if(win)
 		{
 			DrawWinGUI();
+		}
+		else if(loose)
+		{
+			DrawLooseGUI();
 		}
 	}
 }
