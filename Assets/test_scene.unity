@@ -216,6 +216,7 @@ MonoBehaviour:
   towerNotSelectedMessage: Select tower
   selectTowerUpgradeMessage: Select tower upgrade
   maxUpgradeSelectedMessage: Upgraded to max
+  cantBuildHereMessage: You can't build here
 --- !u!132 &300348337
 GUIText:
   m_ObjectHideFlags: 0
@@ -1132,7 +1133,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
+    m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 1
@@ -1250,7 +1251,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8aaebb27b438b344b65afcf9884eed3, type: 3}
   m_Name: 
-  maxLeaveTargetCount: 50
+  maxLeaveTargetCount: 2
   parties:
   - targetPrefab: {fileID: 100036, guid: f8320e05134d12d45ace8ae4fa163764, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1269,7 +1270,7 @@ MonoBehaviour:
   looseBackground: {fileID: 0}
   roundTimerPrefab: {fileID: 11400000, guid: f9aec019d7af2244d872dfab8229a90f, type: 2}
   levelsBar: {fileID: 1687735257}
-  unitDisappearFadeDuration: 10
+  unitDisappearFadeDuration: 1
   unitAppearFadeDuration: 2
   durationBeforeLoose: 2
 --- !u!1 &1147129996
