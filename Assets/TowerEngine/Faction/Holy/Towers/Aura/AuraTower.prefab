@@ -85,7 +85,7 @@ MonoBehaviour:
   damageBonus: 1.5
   radius: 5
   affectOtherAuraTowers: 0
-  auraEffectPrefab: {fileID: 11900000, guid: 1880a732ad112a541100162a44295342, type: 2}
+  auraEffectPrefab: {fileID: 11900000, guid: b0a1f6772f39e47fdae4d55c17d8ac35, type: 2}
   effectProjectorHeight: 7
 --- !u!1001 &100100000
 Prefab:
