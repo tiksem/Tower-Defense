@@ -22,6 +22,7 @@ public class Messenger : MonoBehaviour
 	public string towerNotSelectedMessage = "Select tower";
 	public string selectTowerUpgradeMessage = "Select tower upgrade";
 	public string maxUpgradeSelectedMessage = "Upgraded to max";
+	public string cantBuildHereMessage = "You can't build here";
 	
 	private bool isFadeStopped = false;
 	

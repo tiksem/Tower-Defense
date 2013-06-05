@@ -296,12 +296,17 @@ public class TowerManager : MonoBehaviour
 	{
 		if(mapState == MapState.SELECTING_TOWER)
 		{
-			if(!CheckTowerPlaceSelection())
+			TowerPlaceSelectionResult towerPlaceSelectionResult = CheckTowerPlaceSelection();
+			if(towerPlaceSelectionResult == TowerPlaceSelectionResult.TOWER_SELECTED)
 			{
 				CheckClickedTower();
 				SetTowerBuildButtonToNormal();
 				towerBuildButton.SetActive(false);
 				HideTowersBar();
+			}
+			else if(towerPlaceSelectionResult == TowerPlaceSelectionResult.NONE)
+			{
+				Messenger.Instance.ShowMessage(Messenger.Instance.cantBuildHereMessage);
 			}
 		}
 		else
@@ -336,22 +341,37 @@ public class TowerManager : MonoBehaviour
 		return GetTowerByHit(towerPlace);
 	}
 	
-	private bool CheckTowerPlaceSelection()
+	private enum TowerPlaceSelectionResult
+	{
+		NONE,
+		TOWER_NOT_SELECTED,
+		TOWER_PLACE_SELECTED,
+		TOWER_SELECTED
+	}
+	
+	private TowerPlaceSelectionResult CheckTowerPlaceSelection()
 	{
 		RaycastHit mouseOnGrid = GetTowerPlaceHit();
 		if(mouseOnGrid.point == Vector3.zero)
 		{
-			return false;
+			return TowerPlaceSelectionResult.NONE;
 		}
 		
 		if(selectedTower == null)
 		{
 			OnTowerPlaceClickWhenTowerNotSelected();
-			return false;
+			return TowerPlaceSelectionResult.TOWER_NOT_SELECTED;
 		}
 		
 		towerPosition = GetTowerPosition(mouseOnGrid);
-		return HandleTowerPlaceSelection();
+		if(HandleTowerPlaceSelection())
+		{
+			return TowerPlaceSelectionResult.TOWER_PLACE_SELECTED;
+		}
+		else
+		{
+			return TowerPlaceSelectionResult.TOWER_SELECTED;
+		}
 	}
 	
 	private void CloseTowerBuildMenu()
