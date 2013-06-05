@@ -192,6 +192,8 @@ public class BarWithCircleButtons : MonoBehaviour
 	
 	public void Start()
 	{
+		GUIUtilities.CalculateFontSize(ref textStyle);
+		GUIUtilities.CalculateFontSize(ref disabledTextStyle);
 		UpdateButtons();
 	}
 	

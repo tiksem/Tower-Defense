@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
 	public float unitAppearFadeDuration = 1.0f;
 	public float durationBeforeLoose = 2.0f;
 	
+	public Transform portalAppearancePosition;
+	public GameObject portal;
+	public float delayBetweenPartyAndPortalCreation = 2.0f;
+	
 	private int partyIndex = -1;
 	
 	private int leaveTargetCount = 0;
@@ -38,6 +42,8 @@ public class GameManager : MonoBehaviour
 	private bool loose = false;
 	
 	private GameObject[] partyAppearingPoints;
+	
+	private GameObject createdPortal;
 	
 	private bool roundTimerFired = false;
 	
@@ -79,6 +85,22 @@ public class GameManager : MonoBehaviour
 		UpdateLeaveTargetsState();
 	}
 	
+	private void CreatePortal()
+	{
+		if(portal == null || portalAppearancePosition == null)
+		{
+			return;
+		}
+		
+		createdPortal = (GameObject)Instantiate(portal, portalAppearancePosition.position, portal.transform.rotation);
+	}
+	
+	private IEnumerator PortalCreationAction(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		CreatePortal();
+	}
+	
 	private void OnAllTargetsDestroyed()
 	{
 		if(roundTimerPrefab != null)
@@ -95,7 +117,9 @@ public class GameManager : MonoBehaviour
 				UpdateLevelIndex();
 			}
 			
-			GUITimer.CreateFromPrefab(roundTimerPrefab, NextParty);
+			GUITimer timer = GUITimer.CreateFromPrefab(roundTimerPrefab, NextParty);
+			float portalCreationDelay = timer.seconds - delayBetweenPartyAndPortalCreation;
+			StartCoroutine(PortalCreationAction(portalCreationDelay));
 			roundTimerFired = true;
 		}
 		else
@@ -194,6 +218,11 @@ public class GameManager : MonoBehaviour
 	
 	private void NextParty()
 	{
+		if(createdPortal != null)
+		{
+			Destroy(createdPortal);
+		}
+		
 		UpdateLevelIndex();
 		roundTimerFired = false;
 		CreateParties();

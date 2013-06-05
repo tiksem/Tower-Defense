@@ -1039,6 +1039,32 @@ Prefab:
   m_RootGameObject: {fileID: 1626583931}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &1022055592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1022055593}
+  m_Layer: 0
+  m_Name: PortalPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1022055593
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022055592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.4371548, y: 1, z: 64.8549118}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1086973626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,9 +1296,12 @@ MonoBehaviour:
   looseBackground: {fileID: 0}
   roundTimerPrefab: {fileID: 11400000, guid: f9aec019d7af2244d872dfab8229a90f, type: 2}
   levelsBar: {fileID: 1687735257}
-  unitDisappearFadeDuration: 1
-  unitAppearFadeDuration: 2
-  durationBeforeLoose: 2
+  unitDisappearFadeDuration: .00999999978
+  unitAppearFadeDuration: .00999999978
+  durationBeforeLoose: 0
+  portalAppearancePosition: {fileID: 1022055593}
+  portal: {fileID: 100000, guid: f6e4453a000bb1348a26882aaf5c5066, type: 2}
+  delayBetweenPartyAndPortalCreation: 4
 --- !u!1 &1147129996
 GameObject:
   m_ObjectHideFlags: 0
