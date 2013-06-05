@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using System;
 using AssemblyCSharp;
 
@@ -97,6 +98,8 @@ public class Target : MonoBehaviour
 	public int goldForKill = 1;
 	public GameObject goldForKillPointerPrefab;
 	public AudioClip deathSound;
+	public GameObject deathEffect;
+	public float deathEffectDuration = 1.0f;
 	
 	private int currentHP;
 	private float currentPhysicalArmorCoefficient;
@@ -249,11 +252,22 @@ public class Target : MonoBehaviour
 		PlaySound(deathSound);
 	}
 	
+	private void ShowDeathEffect()
+	{
+		if(deathEffect != null)
+		{
+			Vector3 center = Rendering.GetObjectCenter(gameObject);
+			GameObject effect = (GameObject)Instantiate(deathEffect, center, deathEffect.transform.rotation);
+			FloatTimer.AttachTo(effect, deathEffectDuration);
+		}
+	}
+	
 	protected void Die()
 	{
 		TowerManager.Instance.NotifyTargetDestroyed(this);
 		ShowReceivedGold();
 		PlayDeathSound();
+		ShowDeathEffect();
 		Destroy(gameObject);
 	}
 	

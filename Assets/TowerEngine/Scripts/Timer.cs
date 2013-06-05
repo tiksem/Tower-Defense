@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 	public bool destroyOnFinish = true;
 	
 	private float startTime;
-	private int currentTime;
+	private int currentTime = int.MinValue;
 	
 	public void StartTimer()
 	{
@@ -56,7 +56,6 @@ public class Timer : MonoBehaviour
 	
 	protected virtual void Start()
 	{
-		currentTime = seconds;
 		if(fireOnStart)
 		{
 			StartTimer();
@@ -65,6 +64,11 @@ public class Timer : MonoBehaviour
 	
 	void Update()
 	{
+		if(currentTime == int.MinValue)
+		{
+			currentTime = seconds;
+		}
+		
 		UpdateTimer();
 	}
 }

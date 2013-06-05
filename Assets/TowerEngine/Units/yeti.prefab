@@ -599,6 +599,8 @@ MonoBehaviour:
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 8300000, guid: fb5208434429126488632ae7337a4712, type: 3}
+  deathEffect: {fileID: 100000, guid: b23ef1162d14d4e4582ff585da512eb3, type: 2}
+  deathEffectDuration: 2
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
