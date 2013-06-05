@@ -161,11 +161,11 @@ namespace AssemblyCSharp
 			Vector2 size = textStyle.CalcSize(content);
 			if(width < 0)
 			{
-				width = size.x;
+				width = size.x / Camera.main.pixelWidth;
 			}
 			if(height < 0)
 			{
-				height = size.y;
+				height = size.y / Camera.main.pixelHeight;
 			}
 		}
 		
@@ -173,8 +173,6 @@ namespace AssemblyCSharp
 		{
 			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
 			Rect rect = ScreenToGUIRect(x, y, width, height);
-			rect.height = height;
-			rect.width = width;
 			GUI.Label(rect, text, textStyle);
 		}
 		
