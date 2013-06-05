@@ -185,6 +185,17 @@ public class TowerManager : MonoBehaviour
 		ShowMessage(Messenger.Instance.notEnoughGoldMessage);
 	}
 	
+	private void NewTowerBuiltNotifyAllBut(Tower but)
+	{
+		foreach(Tower tower in towerNameByPlaceMap.Values)
+		{
+			if(tower != but)
+			{
+				tower.NotifyNewTowerBuilt();
+			}
+		}
+	}
+	
 	private void BuildTower(Vector3 towerPosition, GameObject towerPrefab)
 	{
 		int gold = towersBarComponent.TryBuySelectedTower(CurrentGold);
@@ -194,9 +205,11 @@ public class TowerManager : MonoBehaviour
 		}
 		else
 		{
-			GameObject tower = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
-			towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower.GetComponent<Tower>();
+			GameObject towerObject = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
+			Tower tower = towerObject.GetComponent<Tower>();
+			towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower;
 			CurrentGold -= gold;
+			NewTowerBuiltNotifyAllBut(tower);
 		}
 	}
 	
@@ -436,8 +449,19 @@ public class TowerManager : MonoBehaviour
 	private void KickTower(Tower tower)
 	{
 		Vector2 position = PositionUtilities.XYZToXZ(tower.gameObject);
-		towerNameByPlaceMap.Remove(position);
-		Destroy(tower.gameObject);
+		if(towerNameByPlaceMap.Remove(position))
+		{
+			TowerDestroyedNotifyAll(tower);
+			Destroy(tower.gameObject);
+		}
+	}
+
+	private void TowerDestroyedNotifyAll(Tower destroyedTower)
+	{
+		foreach(Tower tower in towerNameByPlaceMap.Values)
+		{
+			tower.NotifySomeTowerDestroyed(destroyedTower);
+		}
 	}
 	
 	private void SellTower(Tower tower)

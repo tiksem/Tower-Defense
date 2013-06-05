@@ -10,14 +10,18 @@ public class Tower : MonoBehaviour
 	
 	public TowerSkillsBar.TowerUpgrade[] upgrades;
 	
-	// Use this for initialization
-	void Start()
+	public virtual void NotifyNewTowerBuilt()
 	{
-	
+		
 	}
 	
-	// Update is called once per frame
-	void Update()
+	public virtual void NotifySomeTowerDestroyed(Tower destroyedTower)
+	{
+		
+	}
+	
+	// Use this for initialization
+	protected virtual void Start()
 	{
 	
 	}

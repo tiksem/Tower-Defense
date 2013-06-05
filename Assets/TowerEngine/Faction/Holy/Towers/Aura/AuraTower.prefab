@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400000}
   - 65: {fileID: 6500000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: AuraTower
   m_TagString: Untagged
@@ -75,12 +75,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 889aa10bd8623d747826c6b1cd5d980b, type: 3}
   m_Name: 
   goldPrice: 100
   level: 0
   crystalPrice: 0
   name: Unnamed
+  upgrades: []
+  damageBonus: 1.5
+  radius: 5
+  affectOtherAuraTowers: 0
+  auraEffectPrefab: {fileID: 11900000, guid: 1880a732ad112a541100162a44295342, type: 2}
+  effectProjectorHeight: 7
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
