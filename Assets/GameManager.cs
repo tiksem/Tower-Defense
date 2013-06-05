@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 	public Transform portalAppearancePosition;
 	public GameObject portal;
 	public float delayBetweenPartyAndPortalCreation = 2.0f;
+	public Vector3 leavePortalOffset = new Vector3(0.0f, 3.0f, 0.0f);
 	
 	private int partyIndex = -1;
 	
@@ -72,17 +73,31 @@ public class GameManager : MonoBehaviour
 		return Animations.CreateFadeDownOrUp(target, unitDisappearFadeDuration);
 	}
 	
-	private IEnumerator FadeTargetDisappearance(GameObject target)
+	private IEnumerator FadeTargetDisappearance(WayPointFollower target)
 	{
-		yield return StartCoroutine(FadeTargetDisappearanceCoroutine(target));
-		Destroy(target);
+		GameObject portal = CreateLeavePortal(target);
+		yield return StartCoroutine(FadeTargetDisappearanceCoroutine(target.gameObject));
+		
+		if(target != null)
+		{
+			leaveTargetCount++;
+			UpdateLeaveTargetsState();
+			Destroy(target.gameObject);
+		}
+		
+		Destroy(portal);
+	}
+	
+	private GameObject CreateLeavePortal(WayPointFollower target)
+	{
+		Vector3 position = target.GetLastWayPoint();
+		position += leavePortalOffset;
+		return (GameObject)Instantiate(portal, position, portal.transform.rotation);
 	}
 	
 	private void NotifyTargetLeave(WayPointFollower target)
 	{
-		leaveTargetCount++;
-		StartCoroutine(FadeTargetDisappearance(target.gameObject));
-		UpdateLeaveTargetsState();
+		StartCoroutine(FadeTargetDisappearance(target));
 	}
 	
 	private void CreatePortal()

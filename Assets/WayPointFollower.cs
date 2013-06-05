@@ -115,6 +115,11 @@ public class WayPointFollower : MonoBehaviour
 		}
 	}
 	
+	public Vector3 GetLastWayPoint()
+	{
+		return wayPoints[wayPoints.Length - 1];
+	}
+	
 	void Update()
 	{
 		if(wayPointTag == null)
