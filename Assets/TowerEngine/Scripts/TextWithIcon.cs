@@ -39,6 +39,6 @@ public class TextWithIcon : MonoBehaviour
 	
 	void OnGUI()
 	{
-		GUIUtilities.DrawTextWidthIcon(x, y, iconSize, icon, text, textStyle, textXOffset);
+		GUIUtilities.DrawTextWithIcon(x, y, iconSize, icon, text, textStyle, textXOffset);
 	}
 }

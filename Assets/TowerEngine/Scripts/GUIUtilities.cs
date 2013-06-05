@@ -176,7 +176,7 @@ namespace AssemblyCSharp
 			GUI.Label(rect, text, textStyle);
 		}
 		
-		public static void DrawTextWidthIcon(float x, float y, float iconSize, Texture icon, string text, GUIStyle textStyle, float textXOffset = 0.0f)
+		public static void DrawTextWithIcon(float x, float y, float iconSize, Texture icon, string text, GUIStyle textStyle, float textXOffset = 0.0f)
 		{
 			float textWidth = 0;
 			float textHeight = 0;
