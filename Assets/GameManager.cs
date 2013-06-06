@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using AssemblyCSharp;
 
-public class GameManager : MonoBehaviour 
+public class GameManager : MonoBehaviour, SavingGameComponent
 {
 	public static GameManager instance;
 	
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 	private int partyIndex = -1;
 	
 	private int leaveTargetCount = 0;
+	private int leavesCountOnRoundStart = 0;
 	
 	private bool win = false;
 	private bool loose = false;
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour
 	private GameObject createdPortal;
 	
 	private bool roundTimerFired = false;
+	
+	private object restoreData;
 	
 	private IEnumerator LooseAction()
 	{
@@ -141,6 +144,8 @@ public class GameManager : MonoBehaviour
 		{
 			NextParty();
 		}
+		
+		leavesCountOnRoundStart = leaveTargetCount;
 	}
 	
 	private bool AllTargetsDestroyed()
@@ -288,8 +293,7 @@ public class GameManager : MonoBehaviour
 		partyAppearingPoints = GameObject.FindGameObjectsWithTag("PartyPoint");
 	}
 	
-	// Use this for initialization
-	void Start () 
+	void Start() 
 	{
 		if(instance != null)
 		{
@@ -298,11 +302,11 @@ public class GameManager : MonoBehaviour
 		
 		instance = this;
 		
+		Restore();
 		InitPartiesPoints();
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	void FixedUpdate() 
 	{
 		if(win || loose)
 		{
@@ -330,5 +334,35 @@ public class GameManager : MonoBehaviour
 		{
 			DrawLooseGUI();
 		}
+	}
+	
+	[System.Serializable]
+	class SaveData
+	{
+		public int partyIndex;
+		public int leavesCount;
+	}
+	
+	private void Restore()
+	{
+		if(restoreData != null)
+		{
+			SaveData saveData = (SaveData)restoreData;
+			partyIndex = saveData.partyIndex - 1;
+			leaveTargetCount = saveData.leavesCount;
+		}
+	}
+	
+	public void OnRestore(object data)
+	{
+		restoreData = data;
+	}
+	
+	public object OnSave()
+	{
+		SaveData saveData = new SaveData();
+		saveData.partyIndex = partyIndex;
+		saveData.leavesCount = leavesCountOnRoundStart;
+		return saveData;
 	}
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using AssemblyCSharp;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class MainMenu : MonoBehaviour
 	
 	public Button[] buttons;
 	public Map[] maps;
+	public static Map[] sharedMapsReferences;
 	public int mapIndex;
 	public Fraction[] fractions;
 	public int fractionIndex = 0;
@@ -100,6 +102,17 @@ public class MainMenu : MonoBehaviour
 	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
 	private AsyncOperation loadingOperation;
 	
+	public static Texture GetMapTextureByName(string name)
+	{
+		Map map = System.Array.Find(sharedMapsReferences, (Map m) => m.sceneName == name);
+		if(map == null)
+		{
+			return null;
+		}
+		
+		return map.texture;
+	}
+	
 	private Texture[] GetMapsTextures()
 	{
 		Texture[] result = new Texture[maps.Length];
@@ -144,6 +157,8 @@ public class MainMenu : MonoBehaviour
 			Texture[] textures = GetFractionsTextures();
 			fractionPeekGridSettings.SetButtons(textures);
 		}
+		
+		sharedMapsReferences = maps;
 	}
 	
 	private Rect GetButtonRect(int index)

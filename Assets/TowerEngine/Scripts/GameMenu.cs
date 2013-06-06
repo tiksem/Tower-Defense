@@ -22,7 +22,18 @@ public class GameMenu : MonoBehaviour
 		SOUND
 	}
 	
+	public enum State
+	{
+		LOADING,
+		END_GAME_CONFIRMATION_MESSAGE,
+		SAVE_GAME,
+		MENU
+	}
+	
 	public GUIButtonGrid buttons = new GUIButtonGrid();
+	public GUIButtonGrid saveGameButtons = new GUIButtonGrid();
+	public GUIStyle saveGameDateStyle;
+	public Texture defaultSaveButtonTexture;
 	public ButtonAction[] buttonsOrder = new ButtonAction[]{ButtonAction.SOUND, ButtonAction.SAVE_GAME, ButtonAction.END_GAME}; 
 	public Texture soundOn;
 	public Texture soundOff;
@@ -47,6 +58,8 @@ public class GameMenu : MonoBehaviour
 	private bool isLoading = false;
 	private bool shouldShowEndGameConfirmationMessage = false;
 	private bool hideAllControls = false;
+	private State state = State.MENU;
+	private SaveGameManager.SaveGameInfo[] saves;
 	
 	public Func<bool,Void> onMenuButtonClick;
 	
@@ -126,9 +139,26 @@ public class GameMenu : MonoBehaviour
 		return isShown;
 	}
 	
+	private void UpdateSaveGameButtons()
+	{
+		saves = SaveGameManager.instance.GetSaves();
+		saveGameButtons.SetButtons(saves, (SaveGameManager.SaveGameInfo save) =>
+		{
+			if(save != null)
+			{
+				return MainMenu.GetMapTextureByName(save.sceneName);
+			}
+			else
+			{
+				return defaultSaveButtonTexture;
+			}
+		});
+	}
+	
 	private void SaveGame()
 	{
-		
+		UpdateSaveGameButtons();
+		state = State.SAVE_GAME;
 	}
 	
 	private void ShowEndGameConfirmationMessage()
@@ -141,7 +171,7 @@ public class GameMenu : MonoBehaviour
 		}
 		else if(result == GUIUtilities.MessageBoxResult.NO)
 		{
-			shouldShowEndGameConfirmationMessage = false;
+			state = State.MENU;
 		}
 	}
 	
@@ -154,7 +184,7 @@ public class GameMenu : MonoBehaviour
 	
 	private void OnEndGameClick()
 	{
-		shouldShowEndGameConfirmationMessage = true;
+		state = State.END_GAME_CONFIRMATION_MESSAGE;
 	}
 	
 	private Texture GetSoundButtonTexture()
@@ -182,7 +212,13 @@ public class GameMenu : MonoBehaviour
 	
 	private bool DrawCancelButton()
 	{
-		return GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
+		bool result = GUIUtilities.DrawSquareButtonInRightTopCorner(cancelButton, cancelButtonSize, cancelButtonBorder);
+		if(result)
+		{
+			GUIManager.Instance.SetMouseOverFlag(true);
+		}
+		
+		return result;
 	}
 	
 	private void MakeBackgroundDarken()
@@ -213,8 +249,36 @@ public class GameMenu : MonoBehaviour
 		buttons.Draw();
 		if(DrawCancelButton())
 		{
-			GUIManager.Instance.SetMouseOverFlag(true);
 			TriggerMenuVisibility();
+		}
+	}
+	
+	private void OnSaveGameCellClick(int index)
+	{
+		SaveGameManager.instance.SaveGame(index);
+		TriggerMenuVisibility();
+	}
+	
+	private void DrawSaveGameCell(int index, Rect rect)
+	{
+		SaveGameManager.SaveGameInfo gameInfo = saves[index];
+		if(gameInfo == null)
+		{
+			return;
+		}
+		
+		DateTime dateTime = gameInfo.dateTime;
+		string dateTimeText = dateTime.ToString();
+		GUIUtilities.DrawText(rect, dateTimeText, saveGameDateStyle);
+	}
+	
+	private void DrawSaveGameMenu()
+	{
+		MakeBackgroundDarken();
+		saveGameButtons.Draw();
+		if(DrawCancelButton())
+		{
+			state = State.MENU;
 		}
 	}
 	
@@ -225,6 +289,7 @@ public class GameMenu : MonoBehaviour
 	
 	private void TriggerMenuVisibility()
 	{
+		state = State.MENU;
 		isShown = !isShown;
 		HandleIsShownParam();
 	}
@@ -258,13 +323,22 @@ public class GameMenu : MonoBehaviour
 		isShown = false;
 		InitButtons();
 		buttons.onClick = OnButtonClick;
+		saveGameButtons.additionalDataDrawer = DrawSaveGameCell;
+		saveGameButtons.onClick = OnSaveGameCellClick;
 	}
 	
 	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.A))
 		{
-			TriggerMenuVisibility();
+			if(!isShown || state == State.MENU)
+			{
+				TriggerMenuVisibility();
+			}
+			else
+			{
+				state = State.MENU;
+			}
 		}
 	}
 	
@@ -285,13 +359,17 @@ public class GameMenu : MonoBehaviour
 		
 		if(isShown)
 		{
-			if(!shouldShowEndGameConfirmationMessage)
+			switch(state)
 			{
+			case State.MENU:
 				DrawMenu();
-			}
-			else
-			{
+				break;
+			case State.END_GAME_CONFIRMATION_MESSAGE:
 				ShowEndGameConfirmationMessage();
+				break;
+			case State.SAVE_GAME:
+				DrawSaveGameMenu();
+				break;
 			}
 		}
 		else

@@ -117,6 +117,11 @@ namespace AssemblyCSharp
 			return DrawTextureButton(x, y, width, height, texture);
 		}
 		
+		public static bool DrawTextureButton(Rect rect, Texture texture)
+		{
+			return DrawTextureButton(rect.x, rect.y, rect.width, rect.height, texture);
+		}
+		
 		public static bool DrawTextureButton(float x, float y, float width, float height, Texture texture)
 		{
 			Rect rect = ScreenToGUIRect(x, y, width, height);
@@ -167,6 +172,11 @@ namespace AssemblyCSharp
 			{
 				height = size.y / Camera.main.pixelHeight;
 			}
+		}
+		
+		public static void DrawText(Rect rect, string text, GUIStyle textStyle)
+		{
+			DrawText(rect.x, rect.y, text, textStyle, rect.width, rect.height);
 		}
 		
 		public static void DrawText(float x, float y, string text, GUIStyle textStyle, float width = -0.1f, float height = -0.1f)

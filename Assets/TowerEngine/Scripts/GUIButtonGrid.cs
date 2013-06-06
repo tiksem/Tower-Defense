@@ -13,12 +13,23 @@ namespace AssemblyCSharp
 		public int buttonsOnLine = 2;
 		
 		public Func<int,Void> onClick;
+		public Func<int, Rect, Void> additionalDataDrawer;
 		
 		private Texture[] buttons;
 		
 		public void SetButtons(Texture[] buttons)
 		{
 			this.buttons = buttons;
+		}
+		
+		public void SetButtons<T>(T[] buttonsSource, Func<T, Texture> transformer)
+		{
+			int buttonsCount = buttonsSource.Length;
+			buttons = new Texture[buttonsCount];
+			for(int i = 0; i < buttonsCount; i++)
+			{
+				buttons[i] = transformer(buttonsSource[i]);	
+			}
 		}
 		
 		public void SetButton(int index, Texture texture)
@@ -57,9 +68,16 @@ namespace AssemblyCSharp
 			for(int i = 0; i < buttons.Length; i++)
 			{
 				Texture texture = buttons[i];
-				if(GUIUtilities.DrawTextureButton(x, y, buttonSize, buttonHeight, texture))
+				
+				Rect rect = new Rect(x, y, buttonSize, buttonHeight);
+				if(GUIUtilities.DrawTextureButton(rect, texture))
 				{
 					OnClick(i);
+				}
+				
+				if(additionalDataDrawer != null)
+				{
+					additionalDataDrawer(i, rect);
 				}
 				
 				if(i % buttonsOnLine == buttonsOnLine - 1)
