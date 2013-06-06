@@ -2020,6 +2020,7 @@ MonoBehaviour:
   goldPrice: 10
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 1
   name: Unnamed
   upgrades:
   - tower: {fileID: 0}

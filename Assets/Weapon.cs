@@ -55,6 +55,7 @@ public class Weapon : MonoBehaviour
 	
 	private ParticleSystem particleSystem;
 	private Renderer rendererComponent;
+	private Tower tower;
 	
 	private bool shouldUpdateRenderingState = true;
 	
@@ -136,6 +137,36 @@ public class Weapon : MonoBehaviour
 		});
 	}
 	
+	private void ApplyInvisibileTargetsDetection(int lastIndex)
+	{
+		if(tower != null && tower.canSeeInvisibleUnits)
+		{
+			for(int i = 0; i < availibleTargets.Length; i++)
+			{
+				GameObject target = availibleTargets[i];
+				Target targetComponent = target.GetComponent<Target>();
+				targetComponent.SetVisible(i <= lastIndex);
+			}
+		}
+		
+		
+	}
+	
+	private int GetFarthestVisibleTargetIndex(int lastIndex)
+	{
+		for(int i = lastIndex; i >= 0; i--)
+		{
+			GameObject target = availibleTargets[i];
+			Target targetComponent = target.GetComponent<Target>();
+			if(targetComponent.IsVisible())
+			{
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	
 	private GameObject FindTargetForAttackType(BulletDefinition attackType)
 	{
 		GameObject[] attackableTargets = GetAttackableTargets(attackType);
@@ -143,10 +174,19 @@ public class Weapon : MonoBehaviour
 		if(index < 0)
 		{
 			index = -index - 2;
- 			if(index < 0)
-			{
-				return null;
-			}
+		}
+		
+		if(index < 0)
+		{
+			return null;
+		}
+		
+		ApplyInvisibileTargetsDetection(index);
+		index = GetFarthestVisibleTargetIndex(index);
+		
+		if(index < 0)
+		{
+			return null;
 		}
 		
 		return availibleTargets[index];
@@ -343,11 +383,16 @@ public class Weapon : MonoBehaviour
 			DisableRendering();
 		}
 		
+		Transform parent = transform.parent;
+		if(parent != null)
+		{
+			tower = parent.gameObject.GetComponent<Tower>();
+		}
+		
 		StartCoroutine(TargetsUpdatingAction());
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	void FixedUpdate() 
 	{
 		if(attackingEnabled)
 		{

@@ -101,6 +101,8 @@ public class Target : MonoBehaviour
 	public int maxHP = 100;
 	public ArmorType armorType = ArmorType.NORMAL;
 	public Type type = Type.GROUND;
+	public bool invisible = false;
+	public float durationBeforeInvisible = 1.5f;
 	public Immunities immunities = new Immunities();
 	public int physicalArmor = 0;
 	public int goldForKill = 1;
@@ -115,6 +117,9 @@ public class Target : MonoBehaviour
 	private HashSet<Weapon.AttackType> immunitiesSet = new HashSet<Weapon.AttackType>();
 	private NavMeshAgent navMeshAgent;
 	private List<GameObject> effects = new List<GameObject>();
+	private Renderer rendererComponent;
+	private bool wasDetected = false;
+	private bool setVisibleExecuted = false;
 	
 	public NavMeshAgent GetNavMeshAgent()
 	{
@@ -186,6 +191,26 @@ public class Target : MonoBehaviour
 	{
 		ValidateImmunities();
 		CurrentPhysicalArmor = physicalArmor;
+	}
+	
+	public void SetVisible(bool value)
+	{
+		if(invisible)
+		{
+			rendererComponent.enabled = value;
+			wasDetected = value;
+			setVisibleExecuted = true;
+		}
+	}
+	
+	public bool IsVisible()
+	{
+		if(!invisible)
+		{
+			return true;
+		}
+		
+		return wasDetected;
 	}
 	
 	public int CurrentPhysicalArmor
@@ -421,6 +446,15 @@ public class Target : MonoBehaviour
 		}
 	}
 	
+	private IEnumerator MakeInvisible()
+	{
+		yield return new WaitForSeconds(durationBeforeInvisible);
+		if(!setVisibleExecuted)
+		{
+			SetVisible(false);
+		}
+	}
+	
 	void OnDestroy()
 	{
 		DestroyEffects();
@@ -431,10 +465,13 @@ public class Target : MonoBehaviour
 	{
 		currentHP = maxHP;
 		navMeshAgent = GetComponent<NavMeshAgent>();
+		rendererComponent = Rendering.GetRenderer(gameObject);
+		//hide target, if it is invisible
+		StartCoroutine(MakeInvisible());
 	}
 	
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		if(currentHP <= 0)
 		{

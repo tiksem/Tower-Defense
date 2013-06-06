@@ -586,6 +586,9 @@ MonoBehaviour:
   m_Name: 
   maxHP: 100
   armorType: 1
+  type: 0
+  invisible: 1
+  durationBeforeInvisible: 1.5
   immunities:
     death: 0
     fire: 0

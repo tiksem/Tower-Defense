@@ -131,7 +131,10 @@ MonoBehaviour:
     range: 10
     damage: 100
     attackType: 0
+    ground: 1
+    air: 1
     additionalEffects: []
+    effectsChances: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,6 +148,7 @@ MonoBehaviour:
   goldPrice: 10
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 1
   name: Unnamed
   upgrades:
   - tower: {fileID: 0}
