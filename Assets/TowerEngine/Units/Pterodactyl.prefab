@@ -791,6 +791,7 @@ MonoBehaviour:
   m_Name: 
   maxHP: 1000
   armorType: 1
+  type: 1
   immunities:
     death: 0
     fire: 0
@@ -803,6 +804,9 @@ MonoBehaviour:
   goldForKill: 1
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
+  deathSound: {fileID: 0}
+  deathEffect: {fileID: 0}
+  deathEffectDuration: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

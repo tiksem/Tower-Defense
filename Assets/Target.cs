@@ -91,8 +91,16 @@ public class Target : MonoBehaviour
 		public bool wind = false;
 	}
 	
+		
+	public enum Type
+	{
+		GROUND,
+		AIR
+	}
+	
 	public int maxHP = 100;
 	public ArmorType armorType = ArmorType.NORMAL;
+	public Type type = Type.GROUND;
 	public Immunities immunities = new Immunities();
 	public int physicalArmor = 0;
 	public int goldForKill = 1;

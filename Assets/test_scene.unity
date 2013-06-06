@@ -4718,6 +4718,8 @@ MonoBehaviour:
     range: 10
     damage: 100
     attackType: 0
+    ground: 1
+    air: 1
     additionalEffects: []
     effectsChances: []
 --- !u!199 &1980164256

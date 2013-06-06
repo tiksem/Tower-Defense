@@ -158,6 +158,8 @@ MonoBehaviour:
     range: 1000
     damage: 100
     attackType: 0
+    ground: 0
+    air: 1
     additionalEffects: []
     effectsChances: []
 --- !u!114 &11400002
@@ -170,7 +172,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
   m_Name: 
-  goldPrice: 500
+  goldPrice: 10
   level: 0
   crystalPrice: 0
   name: Unnamed

@@ -33,9 +33,14 @@ public class Weapon : MonoBehaviour
 		public int damage = 0;
 		public AttackType attackType = AttackType.NORMAL;
 		
+		public bool ground = true;
+		public bool air = true;
+		
 		public GameObject[] additionalEffects;
 		public float[] effectsChances;
 	}
+	
+	private static float UPDATE_TARGETS_DELAY = 0.5f;
 	
 	public bool attackingEnabled = true;
 	public bool renderWhileAttackingOnly = false;
@@ -101,9 +106,40 @@ public class Weapon : MonoBehaviour
 		return result;
 	}
 	
+	private bool CanAttackTarget(BulletDefinition attackType, Target target)
+	{
+		if(target.HasImmunity(attackType.attackType))
+		{
+			return false;
+		}
+		
+		if(target.type == Target.Type.GROUND && attackType.ground)
+		{
+			return true;
+		}
+		
+		if(target.type == Target.Type.AIR && attackType.air)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private GameObject[] GetAttackableTargets(BulletDefinition attackType)
+	{
+		return Collections.Filter(availibleTargets, (int index) =>
+		{
+			GameObject target = availibleTargets[index];
+			Target targetComponent = target.GetComponent<Target>();
+			return CanAttackTarget(attackType, targetComponent);
+		});
+	}
+	
 	private GameObject FindTargetForAttackType(BulletDefinition attackType)
 	{
-		int index = Array.BinarySearch(availibleTargets, attackType.range, new AssemblyCSharp.ComparisonComparer<object>(DistanceComparator));
+		GameObject[] attackableTargets = GetAttackableTargets(attackType);
+		int index = Array.BinarySearch(attackableTargets, attackType.range, new AssemblyCSharp.ComparisonComparer<object>(DistanceComparator));
 		if(index < 0)
 		{
 			index = -index - 2;
@@ -224,12 +260,6 @@ public class Weapon : MonoBehaviour
 		DisableRendering();
 	}
 	
-	private void StartAttacking()
-	{
-		UpdateTargets();
-		Attack();
-	}
-	
 	private void CreateAndThrowBullet(BulletDefinition bulletDefinition, GameObject target)
 	{
 		GameObject bulletPrefab = bulletDefinition.bullet;
@@ -295,6 +325,15 @@ public class Weapon : MonoBehaviour
 		}
 	}
 	
+	private IEnumerator TargetsUpdatingAction()
+	{
+		while(true)
+		{
+			yield return new WaitForSeconds(UPDATE_TARGETS_DELAY);
+			UpdateTargets();
+		}
+	}
+	
 	void Start()
 	{
 		particleSystem = GetComponent<ParticleSystem>();
@@ -303,6 +342,8 @@ public class Weapon : MonoBehaviour
 		{
 			DisableRendering();
 		}
+		
+		StartCoroutine(TargetsUpdatingAction());
 	}
 	
 	// Update is called once per frame
@@ -310,7 +351,7 @@ public class Weapon : MonoBehaviour
 	{
 		if(attackingEnabled)
 		{
-			StartAttacking();
+			Attack();
 		}
 	}
 }
