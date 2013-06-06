@@ -268,8 +268,13 @@ public class GameMenu : MonoBehaviour
 		}
 		
 		DateTime dateTime = gameInfo.dateTime;
-		string dateTimeText = dateTime.ToString();
-		GUIUtilities.DrawText(rect, dateTimeText, saveGameDateStyle);
+		string dateText = dateTime.ToShortDateString();
+		string timeText = dateTime.ToShortTimeString();
+		
+		rect.height /= 2;
+		GUIUtilities.DrawText(rect, dateText, saveGameDateStyle);
+		rect.y += rect.height;
+		GUIUtilities.DrawText(rect, timeText, saveGameDateStyle);
 	}
 	
 	private void DrawSaveGameMenu()
@@ -325,6 +330,7 @@ public class GameMenu : MonoBehaviour
 		buttons.onClick = OnButtonClick;
 		saveGameButtons.additionalDataDrawer = DrawSaveGameCell;
 		saveGameButtons.onClick = OnSaveGameCellClick;
+		GUIUtilities.CalculateFontSize(ref saveGameDateStyle);
 	}
 	
 	void Update()
