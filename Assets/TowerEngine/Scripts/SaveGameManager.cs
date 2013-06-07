@@ -16,11 +16,11 @@ public class SaveGameManager : MonoBehaviour
 	
 	public int maxSavesCount;
 	
-	private static int loadGameId = -1;
+	private int loadGameId = -1;
 	
 	public static SaveGameManager instance;
 	
-	private static Dictionary<string, object> GetSavingData()
+	private Dictionary<string, object> GetSavingData()
 	{
 		try
 		{
@@ -32,7 +32,7 @@ public class SaveGameManager : MonoBehaviour
 		}
 	}
 	
-	private static void SaveData(string fileName, object data)
+	private void SaveData(string fileName, object data)
 	{
 		FileStream file = new FileStream(fileName, FileMode.Create);
 	}
@@ -69,10 +69,10 @@ public class SaveGameManager : MonoBehaviour
 		}
 	}
 	
-	public static void StartGame(string sceneName)
+	public AsyncOperation StartGame(string sceneName)
 	{
 		loadGameId = -1;
-		Application.LoadLevelAsync(sceneName);
+		return Application.LoadLevelAsync(sceneName);
 	}
 	
 	public SaveGameInfo[] GetSaves()
@@ -87,17 +87,16 @@ public class SaveGameManager : MonoBehaviour
 		return saves;
 	}
 	
-	public static bool LoadGame(int id)
+	public AsyncOperation LoadGame(int id)
 	{
 		SaveGameInfo info = GetLevelInfoByLoadGameId(id);
 		if(info == null)
 		{
-			return false;
+			return null;
 		}
 		
 		loadGameId = id;
-		Application.LoadLevelAsync(info.sceneName);
-		return true;
+		return Application.LoadLevelAsync(info.sceneName);
 	}
 	
 	private static string GetSceneNameFileByLoadGameId(int id)
@@ -166,6 +165,7 @@ public class SaveGameManager : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
+		DontDestroyOnLoad(gameObject);
 		Restore();
 	}
 }

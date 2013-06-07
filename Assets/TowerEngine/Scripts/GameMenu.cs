@@ -142,17 +142,7 @@ public class GameMenu : MonoBehaviour
 	private void UpdateSaveGameButtons()
 	{
 		saves = SaveGameManager.instance.GetSaves();
-		saveGameButtons.SetButtons(saves, (SaveGameManager.SaveGameInfo save) =>
-		{
-			if(save != null)
-			{
-				return MainMenu.GetMapTextureByName(save.sceneName);
-			}
-			else
-			{
-				return defaultSaveButtonTexture;
-			}
-		});
+		MainMenu.SetGUIButtonGridButtonsForLoadGame(saves, saveGameButtons, defaultSaveButtonTexture);
 	}
 	
 	private void SaveGame()
@@ -259,9 +249,8 @@ public class GameMenu : MonoBehaviour
 		TriggerMenuVisibility();
 	}
 	
-	private void DrawSaveGameCell(int index, Rect rect)
+	public static void DrawSaveGameCell(SaveGameManager.SaveGameInfo gameInfo, Rect rect, GUIStyle textStyle)
 	{
-		SaveGameManager.SaveGameInfo gameInfo = saves[index];
 		if(gameInfo == null)
 		{
 			return;
@@ -272,9 +261,15 @@ public class GameMenu : MonoBehaviour
 		string timeText = dateTime.ToShortTimeString();
 		
 		rect.height /= 2;
-		GUIUtilities.DrawText(rect, dateText, saveGameDateStyle);
+		GUIUtilities.DrawText(rect, dateText, textStyle);
 		rect.y += rect.height;
-		GUIUtilities.DrawText(rect, timeText, saveGameDateStyle);
+		GUIUtilities.DrawText(rect, timeText, textStyle);
+	}
+	
+	private void DrawSaveGameCell(int index, Rect rect)
+	{
+		SaveGameManager.SaveGameInfo gameInfo = saves[index];
+		DrawSaveGameCell(gameInfo, rect, saveGameDateStyle);
 	}
 	
 	private void DrawSaveGameMenu()

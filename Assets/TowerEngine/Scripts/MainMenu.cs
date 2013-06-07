@@ -88,10 +88,13 @@ public class MainMenu : MonoBehaviour
 	public float gameLogoWidth = 0.1f;
 	public float gameLogoHeight = 0.1f;
 	
+	public GUIButtonGrid loadGameButtons;
+	public Texture defaultLoadGameTexture;
+	
 	public GUIStyle buttonStyle = new GUIStyle();
 	public GUIStyle selectedButtonStyle = new GUIStyle();
+	public GUIStyle loadGameTextStyle = new GUIStyle();
 	public GUIStyle otherTextStyle = new GUIStyle();
-	
 	
 	private float buttonYOffset;
 	private float buttonFontSizeCoefficient;
@@ -101,6 +104,7 @@ public class MainMenu : MonoBehaviour
 	private bool shouldDrawFractionNotReady = false;
 	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
 	private AsyncOperation loadingOperation;
+	private SaveGameManager.SaveGameInfo[] saves;
 	
 	public static Texture GetMapTextureByName(string name)
 	{
@@ -140,6 +144,7 @@ public class MainMenu : MonoBehaviour
 		GUIUtilities.CalculateFontSize(ref buttonStyle);
 		GUIUtilities.CalculateFontSize(ref selectedButtonStyle);
 		GUIUtilities.CalculateFontSize(ref otherTextStyle);
+		GUIUtilities.CalculateFontSize(ref loadGameTextStyle);
 	}
 	
 	void OnValidate()
@@ -187,9 +192,32 @@ public class MainMenu : MonoBehaviour
 		Application.Quit();
 	}
 	
+	public static void SetGUIButtonGridButtonsForLoadGame(SaveGameManager.SaveGameInfo[] saves,
+		GUIButtonGrid buttons, Texture defaultButtonTexture)
+	{
+		buttons.SetButtons(saves, (SaveGameManager.SaveGameInfo save) =>
+		{
+			if(save != null)
+			{
+				return MainMenu.GetMapTextureByName(save.sceneName);
+			}
+			else
+			{
+				return defaultButtonTexture;
+			}
+		});
+	}
+	
+	private void DrawLoadGameCell(int index, Rect rect)
+	{
+		SaveGameManager.SaveGameInfo gameInfo = saves[index];
+		GameMenu.DrawSaveGameCell(gameInfo, rect, loadGameTextStyle);
+	}
+	
 	private void OnLoadGameButtonClick()
 	{
-		
+		saves = SaveGameManager.instance.GetSaves();
+		SetGUIButtonGridButtonsForLoadGame(saves, loadGameButtons, defaultLoadGameTexture);
 	}
 	
 	private void HandleButtonClick(ButtonAction action)
@@ -425,6 +453,7 @@ public class MainMenu : MonoBehaviour
 		FixButtonsFontSize();
 		mapPeekGridSettings.onClick = OnMapPeek;
 		fractionPeekGridSettings.onClick = OnFractionPeek;
+		loadGameButtons.additionalDataDrawer = DrawLoadGameCell;
 	}
 	
 	private void OnSinglePlayer()
@@ -494,13 +523,13 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnLoadGame()
 	{
-		
+		loadGameButtons.Draw();
 	}
 	
 	private void LoadMap(Map map)
 	{
 		string levelName = map.sceneName;
-		loadingOperation = Application.LoadLevelAsync(levelName);
+		loadingOperation = SaveGameManager.instance.StartGame(levelName);
 	}
 	
 	private void DrawLoading()
