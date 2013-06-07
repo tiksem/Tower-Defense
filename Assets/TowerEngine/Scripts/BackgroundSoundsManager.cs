@@ -50,8 +50,17 @@ public class BackgroundSoundsManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 	
+	private void DestroyAudioSource()
+	{
+		if(audioSource != null)
+		{
+			Destroy(audioSource.gameObject);
+		}
+	}
+	
 	void OnLevelWasLoaded(int index)
 	{
+		DestroyAudioSource();
 		//MainMenu
 		if(index == 0)
 		{
