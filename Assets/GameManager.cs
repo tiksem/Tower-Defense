@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	public float delayBetweenPartyAndPortalCreation = 2.0f;
 	public Vector3 leavePortalOffset = new Vector3(0.0f, 3.0f, 0.0f);
 	
+	public TextWithIcon lifesBar;
+	
 	private int partyIndex = -1;
 	
 	private int leaveTargetCount = 0;
@@ -51,6 +53,19 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	private object restoreData;
 	
+	private int LeaveTargetCount
+	{
+		get
+		{
+			return leaveTargetCount;
+		}
+		set
+		{
+			leaveTargetCount = value;
+			UpdateLifesBar();
+		}
+	}
+	
 	private IEnumerator LooseAction()
 	{
 		yield return new WaitForSeconds(durationBeforeLoose);
@@ -60,7 +75,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	private void UpdateLeaveTargetsState()
 	{
-		if(leaveTargetCount >= maxLeaveTargetCount)
+		if(LeaveTargetCount >= maxLeaveTargetCount)
 		{
 			StartCoroutine(LooseAction());
 		}
@@ -83,7 +98,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		
 		if(target != null)
 		{
-			leaveTargetCount++;
+			LeaveTargetCount++;
 			UpdateLeaveTargetsState();
 			Destroy(target.gameObject);
 		}
@@ -119,6 +134,20 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		CreatePortal();
 	}
 	
+	private void UpdateLifesBar()
+	{
+		if(lifesBar != null)
+		{
+			int lifes = maxLeaveTargetCount - LeaveTargetCount;
+			if(lifes < 0)
+			{
+				lifes = 0;
+			}
+			
+			lifesBar.IntText = lifes;
+		}
+	}
+	
 	private void OnAllTargetsDestroyed()
 	{
 		if(roundTimerPrefab != null)
@@ -146,7 +175,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			NextParty();
 		}
 		
-		leavesCountOnRoundStart = leaveTargetCount;
+		leavesCountOnRoundStart = LeaveTargetCount;
 	}
 	
 	private bool AllTargetsDestroyed()
@@ -304,6 +333,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		instance = this;
 		
 		InitPartiesPoints();
+		LeaveTargetCount = 0;
 	}
 	
 	void FixedUpdate() 
@@ -349,7 +379,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		{
 			SaveData saveData = (SaveData)data;
 			partyIndex = saveData.partyIndex - 1;
-			leaveTargetCount = saveData.leavesCount;
+			LeaveTargetCount = saveData.leavesCount;
 		}
 	}
 	
