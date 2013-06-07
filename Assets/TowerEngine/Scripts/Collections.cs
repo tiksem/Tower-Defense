@@ -12,6 +12,17 @@ namespace AssemblyCSharp
 			return clampedResult;
 		}
 		
+		public static To[] GetArrayFromArray<From, To>(From[] array, Func<From, To> transformer)
+		{
+			To[] to = new To[array.Length];
+			for(int i = 0; i < to.Length; i++)
+			{
+				to[i] = transformer(array[i]);
+			}
+			
+			return to;
+		}
+		
 		public static T[] Filter<T>(T[] array, Func<int,bool> predicate)
 		{
 			T[] result = new T[array.Length];
@@ -35,6 +46,22 @@ namespace AssemblyCSharp
 			}
 			
 			return ClampArray(result, index);
+		}
+		
+		public static T[] RemoveNulls<T>(T[] array)
+		{
+			return Filter(array, (int index) => array[index] == null);
+		}
+		
+		public static float Sum(float[] arr)
+		{
+			float result = 0;
+			for(int i = 0; i < arr.Length; i++)
+			{
+				result += arr[i];
+			}
+			
+			return result;
 		}
 	}
 }
