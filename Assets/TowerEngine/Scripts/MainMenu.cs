@@ -91,6 +91,12 @@ public class MainMenu : MonoBehaviour
 	public GUIButtonGrid loadGameButtons;
 	public Texture defaultLoadGameTexture;
 	
+	public Texture soundOn;
+	public Texture soundOff;
+	public float soundOnOffX = 0.5f;
+	public float soundOnOffY = 0.5f;
+	public float soundOnOffSize = 0.1f;
+	
 	public GUIStyle buttonStyle = new GUIStyle();
 	public GUIStyle selectedButtonStyle = new GUIStyle();
 	public GUIStyle loadGameTextStyle = new GUIStyle();
@@ -105,6 +111,7 @@ public class MainMenu : MonoBehaviour
 	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
 	private AsyncOperation loadingOperation;
 	private SaveGameManager.SaveGameInfo[] saves;
+	private Texture soundOnOffTexture;
 	
 	public static Texture GetMapTextureByName(string name)
 	{
@@ -455,6 +462,7 @@ public class MainMenu : MonoBehaviour
 		fractionPeekGridSettings.onClick = OnFractionPeek;
 		loadGameButtons.additionalDataDrawer = DrawLoadGameCell;
 		loadGameButtons.onClick = OnGameSelectedForLoad;
+		UpdateSoundButtonTexture();
 	}
 	
 	private void OnSinglePlayer()
@@ -488,7 +496,10 @@ public class MainMenu : MonoBehaviour
 	
 	private void OnOptions()
 	{
-		
+		if(DrawSoundButton())
+		{
+			ToggleSound();
+		}
 	}
 	
 	private void ReturnToPrevAction()
@@ -562,6 +573,22 @@ public class MainMenu : MonoBehaviour
 		}
 		
 		GUIUtilities.DrawTexture(gameLogoX, gameLogoY, gameLogoWidth, gameLogoHeight, gameLogo);
+	}
+	
+	private void UpdateSoundButtonTexture()
+	{
+		soundOnOffTexture = GameSettings.Instance.SoundEnabled ? soundOn : soundOff;
+	}
+	
+	private void ToggleSound()
+	{
+		GameSettings.Instance.SoundEnabled = !GameSettings.Instance.SoundEnabled;
+		UpdateSoundButtonTexture();
+	}
+	
+	private bool DrawSoundButton()
+	{
+		return GUIUtilities.DrawSquareTextureButtonUsingWidth(soundOnOffX, soundOnOffY, soundOnOffSize, soundOnOffTexture);
 	}
 	
 	void OnGUI()

@@ -322,6 +322,11 @@ MonoBehaviour:
     buttonsOnLine: 3
   defaultLoadGameTexture: {fileID: 2800000, guid: 1ce4191dbd605674c9ee0ff23087b113,
     type: 3}
+  soundOn: {fileID: 2800000, guid: f23753f9a61203e4fb78e59f86bfc4e5, type: 3}
+  soundOff: {fileID: 2800000, guid: 435397671bb2b3e46982cf21e264b0d5, type: 3}
+  soundOnOffX: .569999993
+  soundOnOffY: .349999994
+  soundOnOffSize: .200000003
   buttonStyle:
     m_Name: 
     m_Normal:
