@@ -10,11 +10,13 @@ public class SaveGameManager : MonoBehaviour
 	[System.Serializable]
 	public class SaveGameInfo
 	{
+		public float savingEngineVersion;
 		public DateTime dateTime;
 		public string sceneName;
 	}
 	
 	public int maxSavesCount;
+	public float savingEngineVersion = 1.0f;
 	
 	private int loadGameId = -1;
 	
@@ -104,12 +106,18 @@ public class SaveGameManager : MonoBehaviour
 		return id.ToString() + "level";
 	}
 	
-	public static SaveGameInfo GetLevelInfoByLoadGameId(int id)
+	public SaveGameInfo GetLevelInfoByLoadGameId(int id)
 	{
 		try
 		{
 			string fileName = GetSceneNameFileByLoadGameId(id);
-			return (SaveGameInfo)FileUtilities.Deserialize(fileName); 
+			SaveGameInfo saveGameInfo = (SaveGameInfo)FileUtilities.Deserialize(fileName);
+			if(saveGameInfo.savingEngineVersion != savingEngineVersion)
+			{
+				return null;
+			}
+			
+			return saveGameInfo;
 		}
 		catch(Exception e)
 		{
@@ -130,6 +138,7 @@ public class SaveGameManager : MonoBehaviour
 		SaveGameInfo saveGameInfo = new SaveGameInfo();
 		saveGameInfo.sceneName = Application.loadedLevelName;
 		saveGameInfo.dateTime = DateTime.Now;
+		saveGameInfo.savingEngineVersion = savingEngineVersion;
 		
 		FileUtilities.Serialize(fileName, saveGameInfo);
 	}

@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			}
 			else
 			{
+				TowerManager.Instance.NotifyNewRoundStarted();
 				UpdateLevelIndex();
 			}
 			

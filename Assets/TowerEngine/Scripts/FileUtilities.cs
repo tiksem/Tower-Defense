@@ -27,6 +27,7 @@ namespace AssemblyCSharp
 			}
 			catch(System.Exception e)
 			{
+				Debug.LogError(e);
 				return null;
 			}
 		}

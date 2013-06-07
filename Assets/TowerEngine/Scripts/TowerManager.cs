@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using AssemblyCSharp;
 
-public class TowerManager : MonoBehaviour 
+public class TowerManager : MonoBehaviour, SavingGameComponent
 {
 	private static TowerManager instance;
 		
@@ -11,6 +11,13 @@ public class TowerManager : MonoBehaviour
 		ACTIVE,
 		SELECTING_TOWER,
 		UPGRADING_TOWER
+	}
+	
+	[System.Serializable]
+	private class TowerInfo
+	{
+		public Tower tower;
+		public int id;
 	}
 	
 	public int startGold = 200;
@@ -32,7 +39,7 @@ public class TowerManager : MonoBehaviour
 	public GameObject selectedTower;
 	private int currentGold;
 	private GuiEventsHandler towerBuildButtonHandler;
-	private IDictionary<Vector2, Tower> towerNameByPlaceMap = new Dictionary<Vector2, Tower>();
+	private IDictionary<Vector2, TowerInfo> towerNameByPlaceMap = new Dictionary<Vector2, TowerInfo>();
 	private MouseClickHandler mouseClickHandler = new MouseClickHandler();
 	private Vector3 towerPosition;
 	private TowersBar towersBarComponent;
@@ -42,6 +49,9 @@ public class TowerManager : MonoBehaviour
 	private bool skillsBarClosed = false;
 	private Tower lastClickedTower;
 	private Vector3 towerSelectionTextureInitialOffset;
+	private int currentGoldOnRoundStart;
+	private TowerSaveData[] towersOnRoundStarted;
+	private SaveData saveData;
 	
 	public static TowerManager Instance
 	{
@@ -75,9 +85,9 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
-	private void InitTowersBar()
+	private void InitTowersBarIfNeed()
 	{
-		if(towersBar == null)
+		if(towersBar == null || towersBarComponent != null)
 		{
 			return;
 		}
@@ -91,7 +101,7 @@ public class TowerManager : MonoBehaviour
 	
 	void OnValidate()
 	{
-		InitTowersBar();
+		InitTowersBarIfNeed();
 	}
 	
 	void Awake()
@@ -187,13 +197,25 @@ public class TowerManager : MonoBehaviour
 	
 	private void NewTowerBuiltNotifyAllBut(Tower but)
 	{
-		foreach(Tower tower in towerNameByPlaceMap.Values)
+		foreach(TowerInfo towerInfo in towerNameByPlaceMap.Values)
 		{
+			Tower tower = towerInfo.tower;
 			if(tower != but)
 			{
 				tower.NotifyNewTowerBuilt();
 			}
 		}
+	}
+	
+	private void PutTower(Vector3 towerPosition, GameObject towerPrefab)
+	{
+		GameObject towerObject = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
+		Tower tower = towerObject.GetComponent<Tower>();
+		TowerInfo towerInfo = new TowerInfo();
+		towerInfo.id = towersBarComponent.GetTowerIdByPrefabObject(towerPrefab);
+		towerInfo.tower = tower;
+		towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = towerInfo;
+		NewTowerBuiltNotifyAllBut(tower);
 	}
 	
 	private void BuildTower(Vector3 towerPosition, GameObject towerPrefab)
@@ -205,11 +227,8 @@ public class TowerManager : MonoBehaviour
 		}
 		else
 		{
-			GameObject towerObject = PositionUtilities.InstantiateGameObjectAndPutCenterOnXZPlane(towerPrefab, towerPosition);
-			Tower tower = towerObject.GetComponent<Tower>();
-			towerNameByPlaceMap[new Vector2(towerPosition.x, towerPosition.z)] = tower;
+			PutTower(towerPosition, towerPrefab);
 			CurrentGold -= gold;
-			NewTowerBuiltNotifyAllBut(tower);
 		}
 	}
 	
@@ -246,9 +265,9 @@ public class TowerManager : MonoBehaviour
 	
 	private bool HandleTowerPlaceSelection()
 	{
-		Tower tower = null;
+		TowerInfo towerInfo = null;
 		
-		if(!towerNameByPlaceMap.TryGetValue(new Vector3(towerPosition.x, towerPosition.z), out tower))
+		if(!towerNameByPlaceMap.TryGetValue(new Vector3(towerPosition.x, towerPosition.z), out towerInfo))
 		{
 			BuildSelectedTower(towerPosition);
 			return true;
@@ -256,7 +275,7 @@ public class TowerManager : MonoBehaviour
 		else
 		{
 			string selectedTowerName = GetTowerName(selectedTower);
-			string towerName = tower.name;
+			string towerName = towerInfo.tower.name;
 			if(towerName != selectedTowerName)
 			{
 				ReplaceTower(towerPosition);
@@ -343,9 +362,15 @@ public class TowerManager : MonoBehaviour
 		
 		Vector2 towerPosition = GetTowerXY(raycastHit);
 		
-		Tower tower = null;
-		towerNameByPlaceMap.TryGetValue(towerPosition, out tower);
-		return tower;
+		TowerInfo towerInfo = null;
+		towerNameByPlaceMap.TryGetValue(towerPosition, out towerInfo);
+		
+		if(towerInfo == null)
+		{
+			return null;
+		}
+		
+		return towerInfo.tower;
 	}
 	
 	private Tower GetClickedTower()
@@ -458,8 +483,9 @@ public class TowerManager : MonoBehaviour
 
 	private void TowerDestroyedNotifyAll(Tower destroyedTower)
 	{
-		foreach(Tower tower in towerNameByPlaceMap.Values)
+		foreach(TowerInfo towerInfo in towerNameByPlaceMap.Values)
 		{
+			Tower tower = towerInfo.tower;
 			tower.NotifySomeTowerDestroyed(destroyedTower);
 		}
 	}
@@ -513,10 +539,35 @@ public class TowerManager : MonoBehaviour
 		}
 	}
 	
+	public void NotifyNewRoundStarted()
+	{
+		UpdateSavingData();
+	}
+	
+	private void UpdateSavingTowers()
+	{
+		int index = 0;
+		towersOnRoundStarted = new TowerSaveData[towerNameByPlaceMap.Count];
+		foreach(TowerInfo towerInfo in towerNameByPlaceMap.Values)
+		{
+			TowerSaveData towerSaveData = new TowerSaveData();
+			towerSaveData.position = new SerializableVector3(towerInfo.tower.gameObject.transform.position);
+			towerSaveData.id = towerInfo.id;
+			towersOnRoundStarted[index] = towerSaveData;
+			index++;
+		}
+	}
+	
+	private void UpdateSavingData()
+	{
+		currentGoldOnRoundStart = currentGold;
+		UpdateSavingTowers();
+	}
+	
 	// Use this for initialization
 	void Start() 
 	{
-		InitTowersBar();
+		InitTowersBarIfNeed();
 		HideGrid();
 		HideTowersBar();
 		HideSkillsBar();
@@ -534,6 +585,9 @@ public class TowerManager : MonoBehaviour
 		{
 			towerSelectionTextureInitialOffset = towerSelectionTexture.offset;
 		}
+		
+		Restore();
+		UpdateSavingData();
 	}
 	
 	private void DrawCloseButton()
@@ -563,7 +617,7 @@ public class TowerManager : MonoBehaviour
 	
 	private void ReplaceTower(Tower tower, Tower replaceTo)
 	{
-		Vector3 position = tower.transform.position;
+		/*Vector3 position = tower.transform.position;
 		Vector2 xy = PositionUtilities.XYZToXZ(position);
 		
 		GameObject replaceToObject = replaceTo.gameObject;
@@ -571,7 +625,7 @@ public class TowerManager : MonoBehaviour
 		towerNameByPlaceMap[xy] = replaceTo;
 		
 		Destroy(tower.gameObject);
-		OnTowerClick(replaceTo);
+		OnTowerClick(replaceTo);*/
 	}
 	
 	private void UpgradeTower(Tower upgradeTo, int cost)
@@ -658,5 +712,52 @@ public class TowerManager : MonoBehaviour
 			skillsBarClosed = false;
 			return;
 		}
+	}
+	
+	[System.Serializable]
+	private class TowerSaveData
+	{
+		public int id;
+		public SerializableVector3 position;
+	}
+	
+	[System.Serializable]
+	private class SaveData
+	{
+		public TowerSaveData[] towers;
+		public int gold;
+	}
+	
+	private void RestoreTowers(TowerSaveData[] towers)
+	{
+		InitTowersBarIfNeed();
+		
+		foreach(TowerSaveData tower in towers)
+		{
+			GameObject towerPrefab = towersBarComponent.towers[tower.id];
+			PutTower(tower.position.ToVector3(), towerPrefab);
+		}
+	}
+	
+	public void Restore()
+	{
+		if(saveData != null)
+		{
+			CurrentGold = saveData.gold;
+			RestoreTowers(saveData.towers);
+		}
+	}
+	
+	public object OnSave()
+	{
+		SaveData saveData = new SaveData();
+		saveData.gold = currentGoldOnRoundStart;
+		saveData.towers = towersOnRoundStarted;
+		return saveData;
+	}
+	
+	public void OnRestore(object data)
+	{
+		saveData = (SaveData)data;
 	}
 }

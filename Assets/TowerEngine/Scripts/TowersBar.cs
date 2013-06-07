@@ -114,6 +114,11 @@ public class TowersBar : MonoBehaviour
 		return TryBuyTower(selectedTowerIndex, currentGold);
 	}
 	
+	public int GetTowerIdByPrefabObject(GameObject prefab)
+	{
+		return towers.IndexOf(prefab);
+	}
+	
 	private void InitTowersGold()
 	{
 		int length = towers.Length;
