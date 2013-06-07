@@ -53,11 +53,11 @@ namespace AssemblyCSharp
 			{
 				if(sum != 0.0f)
 				{
-					probabilities[i] /= sum;
+					result[i] = probabilities[i] / sum;
 				}
 				else
 				{
-					probabilities[i] = 1.0f / (float)result.Length;
+					result[i] = 1.0f / (float)result.Length;
 				}
 			}
 			
@@ -76,7 +76,7 @@ namespace AssemblyCSharp
 				steps[i] = step;
 			}
 			
-			return probabilities;
+			return steps;
 		}
 		
 		public static T ChooseOneUsingDistributionFunctionSteps<T>(T[] elements, float[] steps)
@@ -88,7 +88,12 @@ namespace AssemblyCSharp
 				index = ~index;
 			}
 			
-			return elements[index - 1];
+			if(index >= elements.Length)
+			{
+				index = elements.Length - 1;
+			}
+			
+			return elements[index];
 		}
 	}
 }

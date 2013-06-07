@@ -637,12 +637,12 @@ MonoBehaviour:
   gameStartTrack: {fileID: 8300000, guid: 2e9acaf82d7ba684d831b21de0bb08d3, type: 3}
   backgroundTracks:
   - track: {fileID: 8300000, guid: 7e718acf383065c47a1da612348cb481, type: 3}
-    probability: 0
+    probability: .100000001
   - track: {fileID: 8300000, guid: 2e9acaf82d7ba684d831b21de0bb08d3, type: 3}
-    probability: 0
+    probability: .100000001
   - track: {fileID: 8300000, guid: c367c705a37214b409bacfba7a90942e, type: 3}
-    probability: 0
+    probability: .100000001
   - track: {fileID: 8300000, guid: 6b0df655a573d9c408b55aae6d407c66, type: 3}
-    probability: 0
+    probability: .100000001
   - track: {fileID: 8300000, guid: 82a20bff26ed04546afdb16d442c1316, type: 3}
-    probability: 0
+    probability: .100000001
