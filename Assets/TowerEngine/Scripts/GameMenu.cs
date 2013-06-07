@@ -326,6 +326,7 @@ public class GameMenu : MonoBehaviour
 		saveGameButtons.additionalDataDrawer = DrawSaveGameCell;
 		saveGameButtons.onClick = OnSaveGameCellClick;
 		GUIUtilities.CalculateFontSize(ref saveGameDateStyle);
+		ResumeGame();
 	}
 	
 	void Update()
