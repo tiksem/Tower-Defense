@@ -462,6 +462,7 @@ public class MainMenu : MonoBehaviour
 		fractionPeekGridSettings.onClick = OnFractionPeek;
 		loadGameButtons.additionalDataDrawer = DrawLoadGameCell;
 		loadGameButtons.onClick = OnGameSelectedForLoad;
+		GameSettings.Instance.Init();
 		UpdateSoundButtonTexture();
 	}
 	
