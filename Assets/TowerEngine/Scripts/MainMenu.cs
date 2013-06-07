@@ -454,6 +454,7 @@ public class MainMenu : MonoBehaviour
 		mapPeekGridSettings.onClick = OnMapPeek;
 		fractionPeekGridSettings.onClick = OnFractionPeek;
 		loadGameButtons.additionalDataDrawer = DrawLoadGameCell;
+		loadGameButtons.onClick = OnGameSelectedForLoad;
 	}
 	
 	private void OnSinglePlayer()
@@ -519,6 +520,11 @@ public class MainMenu : MonoBehaviour
 		}
 		
 		DrawMiltiplayerBackground();
+	}
+	
+	private void OnGameSelectedForLoad(int index)
+	{
+		loadingOperation = SaveGameManager.instance.LoadGame(index);
 	}
 	
 	private void OnLoadGame()

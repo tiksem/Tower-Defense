@@ -162,10 +162,20 @@ public class SaveGameManager : MonoBehaviour
 		FileUtilities.Serialize(fileName, savingData);
 	}
 	
+	void OnLevelWasLoaded(int levelIndex)
+	{
+		if(levelIndex == 0)
+		{
+			//MainMenu level
+			return;
+		}
+		
+		Restore();
+	}
+	
 	void Awake()
 	{
 		instance = this;
 		DontDestroyOnLoad(gameObject);
-		Restore();
 	}
 }
