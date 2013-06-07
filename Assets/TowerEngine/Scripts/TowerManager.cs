@@ -617,15 +617,18 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 	
 	private void ReplaceTower(Tower tower, Tower replaceTo)
 	{
-		/*Vector3 position = tower.transform.position;
+		Vector3 position = tower.transform.position;
 		Vector2 xy = PositionUtilities.XYZToXZ(position);
 		
 		GameObject replaceToObject = replaceTo.gameObject;
+		TowerInfo towerInfo = new TowerInfo();
+		towerInfo.id = towersBarComponent.GetTowerIdByPrefabObject(replaceToObject);
 		replaceTo = Utilities.InstantiateAndGetComponent<Tower>(replaceToObject.gameObject, position);
-		towerNameByPlaceMap[xy] = replaceTo;
+		towerInfo.tower = replaceTo;
+		towerNameByPlaceMap[xy] = towerInfo;
 		
 		Destroy(tower.gameObject);
-		OnTowerClick(replaceTo);*/
+		OnTowerClick(replaceTo);
 	}
 	
 	private void UpgradeTower(Tower upgradeTo, int cost)
@@ -718,6 +721,7 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 	private class TowerSaveData
 	{
 		public int id;
+		public int[] upgrades;
 		public SerializableVector3 position;
 	}
 	
@@ -734,8 +738,8 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 		
 		foreach(TowerSaveData tower in towers)
 		{
-			GameObject towerPrefab = towersBarComponent.towers[tower.id];
-			PutTower(tower.position.ToVector3(), towerPrefab);
+			Tower towerPrefab = towersBarComponent.GetTowerById(tower.id);
+			PutTower(tower.position.ToVector3(), towerPrefab.gameObject);
 		}
 	}
 	

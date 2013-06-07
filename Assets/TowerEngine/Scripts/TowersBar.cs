@@ -11,6 +11,8 @@ public class TowersBar : MonoBehaviour
 	private int selectedTowerIndex = -1;
 	private BarWithCircleButtons bar;
 	private int[] towersGold;
+	
+	private List<Tower> allTowers = new List<Tower>();
 
 	public GameObject GetSelectedTower()
 	{
@@ -116,7 +118,13 @@ public class TowersBar : MonoBehaviour
 	
 	public int GetTowerIdByPrefabObject(GameObject prefab)
 	{
-		return towers.IndexOf(prefab);
+		Tower tower = prefab.GetComponent<Tower>();
+		return allTowers.IndexOf(tower);
+	}
+	
+	public Tower GetTowerById(int id)
+	{
+		return allTowers[id];
 	}
 	
 	private void InitTowersGold()
@@ -140,10 +148,40 @@ public class TowersBar : MonoBehaviour
 		}
 	}
 	
+	private void AddTowerAndUpgradesToAllTowers(Tower tower)
+	{
+		if(tower == null)
+		{
+			return;	
+		}
+		
+		allTowers.Add(tower);
+		
+		if(tower.upgrades == null)
+		{
+			return;
+		}
+		
+		for(int i = 0; i < tower.upgrades.Length; i++)
+		{
+			Tower towerToAdd = tower.upgrades[i].tower;
+			AddTowerAndUpgradesToAllTowers(towerToAdd);
+		}
+	}
+	
+	void InitAllTowers()
+	{
+		foreach(GameObject tower in towers)
+		{
+			AddTowerAndUpgradesToAllTowers(tower.GetComponent<Tower>());
+		}
+	}
+	
 	void Start()
 	{
 		bar = gameObject.GetComponent<BarWithCircleButtons>();
 		InitTowersGold();
+		InitAllTowers();
 	}
 
 	void Update()
