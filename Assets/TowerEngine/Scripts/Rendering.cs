@@ -5,12 +5,34 @@ namespace AssemblyCSharp
 {
 	public static class Rendering
 	{
+		public static Transform FindChildRecursive(Transform transform, string name)
+		{
+			Transform child = transform.FindChild(name);
+			if(child != null)
+			{
+				return child;
+			}
+			
+			int childCount = transform.GetChildCount();
+			for(int i = 0; i < childCount; i++)
+			{
+				child = transform.GetChild(i);
+				child = FindChildRecursive(child, name);
+				if(child != null)
+				{
+					return child;
+				}
+			}
+			
+			return null;
+		}
+		
 		public static Renderer GetRenderer(GameObject gameObject)
 		{
 			Renderer rendererComponent = gameObject.renderer;
 			if(rendererComponent == null)
 			{
-				Transform body = gameObject.transform.FindChild("body");
+				Transform body = FindChildRecursive(gameObject.transform, "body");
 				
 				if(body != null)
 				{
