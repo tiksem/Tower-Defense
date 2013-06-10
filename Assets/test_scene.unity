@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_Name: 
   maxLeaveTargetCount: 2
   parties:
-  - targetPrefab: {fileID: 100036, guid: f8320e05134d12d45ace8ae4fa163764, type: 2}
+  - targetPrefab: {fileID: 100130, guid: 3643589d5ebd8974ba86f2033ff5fa10, type: 2}
     leaderPrefab: {fileID: 0}
     width: 4
     height: 3
