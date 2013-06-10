@@ -108,6 +108,7 @@ public class Target : MonoBehaviour
 	public int goldForKill = 1;
 	public GameObject goldForKillPointerPrefab;
 	public AudioClip deathSound;
+	public float deathSoundVolume = 0.4f;
 	public GameObject deathEffect;
 	public float deathEffectDuration = 1.0f;
 	
@@ -270,19 +271,19 @@ public class Target : MonoBehaviour
 		goldText.text += goldForKill;
 	}
 	
-	private void PlaySound(AudioClip audio)
+	private void PlaySound(AudioClip audio, float volume)
 	{
 		if(audio == null)
 		{
 			return;
 		}
 		
-		AudioSource.PlayClipAtPoint(audio, transform.position);
+		AudioSource.PlayClipAtPoint(audio, transform.position, volume);
 	}
 	
 	private void PlayDeathSound()
 	{
-		PlaySound(deathSound);
+		PlaySound(deathSound, deathSoundVolume);
 	}
 	
 	private void ShowDeathEffect()

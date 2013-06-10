@@ -173,6 +173,11 @@ public class SaveGameManager : MonoBehaviour
 	
 	void OnLevelWasLoaded(int levelIndex)
 	{
+		if(instance != this)
+		{
+			return;
+		}
+		
 		if(levelIndex == 0)
 		{
 			//MainMenu level
@@ -184,6 +189,12 @@ public class SaveGameManager : MonoBehaviour
 	
 	void Awake()
 	{
+		if(instance != null)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		
 		instance = this;
 		DontDestroyOnLoad(gameObject);
 	}

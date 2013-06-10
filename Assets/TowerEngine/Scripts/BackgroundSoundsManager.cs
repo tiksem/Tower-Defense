@@ -21,6 +21,7 @@ public class BackgroundSoundsManager : MonoBehaviour
 	
 	private float PlayRandomSoundAndGetLength()
 	{
+		DestroyAudioSource();
 		BackgroundTrackPlayback track = RandomUtilites.ChooseOneUsingDistributionFunctionSteps(backgroundTracks, soundPeekDistributionSteps);
 		audioSource = AudioUtilities.PlayClipAt(track.track, Camera.main.transform.position);
 		return track.track.length;
@@ -28,6 +29,7 @@ public class BackgroundSoundsManager : MonoBehaviour
 	
 	private void PlayMenuSound()
 	{
+		DestroyAudioSource();
 		if(gameStartTrack != null)
 		{
 			audioSource = AudioUtilities.PlayClipAt(gameStartTrack, Camera.main.transform.position);
@@ -46,6 +48,12 @@ public class BackgroundSoundsManager : MonoBehaviour
 	
 	void Awake()
 	{
+		if(instance != null)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		
 		instance = this;
 		DontDestroyOnLoad(gameObject);
 	}
@@ -55,11 +63,18 @@ public class BackgroundSoundsManager : MonoBehaviour
 		if(audioSource != null)
 		{
 			Destroy(audioSource.gameObject);
+			Destroy(audioSource);
+			audioSource = null;
 		}
 	}
 	
 	void OnLevelWasLoaded(int index)
 	{
+		if(this != instance)
+		{
+			return;
+		}
+		
 		DestroyAudioSource();
 		//MainMenu
 		if(index == 0)
