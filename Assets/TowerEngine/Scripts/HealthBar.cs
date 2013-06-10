@@ -100,6 +100,10 @@ public class HealthBar : MonoBehaviour
 		{
 			index = colors.Length - 1;
 		}
+		else if(index < 0)
+		{
+			index = 0;
+		}
 		
 		return colors[index];
 	}
