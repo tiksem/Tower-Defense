@@ -6,6 +6,7 @@ public abstract class Bullet : MonoBehaviour
 {
 	public AudioClip creationSound;
 	public AudioClip targetHitSound;
+	public float volume = 0.4f;
 	
 	protected class TargetHit
 	{
@@ -43,7 +44,7 @@ public abstract class Bullet : MonoBehaviour
 			return;
 		}
 		
-		AudioSource.PlayClipAtPoint(audio, position);
+		AudioSource.PlayClipAtPoint(audio, position, volume);
 	}
 	
 	private void PlayCreationSound()
