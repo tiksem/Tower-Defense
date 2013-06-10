@@ -1335,10 +1335,12 @@ MonoBehaviour:
     leaderPrefab: {fileID: 0}
     width: 4
     height: 3
+    gold: 30
   - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
-    leaderPrefab: {fileID: 100114, guid: cb1c0d59bdf35b543bcda3cec3f71f03, type: 2}
+    leaderPrefab: {fileID: 0}
     width: 6
     height: 1
+    gold: 30
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5

@@ -222,17 +222,9 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		wayPointFollower.onFinish = NotifyTargetLeave;
 	}
 	
-	private GameObject CreatePartyTarget(Party party, int partyPointIndex, int x, int y)
+	private GameObject CreatePartyUnit(int partyPointIndex, GameObject prefab, Vector3 position)
 	{
-		NavMeshAgent navMeshAgent = party.targetPrefab.GetComponent<NavMeshAgent>();
-		float targetWidth = GetTargetWidth(party.targetPrefab);
-		GameObject partyPositionPoint = partyAppearingPoints[partyPointIndex];
-		
-		Vector3 position = partyPositionPoint.transform.position;
-		position.x += targetWidth * x;
-		position.z += targetWidth * y;
-		
-		GameObject target = (GameObject)Instantiate(party.targetPrefab, position, party.targetPrefab.transform.rotation);
+		GameObject target = (GameObject)Instantiate(prefab, position, prefab.transform.rotation);
 		Rendering.SetAlpha(target, 0.0f);
 		StartCoroutine(FadeTargetAppearance(target));
 		
@@ -250,16 +242,65 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		return target;
 	}
 	
+	private GameObject CreatePartyTarget(Party party, int partyPointIndex, int x, int y)
+	{
+		NavMeshAgent navMeshAgent = party.targetPrefab.GetComponent<NavMeshAgent>();
+		float targetWidth = GetTargetWidth(party.targetPrefab);
+		GameObject partyPositionPoint = partyAppearingPoints[partyPointIndex];
+		
+		Vector3 position = partyPositionPoint.transform.position;
+		position.x += targetWidth * x;
+		position.z += targetWidth * y;
+		
+		return CreatePartyUnit(partyPointIndex, party.targetPrefab, position);
+	}
+	
+	private GameObject CreatePartyLeader(int partyPointIndex, Vector3 position, Party party)
+	{
+		if(party.leaderPrefab == null)
+		{
+			return null;
+		}
+		
+		position.x += GetTargetWidth(party.leaderPrefab);
+		return CreatePartyUnit(partyPointIndex, party.leaderPrefab, position);
+	}
+	
 	private void CreateParty(int partyPointIndex)
 	{
 		Party partyToCreate = parties[partyIndex];
+		GameObject partyPositionPoint = partyAppearingPoints[partyPointIndex];
+		Vector3 leaderPosition = partyPositionPoint.transform.position;
+		
+		float zInFirstLine = 0.0f;
+		float zInLastLine = 0.0f;
+		
 		for(int y = 0; y < partyToCreate.height; y++)
 		{
+			GameObject target = null;
+			
 			for(int x = 0; x < partyToCreate.width; x++)
 			{
-				CreatePartyTarget(partyToCreate, partyPointIndex, x, y);
+				target = CreatePartyTarget(partyToCreate, partyPointIndex, x, y);
+				if(x == partyToCreate.width - 1 && y == 0)
+				{
+					leaderPosition.x = target.transform.position.x;
+					leaderPosition.x += GetTargetWidth(target);
+				}
+			}
+			
+			if(y == 0)
+			{
+				zInFirstLine = target.transform.position.z;
+			}
+			else if(y == partyToCreate.height - 1)
+			{
+				zInLastLine = target.transform.position.z;
 			}
 		}
+		
+		leaderPosition.z = zInFirstLine + (zInLastLine - zInFirstLine) / 2;
+		CreatePartyLeader(partyPointIndex, leaderPosition, partyToCreate);
 	}
 	
 	private void CreateParties()
