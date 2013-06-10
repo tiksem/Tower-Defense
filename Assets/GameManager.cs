@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		public GameObject leaderPrefab;
 		public int width = 5;
 		public int height = 5;
+		public int gold = 30;
 	}
 	
 	public int maxLeaveTargetCount = 50;
@@ -148,8 +149,19 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		}
 	}
 	
+	private void RecvGoldFromParty()
+	{
+		if(partyIndex >= 0 && partyIndex < parties.Length)
+		{
+			Party party = parties[partyIndex];
+			TowerManager.Instance.CurrentGold += party.gold;
+		}
+	}
+	
 	private void OnAllTargetsDestroyed()
 	{
+		RecvGoldFromParty();
+		
 		if(roundTimerPrefab != null)
 		{
 			partyIndex++;

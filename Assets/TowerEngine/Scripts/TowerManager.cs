@@ -61,7 +61,7 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 		}
 	}
 	
-	private int CurrentGold
+	public int CurrentGold
 	{
 		get
 		{
