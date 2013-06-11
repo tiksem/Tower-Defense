@@ -248,12 +248,12 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 1
-  maxSize: 1.5
+  minSize: 2
+  maxSize: 3
   minEnergy: 4
   maxEnergy: 4.5
   minEmission: 30
-  maxEmission: 30
+  maxEmission: 100
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}
@@ -278,8 +278,8 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 1
-  maxSize: 2
+  minSize: 2
+  maxSize: 4
   minEnergy: 7
   maxEnergy: 7
   minEmission: 40
@@ -308,8 +308,8 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 1
-  maxSize: 1
+  minSize: 2
+  maxSize: 2
   minEnergy: 3
   maxEnergy: 3
   minEmission: 40

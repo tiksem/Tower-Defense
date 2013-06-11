@@ -155,19 +155,19 @@ MonoBehaviour:
   brushes:
   - gameObject: {fileID: 100000, guid: b23ef1162d14d4e4582ff585da512eb3, type: 2}
     period: .00999999978
-    destroyAfter: 30
-  - gameObject: {fileID: 100000, guid: 542f86e4e34b523499e0f073b1355e1a, type: 2}
+    destroyAfter: 200
+  - gameObject: {fileID: 100000, guid: a8a3d529d91b58a46b68f6f143f3419a, type: 2}
     period: .00999999978
-    destroyAfter: 30
+    destroyAfter: 200
   - gameObject: {fileID: 100002, guid: bf32f1ac64f72424cb3489ac80d4ce96, type: 2}
     period: .00999999978
-    destroyAfter: 30
+    destroyAfter: 200
   - gameObject: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
     period: .00999999978
-    destroyAfter: 30
+    destroyAfter: 200
   - gameObject: {fileID: 100000, guid: 283746c560beb6145a5409c8e486d6d9, type: 2}
     period: .00999999978
-    destroyAfter: 30
+    destroyAfter: 200
   terrain: {fileID: 1408230365}
   clearButton: {fileID: 2800000, guid: b132e59082477d04aab3518b579ff299, type: 3}
   clearButtonSize: .100000001
@@ -435,6 +435,7 @@ GameObject:
   - 81: {fileID: 2002074367}
   - 114: {fileID: 2002074366}
   - 45: {fileID: 2002074365}
+  - 114: {fileID: 2002074372}
   m_Layer: 0
   m_Name: VeryGreenMapCamera
   m_TagString: MainCamera
@@ -548,6 +549,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &2002074372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002074364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15d45674f2dad043914e6869fa9aacf, type: 3}
+  m_Name: 
 --- !u!1 &2019051396
 GameObject:
   m_ObjectHideFlags: 0
