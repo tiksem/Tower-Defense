@@ -99,6 +99,18 @@ public class BarWithCircleButtons : MonoBehaviour
 		buttonsStates[buttonIndex] = buttonState;
 	}
 	
+	public bool SetButtonStateToSelectedIfNotDisabled(int index)
+	{
+		ButtonState buttonState = GetButtonState(index);
+		if(buttonState == ButtonState.DISABLED)
+		{
+			return false;
+		}
+		
+		SetButtonState(index, ButtonState.SELECTED);
+		return true;
+	}
+	
 	private void UpdateButtons()
 	{
 		buttonsStates = new ButtonState[buttonsCount];
@@ -190,14 +202,14 @@ public class BarWithCircleButtons : MonoBehaviour
 		return buttonsCount;
 	}
 	
-	public void Start()
+	public virtual void Start()
 	{
 		GUIUtilities.CalculateFontSize(ref textStyle);
 		GUIUtilities.CalculateFontSize(ref disabledTextStyle);
 		UpdateButtons();
 	}
 	
-	public void OnGUI()
+	public virtual void OnGUI()
 	{
 		GUIManager.Instance.SetMouseOverFlag(false);
 		DrawButtons();

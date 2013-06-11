@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
@@ -244,6 +246,32 @@ namespace AssemblyCSharp
 			where T : Component
 		{
 			return InstantiateAndGetComponent<T>(prefab, prefab.transform.position);
+		}
+		
+		public static GameObject InstantiateAndDestroyAfter(GameObject prefab, Vector3 position, Quaternion rotation, float destroyAfter)
+		{
+			GameObject gameObject = (GameObject)GameObject.Instantiate(prefab, position, rotation);
+			GameObject.Destroy(gameObject, destroyAfter);
+			return gameObject;
+		}
+		
+		public static GameObject InstantiateAndDestroyAfter(GameObject prefab, Vector3 position, float destroyAfter)
+		{
+			return InstantiateAndDestroyAfter(prefab, position, prefab.transform.rotation, destroyAfter);
+		}
+		
+		public static void DestroyAll(IEnumerable objects)
+		{
+			foreach(UnityEngine.Object obj in objects)
+			{
+				GameObject.Destroy(obj);
+			}
+		}
+		
+		public static void DestroyAll(IList<UnityEngine.Object> objects)
+		{
+			DestroyAll(objects);
+			objects.Clear();
 		}
 	}
 }
