@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using AssemblyCSharp;
 
 public abstract class Bullet : MonoBehaviour 
 {
@@ -81,12 +82,7 @@ public abstract class Bullet : MonoBehaviour
 	
 	private void InitTargetRenderer()
 	{
-		rendererComponent = target.renderer;
-		if(rendererComponent == null)
-		{
-			Transform body = target.transform.FindChild("body");
-			rendererComponent = body.gameObject.renderer;
-		}
+		rendererComponent = Rendering.GetRenderer(target);
 	}
 	
 	protected virtual void DestroyGameObject()

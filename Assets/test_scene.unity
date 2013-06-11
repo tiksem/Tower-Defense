@@ -1297,6 +1297,11 @@ MonoBehaviour:
     width: 6
     height: 1
     gold: 30
+  - targetPrefab: {fileID: 100130, guid: 3643589d5ebd8974ba86f2033ff5fa10, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 2
+    gold: 30
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5

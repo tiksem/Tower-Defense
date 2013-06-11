@@ -18,7 +18,6 @@ public class HealthBar : MonoBehaviour
 	public float width = 0.07f;
 	public float yOffset = 0.0f;
 	public float xOffset = 0.0f;
-	public string childWithRendererName = "body";
 	
 	
 	private static readonly int TEXTURE_WIDTH = 100;
@@ -38,32 +37,7 @@ public class HealthBar : MonoBehaviour
 	
 	private void InitRendererComponent()
 	{
-		if(rendererComponent != null)
-		{
-			return;
-		}
-		
-		if(renderer != null)
-		{
-			rendererComponent = renderer;
-		}
-		else
-		{
-			Transform rendererTransform = transform.FindChild(childWithRendererName);
-			if(rendererTransform == null)
-			{
-				Debug.LogError("No such child '" + childWithRendererName + "'");
-			}
-			else
-			{
-				GameObject rendererObject = rendererTransform.gameObject;
-				rendererComponent = rendererObject.renderer;
-				if(rendererComponent == null)
-				{
-					Debug.LogError("Child '" + childWithRendererName + "' should have renderer component");
-				}
-			}
-		}
+		rendererComponent = Rendering.GetRenderer(gameObject);
 	}
 	
 	void OnValidate()
