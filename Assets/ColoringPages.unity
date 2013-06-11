@@ -156,11 +156,20 @@ MonoBehaviour:
   - gameObject: {fileID: 100000, guid: b23ef1162d14d4e4582ff585da512eb3, type: 2}
     period: .00999999978
     destroyAfter: 30
-  - gameObject: {fileID: 100004, guid: 56626fba39d1ecc4fa8278f548b409a5, type: 3}
+  - gameObject: {fileID: 100000, guid: 542f86e4e34b523499e0f073b1355e1a, type: 2}
+    period: .00999999978
+    destroyAfter: 30
+  - gameObject: {fileID: 100002, guid: bf32f1ac64f72424cb3489ac80d4ce96, type: 2}
+    period: .00999999978
+    destroyAfter: 30
+  - gameObject: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
+    period: .00999999978
+    destroyAfter: 30
+  - gameObject: {fileID: 100000, guid: 283746c560beb6145a5409c8e486d6d9, type: 2}
     period: .00999999978
     destroyAfter: 30
   terrain: {fileID: 1408230365}
-  clearButton: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
+  clearButton: {fileID: 2800000, guid: b132e59082477d04aab3518b579ff299, type: 3}
   clearButtonSize: .100000001
   clearButtonBorder: 0
 --- !u!1 &786715007
@@ -577,19 +586,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2b595fe96d9104e839b56b46ad6082, type: 3}
   m_Name: 
   iconSize: .100000001
-  firstIconLeft: .100000001
+  firstIconLeft: .0500000007
   iconBottom: .100000001
   distanceBetweenIcons: .100000001
   defaultButtonTexture: {fileID: 0}
   footerTexture: {fileID: 0}
   footerHeight: .100000001
-  buttonsCount: 2
+  buttonsCount: 5
   buttonTextures:
-  - normalState: {fileID: 2800000, guid: ae94dfa1f1ecc3f4690b068b7ce78a16, type: 3}
+  - normalState: {fileID: 2800000, guid: ecd0f8565922ab243972189bbe5c52fd, type: 3}
     selectedState: {fileID: 0}
     disabledState: {fileID: 0}
     additionalText: 
-  - normalState: {fileID: 2800000, guid: 90911b614e7f06342827db2ef6770d7a, type: 3}
+  - normalState: {fileID: 2800000, guid: fce844f0ddd7fae4b90089e7f7e72264, type: 3}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+    additionalText: 
+  - normalState: {fileID: 2800000, guid: b598c273bd4fe3740b57cc0c975b5882, type: 3}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+    additionalText: 
+  - normalState: {fileID: 2800000, guid: e74176ac68a11c04eb4aeb5a17a608f6, type: 3}
+    selectedState: {fileID: 0}
+    disabledState: {fileID: 0}
+    additionalText: 
+  - normalState: {fileID: 2800000, guid: ce9b874e2bfea784eacca4417b3b9646, type: 3}
     selectedState: {fileID: 0}
     disabledState: {fileID: 0}
     additionalText: 
