@@ -57,6 +57,8 @@ ModelImporter:
     100102: zm_Frill9
     100104: zm_Fuehler_01
     100106: zm_Skin
+    100108: Null
+    100110: Skin_2
     400000: Bip01
     400002: Bip01_Head
     400004: Bip01_L_Calf
@@ -111,6 +113,8 @@ ModelImporter:
     400102: zm_Frill9
     400104: zm_Fuehler_01
     400106: zm_Skin
+    400108: Null
+    400110: Skin_2
     2300000: zm_Frill
     2300002: zm_Frill1
     2300004: zm_Frill10

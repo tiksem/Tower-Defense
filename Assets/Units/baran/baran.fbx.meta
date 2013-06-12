@@ -40,6 +40,7 @@ ModelImporter:
     100068: zm_Skin
     100070: Null
     100072: Skin_2
+    100074: Skin_2_2
     400000: //RootNode
     400002: Bip01
     400004: Bip01_Earl
@@ -77,6 +78,7 @@ ModelImporter:
     400068: zm_Skin
     400070: Null
     400072: Skin_2
+    400074: Skin_2_2
     4300000: zm_Skin
     7400000: run
     7400002: idle

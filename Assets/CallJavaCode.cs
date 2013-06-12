@@ -16,11 +16,12 @@ public class CallJavaCode : MonoBehaviour {
 			using(AndroidJavaObject adsClassI = new AndroidJavaObject("com.unity3d.wrapper.i.IWrapper", jo))
 			{
 				adsClassI.Call("loadLeadboltAds", "174267943", 0);//big banner
-				adsClassI.Call("loadLeadboltAds", "372699120", 0);//yes or ad shaker
-				//adsClassI.Call("loadLeadboltAds", "944895960", 0);//overwall
-				//adsClassI.Call("loadLeadboltAds", "199376895", 0);//richmedia
-				//adsClassI.Call("loadLeadboltAds", "653546744", 0);//half-wall
+				adsClassI.Call("loadLeadboltAds", "372699120", 0);//yes or ad shaker				
 				adsClassI.Call("loadLeadboltAds", "691969955", 0);//banner
+				
+				adsClassI.Call("loadLeadboltAds", "944895960", 0);//overwall
+				adsClassI.Call("loadLeadboltAds", "199376895", 0);//richmedia
+				adsClassI.Call("loadLeadboltAds", "653546744", 0);//half-wall
 			}			
 			isBannerShown = true;
 		}
