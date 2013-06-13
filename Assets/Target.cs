@@ -4,6 +4,8 @@ using System.Collections;
 using System;
 using AssemblyCSharp;
 
+[RequireComponent(typeof(WayPointFollower))]
+[RequireComponent(typeof(BoxCollider))]
 public class Target : MonoBehaviour 
 {
 	public enum ArmorType

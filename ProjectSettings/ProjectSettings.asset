@@ -96,8 +96,8 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 1
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: Z:/Towers2/code/Publishing/Coloring Pages 3D/coloring_pages_3d.keystore
+  AndroidKeyaliasName: coloring_pages_3d
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
