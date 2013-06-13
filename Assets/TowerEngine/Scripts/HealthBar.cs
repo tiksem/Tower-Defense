@@ -6,7 +6,7 @@ using AssemblyCSharp;
 public class HealthBar : MonoBehaviour 
 {
 	public Color background = Color.black;
-	public bool useGlobalHealthBarSettings = true;
+	public bool useGlobalColorHealthBarSettings = true;
 	public Color[] colors = new Color[]
 	{
 		Color.blue,
@@ -17,6 +17,8 @@ public class HealthBar : MonoBehaviour
 	
 	public float height = 0.005f;
 	public float width = 0.07f;
+	public bool useGlobalSizeHealthBarSettings = true;
+	public bool adjustHealthBarSizeByMeshBounds = true;
 	public float yOffset = 0.0f;
 	public float xOffset = 0.0f;
 	
@@ -30,48 +32,73 @@ public class HealthBar : MonoBehaviour
 	private Texture2D texture;
 	private GUITexture guiTextureComponent;
 	private GameObject guiTextureObject;
-	private Renderer rendererComponent;
 	private float pixelHeight;
 	private float pixelWidth;
 	private float pixelYOffset;
 	private float pixelXOffset;
+	private Bounds meshBounds;
+	private Vector3 relativeMeshCenter;
 	
-	private void InitRendererComponent()
-	{
-		rendererComponent = Rendering.GetRenderer(gameObject);
-	}
-	
-	void OnValidate()
+	void InitWidthAndHeight()
 	{
 		if(colors.Length <= 0)
 		{
 			Debug.LogError("Colors length should not be 0");
 		}
 		
-		InitRendererComponent();
+		if(useGlobalSizeHealthBarSettings)
+		{
+			if(HealthBarSettings.instance != null)
+			{
+				width = HealthBarSettings.instance.width;
+				height = HealthBarSettings.instance.height;
+			}
+			else
+			{
+				Debug.LogError("Add HealthBarSettings to your scene");
+			}
+		}
+		
+		if(adjustHealthBarSizeByMeshBounds)
+		{
+			float size = meshBounds.size.magnitude;
+			height *= size;
+			width *= size;
+		}
+		
 		pixelHeight = GUIUtilities.ScreenXToGUIX(height);
 		pixelWidth = GUIUtilities.ScreenYToGUIY(width);
 		pixelXOffset = GUIUtilities.ScreenXToGUIX(xOffset);
 		pixelYOffset = GUIUtilities.ScreenYToGUIY(yOffset);
 	}
 	
+	private void InitMeshTopAndBounds()
+	{
+		meshBounds = Rendering.GetObjectBounds(gameObject);
+		relativeMeshCenter = meshBounds.center;
+		relativeMeshCenter.x = meshBounds.min.x;
+		relativeMeshCenter -= transform.position;
+	}
+	
 	// Use this for initialization
 	void Start()
-	{
-		OnValidate();
-		
+	{	
 		GUI.backgroundColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
 		target = GetComponent<Target>();
 		texture = new Texture2D(TEXTURE_WIDTH, TEXTURE_HEIGHT);
 		guiTextureObject = new GameObject();
 		guiTextureComponent = guiTextureObject.AddComponent<GUITexture>();
 		guiTextureComponent.texture = texture;
+		
+		InitMeshTopAndBounds();
+		InitWidthAndHeight();
+		
 		guiTextureObject.SetActive(false);
 	}
 	
 	private Color[] GetColors()
 	{
-		if(useGlobalHealthBarSettings)
+		if(useGlobalColorHealthBarSettings)
 		{
 			if(HealthBarSettings.instance != null)
 			{
@@ -155,7 +182,7 @@ public class HealthBar : MonoBehaviour
 	
 	private void DrawTexture()
 	{
-		Vector3 texturePosition = Camera.main.WorldToScreenPoint(rendererComponent.bounds.center);
+		Vector3 texturePosition = Camera.main.WorldToScreenPoint(relativeMeshCenter + transform.position);
 		//Debug.Log(texturePosition);
 		
 		guiTextureObject.transform.rotation = transform.rotation;

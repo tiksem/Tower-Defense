@@ -123,6 +123,16 @@ namespace AssemblyCSharp
 			top.z = bounds.center.z;
 			return top;
 		}
+		
+		public static Vector3 GetObjectRelativeTopCenter(GameObject gameObject)
+		{
+			Bounds bounds = GetObjectBounds(gameObject);
+			Vector3 top =  GetBoundMaxByY(gameObject);
+			top.x = bounds.center.x;
+			top.z = bounds.center.z;
+			top -= bounds.min;
+			return top;
+		}
 	}
 }
 

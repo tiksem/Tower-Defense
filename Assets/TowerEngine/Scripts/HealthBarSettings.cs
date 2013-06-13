@@ -13,6 +13,9 @@ public class HealthBarSettings : MonoBehaviour
 		Color.blue,
 	};
 	
+	public float height = 0.005f;
+	public float width = 0.07f;
+	
 	void Awake()
 	{
 		instance = this;
