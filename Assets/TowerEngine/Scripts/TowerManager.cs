@@ -696,6 +696,12 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 	
 	void OnGUI()
 	{
+		if(GameMenu.Instance.IsLoading())
+		{
+			goldBar.gameObject.SetActive(false);
+			return;
+		}
+		
 		if(mapState == MapState.UPGRADING_TOWER)
 		{
 			DrawCloseButton();

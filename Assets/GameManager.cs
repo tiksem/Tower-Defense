@@ -407,6 +407,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	{
 		if(GameMenu.Instance.IsLoading())
 		{
+			lifesBar.gameObject.SetActive(false);
 			return;
 		}
 		
