@@ -66,6 +66,7 @@ public class HealthBar : MonoBehaviour
 		guiTextureObject = new GameObject();
 		guiTextureComponent = guiTextureObject.AddComponent<GUITexture>();
 		guiTextureComponent.texture = texture;
+		guiTextureObject.SetActive(false);
 	}
 	
 	private Color[] GetColors()
@@ -183,6 +184,14 @@ public class HealthBar : MonoBehaviour
 	
 	void Update()
 	{
+		if(!guiTextureObject.activeSelf)
+		{
+			if(target.WasDamaged())
+			{
+				guiTextureObject.SetActive(true);
+			}
+		}
+		
 		UpdateTextureState();
 		DrawTexture();
 	}

@@ -250,6 +250,11 @@ public class Target : MonoBehaviour
 		return immunitiesSet.Contains(attackType);
 	}
 	
+	public bool WasDamaged()
+	{
+		return currentHP < maxHP;
+	}
+	
 	private float GetDamageCoefficientForAttackType(Weapon.AttackType attackType)
 	{
 		return ARMOR_TABLE[armorType][attackType];
