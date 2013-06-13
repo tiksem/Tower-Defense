@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	public TextWithIcon lifesBar;
 	
-	private int partyIndex = -1;
+	public int partyIndex = 0;
 	
 	private int leaveTargetCount = 0;
 	private int leavesCountOnRoundStart = 0;
@@ -386,6 +386,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		instance = this;
 		
 		InitPartiesPoints();
+		partyIndex--;
 		LeaveTargetCount = 0;
 	}
 	
