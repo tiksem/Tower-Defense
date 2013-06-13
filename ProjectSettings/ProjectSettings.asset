@@ -66,7 +66,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.weshall.coloring_pages_3d
+  iPhoneBundleIdentifier: com.weshall.warcraft_tower_defence
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 6
@@ -97,16 +97,16 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 1
   AndroidKeystoreName: Z:/Towers2/code/Publishing/Coloring Pages 3D/coloring_pages_3d.keystore
-  AndroidKeyaliasName: coloring_pages_3d
+  AndroidKeyaliasName: 
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: ca4bb43d647b29545b658676de1547ec, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 3007e86ed34312f4d98f5f3bd1a73aa8, type: 3}
       m_Size: 128
   - m_BuildTarget: Android
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: ca4bb43d647b29545b658676de1547ec, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 3007e86ed34312f4d98f5f3bd1a73aa8, type: 3}
       m_Size: 96
     - m_Icon: {fileID: 0}
       m_Size: 72
