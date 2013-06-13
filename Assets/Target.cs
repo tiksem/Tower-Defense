@@ -188,6 +188,7 @@ public class Target : MonoBehaviour
 	void Awake()
 	{
 		OnValidate();
+		tag = "Target";
 	}
 	
 	void OnValidate()
