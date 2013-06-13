@@ -324,67 +324,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9bcc271093a9924798c67db2f485771, type: 3}
   m_Name: 
---- !u!1 &543120965
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-  m_PrefabInternal: {fileID: 635432233}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 543120967}
-  - 132: {fileID: 543120966}
-  - 114: {fileID: 543120968}
-  m_Layer: 0
-  m_Name: FPS
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!132 &543120966
-GUIText:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13200000, guid: eae2373d2b883da46a9bbe613986ed74,
-    type: 2}
-  m_PrefabInternal: {fileID: 635432233}
-  m_GameObject: {fileID: 543120965}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: Gui Text
-  m_Anchor: 0
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Material: {fileID: 0}
-  m_FontSize: 24
-  m_FontStyle: 0
-  m_PixelCorrect: 1
-  m_RichText: 1
---- !u!4 &543120967
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-  m_PrefabInternal: {fileID: 635432233}
-  m_GameObject: {fileID: 543120965}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: .5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
---- !u!114 &543120968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: eae2373d2b883da46a9bbe613986ed74,
-    type: 2}
-  m_PrefabInternal: {fileID: 635432233}
-  m_GameObject: {fileID: 543120965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2386fd446be7cac4493d339d64f9b4b5, type: 3}
-  m_Name: 
-  updateInterval: .5
 --- !u!1001 &562559091
 Prefab:
   m_ObjectHideFlags: 0
@@ -517,46 +456,6 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!1001 &635432233
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: eae2373d2b883da46a9bbe613986ed74, type: 2}
-  m_RootGameObject: {fileID: 543120965}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1001 &720742000
 Prefab:
   m_ObjectHideFlags: 0
@@ -1328,7 +1227,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100126, guid: 19f88e7ca2ca1c748acc712ad245c859, type: 2}
     leaderPrefab: {fileID: 0}
     width: 4
-    height: 3
+    height: 2
     gold: 30
   - targetPrefab: {fileID: 100058, guid: 260811c4ac9404546bb68534699ffafe, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1363,7 +1262,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100100, guid: 98577d735b05f2e42ac5a505d052e9e5, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 5
     gold: 30
   - targetPrefab: {fileID: 100078, guid: 26f4c8d79a3a0cd41bdb2f16b596ae96, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1387,8 +1286,8 @@ MonoBehaviour:
     gold: 30
   - targetPrefab: {fileID: 100168, guid: c04787b27309822458c01e08257d036f, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 3
+    height: 1
     gold: 30
   - targetPrefab: {fileID: 100070, guid: fc7cb5d76296e2f4bb49c3107a87e18c, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1442,15 +1341,15 @@ MonoBehaviour:
     gold: 30
   - targetPrefab: {fileID: 100168, guid: 972b28321f7df0845be87c7f67daeb0e, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 3
+    height: 1
     gold: 30
   - targetPrefab: {fileID: 100084, guid: 60e05dce1b5927044954f2d50cb95f4f, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 5
+    height: 1
     gold: 30
-  - targetPrefab: {fileID: 100106, guid: 755e9e1f23caf2d498fb732c714934fc, type: 2}
+  - targetPrefab: {fileID: 100106, guid: e72d6c9d30331de4290ad96f34711a6d, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
@@ -1462,8 +1361,8 @@ MonoBehaviour:
     gold: 30
   - targetPrefab: {fileID: 100170, guid: b56de0228c2741b42b5f844416377131, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 3
+    height: 1
     gold: 30
   - targetPrefab: {fileID: 100066, guid: 35260c0bdf1d2df4589a3bb790eb30a3, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1487,8 +1386,8 @@ MonoBehaviour:
     gold: 30
   - targetPrefab: {fileID: 100168, guid: 3453af15f0e60524581ce9a64f959826, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 3
+    height: 1
     gold: 30
   - targetPrefab: {fileID: 100106, guid: 44ed0a52163fc5f429bd8009300e148f, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1522,8 +1421,8 @@ MonoBehaviour:
     gold: 30
   - targetPrefab: {fileID: 100170, guid: 63b0547a2eb337c44a105899d2771d7e, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 3
+    height: 1
     gold: 30
   wayPointTags:
   - WayPoint1
@@ -1542,6 +1441,7 @@ MonoBehaviour:
   delayBetweenPartyAndPortalCreation: 2
   leavePortalOffset: {x: 0, y: 3, z: 0}
   lifesBar: {fileID: 1121354448}
+  partyIndex: 0
 --- !u!1 &1121354447
 GameObject:
   m_ObjectHideFlags: 0

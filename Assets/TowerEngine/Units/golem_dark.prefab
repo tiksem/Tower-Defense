@@ -510,7 +510,7 @@ GameObject:
   - 33: {fileID: 3300034}
   - 23: {fileID: 2300034}
   m_Layer: 0
-  m_Name: zm_Frill2
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1507,7 +1507,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100106}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71.2806473, y: 0, z: 42.2025223}
+  m_LocalPosition: {x: 67.374855, y: .211794615, z: 41.4958115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400104}
@@ -2153,7 +2153,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e180c0ab59d299408119c88022a32f1, type: 3}
   m_Name: 
-  animationSpeed: 1
+  animationSpeed: .25
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2225,7 +2225,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100106}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: 2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
