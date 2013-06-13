@@ -153,11 +153,13 @@ MonoBehaviour:
   delayBeforeRender: 2
   attackTypes:
   - name: 
-    bullet: {fileID: 100000, guid: a8a3d529d91b58a46b68f6f143f3419a, type: 2}
+    bullet: {fileID: 100000, guid: fe297bde0e372ed47ad026e486fd86a2, type: 2}
     cooldown: 4
-    range: 100
+    range: 30
     damage: 100
     attackType: 1
+    ground: 1
+    air: 1
     additionalEffects: []
     effectsChances: []
 --- !u!114 &11400002
@@ -173,12 +175,13 @@ MonoBehaviour:
   goldPrice: 200
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 0
   name: Unnamed
   upgrades:
   - tower: {fileID: 11400002, guid: cdf9fdee2c8978040bea2b2283252855, type: 2}
     icon: {fileID: 2800000, guid: dfa2b72405b099543955efb9633a7701, type: 3}
     disabledIcon: {fileID: 2800000, guid: 4c96101c667600e42a2a1c5129c4207c, type: 3}
-    goldCost: 100
+    goldCost: 250
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -112,12 +112,14 @@ MonoBehaviour:
   attackTypes:
   - name: 
     bullet: {fileID: 100012, guid: f81228e3647fdc0449bdf20653a1b8cb, type: 2}
-    cooldown: 1
+    cooldown: 3
     range: 7
-    damage: 10
-    attackType: 0
+    damage: 30
+    attackType: 1
+    ground: 1
+    air: 1
     additionalEffects:
-    - {fileID: 100000, guid: 689bc49e06d62f24ba3c3b9ef00fbe26, type: 2}
+    - {fileID: 100000, guid: da74713636c863546b5d4e1f6c365cb8, type: 2}
     effectsChances:
     - 1
 --- !u!114 &11400002
@@ -133,6 +135,7 @@ MonoBehaviour:
   goldPrice: 25
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 0
   name: Unnamed
   upgrades:
   - tower: {fileID: 0}

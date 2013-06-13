@@ -123,6 +123,7 @@ MonoBehaviour:
   goldPrice: 10
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 0
   name: Unnamed
   upgrades:
   - tower: {fileID: 0}
@@ -146,11 +147,14 @@ MonoBehaviour:
   attackTypes:
   - name: 
     bullet: {fileID: 100002, guid: 509003b980f4e9645bf883334dc6f9a9, type: 2}
-    cooldown: 1
-    range: 40
-    damage: 20
-    attackType: 0
+    cooldown: 2
+    range: 25
+    damage: 25
+    attackType: 4
+    ground: 1
+    air: 1
     additionalEffects: []
+    effectsChances: []
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -1329,7 +1329,7 @@ MonoBehaviour:
     leaderPrefab: {fileID: 0}
     width: 4
     height: 2
-    gold: 30
+    gold: 25
   - targetPrefab: {fileID: 100058, guid: 260811c4ac9404546bb68534699ffafe, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
-  startGold: 1000
+  startGold: 30
   availibleTowerPlaces:
   - {fileID: 1364790118}
   - {fileID: 1113357790}

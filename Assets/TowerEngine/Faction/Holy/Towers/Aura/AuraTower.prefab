@@ -77,13 +77,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 889aa10bd8623d747826c6b1cd5d980b, type: 3}
   m_Name: 
-  goldPrice: 100
+  goldPrice: 500
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 0
   name: Unnamed
   upgrades: []
-  damageBonus: 1.5
-  radius: 5
+  damageBonus: 2
+  radius: 20
   affectOtherAuraTowers: 0
   auraEffectPrefab: {fileID: 11900000, guid: b0a1f6772f39e47fdae4d55c17d8ac35, type: 2}
   effectProjectorHeight: 7

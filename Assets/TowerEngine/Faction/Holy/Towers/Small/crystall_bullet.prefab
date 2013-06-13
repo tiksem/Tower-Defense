@@ -104,7 +104,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59664e13ed0a6a34399a32a0f152db5c, type: 3}
   m_Name: 
-  velocity: 10
+  creationSound: {fileID: 0}
+  targetHitSound: {fileID: 0}
+  volume: .400000006
+  velocity: 30
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

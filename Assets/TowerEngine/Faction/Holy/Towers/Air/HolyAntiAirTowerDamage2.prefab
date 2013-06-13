@@ -155,9 +155,9 @@ MonoBehaviour:
   - name: 
     bullet: {fileID: 100000, guid: 30b2983a75635624a9d186e0f09671ea, type: 2}
     cooldown: 1
-    range: 1000
-    damage: 100
-    attackType: 0
+    range: 30
+    damage: 1850
+    attackType: 2
     ground: 0
     air: 1
     additionalEffects: []
@@ -175,6 +175,7 @@ MonoBehaviour:
   goldPrice: 500
   level: 0
   crystalPrice: 0
+  canSeeInvisibleUnits: 0
   name: Unnamed
   upgrades:
   - tower: {fileID: 0}
