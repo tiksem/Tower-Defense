@@ -6,6 +6,7 @@ using AssemblyCSharp;
 public class HealthBar : MonoBehaviour 
 {
 	public Color background = Color.black;
+	public bool useGlobalHealthBarSettings = true;
 	public Color[] colors = new Color[]
 	{
 		Color.blue,
@@ -67,8 +68,25 @@ public class HealthBar : MonoBehaviour
 		guiTextureComponent.texture = texture;
 	}
 	
+	private Color[] GetColors()
+	{
+		if(useGlobalHealthBarSettings)
+		{
+			if(HealthBarSettings.instance != null)
+			{
+				return HealthBarSettings.instance.colors;
+			}
+			
+			Debug.LogError("Add HealthBarSettings to your scene");
+		}
+		
+		return colors;
+	}
+	
 	private Color GetColorFromHP()
 	{
+		Color[] colors = GetColors();
+		
 		int index = (int)((float)lastHP / (float)target.maxHP * (float)colors.Length);
 		if(index >= colors.Length)
 		{
