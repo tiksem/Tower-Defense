@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(ParticleSystem))]
 public class ParticleSystemAreaBullet : AreaBullet
 {
 	protected ParticleSystem particleSystem;
@@ -12,7 +11,7 @@ public class ParticleSystemAreaBullet : AreaBullet
 	}
 	
 	// Use this for initialization
-	void Start()
+	public virtual void Start()
 	{
 		particleSystem = GetComponent<ParticleSystem>();
 	}
