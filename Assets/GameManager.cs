@@ -523,7 +523,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		if(data != null)
 		{
 			SaveData saveData = (SaveData)data;
-			partyIndex = saveData.partyIndex - 1;
+			partyIndex = saveData.partyIndex;
 			LeaveTargetCount = saveData.leavesCount;
 		}
 	}

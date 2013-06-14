@@ -1140,7 +1140,7 @@ MonoBehaviour:
     poison: 0
     wind: 0
   physicalArmor: 50
-  goldForKill: 1
+  goldForKill: 5
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 0}
@@ -1247,7 +1247,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

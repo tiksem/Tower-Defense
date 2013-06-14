@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 203691212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.6085739, y: 1, z: 65.1882782}
+  m_LocalPosition: {x: 72.1879349, y: .847858429, z: 65.1882782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -636,7 +636,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 758062714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.1572342, y: 4.78438568, z: 59.500824}
+  m_LocalPosition: {x: 19.5278358, y: 4.78438568, z: 60.61586}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   leavePortalOffset: {x: 0, y: 3, z: 0}
   lifesBar: {fileID: 1121354448}
   partyIndex: 0
-  obstaclesTargetAvoidanceQuailty: 1
+  obstaclesTargetAvoidanceQuailty: 3
 --- !u!1 &1121354447
 GameObject:
   m_ObjectHideFlags: 0
