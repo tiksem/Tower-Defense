@@ -7,6 +7,20 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	public static GameManager instance;
 	
 	[System.Serializable]
+	public class Message
+	{
+		public string text = "";
+		public float delayBeforeShow = 0.0f;
+	}
+	
+	[System.Serializable]
+	public class LevelDescriptionMessage
+	{
+		public float delayBeforeShow = 0.0f;
+		public int levelOffset = 0;
+	}
+	
+	[System.Serializable]
 	public class Party
 	{
 		public GameObject targetPrefab;
@@ -14,6 +28,9 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		public int width = 5;
 		public int height = 5;
 		public int gold = 30;
+		
+		public Message[] endRoundMessages;
+		public LevelDescriptionMessage[] endRoundLevelDescriptions = new LevelDescriptionMessage[1];
 	}
 	
 	public int maxLeaveTargetCount = 50;
@@ -65,6 +82,18 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			leaveTargetCount = value;
 			UpdateLifesBar();
 		}
+	}
+	
+	void OnValidate()
+	{
+		/*foreach(Party party in parties)
+		{
+			int levelDescriptionsCount = party.endRoundLevelDescriptions.Length;
+			if(levelDescriptionsCount == 0)
+			{
+				party.endRoundLevelDescriptions = new GameManager.LevelDescriptionMessage[1];
+			}
+		}*/
 	}
 	
 	private IEnumerator LooseAction()
@@ -158,6 +187,38 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		}
 	}
 	
+	private string GetMessageTextForLevel(int level, Target target)
+	{
+		string armorType = target.GetArmorTypeAsString();
+		string type = target.GetTypeAsString();
+		return string.Format(Messenger.Instance.nextLevelDescriptionPattern, level, type, armorType);
+	}
+	
+	private IEnumerator ShowLevelDescriptionMessages()
+	{
+		Party party = parties[partyIndex];
+		LevelDescriptionMessage[] messages = party.endRoundLevelDescriptions;
+		foreach(LevelDescriptionMessage message in messages)
+		{
+			yield return new WaitForSeconds(message.delayBeforeShow);
+			int level = partyIndex + 1 + message.levelOffset;
+			Target target = party.targetPrefab.GetComponent<Target>();
+			string text = GetMessageTextForLevel(level, target);
+			Messenger.Instance.ShowMessage(text);
+		}
+	}
+	
+	private IEnumerator ShowEndRoundMessages()
+	{
+		Party party = parties[partyIndex];
+		Message[] messages = party.endRoundMessages;
+		foreach(Message message in messages)
+		{
+			yield return new WaitForSeconds(message.delayBeforeShow);
+			Messenger.Instance.ShowMessage(message.text);
+		}
+	}
+	
 	private void OnAllTargetsDestroyed()
 	{
 		RecvGoldFromParty();
@@ -174,6 +235,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			else
 			{
 				TowerManager.Instance.NotifyNewRoundStarted();
+				StartCoroutine(ShowEndRoundMessages());
+				StartCoroutine(ShowLevelDescriptionMessages());
 				UpdateLevelIndex();
 			}
 			

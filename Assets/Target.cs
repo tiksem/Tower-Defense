@@ -289,6 +289,18 @@ public class Target : MonoBehaviour
 		AudioSource.PlayClipAtPoint(audio, transform.position, volume);
 	}
 	
+	public string GetTypeAsString()
+	{
+		string name = Enum.GetName(typeof(Type), type);
+		return name.ToLower();
+	}
+	
+	public string GetArmorTypeAsString()
+	{
+		string name = Enum.GetName(typeof(ArmorType), armorType);
+		return name.ToLower();
+	}
+	
 	private void PlayDeathSound()
 	{
 		PlaySound(deathSound, deathSoundVolume);
