@@ -979,8 +979,8 @@ SkinnedMeshRenderer:
   - {fileID: 400000}
   m_RootBone: {fileID: 400052}
   m_AABB:
-    m_Center: {x: .75, y: -.5, z: 0}
-    m_Extent: {x: .877328515, y: 1, z: .939804494}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: .877328515, y: 1, z: .349999994}
   m_DirtyAABB: 0
 --- !u!195 &19500000
 NavMeshAgent:

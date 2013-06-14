@@ -588,7 +588,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e180c0ab59d299408119c88022a32f1, type: 3}
   m_Name: 
-  animationSpeed: 1
+  animationSpeed: .300000012
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
