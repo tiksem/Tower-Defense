@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		{
 			yield return new WaitForSeconds(message.delayBeforeShow);
 			int level = partyIndex + 1 + message.levelOffset;
+			party = parties[level - 1];
 			Target target = party.targetPrefab.GetComponent<Target>();
 			string text = GetMessageTextForLevel(level, target);
 			Messenger.Instance.ShowMessage(text);
@@ -451,6 +452,25 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		InitPartiesPoints();
 		partyIndex--;
 		LeaveTargetCount = 0;
+	}
+	
+		
+	private void KillAllTargets()
+	{
+		GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
+		foreach(GameObject gameObject in targets)
+		{
+			Target target = gameObject.GetComponent<Target>();
+			target.Damage(Weapon.AttackType.NORMAL, 9999999);
+		}
+	}
+	
+	void Update()
+	{
+		if(Input.GetKeyUp(KeyCode.K))
+		{
+			KillAllTargets();
+		}
 	}
 	
 	void FixedUpdate() 

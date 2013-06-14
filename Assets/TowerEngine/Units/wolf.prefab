@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 100
+  maxHP: 500
   armorType: 1
   type: 0
   invisible: 0
@@ -1184,6 +1184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
   m_Name: 
   background: {r: 0, g: 0, b: 0, a: 1}
+  useGlobalColorHealthBarSettings: 1
   colors:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
@@ -1191,6 +1192,8 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   height: .00499999989
   width: .0700000003
+  useGlobalSizeHealthBarSettings: 1
+  adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0
 --- !u!137 &13700000

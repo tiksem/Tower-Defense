@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb1af4e5d8deb8419af6651668da7c0, type: 3}
   m_Name: 
   fadeDuration: 1
-  fadeAfter: 4
+  fadeAfter: 7
   notEnoughGoldMessage: Not enough gold
   towerNotSelectedMessage: Select tower
   selectTowerUpgradeMessage: Select tower upgrade
@@ -1341,273 +1341,353 @@ MonoBehaviour:
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+    - delayBeforeShow: 9
+      levelOffset: 1
   - targetPrefab: {fileID: 100096, guid: ac9f4196a35c81343b05d121002096ff, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100094, guid: c77ccaf8f3f27634a8c0bcbbcb8cc881, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100072, guid: 82ce7d8ed2a9c2d44ae978349e3b2011, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100076, guid: 116e006a8d6dd1048b341fff21d8ff23, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100104, guid: e00b033f3d2713f4bbf1b1e0b16ed8d4, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
-    gold: 30
+    gold: 40
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100100, guid: 98577d735b05f2e42ac5a505d052e9e5, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 5
-    gold: 30
+    gold: 40
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100078, guid: 26f4c8d79a3a0cd41bdb2f16b596ae96, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
-    gold: 30
+    gold: 40
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100038, guid: 06d2c2cd299bc66418a9d8ff70e94750, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100060, guid: f191cc5d0931d974786153de37394023, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100074, guid: ee4088f7a6a77a04da5b2c964c9ced29, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100168, guid: c04787b27309822458c01e08257d036f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100070, guid: fc7cb5d76296e2f4bb49c3107a87e18c, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100076, guid: 3c6d546d40dea8d43a684da89102dee8, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100088, guid: f04512c2a237bd04e89abf6fa1fd7987, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100036, guid: f8320e05134d12d45ace8ae4fa163764, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100106, guid: 669b85aadc8a25b4bbf66280b9e02733, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100100, guid: ba1bdb46edc631d44821f99c773b6971, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100110, guid: 6933b04bfbeb0d542830b321936f4761, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100088, guid: bc4f3dc129e4b5c4491c500d5d0c16e4, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100076, guid: d878bc4fa412f76479f5d6527bd155f2, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100168, guid: 972b28321f7df0845be87c7f67daeb0e, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100084, guid: 60e05dce1b5927044954f2d50cb95f4f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 5
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100106, guid: e72d6c9d30331de4290ad96f34711a6d, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100060, guid: 1e7e1872bc57abf4d849f4a95da2b1a4, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100170, guid: b56de0228c2741b42b5f844416377131, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100066, guid: 35260c0bdf1d2df4589a3bb790eb30a3, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100094, guid: 8d5c32cd387ae764d90a2e9d634b809f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100130, guid: 3643589d5ebd8974ba86f2033ff5fa10, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100070, guid: 79222c200a1bddf47bd44e2dc1b3c8cf, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100168, guid: 3453af15f0e60524581ce9a64f959826, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100106, guid: 44ed0a52163fc5f429bd8009300e148f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100106, guid: a2e0a16609f9fea448feb0a8dbf1826a, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100168, guid: 571ebec30b43b084f8b6c52d2fdf0687, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100060, guid: 6e03b0e75da8ee64082896ecc80fe8d2, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100078, guid: eb27eb10ee696da439c7685ab0eb072d, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100062, guid: 05142950d24915144995c473acee68d2, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
     height: 2
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   - targetPrefab: {fileID: 100170, guid: 63b0547a2eb337c44a105899d2771d7e, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
     height: 1
     gold: 30
     endRoundMessages: []
-    endRoundLevelDescriptions: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5
@@ -3910,6 +3990,7 @@ MonoBehaviour:
   menuButtonHeight: .119999997
   menuButtonX: 0
   menuButtonY: 0
+  timeScale: 2
   endGameMessage: Exit game?
 --- !u!1 &1771949809
 GameObject:

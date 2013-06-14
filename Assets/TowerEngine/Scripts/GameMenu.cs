@@ -51,6 +51,7 @@ public class GameMenu : MonoBehaviour
 	public float menuButtonHeight = 0.1f;
 	public float menuButtonX = 0.0f;
 	public float menuButtonY = 0.0f;
+	public float timeScale = 1.0f;
 	
 	public string endGameMessage = "Exit game?";
 	
@@ -115,12 +116,12 @@ public class GameMenu : MonoBehaviour
 	
 	public void PauseGame()
 	{
-		GameUtilities.PauseGame();
+		Time.timeScale = 0.0f;
 	}
 	
 	public void ResumeGame()
 	{
-		GameUtilities.ResumeGame();
+		Time.timeScale = timeScale;
 	}
 	
 	public void HideAllControls()
