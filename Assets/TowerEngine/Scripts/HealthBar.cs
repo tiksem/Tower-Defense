@@ -36,8 +36,8 @@ public class HealthBar : MonoBehaviour
 	private float pixelWidth;
 	private float pixelYOffset;
 	private float pixelXOffset;
+	private Renderer rendererComponent;
 	private Bounds meshBounds;
-	private Vector3 relativeMeshCenter;
 	
 	void InitWidthAndHeight()
 	{
@@ -72,12 +72,18 @@ public class HealthBar : MonoBehaviour
 		pixelYOffset = GUIUtilities.ScreenYToGUIY(yOffset);
 	}
 	
-	private void InitMeshTopAndBounds()
+	private Vector3 GetMeshCenter()
 	{
-		meshBounds = Rendering.GetObjectBounds(gameObject);
-		relativeMeshCenter = meshBounds.center;
-		relativeMeshCenter.x = meshBounds.min.x;
-		relativeMeshCenter -= transform.position;
+		Bounds bounds = rendererComponent.bounds;
+		Vector3 meshCenter = bounds.center;
+		meshCenter.x = bounds.min.x;
+		return meshCenter;
+	}
+	
+	private void InitRendererComponent()
+	{
+		rendererComponent = Rendering.GetRenderer(gameObject);
+		meshBounds = rendererComponent.bounds;
 	}
 	
 	// Use this for initialization
@@ -90,7 +96,7 @@ public class HealthBar : MonoBehaviour
 		guiTextureComponent = guiTextureObject.AddComponent<GUITexture>();
 		guiTextureComponent.texture = texture;
 		
-		InitMeshTopAndBounds();
+		InitRendererComponent();
 		InitWidthAndHeight();
 		
 		guiTextureObject.SetActive(false);
@@ -182,7 +188,8 @@ public class HealthBar : MonoBehaviour
 	
 	private void DrawTexture()
 	{
-		Vector3 texturePosition = Camera.main.WorldToScreenPoint(relativeMeshCenter + transform.position);
+		Vector3 meshCenter = GetMeshCenter();
+		Vector3 texturePosition = Camera.main.WorldToScreenPoint(meshCenter);
 		//Debug.Log(texturePosition);
 		
 		guiTextureObject.transform.rotation = transform.rotation;

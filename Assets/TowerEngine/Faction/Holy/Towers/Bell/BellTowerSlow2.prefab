@@ -117,7 +117,7 @@ MonoBehaviour:
     damage: 30
     attackType: 1
     ground: 1
-    air: 1
+    air: 0
     additionalEffects:
     - {fileID: 100000, guid: da74713636c863546b5d4e1f6c365cb8, type: 2}
     effectsChances:

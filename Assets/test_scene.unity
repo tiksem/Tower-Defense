@@ -1542,7 +1542,7 @@ MonoBehaviour:
   delayBetweenPartyAndPortalCreation: 2
   leavePortalOffset: {x: 0, y: 3, z: 0}
   lifesBar: {fileID: 1121354448}
-  partyIndex: 0
+  partyIndex: 6
 --- !u!1 &1121354447
 GameObject:
   m_ObjectHideFlags: 0

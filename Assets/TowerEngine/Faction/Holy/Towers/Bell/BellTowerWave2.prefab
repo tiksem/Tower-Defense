@@ -117,7 +117,7 @@ MonoBehaviour:
     damage: 65
     attackType: 1
     ground: 1
-    air: 1
+    air: 0
     additionalEffects: []
     effectsChances: []
 --- !u!114 &11400002
