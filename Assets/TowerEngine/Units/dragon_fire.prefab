@@ -2435,7 +2435,7 @@ MonoBehaviour:
     ice: 0
     poison: 0
     wind: 0
-  physicalArmor: 150
+  physicalArmor: 75
   goldForKill: 40
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}

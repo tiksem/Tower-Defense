@@ -2183,14 +2183,14 @@ MonoBehaviour:
   undead: 0
   durationBeforeInvisible: 1.5
   immunities:
-    death: 0
-    fire: 0
-    ground: 0
-    holy: 0
-    ice: 0
-    poison: 0
-    wind: 0
-  physicalArmor: 400
+    death: 1
+    fire: 1
+    ground: 1
+    holy: 1
+    ice: 1
+    poison: 1
+    wind: 1
+  physicalArmor: 100
   goldForKill: 9
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}

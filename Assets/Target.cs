@@ -497,6 +497,7 @@ public class Target : MonoBehaviour
 		currentHP = maxHP;
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		rendererComponent = Rendering.GetRenderer(gameObject);
+		CurrentPhysicalArmor = physicalArmor;
 		//hide target, if it is invisible
 		StartCoroutine(MakeInvisible());
 	}

@@ -7,7 +7,8 @@ public class CallJavaCode : MonoBehaviour {
 	bool isBannerShown = false;
 	
 	void Update ()
-	{		
+	{
+#if UNITY_ANDROID
 		if (!isBannerShown)
 		{			
 			AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 			
@@ -25,5 +26,6 @@ public class CallJavaCode : MonoBehaviour {
 			}			
 			isBannerShown = true;
 		}
+#endif
 	}
 }
