@@ -156,7 +156,7 @@ MonoBehaviour:
   - name: 
     bullet: {fileID: 100000, guid: 140096660c685634ca17a341da7c43ba, type: 2}
     cooldown: 2
-    range: 20
+    range: 14
     damage: 8
     attackType: 2
     ground: 1

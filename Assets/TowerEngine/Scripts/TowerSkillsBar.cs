@@ -40,6 +40,11 @@ public class TowerSkillsBar : MonoBehaviour
 		for(int i = 0; i < length; i++)
 		{
 			BarWithCircleButtons.Button button = bar.buttonTextures[i];
+			if(button == null)
+			{
+				button = bar.buttonTextures[i] = new BarWithCircleButtons.Button();
+			}
+			
 			TowerUpgrade upgrade = upgrades[i];
 			button.normalState = upgrade.icon;
 			button.disabledState = upgrade.disabledIcon;
@@ -56,10 +61,7 @@ public class TowerSkillsBar : MonoBehaviour
 		
 		for(int i = length; i < bar.buttonsCount - 1; i++)
 		{
-			BarWithCircleButtons.Button button = bar.buttonTextures[i];
-			button.normalState = null;
-			button.selectedState = null;
-			button.additionalText = "";
+			bar.buttonTextures[i] = null;
 		}
 	}
 	

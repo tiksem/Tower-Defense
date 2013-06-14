@@ -304,6 +304,7 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 	private void OnTowerClick(Tower tower)
 	{
 		towerSkillsBar.SetUpgrades(tower.upgrades);
+		towerSkillsBar.UpdateButtonsGoldState(CurrentGold);
 		lastClickedTower = tower;
 		AttachSelectionTextureToTower(tower);
 		ShowSkillsBar();

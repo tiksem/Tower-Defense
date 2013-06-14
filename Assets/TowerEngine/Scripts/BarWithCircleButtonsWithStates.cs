@@ -15,9 +15,8 @@ public class BarWithCircleButtonsWithStates : BarWithCircleButtons
 		}
 	}
 	
-	public override void Start()
+	void Start()
 	{
-		base.Start();
 		SetActiveButtonsCount(activeButtonsCount);
 	}
 	

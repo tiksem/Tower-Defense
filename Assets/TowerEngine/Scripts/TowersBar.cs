@@ -102,7 +102,6 @@ public class TowersBar : MonoBehaviour
 		int towerGold = towersGold[towerIndex];
 		if(towerGold <= currentGold)
 		{
-			UpdateTowersGoldState(currentGold - towerGold);
 			return towerGold;
 		}
 		else

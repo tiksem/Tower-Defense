@@ -131,7 +131,13 @@ public class BarWithCircleButtons : MonoBehaviour
 			return "";
 		}
 		
-		return buttonTextures[index].additionalText;
+		Button button = buttonTextures[index];
+		if(button == null)
+		{
+			return "";
+		}
+		
+		return button.additionalText;
 	}
 	
 	public void SetText(int index, object text)
@@ -202,7 +208,7 @@ public class BarWithCircleButtons : MonoBehaviour
 		return buttonsCount;
 	}
 	
-	public virtual void Start()
+	void Awake()
 	{
 		GUIUtilities.CalculateFontSize(ref textStyle);
 		GUIUtilities.CalculateFontSize(ref disabledTextStyle);
