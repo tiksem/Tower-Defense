@@ -789,9 +789,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 1000
-  armorType: 1
+  maxHP: 2200
+  armorType: 0
   type: 1
+  invisible: 0
+  undead: 0
+  durationBeforeInvisible: 1.5
   immunities:
     death: 0
     fire: 0
@@ -800,11 +803,12 @@ MonoBehaviour:
     ice: 0
     poison: 0
     wind: 0
-  physicalArmor: 0
-  goldForKill: 1
+  physicalArmor: 10
+  goldForKill: 16
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 0}
+  deathSoundVolume: .400000006
   deathEffect: {fileID: 0}
   deathEffectDuration: 1
 --- !u!114 &11400004
@@ -818,6 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
   m_Name: 
   background: {r: 0, g: 0, b: 0, a: 1}
+  useGlobalColorHealthBarSettings: 1
   colors:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
@@ -825,9 +830,10 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   height: .00300000003
   width: .0399999991
+  useGlobalSizeHealthBarSettings: 1
+  adjustHealthBarSizeByMeshBounds: 1
   yOffset: .0199999996
   xOffset: 0
-  childWithRendererName: body
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -889,7 +895,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 100052}
   m_Enabled: 1
   m_Radius: 2
-  m_Speed: 5
+  m_Speed: 6.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

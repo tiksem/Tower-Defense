@@ -155,8 +155,8 @@ MonoBehaviour:
   - name: 
     bullet: {fileID: 100000, guid: fe297bde0e372ed47ad026e486fd86a2, type: 2}
     cooldown: 4
-    range: 30
-    damage: 170
+    range: 25
+    damage: 120
     attackType: 1
     ground: 1
     air: 1
@@ -181,7 +181,7 @@ MonoBehaviour:
   - tower: {fileID: 11400002, guid: cdf9fdee2c8978040bea2b2283252855, type: 2}
     icon: {fileID: 2800000, guid: dfa2b72405b099543955efb9633a7701, type: 3}
     disabledIcon: {fileID: 2800000, guid: 4c96101c667600e42a2a1c5129c4207c, type: 3}
-    goldCost: 250
+    goldCost: 500
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
