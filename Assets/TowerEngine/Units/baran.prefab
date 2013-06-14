@@ -1098,10 +1098,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 100
-  armorType: 1
+  maxHP: 1000
+  armorType: 0
   type: 0
   invisible: 0
+  undead: 0
   durationBeforeInvisible: 1.5
   immunities:
     death: 0
@@ -1111,8 +1112,8 @@ MonoBehaviour:
     ice: 0
     poison: 0
     wind: 0
-  physicalArmor: 0
-  goldForKill: 1
+  physicalArmor: 10
+  goldForKill: 7
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 0}
@@ -1130,6 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
   m_Name: 
   background: {r: 0, g: 0, b: 0, a: 1}
+  useGlobalColorHealthBarSettings: 1
   colors:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
@@ -1137,6 +1139,8 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   height: .00499999989
   width: .0700000003
+  useGlobalSizeHealthBarSettings: 1
+  adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0
 --- !u!137 &13700000

@@ -16,10 +16,24 @@ public class SlowTargetHitEffect : TargetHitEffectWithDuration
 		}
 	}
 	
+	private void ReturnStats()
+	{
+		if(targetComponent != null)
+		{
+			targetComponent.SetSpeeds(speedBefore, angularSpeedBefore);
+		}
+	}
+	
 	protected override void OnTimeReached()
 	{
-		targetComponent.SetSpeeds(speedBefore, angularSpeedBefore);
+		ReturnStats();
 		base.OnTimeReached();
+	}
+	
+	public override void OnDestroy()
+	{
+		base.OnDestroy();
+		ReturnStats();
 	}
 	
 	protected override void FirstApplyToTarget()

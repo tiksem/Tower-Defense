@@ -43,7 +43,7 @@ MonoBehaviour:
   colorChangeSettings:
     changeColor: 1
     changeTo: {r: 1, g: .942281544, b: .410447776, a: 1}
-  coefficient: .5
+  coefficient: .400000006
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

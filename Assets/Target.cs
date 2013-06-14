@@ -80,6 +80,7 @@ public class Target : MonoBehaviour
 	}
 	
 	private static readonly float PHYSICAL_ARMOR_PERCENTS_PER_POINT = 0.01f;
+	private static readonly float LIGHT_TO_UNDEAD_DAMAGE_COEFFICIENT = 3.0f;
 	
 	[System.Serializable]
 	public class Immunities
@@ -104,6 +105,7 @@ public class Target : MonoBehaviour
 	public ArmorType armorType = ArmorType.NORMAL;
 	public Type type = Type.GROUND;
 	public bool invisible = false;
+	public bool undead = false;
 	public float durationBeforeInvisible = 1.5f;
 	public Immunities immunities = new Immunities();
 	public int physicalArmor = 0;
@@ -335,6 +337,14 @@ public class Target : MonoBehaviour
 		}
 		
 		floatValue *= GetDamageCoefficientForAttackType(attackType);
+		
+		if(attackType == Weapon.AttackType.HOLY)
+		{
+			if(undead)
+			{
+				floatValue *= LIGHT_TO_UNDEAD_DAMAGE_COEFFICIENT;
+			}
+		}
 		
 		if(!IsMagicAttackType(attackType))
 		{

@@ -141,7 +141,7 @@ MonoBehaviour:
   - tower: {fileID: 11400002, guid: 0036d952d1d9c7849ac4643b1765cc6b, type: 2}
     icon: {fileID: 2800000, guid: 59a506d86504377479f8bb4db86dcca1, type: 3}
     disabledIcon: {fileID: 2800000, guid: 813e731b5bc68224b9d05977ebf9d02a, type: 3}
-    goldCost: 200
+    goldCost: 80
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

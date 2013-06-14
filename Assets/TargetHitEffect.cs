@@ -38,7 +38,7 @@ public abstract class TargetHitEffect : MonoBehaviour
 		Destroy(gameObject);
 	}
 	
-	public void OnDestroy()
+	public virtual void OnDestroy()
 	{
 		if(targetComponent != null)
 		{
