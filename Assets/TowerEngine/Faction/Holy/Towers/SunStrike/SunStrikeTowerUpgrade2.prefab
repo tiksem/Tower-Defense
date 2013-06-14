@@ -157,7 +157,7 @@ MonoBehaviour:
     cooldown: 4
     range: 25
     damage: 900
-    attackType: 1
+    attackType: 4
     ground: 1
     air: 1
     additionalEffects: []

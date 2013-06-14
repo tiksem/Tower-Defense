@@ -921,12 +921,12 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: 0
-  width: 0
-  useGlobalSizeHealthBarSettings: 1
+  height: .000380000012
+  width: .00749999983
+  useGlobalSizeHealthBarSettings: 0
   adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
-  xOffset: 0
+  xOffset: .00999999978
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -979,8 +979,8 @@ SkinnedMeshRenderer:
   - {fileID: 400000}
   m_RootBone: {fileID: 400052}
   m_AABB:
-    m_Center: {x: .720490575, y: -.0511211157, z: -.227475941}
-    m_Extent: {x: .877328515, y: .255346447, z: .939804494}
+    m_Center: {x: .75, y: -.5, z: 0}
+    m_Extent: {x: .877328515, y: 1, z: .939804494}
   m_DirtyAABB: 0
 --- !u!195 &19500000
 NavMeshAgent:

@@ -69,7 +69,7 @@ PlayerSettings:
   iPhoneBundleIdentifier: com.weshall.warcraft_tower_defence
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 6
+  AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   apiCompatibilityLevel: 2
