@@ -1706,6 +1706,7 @@ MonoBehaviour:
   leavePortalOffset: {x: 0, y: 3, z: 0}
   lifesBar: {fileID: 1121354448}
   partyIndex: 0
+  obstaclesTargetAvoidanceQuailty: 1
 --- !u!1 &1121354447
 GameObject:
   m_ObjectHideFlags: 0
@@ -3990,7 +3991,7 @@ MonoBehaviour:
   menuButtonHeight: .119999997
   menuButtonX: 0
   menuButtonY: 0
-  timeScale: 2
+  timeScale: 1
   endGameMessage: Exit game?
 --- !u!1 &1771949809
 GameObject:

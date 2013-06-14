@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	public int partyIndex = 0;
 	
+	public ObstacleAvoidanceType obstaclesTargetAvoidanceQuailty = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+	
 	private int leaveTargetCount = 0;
 	private int leavesCountOnRoundStart = 0;
 	
@@ -86,14 +88,19 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	void OnValidate()
 	{
-		/*foreach(Party party in parties)
+		foreach(Party party in parties)
 		{
-			int levelDescriptionsCount = party.endRoundLevelDescriptions.Length;
+			/*int levelDescriptionsCount = party.endRoundLevelDescriptions.Length;
 			if(levelDescriptionsCount == 0)
 			{
 				party.endRoundLevelDescriptions = new GameManager.LevelDescriptionMessage[1];
-			}
-		}*/
+			}*/
+			
+			NavMeshAgent targetNavMeshAgent = party.targetPrefab.GetComponent<NavMeshAgent>();
+			targetNavMeshAgent.obstacleAvoidanceType = obstaclesTargetAvoidanceQuailty;
+		}
+		
+		
 	}
 	
 	private IEnumerator LooseAction()
