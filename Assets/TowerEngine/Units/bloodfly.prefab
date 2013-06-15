@@ -679,7 +679,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100090
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -695,7 +695,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100092
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -710,7 +710,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100094
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -731,7 +731,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400096}
-  - 111: {fileID: 11100000}
   - 195: {fileID: 19500000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
@@ -741,6 +740,22 @@ GameObject:
   m_Layer: 0
   m_Name: bloodfly
   m_TagString: Target
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400098}
+  - 111: {fileID: 11100000}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1279,21 +1294,21 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100090}
   m_LocalRotation: {x: 6.12323426e-17, y: 1, z: -6.12323426e-17, w: 6.12323426e-17}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400096}
+  m_Father: {fileID: 400098}
 --- !u!4 &400092
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100092}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400096}
+  m_Father: {fileID: 400098}
 --- !u!4 &400094
 Transform:
   m_ObjectHideFlags: 1
@@ -1301,7 +1316,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100094}
   m_LocalRotation: {x: 6.68779297e-17, y: -5.30217367e-05, z: .707081258, w: .707132339}
-  m_LocalPosition: {x: -1.39330996e-05, y: 1.24998999, z: .0320953019}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400088}
@@ -1317,7 +1332,7 @@ Transform:
   - {fileID: 400068}
   - {fileID: 400066}
   - {fileID: 400064}
-  m_Father: {fileID: 400096}
+  m_Father: {fileID: 400098}
 --- !u!4 &400096
 Transform:
   m_ObjectHideFlags: 1
@@ -1325,13 +1340,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100096}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 67.2098465, y: .110818669, z: 43.6931953}
+  m_LocalPosition: {x: 19.1839848, y: 2.56823015, z: 35.9345474}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400098}
+  m_Father: {fileID: 0}
+--- !u!4 &400098
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.19522667, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400094}
-  - {fileID: 400092}
   - {fileID: 400090}
-  m_Father: {fileID: 0}
+  - {fileID: 400092}
+  m_Father: {fileID: 400096}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -1374,7 +1401,7 @@ Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100096}
+  m_GameObject: {fileID: 100098}
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 284d962b1a9bdd54184a2992bc080f88, type: 3}

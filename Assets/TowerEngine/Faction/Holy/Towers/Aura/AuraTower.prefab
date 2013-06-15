@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
+  - 208: {fileID: 20800000}
   m_Layer: 0
   m_Name: AuraTower
   m_TagString: Untagged
@@ -88,6 +89,15 @@ MonoBehaviour:
   affectOtherAuraTowers: 0
   auraEffectPrefab: {fileID: 11900000, guid: b0a1f6772f39e47fdae4d55c17d8ac35, type: 2}
   effectProjectorHeight: 7
+--- !u!208 &20800000
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Radius: 2.44260025
+  m_Height: 11.67414
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

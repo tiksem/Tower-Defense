@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 7000
+  maxHP: 4525
   armorType: 2
   type: 0
   invisible: 0
@@ -1274,7 +1274,7 @@ MonoBehaviour:
     ice: 0
     poison: 0
     wind: 0
-  physicalArmor: 10
+  physicalArmor: 75
   goldForKill: 18
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
@@ -1299,9 +1299,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: .00499999989
-  width: .0700000003
-  useGlobalSizeHealthBarSettings: 1
+  height: .000500000024
+  width: .00999999978
+  useGlobalSizeHealthBarSettings: 0
   adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0
@@ -1375,7 +1375,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100084}
   m_Enabled: 1
-  m_Radius: 4
+  m_Radius: 3
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50

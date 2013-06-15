@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8aaebb27b438b344b65afcf9884eed3, type: 3}
   m_Name: 
-  maxLeaveTargetCount: 100
+  maxLeaveTargetCount: 15
   parties:
   - targetPrefab: {fileID: 100126, guid: 19f88e7ca2ca1c748acc712ad245c859, type: 2}
     leaderPrefab: {fileID: 0}
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   delayBetweenPartyAndPortalCreation: 5
   leavePortalOffset: {x: 0, y: 3, z: 0}
   lifesBar: {fileID: 1121354448}
-  partyIndex: 39
+  partyIndex: 0
   obstaclesTargetAvoidanceQuailty: 3
 --- !u!1 &1121354447
 GameObject:
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
-  startGold: 10000
+  startGold: 30
   availibleTowerPlaces:
   - {fileID: 1364790118}
   - {fileID: 1113357790}

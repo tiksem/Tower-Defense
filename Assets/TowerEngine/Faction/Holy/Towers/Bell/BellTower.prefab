@@ -28,6 +28,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   - 65: {fileID: 6500000}
+  - 208: {fileID: 20800000}
   m_Layer: 0
   m_Name: BellTower
   m_TagString: Untagged
@@ -144,6 +145,15 @@ MonoBehaviour:
     air: 0
     additionalEffects: []
     effectsChances: []
+--- !u!208 &20800000
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Radius: 2.51142502
+  m_Height: 10.2172451
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

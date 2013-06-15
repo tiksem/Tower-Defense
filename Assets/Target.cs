@@ -394,7 +394,7 @@ public class Target : MonoBehaviour
 	{
 		return effects.Find((GameObject effect) => 
 		{
-			return effect != targetHitEffect.gameObject && effect.name == targetHitEffect.name;
+			return effect != null && effect != targetHitEffect.gameObject && effect.name == targetHitEffect.name;
 		}) != null;
 	}
 	

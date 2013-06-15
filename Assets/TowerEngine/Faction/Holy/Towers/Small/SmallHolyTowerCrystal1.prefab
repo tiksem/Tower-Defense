@@ -31,6 +31,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400002}
+  - 208: {fileID: 20800000}
   m_Layer: 0
   m_Name: SmallHolyTowerCrystal1
   m_TagString: Untagged
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
   m_Name: 
-  goldPrice: 10
+  goldPrice: 30
   level: 0
   crystalPrice: 0
   canSeeInvisibleUnits: 0
@@ -154,7 +155,7 @@ MonoBehaviour:
   - tower: {fileID: 11400000, guid: b842f6f07607b484ebc775f98b55876d, type: 2}
     icon: {fileID: 2800000, guid: f12daf47df1b3e24687b42602db7c52d, type: 3}
     disabledIcon: {fileID: 2800000, guid: 1437da8c8d6870d4dacd825648f61ca5, type: 3}
-    goldCost: 150
+    goldCost: 125
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1226,6 +1227,15 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+--- !u!208 &20800000
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Radius: 1.82485104
+  m_Height: 9.88426971
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -28,6 +28,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
   - 65: {fileID: 6500000}
+  - 208: {fileID: 20800000}
   m_Layer: 0
   m_Name: BellTowerSlow
   m_TagString: Untagged
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69821ec0a66980c4bb320a8d515c8bc7, type: 3}
   m_Name: 
-  goldPrice: 25
+  goldPrice: 150
   level: 0
   crystalPrice: 0
   canSeeInvisibleUnits: 0
@@ -142,6 +143,15 @@ MonoBehaviour:
     icon: {fileID: 2800000, guid: 59a506d86504377479f8bb4db86dcca1, type: 3}
     disabledIcon: {fileID: 2800000, guid: 813e731b5bc68224b9d05977ebf9d02a, type: 3}
     goldCost: 185
+--- !u!208 &20800000
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Radius: 2.51142502
+  m_Height: 10.2172451
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -912,7 +912,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e180c0ab59d299408119c88022a32f1, type: 3}
   m_Name: 
-  animationSpeed: .25
+  animationSpeed: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 22000
+  maxHP: 28000
   armorType: 1
   type: 0
   invisible: 0
@@ -975,9 +975,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: .00499999989
-  width: .0700000003
-  useGlobalSizeHealthBarSettings: 1
+  height: .00150000001
+  width: .0299999993
+  useGlobalSizeHealthBarSettings: 0
   adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0

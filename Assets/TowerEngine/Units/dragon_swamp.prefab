@@ -1250,7 +1250,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100166
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -1271,7 +1271,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400168}
-  - 111: {fileID: 11100000}
   - 195: {fileID: 19500000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
@@ -1281,6 +1280,22 @@ GameObject:
   m_Layer: 0
   m_Name: dragon_swamp
   m_TagString: Target
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400170}
+  - 111: {fileID: 11100000}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2284,14 +2299,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100166}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400164}
   - {fileID: 400162}
   - {fileID: 400160}
-  m_Father: {fileID: 400168}
+  m_Father: {fileID: 400170}
 --- !u!4 &400168
 Transform:
   m_ObjectHideFlags: 1
@@ -2302,8 +2317,20 @@ Transform:
   m_LocalPosition: {x: 65.5204468, y: .139922306, z: 40.1895752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400166}
+  - {fileID: 400170}
   m_Father: {fileID: 0}
+--- !u!4 &400170
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400166}
+  m_Father: {fileID: 400168}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -2346,7 +2373,7 @@ Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100168}
+  m_GameObject: {fileID: 100170}
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 5d86187f97c82a9478f7a8418651bbbb, type: 3}
@@ -2394,7 +2421,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 8500
+  maxHP: 6600
   armorType: 3
   type: 1
   invisible: 0
@@ -2433,9 +2460,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: .00499999989
-  width: .0700000003
-  useGlobalSizeHealthBarSettings: 1
+  height: .000250000012
+  width: .0120000001
+  useGlobalSizeHealthBarSettings: 0
   adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0
@@ -2541,7 +2568,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100168}
   m_Enabled: 1
-  m_Radius: 5
+  m_Radius: 3.1500001
   m_Speed: 2.79999995
   m_Acceleration: 8
   avoidancePriority: 50

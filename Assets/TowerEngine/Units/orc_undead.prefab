@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e180c0ab59d299408119c88022a32f1, type: 3}
   m_Name: 
-  animationSpeed: .25
+  animationSpeed: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 5750
+  maxHP: 7350
   armorType: 0
   type: 0
   invisible: 0
@@ -1058,7 +1058,7 @@ MonoBehaviour:
     ice: 0
     poison: 0
     wind: 0
-  physicalArmor: 0
+  physicalArmor: 12
   goldForKill: 9
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
@@ -1148,7 +1148,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100070}
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 2
   m_Speed: 4.5
   m_Acceleration: 8
   avoidancePriority: 50

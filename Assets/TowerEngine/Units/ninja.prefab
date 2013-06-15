@@ -612,7 +612,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 830
+  maxHP: 550
   armorType: 0
   type: 0
   invisible: 0
@@ -651,9 +651,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: .00499999989
-  width: .0700000003
-  useGlobalSizeHealthBarSettings: 1
+  height: .00079999998
+  width: .00999999978
+  useGlobalSizeHealthBarSettings: 0
   adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0

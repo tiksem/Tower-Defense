@@ -37,7 +37,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f9acbaca8aa548468f825fed9d53a74, type: 3}
   m_Name: 
-  seconds: 100
+  seconds: 12
   fireOnStart: 1
   destroyOnFinish: 1
   x: .0500000007

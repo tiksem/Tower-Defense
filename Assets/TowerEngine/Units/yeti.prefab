@@ -285,6 +285,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
   - 65: {fileID: 6500000}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: yeti
   m_TagString: Target
@@ -584,7 +585,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 1400
+  maxHP: 1000
   armorType: 1
   type: 0
   invisible: 0
@@ -606,6 +607,29 @@ MonoBehaviour:
   deathSoundVolume: .400000006
   deathEffect: {fileID: 100000, guid: b23ef1162d14d4e4582ff585da512eb3, type: 2}
   deathEffectDuration: 2
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3120d9a652cfba04d84dec51bc4a2e0c, type: 3}
+  m_Name: 
+  background: {r: 0, g: 0, b: 0, a: 1}
+  useGlobalColorHealthBarSettings: 1
+  colors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: .921568632, b: .0156862754, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  height: .000300000014
+  width: .00499999989
+  useGlobalSizeHealthBarSettings: 0
+  adjustHealthBarSizeByMeshBounds: 1
+  yOffset: 0
+  xOffset: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

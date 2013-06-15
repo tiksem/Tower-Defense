@@ -690,6 +690,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 111: {fileID: 11100000}
   m_Layer: 0
   m_Name: human_skeleton
   m_TagString: Untagged
@@ -1611,6 +1612,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!111 &11100000
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100088}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7bf86ea4e2ef1974db42205b338cb1c8, type: 3}
+  m_Animations:
+  - {fileID: 7400002, guid: 7bf86ea4e2ef1974db42205b338cb1c8, type: 3}
+  - {fileID: 7400000, guid: 7bf86ea4e2ef1974db42205b338cb1c8, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+  m_UserAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1684,9 +1704,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: .921568632, b: .0156862754, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  height: .00499999989
-  width: .0700000003
-  useGlobalSizeHealthBarSettings: 1
+  height: .00300000003
+  width: .0599999987
+  useGlobalSizeHealthBarSettings: 0
   adjustHealthBarSizeByMeshBounds: 1
   yOffset: 0
   xOffset: 0
@@ -1731,7 +1751,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100088}
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 1.29999995
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
