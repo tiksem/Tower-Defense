@@ -30,4 +30,9 @@ public class ArmorDecreaseEffect : TargetHitEffectWithDuration
 	{
 		return canStack;
 	}
+	
+	public override bool ShouldBeReplaced()
+	{
+		return false;
+	}
 }

@@ -64,7 +64,6 @@ public class LaserBullet : Bullet
 	private IEnumerator DestroyAction()
 	{
 		isLaserOnTarget = true;
-		effectsAttached = false;
 		yield return new WaitForSeconds(delayBeforeDestroy);
 		base.DestroyGameObject();
 		isLaserOnTarget = false;
