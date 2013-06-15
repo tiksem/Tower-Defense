@@ -990,22 +990,22 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 10000
+  maxHP: 6000
   armorType: 1
   type: 0
   invisible: 0
   undead: 0
   durationBeforeInvisible: 1.5
   immunities:
-    death: 0
-    fire: 0
-    ground: 0
-    holy: 0
-    ice: 0
-    poison: 0
-    wind: 0
+    death: 1
+    fire: 1
+    ground: 1
+    holy: 1
+    ice: 1
+    poison: 1
+    wind: 1
   physicalArmor: 0
-  goldForKill: 9
+  goldForKill: 18
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 0}
@@ -1096,7 +1096,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 100066}
   m_Enabled: 1
   m_Radius: 2
-  m_Speed: 2.5
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

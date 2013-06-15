@@ -38,12 +38,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4462b6c7ff9b44d847103ccbde0849, type: 3}
   m_Name: 
   target: {fileID: 0}
-  attackType: 0
+  attackType: 4
   duration: 3
   colorChangeSettings:
     changeColor: 1
     changeTo: {r: 1, g: .942281544, b: .410447776, a: 1}
-  coefficient: .5
+  coefficient: .400000006
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

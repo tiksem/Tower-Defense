@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: LightSlowEffect2
+  m_Name: ArmorDecreaseEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,15 +35,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4462b6c7ff9b44d847103ccbde0849, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aa4580346618e34aa245aed20ebd747, type: 3}
   m_Name: 
   target: {fileID: 0}
-  attackType: 4
-  duration: 5
+  attackType: 0
+  duration: 10
   colorChangeSettings:
     changeColor: 1
-    changeTo: {r: 1, g: .942281544, b: .410447776, a: 1}
-  coefficient: .300000012
+    changeTo: {r: 1, g: .850746274, b: .850746274, a: 1}
+  armorValue: 2
+  canStack: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -1645,7 +1645,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 4000
+  maxHP: 2500
   armorType: 1
   type: 0
   invisible: 0

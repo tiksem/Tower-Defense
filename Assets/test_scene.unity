@@ -1475,7 +1475,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100088, guid: f04512c2a237bd04e89abf6fa1fd7987, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 50
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100106, guid: 669b85aadc8a25b4bbf66280b9e02733, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1511,7 +1511,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100110, guid: 6933b04bfbeb0d542830b321936f4761, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100106, guid: e72d6c9d30331de4290ad96f34711a6d, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100066, guid: 35260c0bdf1d2df4589a3bb790eb30a3, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1592,7 +1592,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100094, guid: 8d5c32cd387ae764d90a2e9d634b809f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100130, guid: 3643589d5ebd8974ba86f2033ff5fa10, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100106, guid: 44ed0a52163fc5f429bd8009300e148f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 65
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1637,7 +1637,7 @@ MonoBehaviour:
   - targetPrefab: {fileID: 100106, guid: a2e0a16609f9fea448feb0a8dbf1826a, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
-    height: 2
+    height: 1
     gold: 65
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1645,8 +1645,8 @@ MonoBehaviour:
       levelOffset: 0
   - targetPrefab: {fileID: 100168, guid: 571ebec30b43b084f8b6c52d2fdf0687, type: 2}
     leaderPrefab: {fileID: 0}
-    width: 6
-    height: 2
+    width: 3
+    height: 1
     gold: 65
     endRoundMessages: []
     endRoundLevelDescriptions:
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
-  startGold: 3000
+  startGold: 30
   availibleTowerPlaces:
   - {fileID: 1364790118}
   - {fileID: 1113357790}

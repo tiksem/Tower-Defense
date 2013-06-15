@@ -154,7 +154,7 @@ MonoBehaviour:
   - tower: {fileID: 11400002, guid: 83b4f3590d5c8fc459516b3c3bf73c68, type: 2}
     icon: {fileID: 2800000, guid: 8f3e930373ccbbd48887d21200a41a54, type: 3}
     disabledIcon: {fileID: 2800000, guid: e9793fc574970f44f92a0b94e77a7744, type: 3}
-    goldCost: 20
+    goldCost: 150
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

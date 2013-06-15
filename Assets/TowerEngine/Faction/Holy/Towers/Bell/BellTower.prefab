@@ -114,11 +114,11 @@ MonoBehaviour:
   - tower: {fileID: 11400002, guid: 7cb9e02ededd722439a881c7c71b8692, type: 2}
     icon: {fileID: 2800000, guid: 3dcefefed66070a4b81f2517e7b3622d, type: 3}
     disabledIcon: {fileID: 2800000, guid: 1e960f8b3b2e7a8428273fc1cd4a053e, type: 3}
-    goldCost: 35
+    goldCost: 65
   - tower: {fileID: 11400002, guid: 6f2685bbfa126214faf2f65809ca8cc6, type: 2}
     icon: {fileID: 2800000, guid: dda16f60343980a44aa9136b121f2677, type: 3}
     disabledIcon: {fileID: 2800000, guid: d7c64fb52d2c25d4f8f0522cb9f6d588, type: 3}
-    goldCost: 50
+    goldCost: 100
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,7 +139,7 @@ MonoBehaviour:
     cooldown: 3
     range: 7
     damage: 30
-    attackType: 1
+    attackType: 0
     ground: 1
     air: 0
     additionalEffects: []

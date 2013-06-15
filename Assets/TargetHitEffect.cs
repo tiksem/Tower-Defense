@@ -12,7 +12,11 @@ public abstract class TargetHitEffect : MonoBehaviour
 	
 	private bool targetDetected = false;
 	
-	protected abstract void ApplyToTarget();
+	protected virtual void ApplyToTarget()
+	{
+		
+	}
+	
 	protected virtual void FirstApplyToTarget()
 	{
 		

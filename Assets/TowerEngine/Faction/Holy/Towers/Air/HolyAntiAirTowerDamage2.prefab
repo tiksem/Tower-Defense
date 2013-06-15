@@ -156,11 +156,12 @@ MonoBehaviour:
     bullet: {fileID: 100000, guid: 30b2983a75635624a9d186e0f09671ea, type: 2}
     cooldown: 1
     range: 30
-    damage: 1850
-    attackType: 4
+    damage: 6000
+    attackType: 2
     ground: 0
     air: 1
-    additionalEffects: []
+    additionalEffects:
+    - {fileID: 100000, guid: 2337f75fcded3cc4ab21b3722bdb20f3, type: 2}
     effectsChances: []
 --- !u!114 &11400002
 MonoBehaviour:

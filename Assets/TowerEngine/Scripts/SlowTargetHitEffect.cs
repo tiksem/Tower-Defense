@@ -24,12 +24,6 @@ public class SlowTargetHitEffect : TargetHitEffectWithDuration
 		}
 	}
 	
-	protected override void OnTimeReached()
-	{
-		ReturnStats();
-		base.OnTimeReached();
-	}
-	
 	public override void OnDestroy()
 	{
 		base.OnDestroy();

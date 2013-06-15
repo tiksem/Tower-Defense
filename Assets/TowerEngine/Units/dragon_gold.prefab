@@ -2421,7 +2421,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45feb5ec3e229b48b0e57a1b03ba270, type: 3}
   m_Name: 
-  maxHP: 30000
+  maxHP: 22000
   armorType: 3
   type: 1
   invisible: 0
@@ -2436,7 +2436,7 @@ MonoBehaviour:
     poison: 0
     wind: 0
   physicalArmor: 100
-  goldForKill: 1
+  goldForKill: 1000
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 0}

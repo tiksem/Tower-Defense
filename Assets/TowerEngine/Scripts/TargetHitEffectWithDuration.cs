@@ -34,6 +34,11 @@ public abstract class TargetHitEffectWithDuration : TargetHitEffect
 		}
 	}
 	
+	public override void OnDestroy()
+	{
+		ReturnColor();
+	}
+	
 	protected override void FirstApplyToTarget()
 	{
 		ChangeColor();
@@ -42,7 +47,6 @@ public abstract class TargetHitEffectWithDuration : TargetHitEffect
 	
 	protected virtual void OnTimeReached()
 	{
-		ReturnColor();
 		Destroy(gameObject);
 	}
 	

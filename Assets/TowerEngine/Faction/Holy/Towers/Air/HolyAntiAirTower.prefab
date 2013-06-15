@@ -160,7 +160,8 @@ MonoBehaviour:
     attackType: 2
     ground: 0
     air: 1
-    additionalEffects: []
+    additionalEffects:
+    - {fileID: 100000, guid: a2845331b60b06a4492e84fc8f76b98a, type: 2}
     effectsChances: []
 --- !u!114 &11400002
 MonoBehaviour:
@@ -181,7 +182,7 @@ MonoBehaviour:
   - tower: {fileID: 11400002, guid: aab49a8c99b33e24a84312805babe691, type: 2}
     icon: {fileID: 2800000, guid: 03392bba78b5b0343b7c5a0d05d795f9, type: 3}
     disabledIcon: {fileID: 2800000, guid: bb501cfc73caa6d4a946d86c59d16c99, type: 3}
-    goldCost: 50
+    goldCost: 200
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

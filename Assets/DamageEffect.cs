@@ -4,13 +4,6 @@ using System.Collections;
 public class DamageEffect : TargetHitEffect 
 {
 	public int damage = 1;
-	public Weapon.AttackType attackType = Weapon.AttackType.NORMAL; 
-	
-	// Use this for initialization
-	void Start()
-	{
-	
-	}
 	
 	private void Damage()
 	{
@@ -25,7 +18,7 @@ public class DamageEffect : TargetHitEffect
 	}
 	
 	// Update is called once per frame
-	protected override void ApplyToTarget()
+	protected override void FirstApplyToTarget()
 	{
 		Damage();
 		Destroy(gameObject);

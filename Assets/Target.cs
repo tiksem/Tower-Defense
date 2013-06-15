@@ -80,7 +80,7 @@ public class Target : MonoBehaviour
 	}
 	
 	private static readonly float PHYSICAL_ARMOR_PERCENTS_PER_POINT = 0.01f;
-	private static readonly float LIGHT_TO_UNDEAD_DAMAGE_COEFFICIENT = 10.0f;
+	private static readonly float LIGHT_TO_UNDEAD_DAMAGE_COEFFICIENT = 2.0f;
 	
 	[System.Serializable]
 	public class Immunities
@@ -373,6 +373,16 @@ public class Target : MonoBehaviour
 		
 		navMeshAgent.speed *= coefficient;
 		navMeshAgent.angularSpeed *= coefficient;
+	}
+	
+	public void ChangePhysicalArmor(int value, Weapon.AttackType attackType)
+	{
+		if(HasImmunity(attackType))
+		{
+			return;
+		}
+		
+		CurrentPhysicalArmor += value;
 	}
 	
 	public void NotifyEffectDestroyed(GameObject effect)
