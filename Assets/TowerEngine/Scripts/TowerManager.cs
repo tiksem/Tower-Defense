@@ -460,6 +460,7 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 	private void ShowSkillsBar()
 	{
 		SetSkillsBarVisibility(true);
+		HideGrid();
 	}
 	
 	private void HideSkillsBar()
