@@ -187,9 +187,9 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	private void RecvGoldFromParty()
 	{
-		if(partyIndex >= 0 && partyIndex < parties.Length)
+		if(partyIndex > 0 && partyIndex <= parties.Length)
 		{
-			Party party = parties[partyIndex];
+			Party party = parties[partyIndex - 1];
 			TowerManager.Instance.CurrentGold += party.gold;
 		}
 	}
