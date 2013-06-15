@@ -229,8 +229,6 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	
 	private void OnAllTargetsDestroyed()
 	{
-		RecvGoldFromParty();
-		
 		if(roundTimerPrefab != null)
 		{
 			partyIndex++;
@@ -252,6 +250,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			float portalCreationDelay = timer.seconds - delayBetweenPartyAndPortalCreation;
 			StartCoroutine(PortalCreationAction(portalCreationDelay));
 			roundTimerFired = true;
+			
+			RecvGoldFromParty();
 		}
 		else
 		{
