@@ -69,6 +69,11 @@ public class Timer : MonoBehaviour
 			currentTime = seconds;
 		}
 		
+		if(Input.GetKeyUp(KeyCode.S))
+		{
+			OnFinish();
+		}
+		
 		UpdateTimer();
 	}
 }

@@ -13,6 +13,8 @@ public class AnimationSpeedController : MonoBehaviour
 	void Start()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
+		Animation animation = GetComponentInChildren<Animation>();
+		
 		if(animation != null)
 		{
 			run = animation["run"];

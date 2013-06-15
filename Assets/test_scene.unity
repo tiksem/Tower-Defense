@@ -1702,10 +1702,10 @@ MonoBehaviour:
   durationBeforeLoose: .300000012
   portalAppearancePosition: {fileID: 1022055593}
   portal: {fileID: 100000, guid: f6e4453a000bb1348a26882aaf5c5066, type: 2}
-  delayBetweenPartyAndPortalCreation: 2
+  delayBetweenPartyAndPortalCreation: 5
   leavePortalOffset: {x: 0, y: 3, z: 0}
   lifesBar: {fileID: 1121354448}
-  partyIndex: 0
+  partyIndex: 12
   obstaclesTargetAvoidanceQuailty: 3
 --- !u!1 &1121354447
 GameObject:
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
-  startGold: 30
+  startGold: 1000
   availibleTowerPlaces:
   - {fileID: 1364790118}
   - {fileID: 1113357790}

@@ -84,7 +84,7 @@ MonoBehaviour:
   name: Unnamed
   upgrades: []
   damageBonus: 1.39999998
-  radius: 20
+  radius: 15
   affectOtherAuraTowers: 0
   auraEffectPrefab: {fileID: 11900000, guid: b0a1f6772f39e47fdae4d55c17d8ac35, type: 2}
   effectProjectorHeight: 7
