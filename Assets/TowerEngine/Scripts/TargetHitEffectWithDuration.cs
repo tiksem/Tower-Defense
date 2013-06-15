@@ -36,7 +36,20 @@ public abstract class TargetHitEffectWithDuration : TargetHitEffect
 	
 	public override void OnDestroy()
 	{
-		ReturnColor();
+				
+		bool canStack = CanStack();
+		
+		if(!canStack)
+		{
+			ReturnColor();
+		}
+		else if(targetComponent != null)
+		{
+			if(!targetComponent.IsEffectAttachedButThis(this))
+			{
+				ReturnColor();
+			}
+		}
 	}
 	
 	protected override void FirstApplyToTarget()

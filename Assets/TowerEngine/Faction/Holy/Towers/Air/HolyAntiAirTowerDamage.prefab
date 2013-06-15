@@ -160,7 +160,8 @@ MonoBehaviour:
     attackType: 2
     ground: 0
     air: 1
-    additionalEffects: []
+    additionalEffects:
+    - {fileID: 100000, guid: a2845331b60b06a4492e84fc8f76b98a, type: 2}
     effectsChances: []
 --- !u!114 &11400002
 MonoBehaviour:
