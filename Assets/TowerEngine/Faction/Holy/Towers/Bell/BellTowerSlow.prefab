@@ -149,7 +149,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 2.51142502
   m_Height: 10.2172451
 --- !u!1001 &100100000

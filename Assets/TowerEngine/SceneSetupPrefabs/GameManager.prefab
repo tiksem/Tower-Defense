@@ -443,7 +443,7 @@ MonoBehaviour:
   leavePortalOffset: {x: 0, y: 3, z: 0}
   partyPointOrientation: 0
   lifesBar: {fileID: 0}
-  partyIndex: 0
+  partyIndex: 34
   obstaclesTargetAvoidanceQuailty: 3
 --- !u!1001 &100100000
 Prefab:

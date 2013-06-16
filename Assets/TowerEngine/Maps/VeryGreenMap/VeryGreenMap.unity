@@ -448,8 +448,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cb1af4e5d8deb8419af6651668da7c0, type: 3}
   m_Name: 
-  fadeDuration: 1
-  fadeAfter: 7
+  fadeDuration: 3
+  fadeAfter: 10
   notEnoughGoldMessage: Not enough gold
   towerNotSelectedMessage: Select tower
   selectTowerUpgradeMessage: Select tower upgrade
@@ -3062,7 +3062,7 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
-    - delayBeforeShow: 9
+    - delayBeforeShow: 12
       levelOffset: 1
   - targetPrefab: {fileID: 100096, guid: ac9f4196a35c81343b05d121002096ff, type: 2}
     leaderPrefab: {fileID: 0}
@@ -3091,6 +3091,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 2
   - targetPrefab: {fileID: 100076, guid: 116e006a8d6dd1048b341fff21d8ff23, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -3098,6 +3100,8 @@ MonoBehaviour:
     gold: 30
     endRoundMessages: []
     endRoundLevelDescriptions:
+    - delayBeforeShow: 12
+      levelOffset: 1
     - delayBeforeShow: 0
       levelOffset: 0
   - targetPrefab: {fileID: 100104, guid: e00b033f3d2713f4bbf1b1e0b16ed8d4, type: 2}
@@ -3136,6 +3140,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 3
   - targetPrefab: {fileID: 100060, guid: f191cc5d0931d974786153de37394023, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -3145,6 +3151,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 2
   - targetPrefab: {fileID: 100074, guid: ee4088f7a6a77a04da5b2c964c9ced29, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -3152,8 +3160,8 @@ MonoBehaviour:
     gold: 40
     endRoundMessages: []
     endRoundLevelDescriptions:
-    - delayBeforeShow: 0
-      levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100168, guid: c04787b27309822458c01e08257d036f, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
@@ -3181,6 +3189,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100052, guid: 530a2e6915fecfc4289945a1c819f2d5, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -3217,6 +3227,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100100, guid: ba1bdb46edc631d44821f99c773b6971, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -3251,8 +3263,8 @@ MonoBehaviour:
     gold: 60
     endRoundMessages: []
     endRoundLevelDescriptions:
-    - delayBeforeShow: 0
-      levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100168, guid: 972b28321f7df0845be87c7f67daeb0e, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
@@ -3289,6 +3301,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100170, guid: b56de0228c2741b42b5f844416377131, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
@@ -3316,6 +3330,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100130, guid: 3643589d5ebd8974ba86f2033ff5fa10, type: 2}
     leaderPrefab: {fileID: 0}
     width: 6
@@ -3334,6 +3350,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100168, guid: 3453af15f0e60524581ce9a64f959826, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
@@ -3361,6 +3379,8 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100168, guid: 571ebec30b43b084f8b6c52d2fdf0687, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
@@ -3397,12 +3417,16 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
   - targetPrefab: {fileID: 100170, guid: 63b0547a2eb337c44a105899d2771d7e, type: 2}
     leaderPrefab: {fileID: 0}
     width: 3
     height: 1
     gold: 65
-    endRoundMessages: []
+    endRoundMessages:
+    - text: Last wave!!!
+      delayBeforeShow: 7
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
@@ -3476,7 +3500,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73417905adf837144b03163c3b662459, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.45055389
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73417905adf837144b03163c3b662459, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3497,6 +3521,10 @@ Prefab:
     - target: {fileID: 400000, guid: 73417905adf837144b03163c3b662459, type: 2}
       propertyPath: m_LocalRotation.w
       value: .875426114
+      objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 73417905adf837144b03163c3b662459, type: 2}
+      propertyPath: m_Intensity
+      value: .75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73417905adf837144b03163c3b662459, type: 2}
@@ -3834,7 +3862,7 @@ Light:
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .699999988
+  m_Intensity: .75
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -3866,7 +3894,7 @@ Transform:
   m_PrefabInternal: {fileID: 1696329279}
   m_GameObject: {fileID: 1957227965}
   m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381661, w: .875426114}
-  m_LocalPosition: {x: 68.7919617, y: 7.45055389, z: 62.3083763}
+  m_LocalPosition: {x: 68.7919617, y: 50, z: 62.3083763}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
