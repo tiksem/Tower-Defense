@@ -39,8 +39,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59664e13ed0a6a34399a32a0f152db5c, type: 3}
   m_Name: 
-  creationSound: {fileID: 8300000, guid: 0a1fbab6bb628e44ea3b3ebe8e2b50a7, type: 3}
-  targetHitSound: {fileID: 8300000, guid: 32b2ed22c66965948ad40c11576bef08, type: 3}
+  creationSound: {fileID: 8300000, guid: 758647c2793369f4a8a4a8bd5f153009, type: 3}
+  targetHitSound: {fileID: 0}
+  volume: .400000006
   velocity: 10
 --- !u!198 &19800000
 ParticleSystem:
