@@ -176,7 +176,7 @@ public class TowersBar : MonoBehaviour
 		}
 	}
 	
-	void Start()
+	void Awake()
 	{
 		bar = gameObject.GetComponent<BarWithCircleButtons>();
 		InitTowersGold();

@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		public int levelOffset = 0;
 	}
 	
+	public enum PartyPointOrientation
+	{
+		HORIZONTAL,
+		VERTICAL
+	}
+	
 	[System.Serializable]
 	public class Party
 	{
@@ -52,6 +58,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	public GameObject portal;
 	public float delayBetweenPartyAndPortalCreation = 2.0f;
 	public Vector3 leavePortalOffset = new Vector3(0.0f, 3.0f, 0.0f);
+	
+	public PartyPointOrientation partyPointOrientation = PartyPointOrientation.HORIZONTAL;
 	
 	public TextWithIcon lifesBar;
 	
@@ -346,11 +354,20 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		float zInFirstLine = 0.0f;
 		float zInLastLine = 0.0f;
 		
-		for(int y = 0; y < partyToCreate.height; y++)
+		int partyWidth = partyToCreate.width;
+		int partyHeight = partyToCreate.height;
+		
+		if(partyPointOrientation == PartyPointOrientation.VERTICAL)
+		{
+			partyWidth = partyToCreate.height;
+			partyHeight = partyToCreate.width;
+		}
+		
+		for(int y = 0; y < partyHeight; y++)
 		{
 			GameObject target = null;
 			
-			for(int x = 0; x < partyToCreate.width; x++)
+			for(int x = 0; x < partyWidth; x++)
 			{
 				target = CreatePartyTarget(partyToCreate, partyPointIndex, x, y);
 				if(x == partyToCreate.width - 1 && y == 0)

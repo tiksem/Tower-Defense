@@ -9,14 +9,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: TowerSkillsBar
+  m_Name: TowerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -24,8 +23,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 63.3014374, y: 25.8437729, z: 25.8627949}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &11400000
@@ -36,29 +35,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f56b3c5f6ab43647829ab9117f5f9a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8394141eabf735d42b3c1f5f559f378e, type: 3}
   m_Name: 
-  iconSize: .128999993
-  firstIconLeft: .0810000002
-  iconBottom: .0165999997
-  distanceBetweenIcons: .0137
-  defaultButtonTexture: {fileID: 2800000, guid: 77aabc0e41fc20f48b923093e80c6dcd,
-    type: 3}
-  footerTexture: {fileID: 2800000, guid: eceb0683971de9b40a4686c5feee5814, type: 3}
-  footerHeight: .100000001
-  buttonsCount: 6
-  buttonTextures: []
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf47cec6687ddd549bce791751397a4f, type: 3}
-  m_Name: 
-  upgrades: []
+  startGold: 30
+  availibleTowerPlaces:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  towerSize: 5
+  terrain: {fileID: 0}
+  towerBuildButton: {fileID: 0}
+  towerSkillsBar: {fileID: 0}
+  towersBar: {fileID: 0}
+  towerSkillsBarClose: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
+  towerSkillsBarCloseSize: .0700000003
+  towerSkillsBarCloseBorder: .0399999991
+  goldBar: {fileID: 0}
+  towerSelectionTexture: {fileID: 0}
+  selectedTower: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
