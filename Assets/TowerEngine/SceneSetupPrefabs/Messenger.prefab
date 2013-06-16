@@ -40,8 +40,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cb1af4e5d8deb8419af6651668da7c0, type: 3}
   m_Name: 
-  fadeDuration: 1
-  fadeAfter: 7
+  fadeDuration: 3
+  fadeAfter: 10
   notEnoughGoldMessage: Not enough gold
   towerNotSelectedMessage: Select tower
   selectTowerUpgradeMessage: Select tower upgrade
