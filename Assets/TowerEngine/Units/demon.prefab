@@ -1899,7 +1899,7 @@ MonoBehaviour:
   goldForKill: 18
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: ee1880ff9010c274fa575185705c4962, type: 3}
   deathSoundVolume: .400000006
   deathEffect: {fileID: 0}
   deathEffectDuration: 1
