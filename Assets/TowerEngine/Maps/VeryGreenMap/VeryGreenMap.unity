@@ -1253,7 +1253,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0dc30a9ce1c6e4345b312d2b83939d6d, type: 2}
       propertyPath: timeScale
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0dc30a9ce1c6e4345b312d2b83939d6d, type: 2}
@@ -1850,7 +1850,7 @@ MonoBehaviour:
   menuButtonHeight: .119999997
   menuButtonX: 0
   menuButtonY: 0
-  timeScale: 5
+  timeScale: 1
   endGameMessage: Exit game?
 --- !u!4 &793557735
 Transform:
