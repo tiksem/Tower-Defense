@@ -56,6 +56,8 @@ public class MainMenu : MonoBehaviour
 	public float chooseMapFractionButtonSize = 0.2f;
 	public float chooseMapFractionButtonX = 0.2f;
 	public float chooseMapButtonY = 0.2f;
+	public float availibleMapsCount = 6;
+	public string proVersionId;
 	public float chooseFractionButtonY = 0.2f;
 	public float chooseMapFractionTextYOffset = 0.1f;
 	public string chooseMapText = "Choose a map";
@@ -112,6 +114,7 @@ public class MainMenu : MonoBehaviour
 	private AsyncOperation loadingOperation;
 	private SaveGameManager.SaveGameInfo[] saves;
 	private Texture soundOnOffTexture;
+	private static string sharedProAppliactionId;
 	
 	public static Texture GetMapTextureByName(string name)
 	{
@@ -414,9 +417,23 @@ public class MainMenu : MonoBehaviour
 		shouldDrawFractionNotReady = false;
 	}
 	
+	public static void OpenProAppliactionOnPlayStore()
+	{
+		string url = "market://details?id=" + sharedProAppliactionId;
+		Application.OpenURL(url);
+	}
+	
 	private void OnMapPeek(int index)
 	{
-		mapIndex = index;
+		if(index < availibleMapsCount)
+		{
+			mapIndex = index;
+		}
+		else
+		{
+			OpenProAppliactionOnPlayStore();
+		}
+		
 		HideAllPopUps();
 	}
 	
@@ -451,6 +468,11 @@ public class MainMenu : MonoBehaviour
 		{
 			OnStartButtonClick();
 		}
+	}
+	
+	void Awake()
+	{
+		sharedProAppliactionId = proVersionId;
 	}
 	
 	// Use this for initialization

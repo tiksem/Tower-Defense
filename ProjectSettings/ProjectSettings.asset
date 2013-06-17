@@ -11,7 +11,7 @@ PlayerSettings:
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: WeShall Ltd.
-  productName: Coloring Pages 3D
+  productName: Warcraft Tower Defense
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
@@ -67,8 +67,8 @@ PlayerSettings:
     16:9: 1
     Others: 1
   iPhoneBundleIdentifier: com.weshall.warcraft_tower_defence
-  iPhoneBundleVersion: 1.0
-  AndroidBundleVersionCode: 1
+  iPhoneBundleVersion: 1.1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -96,17 +96,17 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 1
-  AndroidKeystoreName: Z:/Towers2/code/Publishing/Coloring Pages 3D/coloring_pages_3d.keystore
+  AndroidKeystoreName: "C:/Users/\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440/Desktop/w_td_pro.keystore"
   AndroidKeyaliasName: 
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 3007e86ed34312f4d98f5f3bd1a73aa8, type: 3}
+    - m_Icon: {fileID: 2800000, guid: a9f700b37f4e7294bb0654ac1c791abb, type: 3}
       m_Size: 128
   - m_BuildTarget: Android
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 3007e86ed34312f4d98f5f3bd1a73aa8, type: 3}
+    - m_Icon: {fileID: 2800000, guid: a9f700b37f4e7294bb0654ac1c791abb, type: 3}
       m_Size: 96
     - m_Icon: {fileID: 0}
       m_Size: 72
@@ -153,7 +153,16 @@ PlayerSettings:
   ps3SaveGameSlots: 1
   ps3TrialMode: 0
   flashStrippingLevel: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    data:
+      first: 1
+      second: 
+    data:
+      first: 2
+      second: 
+    data:
+      first: 7
+      second: 
   metroPackageName: 
   metroPackageLogo: 
   metroPackageVersion: 

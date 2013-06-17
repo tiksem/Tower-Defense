@@ -131,7 +131,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
-    m_FontSize: 35
+    m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 6
     m_WordWrap: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
-    m_FontSize: 35
+    m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 6
     m_WordWrap: 0
@@ -203,8 +203,8 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   doNotUseDisabledTextStyle: 0
-  textOffsetY: -.0700000003
-  textOffsetX: 0
+  textOffsetY: -.100000001
+  textOffsetX: -.0299999993
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

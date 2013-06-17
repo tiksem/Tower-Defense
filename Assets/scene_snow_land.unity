@@ -3590,7 +3590,7 @@ Light:
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .300000012
+  m_Intensity: .349999994
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -4260,7 +4260,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
-    m_FontSize: 35
+    m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 6
     m_WordWrap: 0
@@ -4319,7 +4319,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
-    m_FontSize: 35
+    m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 6
     m_WordWrap: 0
@@ -4332,8 +4332,8 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   doNotUseDisabledTextStyle: 0
-  textOffsetY: -.0700000003
-  textOffsetX: 0
+  textOffsetY: -.100000001
+  textOffsetX: -.0299999993
 --- !u!4 &965043605
 Transform:
   m_ObjectHideFlags: 0
@@ -7122,7 +7122,7 @@ GUIText:
   m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
   m_Material: {fileID: 0}
   m_FontSize: 30
-  m_FontStyle: 1
+  m_FontStyle: 0
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &1806237995
@@ -7569,7 +7569,7 @@ MonoBehaviour:
   leavePortalOffset: {x: 0, y: 3, z: 0}
   partyPointOrientation: 0
   lifesBar: {fileID: 274984358}
-  partyIndex: 34
+  partyIndex: 0
   obstaclesTargetAvoidanceQuailty: 3
 --- !u!4 &1827021089
 Transform:

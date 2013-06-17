@@ -86,7 +86,7 @@ GUIText:
   m_Font: {fileID: 12800000, guid: b91fb9136488ac34eb4a5258dd05c2e1, type: 3}
   m_Material: {fileID: 0}
   m_FontSize: 30
-  m_FontStyle: 1
+  m_FontStyle: 0
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1001 &100100000

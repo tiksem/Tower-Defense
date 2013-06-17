@@ -1167,7 +1167,7 @@ MonoBehaviour:
     poison: 0
     wind: 0
   physicalArmor: 10
-  goldForKill: 1
+  goldForKill: 10
   goldForKillPointerPrefab: {fileID: 100000, guid: 546ea84c825d1d04e939972c0e61992b,
     type: 2}
   deathSound: {fileID: 8300000, guid: 36bdba2c70a08b943b0eed288ada06f8, type: 3}
