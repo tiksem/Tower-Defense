@@ -430,6 +430,7 @@ MonoBehaviour:
   defaultTargetRadius: .5
   wonText: You won!!!
   looseText: You loose!!!
+  freeWonText: Wanna more levels?
   wonBackground: {fileID: 2800000, guid: 33afd227205b83b4eb0dbae764d45f99, type: 3}
   looseBackground: {fileID: 0}
   roundTimerPrefab: {fileID: 11400000, guid: f9aec019d7af2244d872dfab8229a90f, type: 2}
@@ -445,6 +446,7 @@ MonoBehaviour:
   lifesBar: {fileID: 0}
   partyIndex: 0
   obstaclesTargetAvoidanceQuailty: 3
+  isFree: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

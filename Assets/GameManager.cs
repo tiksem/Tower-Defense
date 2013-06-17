@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	public float defaultTargetRadius = 0.5f;
 	public string wonText = "You won!!!";
 	public string looseText = "You loose!!!";
+	public string freeWonText = "You won, wanna more levels?";
 	public Texture wonBackground;
 	public Texture looseBackground;
 	public GUITimer roundTimerPrefab;
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	public int partyIndex = 0;
 	
 	public ObstacleAvoidanceType obstaclesTargetAvoidanceQuailty = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+	
+	public bool isFree = false;
 	
 	private int leaveTargetCount = 0;
 	private int leavesCountOnRoundStart = 0;
@@ -429,21 +432,47 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		GUIUtilities.DrawBackground(looseBackground);
 	}
 	
-	private void DrawLooseGUI()
+	private string GetEndGameText()
 	{
-		GameMenu.Instance.HideAllControls();
-		DrawWinBackground();
-		if(GUIUtilities.DrawMessageBox(looseText, GUIUtilities.MessageBoxType.OK) == GUIUtilities.MessageBoxResult.OK)
+		string text = wonText;
+		if(loose)
 		{
-			GameMenu.Instance.EndGame();
+			text = looseText;
 		}
+		else if(isFree)
+		{
+			text = freeWonText;
+		}
+		
+		return text;
 	}
 	
-	private void DrawWinGUI()
+	private void DrawEndGameGUIIfRequired()
 	{
+		if(!win && !loose)
+		{
+			return;
+		}
+		
 		GameMenu.Instance.HideAllControls();
 		DrawWinBackground();
-		if(GUIUtilities.DrawMessageBox(wonText,GUIUtilities.MessageBoxType.OK) == GUIUtilities.MessageBoxResult.OK)
+		
+		string text = GetEndGameText();
+		
+		GUIUtilities.MessageBoxType messageBoxType = GUIUtilities.MessageBoxType.OK;
+		if(win && isFree)
+		{
+			messageBoxType = GUIUtilities.MessageBoxType.YES_NO;
+		}
+		
+		GUIUtilities.MessageBoxResult messageBoxResult = GUIUtilities.DrawMessageBox(text, messageBoxType);
+		
+		if(messageBoxResult == GUIUtilities.MessageBoxResult.YES)
+		{
+			MainMenu.OpenProAppliactionOnPlayStore();
+		}
+		
+		if(messageBoxResult != GUIUtilities.MessageBoxResult.NONE)
 		{
 			GameMenu.Instance.EndGame();
 		}
@@ -518,14 +547,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			return;
 		}
 		
-		if(win)
-		{
-			DrawWinGUI();
-		}
-		else if(loose)
-		{
-			DrawLooseGUI();
-		}
+		DrawEndGameGUIIfRequired();
 	}
 	
 	[System.Serializable]

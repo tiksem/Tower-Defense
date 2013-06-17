@@ -35,19 +35,26 @@ namespace AssemblyCSharp
 				throw new UnityEngine.MissingReferenceException("Add MessageBoxSettings gameObject to your scene");
 			}
 			
-			Vector2 xy = DrawTextureInCenter(messageBoxSettings.width, messageBoxSettings.height, messageBoxSettings.background);
-			
 			float textBorderX = messageBoxSettings.textBorderX;
 			float textBorderY = messageBoxSettings.textBorderY;
-			float textX = xy.x + textBorderX;
-			float textY = xy.y + textBorderY;
-			float textWidth = messageBoxSettings.width - textBorderX / 2;
+						
+			float textWidth = -1.0f;
+			float textHeight = -1.0f;
+			AdjustTextWidthAndHeight(ref textWidth, ref textHeight, message, messageBoxSettings.textStyle);
 			
-			DrawText(textX, textY, message, messageBoxSettings.textStyle, textWidth);
+			float textureWidth = Math.Max(messageBoxSettings.width, textWidth + textBorderX * 2);
+			float textureHeight = Math.Max(messageBoxSettings.height, textHeight + textBorderY * 2);
+			
+			Vector2 xy = DrawTextureInCenter(textureWidth, textureHeight, messageBoxSettings.background);
+			
+			float textX = 0.5f - textWidth / 2;
+			float textY = xy.y + textBorderY;
+			
+			DrawText(textX, textY, message, messageBoxSettings.textStyle, textWidth, textHeight);
 			
 			float buttonWidth = messageBoxSettings.buttonSize;
 			float buttonHeight = GetHeightFromWidthForSquareButton(buttonWidth);
-			float buttonY = xy.y + messageBoxSettings.height - buttonHeight - messageBoxSettings.buttonOffsetY;
+			float buttonY = xy.y + textureHeight - buttonHeight - messageBoxSettings.buttonOffsetY;
 			
 			MessageBoxResult messageBoxResult = MessageBoxResult.NONE;
 			
@@ -61,7 +68,7 @@ namespace AssemblyCSharp
 			}
 			else
 			{
-				float buttonX = xy.x + (messageBoxSettings.width - buttonWidth * 2 - messageBoxSettings.distanceBetweenButtons) / 2;
+				float buttonX = xy.x + (textureWidth - buttonWidth * 2 - messageBoxSettings.distanceBetweenButtons) / 2;
 				
 				if(DrawTextureButton(buttonX, buttonY, buttonWidth, buttonHeight, messageBoxSettings.ok))
 				{

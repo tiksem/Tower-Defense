@@ -43,7 +43,7 @@ MonoBehaviour:
   close: {fileID: 0}
   cancel: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
   ok: {fileID: 2800000, guid: d52bd10deaeb3074e99faed7687dddb2, type: 3}
-  textBorderX: 0
+  textBorderX: .0350000001
   textBorderY: .0500000007
   buttonSize: .0599999987
   buttonOffsetY: -0

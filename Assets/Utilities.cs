@@ -273,6 +273,20 @@ namespace AssemblyCSharp
 			DestroyAll(objects);
 			objects.Clear();
 		}
+		
+		public static void InitSingleton<T>(ref T instance, T self)
+			where T : UnityEngine.Object
+		{
+			if(instance == null)
+			{
+				instance = self;
+				GameObject.DontDestroyOnLoad(self);
+			}
+			else if(instance != self)
+			{
+				GameObject.Destroy(self);
+			}
+		}
 	}
 }
 
