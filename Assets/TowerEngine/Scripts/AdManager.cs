@@ -25,6 +25,7 @@ public class AdManager : MonoBehaviour
 	
 	private void ShowAds(bool isEndOfTheRound)
 	{
+#if UNITY_ANDROID && !UNITY_EDITOR
 		if(!gameObject.activeSelf)
 		{
 			return;
@@ -45,7 +46,8 @@ public class AdManager : MonoBehaviour
 				int id = ad.id;
 				adsClassI.Call("loadLeadboltAds", id.ToString(), 0);
 			}
-		}	
+		}
+#endif
 	}
 	
 	public void ShowEndOfTheRoundAds()
@@ -65,13 +67,9 @@ public class AdManager : MonoBehaviour
 			if(doNotShowAdsOnScenesWithId.IndexOf(Application.loadedLevel) >= 0)
 			{
 				return;
-			}
-			
-#if UNITY_ANDROID && !UNITY_EDITOR
-				
+			}		
 			ShowAds(false);
 			isBannerShown = true;
-#endif
 		}
 	}
 	
