@@ -89,7 +89,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &77409303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
     id: 130482453
     showOnEndOfRound: 0
   - name: App Wall
-    id: 532592516
+    id: 818374549
     showOnEndOfRound: 1
   - name: Small Banner
     id: 465928779
@@ -329,7 +329,7 @@ MonoBehaviour:
   chooseMapFractionButtonSize: .150000006
   chooseMapFractionButtonX: .610000014
   chooseMapButtonY: .0799999982
-  availibleMapsCount: 5
+  availibleMapsCount: 6
   proVersionId: com.weshall.warcraft_tower_defence
   chooseFractionButtonY: .5
   chooseMapFractionTextYOffset: -.0500000007
@@ -698,7 +698,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
       propertyPath: ads.Array.data[0].showOnEndOfRound
@@ -707,6 +707,10 @@ Prefab:
     - target: {fileID: 11400000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
       propertyPath: ads.Array.data[2].showOnEndOfRound
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
+      propertyPath: ads.Array.data[2].id
+      value: 818374549
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
