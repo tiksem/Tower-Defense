@@ -16,11 +16,42 @@ public class AdManager : MonoBehaviour
 	{
 		public string name;
 		public int id;
+		public bool showOnEndOfRound = false;
 	}
 	
 	public Ad[] ads;
 	
 	bool isBannerShown = false;
+	
+	private void ShowAds(bool isEndOfTheRound)
+	{
+		if(!gameObject.activeSelf)
+		{
+			return;
+		}
+		
+		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 			
+		AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
+			
+		using(AndroidJavaObject adsClassI = new AndroidJavaObject("com.unity3d.wrapper.i.IWrapper", jo))
+		{
+			foreach(Ad ad in ads)
+			{
+				if(ad.showOnEndOfRound != isEndOfTheRound)
+				{
+					continue;
+				}
+					
+				int id = ad.id;
+				adsClassI.Call("loadLeadboltAds", id.ToString(), 0);
+			}
+		}	
+	}
+	
+	public void ShowEndOfTheRoundAds()
+	{
+		ShowAds(true);
+	}
 	
 	void Update ()
 	{
@@ -37,18 +68,8 @@ public class AdManager : MonoBehaviour
 			}
 			
 #if UNITY_ANDROID && !UNITY_EDITOR
-			AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 			
-			AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-			
-			using(AndroidJavaObject adsClassI = new AndroidJavaObject("com.unity3d.wrapper.i.IWrapper", jo))
-			{
-				foreach(Ad ad in ads)
-				{
-					int id = ad.id;
-					adsClassI.Call("loadLeadboltAds", id.ToString(), 0);
-				}
-			}		
-			
+				
+			ShowAds(false);
 			isBannerShown = true;
 #endif
 		}

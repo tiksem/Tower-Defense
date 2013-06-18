@@ -476,6 +476,11 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		{
 			GameMenu.Instance.EndGame();
 		}
+		
+		if(isFree)
+		{
+			AdManager.instance.ShowEndOfTheRoundAds();
+		}
 	}
 	
 	private void OnWin()
