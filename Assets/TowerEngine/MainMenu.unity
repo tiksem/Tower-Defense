@@ -106,12 +106,16 @@ MonoBehaviour:
   ads:
   - name: Alert
     id: 213549360
+    showOnEndOfRound: 1
   - name: Banner
     id: 130482453
+    showOnEndOfRound: 0
   - name: App Wall
     id: 532592516
+    showOnEndOfRound: 1
   - name: Small Banner
     id: 465928779
+    showOnEndOfRound: 0
 --- !u!4 &77409304
 Transform:
   m_ObjectHideFlags: 0
@@ -690,6 +694,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
       propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
+      propertyPath: ads.Array.data[0].showOnEndOfRound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a2a311d258ba5ab459e74ade6c5dcafe, type: 2}
+      propertyPath: ads.Array.data[2].showOnEndOfRound
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
