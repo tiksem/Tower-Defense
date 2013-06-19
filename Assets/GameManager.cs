@@ -502,7 +502,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		partyAppearingPoints = GameObject.FindGameObjectsWithTag("PartyPoint");
 	}
 	
-	void Start() 
+	void Awake()
 	{
 		if(instance != null)
 		{
@@ -511,6 +511,11 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		
 		instance = this;
 		
+		maxLeaveTargetCount = MainMenu.GetLifesCount();
+	}
+	
+	void Start() 
+	{
 		InitPartiesPoints();
 		partyIndex--;
 		LeaveTargetCount = 0;

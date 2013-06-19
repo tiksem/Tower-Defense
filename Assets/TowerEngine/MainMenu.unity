@@ -326,15 +326,28 @@ MonoBehaviour:
     isDisabled: 0
   fractionIndex: 0
   mapsButtonSize: 0
-  chooseMapFractionButtonSize: .150000006
+  chooseMapFractionButtonSize: .125
   chooseMapFractionButtonX: .610000014
   chooseMapButtonY: .0799999982
   availibleMapsCount: 6
   proVersionId: com.weshall.warcraft_tower_defence
-  chooseFractionButtonY: .5
+  chooseFractionButtonY: .63499999
+  chooseDifficultyButtonY: .360000014
   chooseMapFractionTextYOffset: -.0500000007
   chooseMapText: Choose a map
   chooseFractionText: Choose a fraction
+  chooseDifficultyText: Choose difficulty
+  difficulties:
+  - name: Easy
+    texture: {fileID: 2800000, guid: 2d10b9df935be714d899096b2eb963a2, type: 3}
+    lifesCount: 75
+  - name: Normal
+    texture: {fileID: 2800000, guid: fe263f0e1a3954d47abb41d452ea0899, type: 3}
+    lifesCount: 35
+  - name: Hard
+    texture: {fileID: 2800000, guid: f50d8a57ef1fa1644845664736f5aac4, type: 3}
+    lifesCount: 15
+  difficultyIndex: 0
   startButtonWidth: .200000003
   startButtonHeight: .100000001
   startButtonX: .579999983
@@ -354,6 +367,12 @@ MonoBehaviour:
     distanceBetweenButtons: .00999999978
     buttonsLeft: .119999997
     buttonsTop: .0799999982
+    buttonsOnLine: 3
+  difficultyPeekGridSettings:
+    buttonSize: .25
+    distanceBetweenButtons: .00999999978
+    buttonsLeft: .119999997
+    buttonsTop: .150000006
     buttonsOnLine: 3
   selectedAction: 0
   cancelButton: {fileID: 2800000, guid: cce7472152fc18345927bfdd0635e33e, type: 3}
