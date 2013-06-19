@@ -30,6 +30,39 @@ namespace AssemblyCSharp
 		
 		public static MessageBoxResult DrawMessageBox(string message, MessageBoxType type = MessageBoxType.OK)
 		{
+			return DrawMessageExtendedBox(message, type);
+		}
+		
+		public class DrawMessageBoxParams
+		{
+			public float width;
+			public float height;
+			public float border = 0.0f;
+			public Func<Rect,Void> drawer;
+		}
+		
+		public static void RemoveBorderUsingWidth(ref Rect rect, float border)
+		{
+			if(border == 0)
+			{
+				return;
+			}
+			
+			rect.width -= border;
+			float borderHeight = GetHeightFromWidthForSquareButton(border);
+			rect.height -= borderHeight;
+			rect.x += border;
+			rect.y += borderHeight;
+		}
+		
+		public static MessageBoxResult DrawMessageBoxUsingCustomDrawer(DrawMessageBoxParams messageBoxParams, 
+			MessageBoxType type = MessageBoxType.OK)
+		{
+			return DrawMessageExtendedBox(messageBoxParams, type);
+		}
+		
+		private static MessageBoxResult DrawMessageExtendedBox(object message, MessageBoxType type = MessageBoxType.OK)
+		{
 			if(messageBoxSettings == null)
 			{
 				throw new UnityEngine.MissingReferenceException("Add MessageBoxSettings gameObject to your scene");
@@ -38,22 +71,43 @@ namespace AssemblyCSharp
 			float textBorderX = messageBoxSettings.textBorderX;
 			float textBorderY = messageBoxSettings.textBorderY;
 						
-			float textWidth = -1.0f;
-			float textHeight = -1.0f;
-			AdjustTextWidthAndHeight(ref textWidth, ref textHeight, message, messageBoxSettings.textStyle);
+			float contentWidth = -1.0f;
+			float contentHeight = -1.0f;
 			
-			float textureWidth = Math.Max(messageBoxSettings.width, textWidth + textBorderX * 2);
-			float textureHeight = Math.Max(messageBoxSettings.height, textHeight + textBorderY * 2);
+			DrawMessageBoxParams drawParams = message as DrawMessageBoxParams;
 			
-			Vector2 xy = DrawTextureInCenter(textureWidth, textureHeight, messageBoxSettings.background);
-			
-			float textX = 0.5f - textWidth / 2;
-			float textY = xy.y + textBorderY;
-			
-			DrawText(textX, textY, message, messageBoxSettings.textStyle, textWidth, textHeight);
+			if(message is string)
+			{
+				AdjustTextWidthAndHeight(ref contentWidth, ref contentHeight, message.ToString(), messageBoxSettings.textStyle);
+			}
+			else
+			{
+				contentWidth = drawParams.width;
+				contentHeight = drawParams.height;
+			}
 			
 			float buttonWidth = messageBoxSettings.buttonSize;
 			float buttonHeight = GetHeightFromWidthForSquareButton(buttonWidth);
+			
+			float textureWidth = Math.Max(messageBoxSettings.width, contentWidth + textBorderX * 2);
+			float textureHeight = Math.Max(messageBoxSettings.height, contentHeight + textBorderY * 2 + buttonHeight);
+			
+			Vector2 xy = DrawTextureInCenter(textureWidth, textureHeight, messageBoxSettings.background);
+			
+			if(message is string)
+			{
+				float textX = 0.5f - contentWidth / 2;
+				float textY = xy.y + textBorderY;
+			
+				DrawText(textX, textY, message.ToString(), messageBoxSettings.textStyle, contentWidth, contentHeight);
+			}
+			else
+			{
+				Rect rect = new Rect(xy.x, xy.y, contentWidth, contentHeight);
+				RemoveBorderUsingWidth(ref rect, drawParams.border);
+				drawParams.drawer(rect);
+			}
+			
 			float buttonY = xy.y + textureHeight - buttonHeight - messageBoxSettings.buttonOffsetY;
 			
 			MessageBoxResult messageBoxResult = MessageBoxResult.NONE;
@@ -124,6 +178,13 @@ namespace AssemblyCSharp
 			return DrawTextureButton(x, y, width, height, texture);
 		}
 		
+		public static bool DrawSquareTextureButtonWithBorderUsingWidth(float x, float y, float width, float border, Texture texture)
+		{
+			x += border;
+			y += GetHeightFromWidthForSquareButton(border);
+			return DrawSquareTextureButtonUsingWidth(x, y, width, texture);
+		}
+		
 		public static bool DrawTextureButton(Rect rect, Texture texture)
 		{
 			return DrawTextureButton(rect.x, rect.y, rect.width, rect.height, texture);
@@ -181,16 +242,32 @@ namespace AssemblyCSharp
 			}
 		}
 		
-		public static void DrawText(Rect rect, string text, GUIStyle textStyle)
+		public static void CalculateTextWidthAndHeight(out float width, out float height, string text, GUIStyle textStyle)
 		{
-			DrawText(rect.x, rect.y, text, textStyle, rect.width, rect.height);
+			width = -1.0f;
+			height = -1.0f;
+			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
 		}
 		
-		public static void DrawText(float x, float y, string text, GUIStyle textStyle, float width = -0.1f, float height = -0.1f)
+		public static Vector2 DrawText(Rect rect, string text, GUIStyle textStyle)
+		{
+			return DrawText(rect.x, rect.y, text, textStyle, rect.width, rect.height);
+		}
+		
+		public static Vector2 DrawText(float x, float y, string text, GUIStyle textStyle, float width = -0.1f, float height = -0.1f)
 		{
 			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
+			Vector2 size = new Vector2(width, height);
 			Rect rect = ScreenToGUIRect(x, y, width, height);
 			GUI.Label(rect, text, textStyle);
+			return size;
+		}
+		
+		public class TextAndIconGetter
+		{
+			public Func<int,Texture> icon;
+			public Func<int,string> text;
+			public Func<int,GUIStyle> textStyle;
 		}
 		
 		public static void DrawTextWithIcon(float x, float y, float iconSize, Texture icon, string text, GUIStyle textStyle, float textXOffset = 0.0f)
@@ -205,6 +282,54 @@ namespace AssemblyCSharp
 			
 			DrawTexture(x, y, iconSize, iconHeight, icon);
 			DrawText(textX, textY, text, textStyle, textWidth, textHeight);
+		}
+		
+		[System.Serializable]
+		public class Table
+		{
+			public int cellCountX = 2;
+			public int cellCountY = 2;
+			public Func<Rect, Void> cellDrawer;
+			public float border = 0.0f;
+			public float x;
+			public float y;
+			public float cellWidth;
+			public float cellHeight;
+			public bool useSquareCells = false;
+			
+			public float GetContentWidth()
+			{
+				return cellWidth * cellCountX;
+			}
+			
+			public float GetContentHeight()
+			{
+				return cellHeight * cellCountY;
+			}
+			
+			public void Draw()
+			{
+				if(useSquareCells)
+				{
+					cellHeight = GetHeightFromWidthForSquareButton(cellWidth);
+				}
+				
+				Rect rect = new Rect(x, y, cellWidth, cellHeight);
+				
+				for(int i = 0; i < cellCountY; i++)
+				{
+					for(int j = 0; j < cellCountX; j++)
+					{
+						Rect rectWithBorder = rect;
+						RemoveBorderUsingWidth(ref rectWithBorder, border);
+						cellDrawer(rectWithBorder);
+						
+						rect.x += cellWidth;
+					}
+					
+					rect.y += cellHeight;
+				}
+			}
 		}
 		
 		public static float ScreenXToGUIX(float x)
