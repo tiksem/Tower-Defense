@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	private bool win = false;
 	private bool loose = false;
 	
+	private bool adsDisaplyed = false;
+	
 	private GameObject[] partyAppearingPoints;
 	
 	private GameObject createdPortal;
@@ -451,6 +453,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 	{
 		if(!win && !loose)
 		{
+			adsDisaplyed = false;
 			return;
 		}
 		
@@ -477,9 +480,10 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			GameMenu.Instance.EndGame();
 		}
 		
-		if(isFree)
+		if(isFree && !adsDisaplyed)
 		{
 			AdManager.instance.ShowEndOfTheRoundAds();
+			adsDisaplyed = true;
 		}
 	}
 	
