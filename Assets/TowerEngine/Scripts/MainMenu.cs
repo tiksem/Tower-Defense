@@ -37,6 +37,14 @@ public class MainMenu : MonoBehaviour
 		public bool isDisabled = true;
 	}
 	
+	[System.Serializable]
+	public class Difficulty
+	{
+		public string name;
+		public Texture texture;
+		public int lifesCount = 10;
+	}
+	
 	public Texture background;
 	public float distanceBetweenButtons;
 	public float buttonsTop;
@@ -59,9 +67,14 @@ public class MainMenu : MonoBehaviour
 	public float availibleMapsCount = 6;
 	public string proVersionId;
 	public float chooseFractionButtonY = 0.2f;
+	public float chooseDifficultyButtonY = 0.3f;
 	public float chooseMapFractionTextYOffset = 0.1f;
 	public string chooseMapText = "Choose a map";
 	public string chooseFractionText = "Choose a fraction";
+	public string chooseDifficultyText = "Choose difficulty";
+	
+	public Difficulty[] difficulties = new Difficulty[1];
+	public int difficultyIndex = 0;
 	
 	public float startButtonWidth = 0.1f;
 	public float startButtonHeight = 0.04f;
@@ -73,6 +86,7 @@ public class MainMenu : MonoBehaviour
 	public Texture backgroundDarkenTexture;
 	public GUIButtonGrid mapPeekGridSettings;
 	public GUIButtonGrid fractionPeekGridSettings;
+	public GUIButtonGrid difficultyPeekGridSettings;
 	
 	public ButtonAction selectedAction = ButtonAction.SINGLE_PLAYER;
 	
@@ -110,11 +124,13 @@ public class MainMenu : MonoBehaviour
 	private bool shouldDrawMapPeekGrid = false;
 	private bool shouldDrawFractionPeekGrid = false;
 	private bool shouldDrawFractionNotReady = false;
+	private bool shouldDrawDifficultyPeekGrid = false;
 	private ButtonAction prevSelectedAction = ButtonAction.SINGLE_PLAYER;
 	private AsyncOperation loadingOperation;
 	private SaveGameManager.SaveGameInfo[] saves;
 	private Texture soundOnOffTexture;
 	private static string sharedProAppliactionId;
+	private static Difficulty selectedDifficulty;
 	
 	public static Texture GetMapTextureByName(string name)
 	{
@@ -138,6 +154,22 @@ public class MainMenu : MonoBehaviour
 		return result;
 	}
 	
+	private Texture[] GetDifficultiesTextures()
+	{
+		Texture[] result = new Texture[difficulties.Length];
+		for(int i = 0; i < result.Length; i++)
+		{
+			result[i] = difficulties[i].texture;
+		}
+		
+		return result;
+	}
+	
+	public static int GetLifesCount()
+	{
+		return selectedDifficulty.lifesCount;
+	}
+	
 	private Texture[] GetFractionsTextures()
 	{
 		Texture[] result = new Texture[fractions.Length];
@@ -159,19 +191,24 @@ public class MainMenu : MonoBehaviour
 	
 	void OnValidate()
 	{
+		Texture[] textures;
+		
 		buttonYOffset = buttonHeight + distanceBetweenButtons;
 		
 		if(maps != null)
 		{
-			Texture[] textures = GetMapsTextures();
+			textures = GetMapsTextures();
 			mapPeekGridSettings.SetButtons(textures);
 		}
 		
 		if(fractions != null)
 		{
-			Texture[] textures = GetFractionsTextures();
+			textures = GetFractionsTextures();
 			fractionPeekGridSettings.SetButtons(textures);
 		}
+		
+		textures = GetDifficultiesTextures();
+		difficultyPeekGridSettings.SetButtons(textures);
 		
 		sharedMapsReferences = maps;
 	}
@@ -347,6 +384,12 @@ public class MainMenu : MonoBehaviour
 		shouldDrawMapPeekGrid = true;
 	}
 	
+	private void OnDifficultyChangeButtonClick()
+	{
+		backgroundShouldBeDarken = true;
+		shouldDrawDifficultyPeekGrid = true;
+	}
+	
 	private void DrawPeekButton(Texture texture, string text, float y, System.Func<System.Void> onClick)
 	{
 		float x = chooseMapFractionButtonX;
@@ -394,6 +437,12 @@ public class MainMenu : MonoBehaviour
 		DrawPeekButton(fractionTexture, chooseFractionText, chooseFractionButtonY, OnFractionChangeButtonClick);
 	}
 	
+	private void DrawDifficultyButton()
+	{
+		Texture difficultyTexture = difficulties[difficultyIndex].texture;
+		DrawPeekButton(difficultyTexture, chooseDifficultyText, chooseDifficultyButtonY, OnDifficultyChangeButtonClick);
+	}
+	
 	private void DrawFractionPeekGrid()
 	{
 		fractionPeekGridSettings.Draw();
@@ -402,6 +451,11 @@ public class MainMenu : MonoBehaviour
 	private void DrawMapPeekGrid()
 	{
 		mapPeekGridSettings.Draw();
+	}
+	
+	private void DrawDifficultyPeekGrid()
+	{
+		difficultyPeekGridSettings.Draw();
 	}
 	
 	private bool DrawCancelButton()
@@ -415,6 +469,7 @@ public class MainMenu : MonoBehaviour
 		backgroundShouldBeDarken = false;
 		shouldDrawFractionPeekGrid = false;
 		shouldDrawFractionNotReady = false;
+		shouldDrawDifficultyPeekGrid = false;
 	}
 	
 	public static void OpenProAppliactionOnPlayStore()
@@ -450,6 +505,28 @@ public class MainMenu : MonoBehaviour
 		}
 	}
 	
+	private void SetDifficulty(int value)
+	{
+		if(value < 0)
+		{
+			value = 0;
+		}
+		
+		if(value >= difficulties.Length)
+		{
+			value = difficulties.Length - 1;
+		}
+		
+		difficultyIndex = value;
+		selectedDifficulty = difficulties[difficultyIndex];
+	}
+	
+	private void OnDifficultyPeek(int index)
+	{
+		SetDifficulty(index);
+		HideAllPopUps();
+	}
+	
 	private void OnStartButtonClick()
 	{
 		Map map = maps[mapIndex];
@@ -473,6 +550,7 @@ public class MainMenu : MonoBehaviour
 	void Awake()
 	{
 		sharedProAppliactionId = proVersionId;
+		selectedDifficulty = difficulties[difficultyIndex];
 	}
 	
 	// Use this for initialization
@@ -484,6 +562,7 @@ public class MainMenu : MonoBehaviour
 		fractionPeekGridSettings.onClick = OnFractionPeek;
 		loadGameButtons.additionalDataDrawer = DrawLoadGameCell;
 		loadGameButtons.onClick = OnGameSelectedForLoad;
+		difficultyPeekGridSettings.onClick = OnDifficultyPeek;
 		GameSettings.Instance.Init();
 		UpdateSoundButtonTexture();
 	}
@@ -495,6 +574,7 @@ public class MainMenu : MonoBehaviour
 			DrawMapButton();
 			DrawFractionButton();
 			DrawStartButton();
+			DrawDifficultyButton();
 		}
 		
 		if(shouldDrawMapPeekGrid)
@@ -505,6 +585,11 @@ public class MainMenu : MonoBehaviour
 		if(shouldDrawFractionPeekGrid)
 		{
 			DrawFractionPeekGrid();
+		}
+		
+		if(shouldDrawDifficultyPeekGrid)
+		{
+			DrawDifficultyPeekGrid();
 		}
 		
 		if(shouldDrawFractionNotReady)
