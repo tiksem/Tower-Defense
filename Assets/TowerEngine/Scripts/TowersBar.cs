@@ -121,6 +121,21 @@ public class TowersBar : MonoBehaviour
 		return allTowers.IndexOf(tower);
 	}
 	
+	public void Deselect()
+	{
+		if(selectedTowerIndex < 0)
+		{
+			return;
+		}
+		
+		if(bar.GetButtonState(selectedTowerIndex) == BarWithCircleButtons.ButtonState.SELECTED)
+		{
+			bar.SetButtonState(selectedTowerIndex, BarWithCircleButtons.ButtonState.NORMAL);
+		}
+		
+		selectedTowerIndex = -1;
+	}
+	
 	public Tower GetTowerById(int id)
 	{
 		return allTowers[id];

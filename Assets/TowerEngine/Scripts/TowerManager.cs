@@ -169,6 +169,11 @@ public class TowerManager : MonoBehaviour, SavingGameComponent
 	
 	private void SetTowersBarVisibility(bool value)
 	{
+		if(value == false)
+		{
+			towersBarComponent.Deselect();
+		}
+		
 		towersBar.SetActive(value);
 	}
 	

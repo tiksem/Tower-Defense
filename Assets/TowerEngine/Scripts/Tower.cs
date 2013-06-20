@@ -11,6 +11,11 @@ public class Tower : MonoBehaviour
 	
 	public TowerSkillsBar.TowerUpgrade[] upgrades;
 	
+	public Weapon GetMainWeapon()
+	{
+		return GetComponentInChildren<Weapon>();
+	}
+	
 	public virtual void NotifyNewTowerBuilt()
 	{
 		

@@ -15,6 +15,7 @@ namespace AssemblyCSharp
 		
 		public GUIStyle headTextStyle;
 		public GUIStyle footerTextStyle;
+		public bool useHeadStyleForFooter = false;
 		
 		private GUIUtilities.DrawMessageBoxParams messageBoxParams;
 		private float iconHeight;
@@ -23,6 +24,10 @@ namespace AssemblyCSharp
 		private float statsHeight;
 		private float contentWidth;
 		private float contentHeight;
+		private float headTextWidth;
+		private float headTextHeight;
+		private float footerTextWidth;
+		private float footerTextHeight;
 		
 		private void UpdateMessageBoxSettings()
 		{
@@ -33,17 +38,33 @@ namespace AssemblyCSharp
 			messageBoxParams.drawer = DrawContent;
 		}
 		
-		private void InitContentWidth()
+		public void ValidateTextStyles()
 		{
-			//GUIUtilities.CalculateTextWidthAndHeight(
+			if(useHeadStyleForFooter)
+			{
+				footerTextStyle = headTextStyle;
+			}
+			
+			GUIUtilities.CalculateFontSize(ref footerTextStyle);
+			GUIUtilities.CalculateFontSize(ref headTextStyle);
 		}
 		
-		public void Validate()
+		private void InitContentSize()
 		{
 			iconHeight = GUIUtilities.GetHeightFromWidthForSquareButton(iconSize);
 			heightBorder = GUIUtilities.GetHeightFromWidthForSquareButton(border);
 			statsWidth = stats.GetContentWidth();
 			statsHeight = stats.GetContentHeight();
+			
+			GUIUtilities.CalculateTextWidthAndHeight(out headTextWidth, out headTextHeight, headText, headTextStyle);
+			GUIUtilities.CalculateTextWidthAndHeight(out footerTextWidth, out footerTextHeight, footerText, footerTextStyle);
+			contentWidth = iconSize + border * 3 + statsWidth;
+			contentHeight = headTextHeight + footerTextHeight + border * 4 + Math.Max(statsHeight, iconHeight);
+		}
+		
+		public void Validate()
+		{
+			InitContentSize();
 			UpdateMessageBoxSettings();
 		}
 		
@@ -55,8 +76,8 @@ namespace AssemblyCSharp
 			y += heightBorder;
 			
 			x += border;
-			Vector3 textSize = GUIUtilities.DrawText(x, y, headText, headTextStyle);
-			y += textSize.y;
+			GUIUtilities.DrawText(x, y, headText, headTextStyle, headTextWidth, headTextHeight);
+			y += headTextHeight;
 			y += heightBorder;
 			
 			GUIUtilities.DrawTexture(x, y, iconSize, iconHeight, icon);
@@ -65,11 +86,11 @@ namespace AssemblyCSharp
 			stats.x = x;
 			stats.y = y;
 			stats.Draw();
-			y += Math.Max(statsHeight, statsHeight);
+			y += Math.Max(statsHeight, iconHeight);
 			y += heightBorder;
 			
 			x = rect.x + border;
-			GUIUtilities.DrawText(x, y, footerText, footerTextStyle);
+			GUIUtilities.DrawText(x, y, footerText, footerTextStyle, footerTextWidth, footerTextHeight);
 		}
 		
 		public GUIUtilities.MessageBoxResult DrawAsMessageBox()

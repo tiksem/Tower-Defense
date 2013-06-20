@@ -374,6 +374,29 @@ public class Weapon : MonoBehaviour
 		}
 	}
 	
+	public static string GetAvailibleTargetTypesAsJoinedString(Weapon.BulletDefinition attackType, string separator = ", ")
+	{
+		string[] canAttack = new string[2];
+		int count = 0;
+		if(attackType.air)
+		{
+			canAttack[count] = Enum.GetName(typeof(Target.Type), Target.Type.AIR);
+			count++;
+		}
+		if(attackType.ground)
+		{
+			canAttack[count] = Enum.GetName(typeof(Target.Type), Target.Type.GROUND);
+			count++;
+		}
+		
+		return string.Join(separator, canAttack, 0, count);
+	}
+	
+	public BulletDefinition GetMainAttackType()
+	{
+		return attackTypes[0];
+	}
+	
 	void Start()
 	{
 		particleSystem = GetComponent<ParticleSystem>();
