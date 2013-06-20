@@ -67,8 +67,8 @@ PlayerSettings:
     16:9: 1
     Others: 1
   iPhoneBundleIdentifier: com.weshall.warcraft_tower_defencefree
-  iPhoneBundleVersion: 1.1
-  AndroidBundleVersionCode: 2
+  iPhoneBundleVersion: 1.2
+  AndroidBundleVersionCode: 3
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
   aotOptions: 
