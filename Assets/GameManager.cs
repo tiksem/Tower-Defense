@@ -519,6 +519,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		InitPartiesPoints();
 		partyIndex--;
 		LeaveTargetCount = 0;
+		Restore();
 	}
 	
 		
@@ -571,14 +572,19 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		public int leavesCount;
 	}
 	
-	public void OnRestore(object data)
+	public void Restore()
 	{
-		if(data != null)
+		if(restoreData != null)
 		{
-			SaveData saveData = (SaveData)data;
+			SaveData saveData = (SaveData)restoreData;
 			partyIndex = saveData.partyIndex;
 			LeaveTargetCount = saveData.leavesCount;
 		}
+	}
+	
+	public void OnRestore(object data)
+	{
+		restoreData = data;
 	}
 	
 	public object OnSave()
