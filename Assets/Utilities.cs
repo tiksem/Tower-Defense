@@ -274,7 +274,7 @@ namespace AssemblyCSharp
 			objects.Clear();
 		}
 		
-		public static void InitSingleton<T>(ref T instance, T self)
+		public static bool InitSingleton<T>(ref T instance, T self)
 			where T : UnityEngine.Object
 		{
 			if(instance == null)
@@ -285,7 +285,10 @@ namespace AssemblyCSharp
 			else if(instance != self)
 			{
 				GameObject.Destroy(self);
+				return false;
 			}
+			
+			return true;
 		}
 	}
 }
