@@ -170,6 +170,7 @@ public class GameMenu : MonoBehaviour
 	{
 		ResumeGame();
 		Application.LoadLevelAsync(0);
+		AdManager.instance.ShowEndOfTheRoundAds();
 		isLoading = true;
 	}
 	
