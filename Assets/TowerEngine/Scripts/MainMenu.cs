@@ -167,7 +167,14 @@ public class MainMenu : MonoBehaviour
 	
 	public static int GetLifesCount()
 	{
-		return selectedDifficulty.lifesCount;
+		if(selectedDifficulty != null)
+		{
+			return selectedDifficulty.lifesCount;
+		}
+		else
+		{
+			return 15;
+		}
 	}
 	
 	private Texture[] GetFractionsTextures()

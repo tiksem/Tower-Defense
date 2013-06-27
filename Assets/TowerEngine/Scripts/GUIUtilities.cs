@@ -249,6 +249,32 @@ namespace AssemblyCSharp
 			AdjustTextWidthAndHeight(ref width, ref height, text, textStyle);
 		}
 		
+		public static void CalculateMaxTextWidthAndHeight(out float width, out float height, string[] texts, GUIStyle textStyle)
+		{
+			width = 0;
+			height = 0;
+			float textMaxWidth = 0;
+			float textMaxHeight = 0;
+		
+			foreach(string text in texts)
+			{
+				GUIUtilities.CalculateTextWidthAndHeight(out width, out height, text, textStyle);
+			
+				if(width > textMaxWidth)
+				{
+					textMaxWidth = width;
+				}
+			
+				if(height > textMaxHeight)
+				{
+					textMaxHeight = height;
+				}
+			}
+		
+			width = textMaxWidth;
+			height = textMaxHeight;
+		}
+		
 		public static Vector2 DrawText(Rect rect, string text, GUIStyle textStyle)
 		{
 			return DrawText(rect.x, rect.y, text, textStyle, rect.width, rect.height);
@@ -349,12 +375,7 @@ namespace AssemblyCSharp
 		
 		public static float GetCentricCoordinateBySize(float size, float maxSize = 1.0f)
 		{
-			if(size > maxSize || size < 0.0f)
-			{
-				throw new System.ArgumentException("size > maxSize || size < 0.0f");
-			}
-			
-			return (maxSize - size) / 2;
+			return Math.Abs((maxSize - size) / 2);
 		}
 		
 		public static Vector2 GetCentricScreenRectXY(float width, float height)
