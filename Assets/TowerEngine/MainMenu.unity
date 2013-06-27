@@ -285,6 +285,8 @@ MonoBehaviour:
     action: 3
   - text: Options
     action: 2
+  - text: Exit
+    action: 4
   maps:
   - name: Ugly Field
     texture: {fileID: 2800000, guid: 743b9fd0a9a16a547b824504539db2c8, type: 3}
