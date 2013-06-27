@@ -41,14 +41,14 @@ MonoBehaviour:
   minusButton: {fileID: 2800000, guid: d6ff9c925fd2f7940af7e0d8f6bc88a4, type: 3}
   disabledPlusButton: {fileID: 2800000, guid: 927ed7a6817bcbe438ebe606cd737027, type: 3}
   disabledMinusButton: {fileID: 2800000, guid: f37be75a2f2ffbc40a8f2c7c710615db, type: 3}
-  x: .680000007
-  y: .150000006
+  x: .920000017
+  y: .349999994
   textMargin: .00999999978
   buttonWidth: .0399999991
   buttonHeight: .100000001
   values:
   - 
-  startValueIndex: 0
+  startValueIndex: 1
   orientation: 0
   textStyle:
     m_Name: 

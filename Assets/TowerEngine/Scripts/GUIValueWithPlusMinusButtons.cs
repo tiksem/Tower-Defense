@@ -67,12 +67,24 @@ public class GUIValueWithPlusMinusButtons : MonoBehaviour
 	{
 		InitTextSize();
 		
-		minusButtonX = x;
-		minusButtonY = y;
-		textX = minusButtonX + buttonWidth + textMargin;
-		textY = GUIUtilities.GetCentricCoordinateBySize(textHeight, buttonHeight) + y;
-		plusButtonX = minusButtonX + buttonWidth + textMargin * 2 + textWidth;
-		plusButtonY = y;
+		if(orientation == Orientation.HORIZONTAL)
+		{
+			minusButtonX = x;
+			minusButtonY = y;
+			textX = minusButtonX + buttonWidth + textMargin;
+			textY = GUIUtilities.GetCentricCoordinateBySize(textHeight, buttonHeight) + y;
+			plusButtonX = minusButtonX + buttonWidth + textMargin * 2 + textWidth;
+			plusButtonY = y;
+		}
+		else
+		{
+			plusButtonX = x;
+			plusButtonY = y;
+			textX = GUIUtilities.GetCentricCoordinateBySize(textWidth, buttonWidth) + x;
+			textY = plusButtonY + buttonHeight + textMargin;
+			minusButtonX = x;
+			minusButtonY = y + buttonHeight + textMargin * 2 + textHeight;
+		}
 	}
 	
 	public virtual void Start()

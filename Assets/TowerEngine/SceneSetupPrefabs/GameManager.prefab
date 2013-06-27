@@ -307,6 +307,124 @@ MonoBehaviour:
     endRoundLevelDescriptions:
     - delayBeforeShow: 0
       levelOffset: 0
+  - targetPrefab: {fileID: 100066, guid: 35260c0bdf1d2df4589a3bb790eb30a3, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 1
+    gold: 60
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100094, guid: 8d5c32cd387ae764d90a2e9d634b809f, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 1
+    gold: 60
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
+  - targetPrefab: {fileID: 100130, guid: 3643589d5ebd8974ba86f2033ff5fa10, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 1
+    gold: 60
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100070, guid: 79222c200a1bddf47bd44e2dc1b3c8cf, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 2
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
+  - targetPrefab: {fileID: 100168, guid: 3453af15f0e60524581ce9a64f959826, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 3
+    height: 1
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100106, guid: 44ed0a52163fc5f429bd8009300e148f, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 1
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100106, guid: a2e0a16609f9fea448feb0a8dbf1826a, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 1
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
+  - targetPrefab: {fileID: 100168, guid: 571ebec30b43b084f8b6c52d2fdf0687, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 3
+    height: 1
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100060, guid: 6e03b0e75da8ee64082896ecc80fe8d2, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 1
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100078, guid: eb27eb10ee696da439c7685ab0eb072d, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 2
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+  - targetPrefab: {fileID: 100062, guid: 05142950d24915144995c473acee68d2, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 6
+    height: 2
+    gold: 65
+    endRoundMessages: []
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
+    - delayBeforeShow: 12
+      levelOffset: 1
+  - targetPrefab: {fileID: 100170, guid: 63b0547a2eb337c44a105899d2771d7e, type: 2}
+    leaderPrefab: {fileID: 0}
+    width: 3
+    height: 1
+    gold: 65
+    endRoundMessages:
+    - text: Last wave!!!
+      delayBeforeShow: 7
+    endRoundLevelDescriptions:
+    - delayBeforeShow: 0
+      levelOffset: 0
   wayPointTags:
   - WayPoint1
   defaultTargetRadius: .5

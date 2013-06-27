@@ -7,4 +7,12 @@ public class GameSpeedController : GUIFloatWithPlusMinusButton
 	{
 		Time.timeScale = currentValue;
 	}
+	
+	public override void OnGUI()
+	{
+		if(!GameMenu.Instance.IsLoading() && !GameMenu.Instance.IsShown())
+		{
+			base.OnGUI();
+		}
+	}
 }

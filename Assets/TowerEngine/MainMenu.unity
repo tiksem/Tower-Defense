@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a623d73b40c88094b9dd8406c3750815, type: 3}
   m_Name: 
   background: {fileID: 2800000, guid: ceb634d65a2e3fa4188ad790607918e8, type: 3}
-  distanceBetweenButtons: .0399999991
+  distanceBetweenButtons: .0199999996
   buttonsTop: .300000012
   buttonsLeft: .0240000002
   buttonWidth: .300000012

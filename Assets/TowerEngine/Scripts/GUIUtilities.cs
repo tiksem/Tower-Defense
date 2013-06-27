@@ -375,7 +375,7 @@ namespace AssemblyCSharp
 		
 		public static float GetCentricCoordinateBySize(float size, float maxSize = 1.0f)
 		{
-			return Math.Abs((maxSize - size) / 2);
+			return (maxSize - size) / 2;
 		}
 		
 		public static Vector2 GetCentricScreenRectXY(float width, float height)
