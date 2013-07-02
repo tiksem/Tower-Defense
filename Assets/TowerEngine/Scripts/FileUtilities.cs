@@ -8,9 +8,17 @@ namespace AssemblyCSharp
 {
 	public static class FileUtilities
 	{
+		private static string persistentDataPath = UnityEngine.Application.persistentDataPath;
+		
 		public static string TransformFileName(string fileName)
 		{
-			return UnityEngine.Application.persistentDataPath + '/' + fileName;
+			return persistentDataPath + '/' + fileName;
+		}
+		
+		public static void Delete(string fileName)
+		{
+			fileName = TransformFileName(fileName);
+			File.Delete(fileName);
 		}
 		
 		public static object Deserialize(string fileName)

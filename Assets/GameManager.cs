@@ -271,7 +271,18 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 			NextParty();
 		}
 		
+		UpdateSavingData();
+		Autosave();
+	}
+	
+	private void UpdateSavingData()
+	{
 		leavesCountOnRoundStart = LeaveTargetCount;
+	}
+	
+	private void Autosave()
+	{
+		SaveGameManager.instance.ExecuteAutosaveAsync();
 	}
 	
 	private bool AllTargetsDestroyed()
@@ -577,7 +588,7 @@ public class GameManager : MonoBehaviour, SavingGameComponent
 		if(restoreData != null)
 		{
 			SaveData saveData = (SaveData)restoreData;
-			partyIndex = saveData.partyIndex;
+			partyIndex = saveData.partyIndex - 1;
 			LeaveTargetCount = saveData.leavesCount;
 		}
 	}

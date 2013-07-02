@@ -172,6 +172,7 @@ public class GameMenu : MonoBehaviour
 		Application.LoadLevelAsync(0);
 		AdManager.instance.ShowEndOfTheRoundAds();
 		isLoading = true;
+		SaveGameManager.instance.DeleteAutosave();
 	}
 	
 	private void OnEndGameClick()

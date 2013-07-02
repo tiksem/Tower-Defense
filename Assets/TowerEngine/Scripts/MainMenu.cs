@@ -560,6 +560,12 @@ public class MainMenu : MonoBehaviour
 		selectedDifficulty = difficulties[difficultyIndex];
 	}
 	
+	private bool TryLoadAutosave()
+	{
+		loadingOperation = SaveGameManager.instance.LoadAutosave();
+		return loadingOperation != null;
+	}
+	
 	// Use this for initialization
 	void Start()
 	{
@@ -572,6 +578,11 @@ public class MainMenu : MonoBehaviour
 		difficultyPeekGridSettings.onClick = OnDifficultyPeek;
 		GameSettings.Instance.Init();
 		UpdateSoundButtonTexture();
+		
+		if(!SaveGameManager.instance.WasAutoSaveExecuted())
+		{
+			TryLoadAutosave();
+		}
 	}
 	
 	private void OnSinglePlayer()

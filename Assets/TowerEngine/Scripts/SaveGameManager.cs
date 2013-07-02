@@ -15,10 +15,13 @@ public class SaveGameManager : MonoBehaviour
 		public string sceneName;
 	}
 	
+	public static readonly int AUTOSAVE_GAMEID = -2;
+	
 	public int maxSavesCount;
 	public float savingEngineVersion = 1.0f;
 	
 	private int loadGameId = -1;
+	private bool autosaveWasExecuted = false;
 	
 	public static SaveGameManager instance;
 	
@@ -89,6 +92,16 @@ public class SaveGameManager : MonoBehaviour
 		return saves;
 	}
 	
+	public bool WasAutoSaveExecuted()
+	{
+		return autosaveWasExecuted;
+	}
+	
+	public AsyncOperation LoadAutosave()
+	{
+		return LoadGame(AUTOSAVE_GAMEID);
+	}
+	
 	public AsyncOperation LoadGame(int id)
 	{
 		SaveGameInfo info = GetLevelInfoByLoadGameId(id);
@@ -131,23 +144,76 @@ public class SaveGameManager : MonoBehaviour
 		SaveGameData(id.ToString());
 	}
 	
-	private void SaveSceneInfo(int id)
+	public void ExecuteAutosave()
+	{
+		SaveGame(AUTOSAVE_GAMEID);
+		autosaveWasExecuted = true;
+	}
+	
+	public void ExecuteAutosaveAsync()
+	{
+		Dictionary<string,object> savingData = CreateSavingData();
+		SaveGameInfo saveGameInfo;
+		string fileName;
+		GetSaveSceneInfo(AUTOSAVE_GAMEID, out fileName, out saveGameInfo);
+		
+		Func<Void> task = () => 
+		{
+			SaveSceneInfo(fileName, saveGameInfo);
+			SaveGameData(AUTOSAVE_GAMEID.ToString(), savingData);
+		};
+		
+		AsyncTaskManager.instance.RunOnBackground(task);
+		
+		autosaveWasExecuted = true;
+	}
+	
+	public void DeleteSave(int id)
 	{
 		string fileName = GetSceneNameFileByLoadGameId(id);
+		FileUtilities.Delete(fileName);
+		FileUtilities.Delete(id.ToString());
+	}
+	
+	public void DeleteAutosave()
+	{
+		DeleteSave(AUTOSAVE_GAMEID);
+	}
+	
+	private void GetSaveSceneInfo(int id, out string fileName, out SaveGameInfo saveGameInfo)
+	{
+		fileName = GetSceneNameFileByLoadGameId(id);
 		
-		SaveGameInfo saveGameInfo = new SaveGameInfo();
+		saveGameInfo = new SaveGameInfo();
 		saveGameInfo.sceneName = Application.loadedLevelName;
 		saveGameInfo.dateTime = DateTime.Now;
 		saveGameInfo.savingEngineVersion = savingEngineVersion;
-		
+	}
+	
+	private void SaveSceneInfo(string fileName, SaveGameInfo saveGameInfo)
+	{
 		FileUtilities.Serialize(fileName, saveGameInfo);
 	}
 	
-	private void SaveGameData(string fileName)
+	private void SaveSceneInfo(int id)
 	{
-		Dictionary<string,object> savingData = new Dictionary<string, object>();
+		SaveGameInfo saveGameInfo;
+		string fileName;
 		
-		UnityEngine.Object[] objects = GameObject.FindSceneObjectsOfType(typeof(MonoBehaviour)); 
+		GetSaveSceneInfo(id, out fileName, out saveGameInfo);
+		SaveSceneInfo(fileName, saveGameInfo);
+	}
+	
+	private void SaveGameData(string fileName, Dictionary<string,object> savingData)
+	{
+		FileUtilities.Serialize(fileName, savingData);
+	}
+	
+	private Dictionary<string,object> CreateSavingData()
+	{
+		UnityEngine.Object[] objects = GameObject.FindSceneObjectsOfType(typeof(MonoBehaviour));
+		
+		Dictionary<string,object> savingData = new Dictionary<string, object>();
 		
 		foreach(UnityEngine.Object obj in objects)
 		{
@@ -168,7 +234,13 @@ public class SaveGameManager : MonoBehaviour
 			savingData.Add(gameObject.name, data);
 		}
 		
-		FileUtilities.Serialize(fileName, savingData);
+		return savingData;
+	}
+	
+	private void SaveGameData(string fileName)
+	{
+		Dictionary<string,object> savingData = CreateSavingData();
+		SaveGameData(fileName, savingData);
 	}
 	
 	void OnLevelWasLoaded(int levelIndex)
